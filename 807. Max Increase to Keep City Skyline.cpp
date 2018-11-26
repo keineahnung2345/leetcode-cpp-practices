@@ -32,6 +32,7 @@ All heights grid[i][j] are in the range [0, 100].
 All buildings in grid[i][j] occupy the entire grid cell: that is, they are a 1 x 1 x grid[i][j] rectangular prism.
 **/
 
+/**
 class Solution {
 public:
     int maxIncreaseKeepingSkyline(vector<vector<int>>& grid) {
@@ -62,6 +63,34 @@ public:
             for(int j = 0; j < increased_grid[0].size(); j++){
                 increased_grid[i][j] = tb[i]<lr[j]?tb[i]:lr[j];
                 answer+=(increased_grid[i][j]-grid[i][j]);
+            }
+        }
+        
+        return answer;
+    }
+};
+**/
+
+//optimized
+class Solution {
+public:
+    int maxIncreaseKeepingSkyline(vector<vector<int>>& grid) {
+        vector<int> tb = vector<int>((int)grid[0].size(), 0);
+        vector<int> lr = vector<int>((int)grid.size(), 0);
+        int answer=0;
+        
+        //first find out the skyline 
+        for(int i = 0; i < grid.size(); i++){
+            for(int j = 0; j < grid[0].size(); j++){
+                lr[i] = max(grid[i][j], lr[i]); //compare through j, left-right
+                tb[j] = max(grid[i][j], tb[j]); //compare through i, top-bottom
+            }
+        }
+        
+        //build the increased skyline
+        for(int i = 0; i < grid.size(); i++){
+            for(int j = 0; j < grid[0].size(); j++){
+                answer+=(min(tb[i], lr[j])-grid[i][j]);
             }
         }
         
