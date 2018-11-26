@@ -17,6 +17,11 @@ S and J will consist of letters and have length at most 50.
 The characters in J are distinct.
 **/
 
+/**
+You are here! 
+Your runtime beats 98.58 % of cpp submissions.
+**/
+
 class Solution {
 public:
     int numJewelsInStones(string J, string S) {
