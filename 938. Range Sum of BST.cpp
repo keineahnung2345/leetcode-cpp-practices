@@ -30,18 +30,61 @@ The final answer is guaranteed to be less than 2^31.
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
+/**
+Approach 1: Depth First Search
+Intuition and Algorithm
+
+We traverse the tree using a depth first search. If node.val falls outside the range [L, R], (for example node.val < L), then we know that only the right branch could have nodes with value inside [L, R].
+
+We showcase two implementations - one using a recursive algorithm, and one using an iterative one.
+
+Complexity Analysis
+
+Time Complexity: O(N), where N is the number of nodes in the tree.
+
+Space Complexity: O(H), where H is the height of the tree. 
+**/
 class Solution {
 public:
-    int sum = 0;
+//    //recursive method, slower
+//     int sum = 0;
+//     int rangeSumBST(TreeNode* root, int L, int R) {
+//         if(root->left!=NULL){
+//             rangeSumBST(root->left, L, R);
+//         }
+//         if(root->val>=L && root->val<=R){
+//             sum+=root->val;
+//         }
+//         if(root->right!=NULL){
+//             rangeSumBST(root->right, L, R);
+//         }
+//         return sum;
+//     }
+ 
+    //iterative method, faster
     int rangeSumBST(TreeNode* root, int L, int R) {
-        if(root->left!=NULL){
-            rangeSumBST(root->left, L, R);
-        }
-        if(root->val>=L && root->val<=R){
-            sum+=root->val;
-        }
-        if(root->right!=NULL){
-            rangeSumBST(root->right, L, R);
+        int sum = 0;
+        std::stack<TreeNode*> stack = std::stack<TreeNode*>();
+        stack.push(root);
+        
+        while(!stack.empty()){
+            TreeNode* node = stack.top();
+            stack.pop(); //it returns NULL!
+            
+            if(node->val >= L && node->val <= R){
+                sum+=node->val;
+            }
+            //trimming
+            // if(node->left!=NULL && node->val >= L){
+            if(node->left && node->val >= L){
+                stack.push(node->left);
+            }
+            
+            // if(node->right!=NULL && node->val <= R){
+            if(node->right && node->val <= R){
+                stack.push(node->right);
+            }
         }
         return sum;
     }
