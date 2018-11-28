@@ -59,6 +59,11 @@ Now, consider the balance of every prefix of S. If it is ever negative (say, -1)
     }
 }
 
+// meet (): bal: 1->0, ans: 0->0
+// meet ((: bal: 1->2, ans: 0->0
+// meet )): bal: 0 -> 0, ans: 1->2
+// "bal" means remaining "(", "ans" means how many ')' added
+
 Complexity Analysis
 
 Time Complexity: O(N), where N is the length of S.
