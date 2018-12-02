@@ -42,6 +42,31 @@ The value of each node will only be 0 or 1.
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+/**
+Wrong Answer
+class Solution {
+public:
+    TreeNode* pruneTree(TreeNode* root) {
+        //use DFS
+        if(root==NULL){ //empty node
+            return NULL;
+        }else if(root->left==NULL && root->right==NULL && root->val==0){ //empty subtree
+            return NULL;
+        }else{
+            root->left = pruneTree(root->left);
+            root->right = pruneTree(root->right);
+        }
+        return root;
+    }
+};
+//the combine step:
+if(root->left==NULL && root->right==NULL && root->val==0){ //empty subtree
+    return NULL;
+should be put after divide step:
+root->left = pruneTree(root->left);
+root->right = pruneTree(root->right);
+!
+**/
 class Solution {
 public:
     TreeNode* pruneTree(TreeNode* root) {
