@@ -141,6 +141,9 @@ public:
             dfs(node->right, v);
             dfs(node->left, v);
         }
+        //official answer push NULL here, don't know why
+        //the algorithm can work without this line
+        //v.push_back(NULL);
     }
 };
 
