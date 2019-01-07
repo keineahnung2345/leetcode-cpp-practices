@@ -110,15 +110,7 @@ Time Complexity: O(N), where N is the number of nodes in the given tree.
 Space Complexity: O(H), where H is the height of the given tree. 
 
 //Runtime: 4 ms, faster than 93.20% of C++ online submissions for Univalued Binary Tree.
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+
 class Solution {
 public:
     bool isUnivalTree(TreeNode* root) {
