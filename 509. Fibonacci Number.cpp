@@ -9,10 +9,9 @@ F(N) = F(N - 1) + F(N - 2), for N > 1.
 Given N, calculate F(N).
 **/
 
+//recursive solution
 //Runtime: 16 ms, faster than 32.44% of C++ online submissions for Fibonacci Number.
 //Memory Usage: 8.5 MB, less than 38.31% of C++ online submissions for Fibonacci Number.
-
-//recursive solution
 class Solution {
 public:
     int fib(int N) {
@@ -25,6 +24,8 @@ public:
 };
 
 //dynamic programming
+//Runtime: 4 ms, faster than 100.00% of C++ online submissions for Fibonacci Number.
+//Memory Usage: 8.6 MB, less than 21.93% of C++ online submissions for Fibonacci Number.
 class Solution {
 public:
     int fib(int N) {
