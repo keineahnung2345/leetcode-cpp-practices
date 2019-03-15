@@ -24,6 +24,25 @@ S.length <= 100
 S doesn't contain \ or "
 **/
 
+/**
+Approach 2: Reverse Pointer
+Intuition
+
+Write the characters of S one by one. 
+When we encounter a letter, 
+we want to write the next letter that occurs if we iterated through the string backwards.
+
+So we do just that: 
+keep track of a pointer j that iterates through the string backwards.
+When we need to write a letter, we use it.
+**/
+
+/**
+Complexity Analysis
+Time Complexity: O(N), where N is the length of S.
+Space Complexity: O(N). 
+**/
+
 //Runtime: 4 ms, faster than 100.00% of C++ online submissions for Reverse Only Letters.
 //Memory Usage: 9 MB, less than 40.00% of C++ online submissions for Reverse Only Letters.
 class Solution {
