@@ -1,0 +1,90 @@
+/**
+Reverse a singly linked list.
+
+Example:
+
+Input: 1->2->3->4->5->NULL
+Output: 5->4->3->2->1->NULL
+Follow up:
+
+A linked list can be reversed either iteratively or recursively. Could you implement both?
+**/
+
+//iterative
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* cur = head;
+        ListNode* prev = head;
+        while(cur!=NULL){
+            ListNode* next = cur->next;
+            if(cur==head){
+                cur->next = NULL;
+            }else{
+                cur->next = prev;
+            }
+            prev = cur;
+            cur = next;
+        }
+        return prev;
+    }
+};
+
+
+//recursive
+/**
+Approach #2 (Recursive) [Accepted]
+The recursive version is slightly trickier and the key is to work backwards. Assume that the rest of the list had already been reversed, now how do I reverse the front part? Let's assume the list is: n1 → … → nk-1 → nk → nk+1 → … → nm → Ø
+
+Assume from node nk+1 to nm had been reversed and you are at node nk.
+
+n1 → … → nk-1 → nk → nk+1 ← … ← nm
+
+We want nk+1’s next node to point to nk.
+
+So,
+
+nk.next.next = nk;
+
+Be very careful that n1's next must point to Ø. 
+If you forget about this, your linked list has a cycle in it. 
+This bug could be caught if you test your code with a linked list of size 2.
+**/
+
+/**
+Complexity analysis
+
+Time complexity : O(n). 
+Assume that nn is the list's length, the time complexity is O(n).
+
+Space complexity : O(n).
+The extra space comes from implicit stack space due to recursion. 
+The recursion could go up to nn levels deep.
+**/
+
+/**
+Runtime: 8 ms, faster than 100.00% of C++ online submissions for Reverse Linked List.
+Memory Usage: 9.3 MB, less than 10.03% of C++ online submissions for Reverse Linked List.
+**/
+/**
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(head==NULL || head->next==NULL) return head;
+        ListNode* p = reverseList(head->next);
+        //head->next: tail of p
+        //the new tail of p becomes head
+        head->next->next = head;
+        head->next = NULL;
+        return p;
+    }
+};
+**/
