@@ -13,6 +13,8 @@ If you have figured out the O(n) solution, try coding another solution using the
 
 //http://emn178.pixnet.net/blog/post/88907691-%E6%9C%80%E5%A4%A7%E5%AD%90%E5%BA%8F%E5%88%97%28maximum-subarray%29
 
+//Runtime: 12 ms, faster than 90.30% of C++ online submissions for Maximum Subarray.
+//Memory Usage: 10.4 MB, less than 33.46% of C++ online submissions for Maximum Subarray.
 class Solution {
 public:
     int maxNegative(vector<int>& nums) {
