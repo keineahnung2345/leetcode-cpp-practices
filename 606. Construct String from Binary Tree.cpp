@@ -140,6 +140,9 @@ Time complexity : O(n)O(n). nn nodes are pushed and popped in a stack.
 Space complexity : O(n)O(n). stackstack size can grow upto nn.
 **/
 
+//Runtime: 32 ms, faster than 79.03% of C++ online submissions for Construct String from Binary Tree.
+//Memory Usage: 22.1 MB, less than 94.68% of C++ online submissions for Construct String from Binary Tree.
+
 /**
 class Solution {
 public:
@@ -152,9 +155,7 @@ public:
         
         stk.push(t);
         while(!stk.empty()){
-            cout << "size: " << stk.size() << endl;
             t = stk.top();
-            cout << "t: " << t->val << endl;
             if(visited.find(t) == visited.end()){
                 visited.insert(t);
                 //to_string(int): string
