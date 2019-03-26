@@ -107,3 +107,75 @@ Time complexity : O(n)O(n). The preorder traversal is done over the nn nodes of 
 Space complexity : O(n)O(n). The depth of the recursion tree can go upto nn in case of a skewed tree.
 **/
 
+/**
+Approach #2 Iterative Method Using stack [Accepted]
+Algorithm
+
+In order to solve the given problem, we can also make use of a stackstack. To see how to do it, we'll go through the implementation and we'll also look at the idea behind each step.
+
+We make use of a stackstack onto which various nodes of the given tree will be pushed during the process. The node at the top of the stackstack represents the current node to be processed. Whenever a node has been processed once, it is marked as visited. The reasoning behind this will be discussed soon.
+
+We start off by pushing the root of the binary tree onto the stackstack. Now, the root acts as the current node. For every current node encountered, firstly, we check if it has not been visited already. If not, we add it to the set of visited nodes.
+
+Since, for the preorder traversal, we know, we need to process the nodes in the order current-left-right. Thus, we add a ( followed by the current node to the string ss to be returned.
+
+Now, if both the left and the right children of the current node exist, we need to process them in the order left-right. To do so, we need to push them onto the stackstack in the reverse order, so that when they are picked up later on, their order of processing gets corrected.
+
+Since we've already added (current\_node(current_node to the string ss, if only the right child of the current node exists, as discussed in case 4 in the last approach, we need to put a () in ss representing the null left node. We need not push anything onto the stackstack for the left node and we can directly add the () to ss for this. But, we still need to push the right child onto the stackstack for future processing.
+
+If only the left child exists, we need not consider the right child at all, as discussed in case 3 in the last approach. We can continue the process by just pushing the left child onto the stackstack.
+
+Now, we need to note that even when a node is being processed, if it has not already been visited, it isn't popped off from the stackstack. But, if a node that has already been processed(i.e. its children have been considered already), it is popped off from the stackstack when encountered again. Such a situation will occur for a node only when the preorder traversal of both its left and right sub-trees has been completely done. Thus, we need to add a ) to mark the end of the preorder traversal of the current node as well.
+
+Thus, at the end, we get the required pre-order traversal in the substring s(1:n-1)s(1:n−1). Here, nn represents the length of ss. This is because, we need not put the parentheses(redundant) at the outermost level.
+
+The following animation better depicts the process.
+**/
+
+/**
+Complexity Analysis
+
+Time complexity : O(n)O(n). nn nodes are pushed and popped in a stack.
+
+Space complexity : O(n)O(n). stackstack size can grow upto nn.
+**/
+
+/**
+class Solution {
+public:
+    string tree2str(TreeNode* t) {
+        if(!t) return "";
+        
+        string s = "";
+        stack<TreeNode*> stk;
+        set<TreeNode*> visited;
+        
+        stk.push(t);
+        while(!stk.empty()){
+            cout << "size: " << stk.size() << endl;
+            t = stk.top();
+            cout << "t: " << t->val << endl;
+            if(visited.find(t) == visited.end()){
+                visited.insert(t);
+                //to_string(int): string
+                s += ("(" + to_string(t->val));
+                if(!t->left && t->right){
+                    s += "()";
+                }
+                if(t->right){
+                    stk.push(t->right);
+                }
+                if(t->left){
+                    stk.push(t->left);
+                }
+            }else{
+                stk.pop();
+                s += ")";
+            }
+        }
+        
+        //s.substr(start, length)
+        return s.substr(1, s.size()-2);
+    }
+};
+**/
