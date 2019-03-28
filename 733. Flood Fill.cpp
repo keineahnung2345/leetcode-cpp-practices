@@ -89,6 +89,8 @@ Time Complexity: O(N)O(N), where NN is the number of pixels in the image. We mig
 Space Complexity: O(N)O(N), the size of the implicit call stack when calling dfs.
 **/
 
+//Runtime: 24 ms, faster than 100.00% of C++ online submissions for Flood Fill.
+//Memory Usage: 10.2 MB, less than 99.22% of C++ online submissions for Flood Fill.
 /**
 class Solution {
 public:
