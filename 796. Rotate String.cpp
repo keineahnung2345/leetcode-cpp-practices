@@ -49,3 +49,39 @@ public:
     }
 };
 
+/**
+Approach #1: Brute Force [Accepted]
+Complexity Analysis
+
+Time Complexity: O(N^2)O(N 
+2
+ ), where NN is the length of A. For each rotation s, we check up to NN elements in A and B.
+
+Space Complexity: O(1)O(1). We only use pointers to elements of A and B.
+**/
+
+/**
+Approach #2: Simple Check [Accepted]
+Intuition and Algorithm
+
+All rotations of A are contained in A+A. Thus, we can simply check whether B is a substring of A+A. We also need to check A.length == B.length, otherwise we will fail cases like A = "a", B = "aa".
+**/
+/**
+Complexity Analysis
+
+Time Complexity: O(N^2)O(N 
+2
+ ), where NN is the length of A.
+
+Space Complexity: O(N)O(N), the space used building A+A.
+**/
+/**
+class Solution {
+public:
+    bool rotateString(string A, string B) {
+        return A.size() == B.size() && (A+A).find(B)!=string::npos;
+    }
+};
+**/
+
+
