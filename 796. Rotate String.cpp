@@ -84,4 +84,10 @@ public:
 };
 **/
 
+/**
+Approach #3: Rolling Hash [Accepted]
+**/
 
+/**
+Approach #4: KMP (Knuth-Morris-Pratt) [Accepted]
+**/
