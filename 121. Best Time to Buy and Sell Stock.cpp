@@ -45,3 +45,42 @@ public:
         return ans;
     }
 };
+
+/**
+Approach 2: One Pass
+Algorithm
+
+Say the given array is:
+
+[7, 1, 5, 3, 6, 4]
+
+If we plot the numbers of the given array on a graph, we get:
+
+The points of interest are the peaks and valleys in the given graph. We need to find the largest peak following the smallest valley. We can maintain two variables - minprice and maxprofit corresponding to the smallest valley and maximum profit (maximum difference between selling price and minprice) obtained so far respectively.
+**/
+
+/**
+Complexity Analysis
+
+Time complexity : O(n)O(n). Only a single pass is needed.
+
+Space complexity : O(1)O(1). Only two variables are used.
+**/
+
+/**
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int valley = INT_MAX;
+        int ans = 0;
+        for(int i = 0; i < prices.size(); i++){
+            if(prices[i] < valley){
+                valley = prices[i];
+            }else if(prices[i] - valley > ans){
+                asn = prices[i] - valley;
+            }
+        }
+        return ans;
+    }
+};
+**/
