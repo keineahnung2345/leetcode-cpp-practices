@@ -63,3 +63,67 @@ public:
         return true;
     }
 };
+
+/**
+Approach #1: Build String [Accepted]
+**/
+/**
+Complexity Analysis
+
+Time Complexity: O(M + N)O(M+N), where M, NM,N are the lengths of S and T respectively.
+
+Space Complexity: O(M + N)O(M+N).
+**/
+
+/**
+Approach #2: Two Pointer [Accepted]
+Intuition
+
+When writing a character, it may or may not be part of the final string depending on how many backspace keystrokes occur in the future.
+
+If instead we iterate through the string in reverse, then we will know how many backspace characters we have seen, and therefore whether the result includes our character.
+
+Algorithm
+
+Iterate through the string in reverse. If we see a backspace character, the next non-backspace character is skipped. If a character isn't skipped, it is part of the final answer.
+
+See the comments in the code for more details.
+**/
+/*8
+Complexity Analysis
+
+Time Complexity: O(M + N)O(M+N), where M, NM,N are the lengths of S and T respectively.
+
+Space Complexity: O(1)O(1).**/
+
+//Runtime: 4 ms, faster than 100.00% of C++ online submissions for Backspace String Compare.
+//Memory Usage: 8.3 MB, less than 100.00% of C++ online submissions for Backspace String Compare.
+/**
+class Solution {
+public:
+    bool backspaceCompare(string S, string T) {
+        int curS = S.size()-1, curT = T.size()-1;
+        int skipS = 0, skipT = 0;
+        
+        //if two string ends concurrently, we return true
+        while(curS >= 0 || curT >= 0){
+            while(curS >= 0){
+                if(S[curS] == '#'){skipS++; curS--;}
+                else if(skipS > 0) {skipS--; curS--;}
+                //find the char not skipped
+                else break;
+            }
+            while(curT >= 0){
+                if(T[curT] == '#'){skipT++; curT--;}
+                else if(skipT > 0) {skipT--; curT--;}
+                else break;
+            }
+            if(curS >= 0 && curT >= 0 && S[curS] != T[curT]) return false;
+            //one string ends earlier than the other
+            if((curS >= 0) != (curT >= 0)) return false;
+            curS--; curT--;
+        }
+        return true;
+    }
+};
+**/
