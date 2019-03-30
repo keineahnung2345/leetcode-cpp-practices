@@ -17,6 +17,16 @@ Output:
 ]
 **/
 
+/**
+Approach 1: Dynamic Programming
+**/
+
+/**
+Complexity Analysis
+Time complexity : O(numRows^2)
+Space complexity : O(numRows^2)
+**/
+
 //Runtime: 8 ms, faster than 25.38% of C++ online submissions for Pascal's Triangle.
 //Memory Usage: 8.7 MB, less than 86.38% of C++ online submissions for Pascal's Triangle.
 
