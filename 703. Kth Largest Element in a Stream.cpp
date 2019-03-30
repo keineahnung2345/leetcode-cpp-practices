@@ -66,3 +66,28 @@ public:
  * int param_1 = obj->add(val);
  */
  
+//https://leetcode.com/problems/kth-largest-element-in-a-stream/discuss/150609/C%2B%2B-super-easy-28ms-solution-beats-100!
+//Runtime: 52 ms, faster than 96.48% of C++ online submissions for Kth Largest Element in a Stream.
+//Memory Usage: 19.5 MB, less than 69.93% of C++ online submissions for Kth Largest Element in a Stream.
+
+/**
+class KthLargest {
+private:
+    priority_queue<int, vector<int>, greater<int>> pq;
+    int myk;
+public:
+    KthLargest(int k, vector<int> nums) {
+        myk = k;
+        for(int e : nums){
+            pq.push(e);
+            if(pq.size() > k) pq.pop();
+        }
+    }
+    
+    int add(int val) {
+        pq.push(val);
+        if(pq.size() > myk) pq.pop();
+        return pq.top();
+    }
+};
+**/
