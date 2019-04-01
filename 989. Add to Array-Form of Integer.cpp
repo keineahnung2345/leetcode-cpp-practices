@@ -72,6 +72,8 @@ Time Complexity: O(\max(N, \log K))O(max(N,logK)) where NN is the length of A.
 Space Complexity: O(\max(N, \log K))O(max(N,logK)). 
 **/
 
+//Runtime: 116 ms, faster than 99.24% of C++ online submissions for Add to Array-Form of Integer.
+//Memory Usage: 13.7 MB, less than 52.65% of C++ online submissions for Add to Array-Form of Integer.
 /**
 class Solution {
 public:
