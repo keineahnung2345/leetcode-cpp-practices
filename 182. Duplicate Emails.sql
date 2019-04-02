@@ -19,7 +19,7 @@ For example, your query should return the following for the above table:
 Note: All emails are in lowercase.
 **/
 
-//Runtime: 204 ms, faster than 35.61% of MySQL online submissions for Duplicate Emails.
+# Runtime: 204 ms, faster than 35.61% of MySQL online submissions for Duplicate Emails.
 # Write your MySQL query statement below
 select `Email` from `Person` group by `Email` having count(*)>1
 
