@@ -102,6 +102,9 @@ Time complexity : O(n)O(n). Because we traverse the entire input tree once, the 
 Space complexity : There is additional space required for the search queue. In the worst case, we have to insert O(n)O(n) nodes in the queue. Therefore, space complexity is O(n)O(n).
 **/
 
+//Runtime: 8 ms, faster than 100.00% of C++ online submissions for Symmetric Tree.
+//Memory Usage: 14.9 MB, less than 99.46% of C++ online submissions for Symmetric Tree.
+
 /**
 class Solution {
 public:
