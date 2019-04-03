@@ -41,12 +41,16 @@ Time: O(n)
 Space: O(1)
 **/
 
+//Runtime: 12 ms, faster than 100.00% of C++ online submissions for Remove Duplicates from Sorted List.
+//Memory Usage: 9.2 MB, less than 55.04% of C++ online submissions for Remove Duplicates from Sorted List.
+
 /**
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
+        if(head == NULL) return NULL;
         ListNode* cur = head;
-        while(!cur && !cur->next){
+        while(cur != NULL && cur->next != NULL){
             if(cur->val == cur->next->val){
                 //remove cur->next
                 cur->next = cur->next->next;
