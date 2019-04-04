@@ -146,6 +146,9 @@ count empty seats and ans on the fly
 time: O(N), space: O(1)
 **/
 
+//Runtime: 12 ms, faster than 98.25% of C++ online submissions for Maximize Distance to Closest Person.
+//Memory Usage: 9.9 MB, less than 100.00% of C++ online submissions for Maximize Distance to Closest Person.
+
 /**
 class Solution {
 public:
