@@ -50,6 +50,8 @@ public:
 
 /**Without map**/
 //https://leetcode.com/problems/find-mode-in-binary-search-tree/discuss/98100/Java-4ms-Beats-100-Extra-O(1)-solution-No-Map
+//Runtime: 28 ms, faster than 96.51% of C++ online submissions for Find Mode in Binary Search Tree.
+//Memory Usage: 23.2 MB, less than 97.09% of C++ online submissions for Find Mode in Binary Search Tree.
 
 class Solution {
 public:
