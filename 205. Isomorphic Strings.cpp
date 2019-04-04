@@ -31,6 +31,10 @@ public:
 /**
 indirect mapping
 **/
+
+//Runtime: 16 ms, faster than 36.56% of C++ online submissions for Isomorphic Strings.
+//Memory Usage: 9 MB, less than 32.11% of C++ online submissions for Isomorphic Strings.
+
 class Solution {
 public:
     bool isIsomorphic(string s, string t) {
