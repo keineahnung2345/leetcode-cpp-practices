@@ -137,3 +137,48 @@ public:
 };
 **/
 
+/**
+Approach #3: Group by Zero [Accepted]
+count empty seats and ans on the fly
+**/
+
+/**
+time: O(N), space: O(1)
+**/
+
+/**
+class Solution {
+public:
+    int maxDistToClosest(vector<int>& seats) {
+        int N = seats.size();
+        int K = 0;
+        int ans = 0;
+        
+        for(int i = 0; i < N; i++){
+            if(seats[i] == 0){
+                K++;
+            }else{
+                ans = max(ans, (K+1)/2);
+                K = 0;
+            }
+        }
+        
+        for(int i = 0; i < N; i++){
+            if(seats[i] == 1){
+                ans = max(ans, i);
+                break;
+            }
+        }
+        
+        for(int i = N-1; i >= 0; i--){
+            if(seats[i] == 1){
+                ans = max(ans, (N-1-i));
+                // ans = max(ans, seats.size()-1-i);
+                break;
+            }
+        }
+        
+        return ans;
+    }
+};
+**/
