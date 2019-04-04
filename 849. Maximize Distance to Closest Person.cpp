@@ -95,3 +95,45 @@ public:
     }
 };
 **/
+
+/**
+Approach #2: Two Pointer [Accepted]
+**/
+
+/**
+time: O(N), space: O(1)
+**/
+
+//Runtime: 12 ms, faster than 98.25% of C++ online submissions for Maximize Distance to Closest Person.
+//Memory Usage: 9.9 MB, less than 100.00% of C++ online submissions for Maximize Distance to Closest Person.
+
+/**
+class Solution {
+public:
+    int maxDistToClosest(vector<int>& seats) {
+        int N = seats.size();
+        int prev = -1; //first time is -1, go right
+        int future = 0; //go right
+        int ans = 0; //not 1?
+        int left, right;
+        
+        for(int i = 0; i < N; i++){
+            if(seats[i] == 1){
+                prev = i;
+            }else{
+                while((future < N && seats[future] == 0) || future < i){
+                    future++;
+                }
+                //prev == -1: not person at left
+                left = (prev == -1) ? N : (i-prev);
+                //future == N: no person at right
+                right = (future == N) ? N : (future -i);
+                ans = max(ans, min(left, right));
+            }
+        }
+        
+        return ans;
+    }
+};
+**/
+
