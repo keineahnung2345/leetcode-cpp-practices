@@ -36,3 +36,16 @@ public:
         return head;
     }
 };
+
+//https://leetcode.com/problems/remove-linked-list-elements/discuss/57306/3-line-recursive-solution
+//Runtime: 28 ms, faster than 99.77% of C++ online submissions for Remove Linked List Elements.
+//Memory Usage: 11.2 MB, less than 78.48% of C++ online submissions for Remove Linked List Elements.
+
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        if(head == NULL) return NULL;
+        head->next = removeElements(head->next, val);
+        return head->val == val?head->next:head;
+    }
+};
