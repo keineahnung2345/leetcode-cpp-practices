@@ -24,3 +24,25 @@ public:
         nums1.resize(m+n);
     }
 };
+
+//https://leetcode.com/problems/merge-sorted-array/discuss/29522/This-is-my-AC-code-may-help-you
+//Runtime: 4 ms, faster than 100.00% of C++ online submissions for Merge Sorted Array.
+//Memory Usage: 8.7 MB, less than 100.00% of C++ online submissions for Merge Sorted Array.
+
+class Solution {
+public:
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int i = m-1, j = n-1, k = m+n-1;
+        while(i >= 0 && j >= 0){
+            if(nums1[i] > nums2[j]){
+                nums1[k--] = nums1[i--];
+            }else{
+                nums1[k--] = nums2[j--];
+            }
+        }
+        
+        while(j >= 0){
+            nums1[k--] = nums2[j--];
+        }
+    }
+};
