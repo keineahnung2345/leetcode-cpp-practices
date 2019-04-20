@@ -35,3 +35,87 @@ public:
  * bool param_3 = obj->startsWith(prefix);
  */
  
+//
+class TrieNode{
+private:
+    vector<TrieNode*> links;
+    int R = 26;
+    bool isEnd = false;
+    
+public:    
+    TrieNode() {
+        links = vector<TrieNode*>(R);
+    }
+    
+    bool containsKey(char c){
+        return links[c-'a'] != NULL;
+    }
+    
+    TrieNode* get(char c){
+        return links[c-'a'];
+    }
+    
+    void put(char c, TrieNode* node){
+        links[c-'a'] = node;
+    }
+    
+    void setEnd(){
+        isEnd = true;
+    }
+    
+    bool getEnd(){
+        return isEnd;
+    }
+};
+
+class Trie {
+private:
+    TrieNode *root;
+    
+    // search a prefix or whole key in trie and
+    // returns the node where search ends
+    TrieNode* searchPrefix(string word){
+        TrieNode *node = root;
+        for(char c : word){
+            if(node->containsKey(c)){
+                node = node->get(c);
+            }else{
+                return NULL;
+            }
+        }
+        return node;
+    }
+    
+public:
+    /** Initialize your data structure here. */
+    Trie() {
+        root = new TrieNode();
+    }
+    
+    /** Inserts a word into the trie. */
+    //time: O(m), space: O(m), m is the key length.
+    void insert(string word) {
+        TrieNode *node = root;
+        for(char c : word){
+            if(!node->containsKey(c)){
+                node->put(c, new TrieNode());
+            }
+            node = node->get(c);
+        }
+        node->setEnd();
+    }
+    
+    /** Returns if the word is in the trie. */
+    //time: O(m), space: O(1)
+    bool search(string word) {
+        TrieNode *node = searchPrefix(word);
+        return node != NULL && node->getEnd();
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    //time: O(m), space: O(1)
+    bool startsWith(string prefix) {
+        TrieNode *node = searchPrefix(prefix);
+        return node != NULL;
+    }
+};
