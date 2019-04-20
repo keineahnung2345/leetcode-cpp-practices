@@ -35,7 +35,8 @@ public:
  * bool param_3 = obj->startsWith(prefix);
  */
  
-//
+//Runtime: 92 ms, faster than 59.89% of C++ online submissions for Implement Trie (Prefix Tree).
+//Memory Usage: 48 MB, less than 30.86% of C++ online submissions for Implement Trie (Prefix Tree).
 class TrieNode{
 private:
     vector<TrieNode*> links;
