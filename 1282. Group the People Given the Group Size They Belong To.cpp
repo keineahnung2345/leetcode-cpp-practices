@@ -1,3 +1,6 @@
+//Runtime: 32 ms, faster than 24.78% of C++ online submissions for Group the People Given the Group Size They Belong To.
+//Memory Usage: 11.7 MB, less than 100.00% of C++ online submissions for Group the People Given the Group Size They Belong To.
+
 class Solution {
 public:
     //declare it here to avoid 
