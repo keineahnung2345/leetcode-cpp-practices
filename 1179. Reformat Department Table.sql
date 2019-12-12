@@ -1,8 +1,10 @@
 # Write your MySQL query statement below
 # case-when-then-else-end: https://www.w3schools.com/sql/sql_case.asp
 # https://leetcode.com/problems/reformat-department-table/discuss/376357/MySQLPostgreSQL-solutions
+# Runtime: 698 ms, faster than 32.00% of MySQL online submissions for Reformat Department Table.
+# Memory Usage: 0B, less than 100.00% of MySQL online submissions for Reformat Department Table.
 select id, 
-	(case when month = 'jan' then revenue else null end) as Jan_Revenue,
+	sum(case when month = 'jan' then revenue else null end) as Jan_Revenue,
 	sum(case when month = 'feb' then revenue else null end) as Feb_Revenue,
 	sum(case when month = 'mar' then revenue else null end) as Mar_Revenue,
 	sum(case when month = 'apr' then revenue else null end) as Apr_Revenue,
