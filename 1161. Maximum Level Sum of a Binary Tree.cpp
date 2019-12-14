@@ -1,3 +1,4 @@
+//BFS
 //Runtime: 248 ms, faster than 15.14% of C++ online submissions for Maximum Level Sum of a Binary Tree.
 //Memory Usage: 74.3 MB, less than 100.00% of C++ online submissions for Maximum Level Sum of a Binary Tree.
 
@@ -50,6 +51,63 @@ public:
                 }
                 lastSum = 0;
             }
+        }
+        
+        return maxLevel;
+    }
+};
+
+
+//BFS, cleaner
+//Runtime: 232 ms, faster than 55.42% of C++ online submissions for Maximum Level Sum of a Binary Tree.
+//Memory Usage: 72.7 MB, less than 100.00% of C++ online submissions for Maximum Level Sum of a Binary Tree.
+//https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/discuss/360968/JavaPython-3-Two-codes-language%3A-BFS-level-traversal-and-DFS-level-sum.
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int maxLevelSum(TreeNode* root) {
+        queue<TreeNode*> q;
+        TreeNode* node;
+        int levelSize;
+        int curLevel = 1;
+        int maxSum = INT_MIN, maxLevel = -1;
+        int levelSum = 0;
+        
+        q.push(root);
+        
+        while(!q.empty()){
+            levelSize = q.size();
+            for(int i = 0; i < levelSize; i++){
+                node = q.front();
+                q.pop();
+                
+                if(node->left){
+                    q.push(node->left);
+                }
+                
+                if(node->right){
+                    q.push(node->right);
+                }
+                
+                levelSum += node->val;
+            }
+            
+            //clean up before going to next level
+            if(levelSum > maxSum){
+                maxSum = levelSum;
+                maxLevel = curLevel;
+            }
+            levelSum = 0;  
+            curLevel++;
         }
         
         return maxLevel;
