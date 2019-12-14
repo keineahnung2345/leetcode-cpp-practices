@@ -113,3 +113,50 @@ public:
         return maxLevel;
     }
 };
+
+//DFS
+//https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/discuss/360968/JavaPython-3-Two-codes-language%3A-BFS-level-traversal-and-DFS-level-sum.
+//Runtime: 220 ms, faster than 87.98% of C++ online submissions for Maximum Level Sum of a Binary Tree.
+//Memory Usage: 70.4 MB, less than 100.00% of C++ online submissions for Maximum Level Sum of a Binary Tree.
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    //iterate tree and fill levelSums
+    void dfs(TreeNode* node, vector<int>& levelSums, int level){
+        if(!node) return;
+        //ex: levelSums is empty, we need to make its length 1 so that we can set levelSums[0] as node->val
+        if(level == levelSums.size()){
+            levelSums.push_back(node->val);
+        }else{
+            levelSums[level] += node->val;
+        }
+        
+        if(node->left){
+            dfs(node->left, levelSums, level+1);
+        }
+        if(node->right){
+            dfs(node->right, levelSums, level+1);
+        }
+    };
+    
+    int maxLevelSum(TreeNode* root) {
+        //levelSums[0]: the sum of nodes' values in level 0+1=1
+        vector<int> levelSums;
+
+        //pretend the first level is level 0
+        //later will add 1 to convert it to the real level
+        dfs(root, levelSums, 0);
+        
+        //max_element: Returns an iterator pointing to the element with the largest value in the range [first,last).
+        return distance(levelSums.begin(), 
+                max_element(levelSums.begin(), levelSums.end())) + 1;
+    }
+};
