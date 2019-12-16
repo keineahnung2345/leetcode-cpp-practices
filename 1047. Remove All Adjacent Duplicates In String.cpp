@@ -24,3 +24,22 @@ public:
         return S;
     }
 };
+
+//Two pointer:
+//https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/discuss/294893/JavaC%2B%2BPython-Two-Pointers-and-Stack-Solution
+//Runtime: 20 ms, faster than 82.26% of C++ online submissions for Remove All Adjacent Duplicates In String.
+//Memory Usage: 11.8 MB, less than 100.00% of C++ online submissions for Remove All Adjacent Duplicates In String.
+
+class Solution {
+public:
+    string removeDuplicates(string S) {
+        int isrc, idst;
+        for(isrc = 0, idst = 0; isrc < S.size(); isrc++, idst++){
+            S[idst] = S[isrc];
+            if(idst > 0 && S[idst] == S[idst-1]){
+                idst -= 2;
+            }
+        }
+        return S.substr(0, idst);
+    }
+};
