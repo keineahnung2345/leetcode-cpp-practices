@@ -90,3 +90,65 @@ public:
         return root;
     }
 };
+
+//[Java/C++/Python] Iterative Stack Solution
+//https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/discuss/274621/JavaC%2B%2BPython-Iterative-Stack-Solution
+//Runtime: 12 ms, faster than 99.64% of C++ online submissions for Recover a Tree From Preorder Traversal.
+//Memory Usage: 11.1 MB, less than 100.00% of C++ online submissions for Recover a Tree From Preorder Traversal.
+//Time O(S), Space O(N)
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* recoverFromPreorder(string S) {
+        int level, value;
+        TreeNode* node;
+        stack<TreeNode*> stk;
+        
+        //no i++ in this for loop!
+        for(int i = 0; i < S.size();){
+            level = 0;
+            value = 0;
+            //&& i < S.size() is important!
+            for(; S[i]=='-' && i < S.size(); i++){
+                level++;
+            }
+            for(; S[i]!='-' && i < S.size(); i++){
+                value = value * 10 + (S[i] - '0');
+            }
+            // cout << level << " " << value << endl;
+            node = new TreeNode(value);
+            //create connection with one of previous nodes
+            while(stk.size() > level){
+                //when current node is level 1, 
+                //we expect that the stack contains only 1 node(at level 0)
+                stk.pop();
+            }
+            // cout << stk.size() << endl;
+            if(!stk.empty()){
+                //set this node as its parent's left or right child
+                if(!stk.top()->left)stk.top()->left = node;
+                else stk.top()->right = node;
+            }
+            //push it into stack
+            stk.push(node);
+            // cout << stk.size() << endl;
+        }
+        
+        //to get the very first node
+        while(!stk.empty()){
+            node = stk.top();
+            stk.pop();
+        }
+        
+        return node;
+    }
+};
