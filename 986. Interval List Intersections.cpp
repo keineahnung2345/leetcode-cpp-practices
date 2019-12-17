@@ -57,3 +57,33 @@ public:
         return intersection;
     }
 };
+
+//https://leetcode.com/problems/interval-list-intersections/solution/
+//Runtime: 44 ms, faster than 97.77% of C++ online submissions for Interval List Intersections.
+//Memory Usage: 15.8 MB, less than 96.00% of C++ online submissions for Interval List Intersections.
+//time complexity: O(M+N), space complexity: O(M+N)
+
+class Solution {
+public:
+    vector<vector<int>> intervalIntersection(vector<vector<int>>& A, vector<vector<int>>& B) {
+        int i = 0, j = 0;
+        vector<vector<int>> intersection;
+        
+        while(i < A.size() && j < B.size()){
+            int low = max(A[i][0], B[j][0]);
+            int high = min(A[i][1], B[j][1]);
+            
+            if(low <= high){
+                intersection.push_back({low, high});
+            }
+            
+            if(A[i][1] < B[j][1]){
+                i++;
+            }else{
+                j++;
+            }
+        }
+        
+        return intersection;
+    }
+};
