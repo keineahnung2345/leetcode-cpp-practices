@@ -1,3 +1,4 @@
+//https://leetcode.com/problems/flower-planting-with-no-adjacent/discuss/290858/JavaC%2B%2BPython-Greedily-Paint
 //Runtime: 180 ms, faster than 65.71% of C++ online submissions for Flower Planting With No Adjacent.
 //Memory Usage: 38.8 MB, less than 100.00% of C++ online submissions for Flower Planting With No Adjacent.
 
