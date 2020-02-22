@@ -43,3 +43,37 @@ public:
         return candidates[0];
     }
 };
+
+/*
+Hint 1
+For every word in the input list, we can check whether all prefixes of that word are in the input list by using a Set.
+*/
+
+class Solution {
+public:
+    string longestWord(vector<string>& words) {
+        vector<string> candidates;
+        
+        for(string word : words){
+            bool valid = true;
+            for(int i = word.size() - 1; i >= 1; i--){
+                string prefix = word.substr(0, i);
+                // cout << prefix << endl;
+                if(find(words.begin(), words.end(), prefix) == words.end()){
+                    valid = false;
+                    break;
+                }
+            }
+            if(valid)candidates.push_back(word);
+        }
+        // cout << candidates.size() << endl;
+        // copy(candidates.begin(), candidates.end(), ostream_iterator<string>(cout, " "));
+
+        sort(candidates.begin(), candidates.end(), 
+             [](const string& a, const string& b){
+                 return a.size() == b.size() ? a < b : a.size() > b.size();
+             }
+            );
+        return candidates[0];
+    }
+};
