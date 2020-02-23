@@ -48,7 +48,8 @@ public:
 Hint 1
 For every word in the input list, we can check whether all prefixes of that word are in the input list by using a Set.
 */
-
+//Runtime: 540 ms, faster than 5.02% of C++ online submissions for Longest Word in Dictionary.
+//Memory Usage: 29.4 MB, less than 30.00% of C++ online submissions for Longest Word in Dictionary.
 class Solution {
 public:
     string longestWord(vector<string>& words) {
@@ -75,5 +76,84 @@ public:
              }
             );
         return candidates[0];
+    }
+};
+
+//Trie + Depth-First Search
+//Runtime: 84 ms, faster than 30.96% of C++ online submissions for Longest Word in Dictionary.
+//Memory Usage: 25.6 MB, less than 50.00% of C++ online submissions for Longest Word in Dictionary.
+class Node {
+public:
+    Node(char c){
+        this->c = c;
+    }
+
+    char c;
+    int end; //default is 0
+    map<char, Node*> children;
+};
+
+class Trie {
+public:
+    Trie() {
+        root = new Node('0');
+    }
+    
+    void insert(string word, int index) {
+        Node* cur = root;
+        //put the word into the tree vertically
+        for(char c : word){
+            if(!cur->children[c]){
+                cur->children[c] = new Node(c);
+            }
+            cur = cur->children[c];
+        }
+        //cur->end - 1 is the index for the input array
+        //mark this node comes from input array
+        cur->end = index;
+    }
+    
+    string dfs(){
+        string ans = "";
+        stack<Node*> stk;
+        stk.push(root);
+        while(!stk.empty()){
+            Node* node = stk.top(); stk.pop();
+            //root node's end is 0
+            //only want node from input array and root, not a non-leaf node
+            if(node->end > 0 || node == root){
+                //node from input array
+                if(node != root){
+                    //node->end -1 is the index for the input array
+                    string word = words[node->end -1];
+                    if(word.size() > ans.size() || 
+                      word.size() == ans.size() && word < ans){
+                        ans = word;
+                    }                    
+                }
+                for(auto it = node->children.begin(); it != node->children.end(); it++){
+                    stk.push(it->second);
+                }
+            }
+        }
+        return ans;
+    }
+
+    Node* root;
+    vector<string> words;
+};
+
+class Solution {
+public:
+    string longestWord(vector<string>& words) {
+        Trie trie;
+        int index = 0;
+        //put every word in a trie(a prefix tree)
+        for(string word : words){
+            trie.insert(word, ++index);
+        }
+        trie.words = words;
+        //dfs, only searching nodes that ended a word
+        return trie.dfs();
     }
 };
