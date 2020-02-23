@@ -157,3 +157,28 @@ public:
         return trie.dfs();
     }
 };
+
+//set
+//https://leetcode.com/problems/longest-word-in-dictionary/discuss/109114/JavaC%2B%2B-Clean-Code
+//Runtime: 52 ms, faster than 78.87% of C++ online submissions for Longest Word in Dictionary.
+//Memory Usage: 18 MB, less than 80.00% of C++ online submissions for Longest Word in Dictionary.
+class Solution {
+public:
+    string longestWord(vector<string>& words) {
+        unordered_set<string> built;
+        string ans;
+        sort(words.begin(), words.end());
+        for(string word : words){
+            if(word.size() == 1 || built.find(word.substr(0, word.size()-1)) != built.end()){
+                //check both length and their lexicographical order
+                ans = (word.size() == ans.size()) ? (word < ans ? word : ans) : (word.size() > ans.size() ? word : ans);
+                //this works because the vector "words" is sorted
+                // ans = word.size() > ans.size() ? word : ans;
+                //only record the word can be built from one char into the set,
+                //for those word built from 2 or more chars, not record them
+                built.insert(word);
+            }
+        }
+        return ans;
+    }
+};
