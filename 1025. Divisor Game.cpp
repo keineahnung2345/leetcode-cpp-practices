@@ -101,3 +101,23 @@ public:
         return win[N];
     }
 };
+
+//https://leetcode.com/problems/divisor-game/discuss/274566/just-return-N-2-0-(proof)
+//Runtime: 4 ms, faster than 61.78% of C++ online submissions for Divisor Game.
+//Memory Usage: 8.1 MB, less than 96.55% of C++ online submissions for Divisor Game.
+class Solution {
+public:
+    bool divisorGame(int N) {
+        return N%2 == 0;
+    }
+};
+
+//Runtime: 4 ms, faster than 61.78% of C++ online submissions for Divisor Game.
+//Memory Usage: 8.1 MB, less than 100.00% of C++ online submissions for Divisor Game.
+class Solution {
+public:
+    bool divisorGame(int N) {
+        return !(N & 1);
+    }
+};
+
