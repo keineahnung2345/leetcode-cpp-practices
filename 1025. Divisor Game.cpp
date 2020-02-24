@@ -1,3 +1,44 @@
+//Runtime: 8 ms, faster than 15.67% of C++ online submissions for Divisor Game.
+//Memory Usage: 9.7 MB, less than 6.90% of C++ online submissions for Divisor Game.
+class Solution {
+public:
+    vector<int> getDivisors(int x){
+        vector<int> divisors;
+        
+        for(int divisor = x/2; divisor >= 1; divisor--){
+            if(x % divisor == 0){
+                divisors.push_back(divisor);
+            }
+        }
+        
+        return divisors;
+    }
+    
+    bool divisorGame(int N) {
+        vector<bool> win(N+1, false);
+        
+        win[1] = false;
+        win[2] = true;
+        
+        for(int i = 3; i <= N; i++){
+            vector<int> divisors = getDivisors(i);
+            // cout << "i: " << i << endl;
+            // copy(divisors.begin(), divisors.end(), ostream_iterator<int>(cout, " "));
+            // cout << endl;
+            // cout << "win: " << win[i] << endl;
+            for(int divisor : divisors){
+                if(!win[i - divisor]){
+                    win[i] = true;
+                    break;
+                }
+            }
+            // cout << "win: " << win[i] << endl;
+        }
+        
+        return win[N];
+    }
+};
+
 //make all_divisors an array of array
 //Runtime: 20 ms, faster than 6.95% of C++ online submissions for Divisor Game.
 //Memory Usage: 10.6 MB, less than 6.90% of C++ online submissions for Divisor Game.
