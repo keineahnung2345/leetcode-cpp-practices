@@ -42,3 +42,58 @@ public:
         return vector<int>();
     }
 };
+
+//Approach #2: Union-Find
+//Runtime: 8 ms, faster than 79.50% of C++ online submissions for Redundant Connection.
+//Memory Usage: 10.3 MB, less than 47.06% of C++ online submissions for Redundant Connection.
+class DSU{
+private:
+    vector<int> parent;
+    vector<int> rank;
+public:
+    DSU(int size){
+        parent = vector<int>(size);
+        iota(parent.begin(), parent.end(), 0);
+        rank = vector<int>(size);
+    };
+    
+    int find(int x){
+        if(parent[x] != x){
+            parent[x] = find(parent[x]);
+        }
+        return parent[x];
+    };
+    
+    bool unite(int x, int y){
+        int xp = find(x), yp = find(y);
+        if(xp == yp){
+            //x and y is already connected
+            return false;
+        }else if(rank[xp] < rank[yp]){
+            //union-by-rank
+            parent[xp] = yp;
+        }else if(rank[xp] > rank[yp]){
+            parent[yp] = xp;
+        }else{
+            parent[yp] = xp;
+            rank[xp]++;
+        }
+        //now x and y is connected
+        return true;
+    };
+};
+
+class Solution {
+public:
+    int MAX_EDGE_VAL = 1000;
+    
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        DSU dsu = DSU(MAX_EDGE_VAL+1);
+        for(vector<int>& edge : edges){
+            if(!dsu.unite(edge[0], edge[1])){
+                return edge;
+            }
+        }
+        return vector<int>();
+    }
+};
