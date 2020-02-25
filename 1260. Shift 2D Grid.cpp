@@ -44,3 +44,25 @@ public:
         return ans;
     }
 };
+
+//Approach 3: Using Modulo Arithmetic
+//time: O(m*n), space: O(m*n)
+//Runtime: 68 ms, faster than 75.78% of C++ online submissions for Shift 2D Grid.
+//Memory Usage: 13.4 MB, less than 100.00% of C++ online submissions for Shift 2D Grid.
+class Solution {
+public:
+    vector<vector<int>> shiftGrid(vector<vector<int>>& grid, int k) {
+        int m = grid.size(), n = grid[0].size();
+        vector<vector<int>> ans(m, vector<int>(n, 0));
+        
+        for(int i = 0 ; i < m; i++){
+            for(int j = 0; j < n; j++){
+                int new_j = (j + k)%n;
+                int new_i = (i + (j + k)/n)%m;
+                ans[new_i][new_j] = grid[i][j];
+            }
+        }
+        
+        return ans;
+    }
+};
