@@ -97,3 +97,25 @@ public:
         return vector<int>();
     }
 };
+
+//WA
+class Solution {
+public:
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        // cout << edges.size() << endl;
+        for(int i = edges.size()-1; i >= 0; i--){
+            int x = edges[i][0], y = edges[i][1];
+            bool first = false, second = false;
+            for(int j = 0; j < i; j++){
+                if(find(edges[j].begin(), edges[j].end(), x) != edges[j].end()){
+                    first = true;
+                }else if(find(edges[j].begin(), edges[j].end(), y) != edges[j].end()){
+                    second = true;
+                }
+                if(first && second) return edges[i];
+            }
+            
+        }
+        return vector<int>();
+    }
+};
