@@ -34,3 +34,17 @@ public:
         return count;
     }
 };
+
+//https://leetcode.com/problems/minimum-moves-to-equal-array-elements/discuss/93817/It-is-a-math-question
+//Runtime: 48 ms, faster than 93.11% of C++ online submissions for Minimum Moves to Equal Array Elements.
+//Memory Usage: 11 MB, less than 77.78% of C++ online submissions for Minimum Moves to Equal Array Elements.
+class Solution {
+public:
+    int minMoves(vector<int>& nums) {
+        long long sum = accumulate(nums.begin(), nums.end(), 0LL);
+        int minimum = *min_element(nums.begin(), nums.end());
+        int n = nums.size();
+        
+        return sum - (long long)minimum * n;
+    }
+};
