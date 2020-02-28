@@ -76,3 +76,16 @@ public:
         return abs(round(log(n)/log(3)) - log(n)/log(3)) < std::numeric_limits<double>::epsilon()*20;
     }
 };
+
+//Approach 4: Integer Limitations
+//time: O(1), space: O(1)
+//Runtime: 12 ms, faster than 86.75% of C++ online submissions for Power of Three.
+//Memory Usage: 7.1 MB, less than 100.00% of C++ online submissions for Power of Three.
+class Solution {
+public:
+    bool isPowerOfThree(int n) {
+        int max_power_of_3 = pow(3, int(log(INT_MAX)/log(3)));
+        //if n can divide max_power_of_3, it's power of 3
+        return n > 0 && max_power_of_3 % n == 0;
+    }
+};
