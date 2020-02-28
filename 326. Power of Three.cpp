@@ -25,7 +25,7 @@ public:
 };
 
 //Approach 1: Loop Iteration
-//time: O(log(n)), space: O(1)
+//time: O(log3(n)), space: O(1)
 //Runtime: 28 ms, faster than 17.10% of C++ online submissions for Power of Three.
 //Memory Usage: 7.2 MB, less than 100.00% of C++ online submissions for Power of Three.
 class Solution {
@@ -41,3 +41,38 @@ public:
     }
 };
 
+//Approach 2: Base Conversion & regex
+//time: O(log3(n)), space: O(log3(n))
+//Runtime: 188 ms, faster than 5.75% of C++ online submissions for Power of Three.
+//Memory Usage: 85.7 MB, less than 9.52% of C++ online submissions for Power of Three.
+class Solution {
+public:
+    bool isPowerOfThree(int n) {
+        // char buffer[32];
+        // itoa(n, buffer, 3);
+        // string str = string(buffer);
+        
+        string str = "";
+        while(n){
+            // str = to_string(n%3) + str;
+            str.insert(0, to_string(n%3));
+            n /= 3;
+        }
+        
+        regex pattern("^10*$");
+        
+        return regex_match(str, pattern);
+    }
+};
+
+//Approach 3: Mathematics
+//time: depends on log's implementation, space: O(1)
+//Runtime: 16 ms, faster than 69.14% of C++ online submissions for Power of Three.
+//Memory Usage: 7.6 MB, less than 100.00% of C++ online submissions for Power of Three.
+class Solution {
+public:
+    bool isPowerOfThree(int n) {
+        // cout << n << ", " << round(log(n)/log(3)) << ", " << abs(round(log(n)/log(3)) - log(n)/log(3)) << ", " << std::numeric_limits<double>::epsilon() << endl;
+        return abs(round(log(n)/log(3)) - log(n)/log(3)) < std::numeric_limits<double>::epsilon()*20;
+    }
+};
