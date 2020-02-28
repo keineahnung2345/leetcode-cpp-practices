@@ -23,3 +23,21 @@ public:
         return abs((log(n) / log(3)) - ceil((log(n) / log(3)))) < 1e-14;
     }
 };
+
+//Approach 1: Loop Iteration
+//time: O(log(n)), space: O(1)
+//Runtime: 28 ms, faster than 17.10% of C++ online submissions for Power of Three.
+//Memory Usage: 7.2 MB, less than 100.00% of C++ online submissions for Power of Three.
+class Solution {
+public:
+    bool isPowerOfThree(int n) {
+        if(n < 1) return false;
+        
+        while(n % 3 == 0){
+            n /= 3;
+        }
+        
+        return n == 1;
+    }
+};
+
