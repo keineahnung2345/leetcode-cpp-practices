@@ -27,3 +27,24 @@ public:
         return ans;
     }
 };
+
+//Sum the difference
+//https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/discuss/503450/JavaPython-3-Count-occurrences-and-sum-the-difference-w-analysis.
+//Runtime: 84 ms, faster than 93.62% of C++ online submissions for Minimum Number of Steps to Make Two Strings Anagram.
+//Memory Usage: 18 MB, less than 100.00% of C++ online submissions for Minimum Number of Steps to Make Two Strings Anagram.
+class Solution {
+public:
+    int minSteps(string s, string t) {
+        vector<int> count(26);
+        
+        for(int i = 0; i < s.size(); i++){
+            count[t[i]-'a']++;
+            count[s[i]-'a']--;
+        }
+        
+        int (*iabs)(int) = &std::abs;
+        transform(count.begin(), count.end(), count.begin(), iabs);
+        
+        return accumulate(count.begin(), count.end(), 0)/2;
+    }
+};
