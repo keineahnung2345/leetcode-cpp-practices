@@ -1,6 +1,7 @@
 //dp
 //Runtime: 32 ms, faster than 10.62% of C++ online submissions for Minimum Cost Tree From Leaf Values.
 //Memory Usage: 8.1 MB, less than 100.00% of C++ online submissions for Minimum Cost Tree From Leaf Values.
+//time: O(N^3), space: O(N^2)
 
 class Solution {
 public:
@@ -27,5 +28,32 @@ public:
         // cout << endl;
         
         return dp[0][n-1];
+    }
+};
+
+//https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/discuss/339959/One-Pass-O(N)-Time-and-Space
+//merge node
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Minimum Cost Tree From Leaf Values.
+//Memory Usage: 7.7 MB, less than 100.00% of C++ online submissions for Minimum Cost Tree From Leaf Values.
+//time: O(N^2), space: O(N)
+class Solution {
+public:
+    int mctFromLeafValues(vector<int>& arr) {
+        int ans = 0;
+        
+        while(arr.size() > 1){
+            auto min_it = min_element(arr.begin(), arr.end());
+            int min_index = min_it - arr.begin();
+            // merge with its left or right neighbor
+            // it either neighbor not exist, use INT_MAX to replace it
+            ans += min(min_index >= 1 ? arr[min_index-1]: INT_MAX,
+                       min_index+1 < arr.size() ? arr[min_index+1] : INT_MAX) 
+                   * (*min_it);
+            // current node is already merged, 
+            //it's now represented by the the larger value in same subtree
+            arr.erase(arr.begin() + min_index);
+        }
+        
+        return ans;
     }
 };
