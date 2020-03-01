@@ -1,3 +1,4 @@
+//time: O(N^2), space: O(N)
 //Runtime: 260 ms, faster than 8.26% of C++ online submissions for Next Greater Element II.
 //Memory Usage: 11.1 MB, less than 100.00% of C++ online submissions for Next Greater Element II.
 
