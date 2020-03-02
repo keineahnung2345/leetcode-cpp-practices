@@ -57,3 +57,35 @@ public:
         return ans;
     }
 };
+
+//stack
+//https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/discuss/339959/One-Pass-O(N)-Time-and-Space
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Minimum Cost Tree From Leaf Values.
+//Memory Usage: 7.7 MB, less than 100.00% of C++ online submissions for Minimum Cost Tree From Leaf Values.
+
+class Solution {
+public:
+    int mctFromLeafValues(vector<int>& arr) {
+        int res = 0;
+        stack<int> stk;
+        stk.push(INT_MAX);
+        for(int a : arr){
+            //if a < stk.top(), just push it
+            while(stk.top() <= a){
+                int mid = stk.top(); stk.pop();
+                //stk.top(): left, a: right
+                //mid <= stk.top() and a
+                //merge it with the smaller of them
+                res += mid * min(stk.top(), a);
+            }
+            stk.push(a);
+        }
+        //excluding INT_MAX, there is still at least 2 elements
+        //two 2 elements is the largest of left and right subtree
+        while(stk.size() > 2){
+            int tmp = stk.top(); stk.pop();
+            res += tmp * stk.top();
+        }
+        return res;
+    }
+};
