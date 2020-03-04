@@ -20,3 +20,29 @@ public:
         return N-covered;
     }
 };
+
+//sort, one pass
+//https://leetcode.com/problems/remove-covered-intervals/discuss/451277/JavaC%2B%2BPython-Sort-Solution-Test-Cases-are-Trash
+//time: O(NlogN), space: O(N)
+class Solution {
+public:
+    int removeCoveredIntervals(vector<vector<int>>& intervals) {
+        int res = 0, left = -1, right = -1;
+        sort(intervals.begin(), intervals.end());
+        for(vector<int>& v : intervals){
+            //v[0] same as left: remove last interval
+            //v[0] bigger, v[1] same as right: remove current interval
+            if(v[0] > left && v[1] > right){
+                //later interval can only has left and right boundary >= current left and right boundary
+                //so update "left"
+                left = v[0];
+                //current interval is not covered, so add it
+                res++;
+            }
+            //v[0] same as left: remove last interval and make right bigger
+            //v[0] bigger, v[1] same as right: right is not changed
+            right = max(right, v[1]);
+        }
+        return res;
+    }
+};
