@@ -24,6 +24,8 @@ public:
 //sort, one pass
 //https://leetcode.com/problems/remove-covered-intervals/discuss/451277/JavaC%2B%2BPython-Sort-Solution-Test-Cases-are-Trash
 //time: O(NlogN), space: O(N)
+//Runtime: 24 ms, faster than 76.60% of C++ online submissions for Remove Covered Intervals.
+//Memory Usage: 11.1 MB, less than 100.00% of C++ online submissions for Remove Covered Intervals.
 class Solution {
 public:
     int removeCoveredIntervals(vector<vector<int>>& intervals) {
