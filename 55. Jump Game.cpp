@@ -157,3 +157,24 @@ public:
         return memo[0] == Index::GOOD;
     }
 };
+
+//Approach 4: Greedy
+//Runtime: 12 ms, faster than 73.33% of C++ online submissions for Jump Game.
+//Memory Usage: 9.3 MB, less than 100.00% of C++ online submissions for Jump Game.
+//time: O(n), space: O(1)
+
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        int N = nums.size();
+        int lastGood = N-1;
+        
+        for(int i = N-2; i >= 0; i--){
+            if(i + nums[i] >= lastGood){
+                lastGood = i;
+            }
+        }
+        
+        return lastGood == 0;
+    }
+};
