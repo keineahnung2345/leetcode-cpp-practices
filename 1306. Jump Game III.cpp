@@ -138,3 +138,20 @@ public:
         return false;
     }
 };
+
+//Recursion, without set and queue
+//https://leetcode.com/problems/jump-game-iii/discuss/465602/JavaC%2B%2BPython-1-Line-Recursion
+//Runtime: 52 ms, faster than 77.17% of C++ online submissions for Jump Game III.
+//Memory Usage: 11.3 MB, less than 100.00% of C++ online submissions for Jump Game III.
+class Solution {
+public:
+    bool canReach(vector<int>& arr, int start) {
+        if((start >= 0) && (start < arr.size()) && (arr[start] >= 0)){
+            //mark as visited
+            arr[start] *= -1;
+            return arr[start] == 0 || canReach(arr, start+arr[start]) || canReach(arr, start-arr[start]);
+        }
+        
+        return false;
+    }
+};
