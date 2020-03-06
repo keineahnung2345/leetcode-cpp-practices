@@ -104,3 +104,37 @@ public:
         return false;
     }
 };
+
+//queue BFS
+//https://leetcode.com/problems/jump-game-iii/discuss/463872/Simple-one-using-queue-and-visited-paths-JAVA
+//Runtime: 52 ms, faster than 77.17% of C++ online submissions for Jump Game III.
+//Memory Usage: 11.8 MB, less than 100.00% of C++ online submissions for Jump Game III.
+class Solution {
+public:
+    bool canReach(vector<int>& arr, int start) {
+        set<int> visited;
+        queue<int> q;
+        
+        q.push(start);
+        while(!q.empty()){
+            int cur = q.front(); q.pop();
+            if(visited.find(cur) != visited.end()){
+                //ignore visited node
+                continue;
+            }
+            visited.insert(cur);
+            
+            if(arr[cur] == 0){
+                return true;
+            }
+            if(cur + arr[cur] < arr.size()){
+                q.push(cur + arr[cur]);
+            }
+            if(cur - arr[cur] >= 0){
+                q.push(cur - arr[cur]);
+            }
+        }
+        
+        return false;
+    }
+};
