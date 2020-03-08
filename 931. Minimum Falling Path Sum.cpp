@@ -34,6 +34,7 @@ public:
 };
 
 //dp
+//time: O(N^2), space: O(1)
 //Runtime: 28 ms, faster than 6.41% of C++ online submissions for Minimum Falling Path Sum.
 //Memory Usage: 9.3 MB, less than 100.00% of C++ online submissions for Minimum Falling Path Sum.
 class Solution {
