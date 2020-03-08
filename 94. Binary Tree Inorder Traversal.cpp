@@ -157,3 +157,47 @@ public:
         return ans;
     }
 };
+
+//Approach 3: Morris Traversal
+//time: O(n), space: O(n)
+//Runtime: 4 ms, faster than 56.80% of C++ online submissions for Binary Tree Inorder Traversal.
+//Memory Usage: 8 MB, less than 100.00% of C++ online submissions for Binary Tree Inorder Traversal.
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        TreeNode *cur = root, *pre;
+        
+        while(cur){
+            if(cur->left){
+                pre = cur->left;
+                while(pre->right){
+                    pre = pre->right;
+                }
+                //pre->right is now cur's rightmost child
+                //it doesn't have right child
+                //pre is the parent of cur's rightmost child
+                pre->right = cur;
+                TreeNode* tmp = cur;
+                //current root becomes its left child
+                cur = cur->left;
+                //cur original root's left subtree
+                tmp->left = nullptr;
+            }else{
+                ans.push_back(cur->val);
+                cur = cur->right;
+            }
+        }
+        
+        return ans;
+    }
+};
