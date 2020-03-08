@@ -50,24 +50,30 @@ public:
                     int area = 0;
                     stack<vector<int>> stk;
                     stk.push({r0, c0});
-                    //FLAG1
+//MODE1 and MODE2 work the same, just the places of "visited[r0][c0] = true;" are different
+#ifdef MODE1
                     visited[r0][c0] = true;
+#endif
                     //dfs for a cell, find the area
                     while(!stk.empty()){
                         vector<int> node = stk.top(); stk.pop();
                         int r = node[0], c = node[1];
                         area++;
-                        //why put "visited[r][c] = true;" in FLAG1 rather than FLAG2?
-                        //FLAG2
-                        // visited[r][c] = true;
+#ifdef MODE2
+                        if(!visited[r][c]){
+                            area++;
+                            visited[r][c] = true;
+                        }
+#endif
                         for(int k = 0; k < 4; k++){
                             int nr = r + dr[k];
                             int nc = c + dc[k];
                             if(nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc] && !visited[nr][nc])
                             {
                                 stk.push({nr, nc});
-                                //FLAG1
+#ifdef MODE1
                                 visited[nr][nc] = true;
+#endif
                             }
                         }
                     }
