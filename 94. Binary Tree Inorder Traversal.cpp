@@ -85,3 +85,40 @@ public:
         return ans;
     }
 };
+
+//iterative, another version
+//Runtime: 4 ms, faster than 56.80% of C++ online submissions for Binary Tree Inorder Traversal.
+//Memory Usage: 8 MB, less than 100.00% of C++ online submissions for Binary Tree Inorder Traversal.
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        stack<TreeNode*> stk;
+        TreeNode* cur;
+        
+        stk.push(root);
+        
+        while(!stk.empty()){
+            cur = stk.top();
+            while(cur && cur->left){
+                stk.push(cur->left);
+                cur = cur->left;
+            }
+            cur = stk.top(); stk.pop();
+            if(cur) ans.push_back(cur->val);
+            if(stk.size() > 0) stk.top()->left = nullptr;
+            if(cur && cur->right) stk.push(cur->right);
+        }
+        
+        return ans;
+    }
+};
