@@ -36,6 +36,8 @@ public:
     }
 };
 
+//Approach 2: Backtracking
+//time: O(N*2^N), space: O(N*2^N)
 //https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning)
 //Runtime: 4 ms, faster than 97.95% of C++ online submissions for Subsets.
 //Memory Usage: 8.2 MB, less than 100.00% of C++ online submissions for Subsets.
