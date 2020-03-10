@@ -150,3 +150,28 @@ public:
         return ans;
     }
 };
+
+//use a map
+//Runtime: 212 ms, faster than 50.49% of C++ online submissions for Flip Columns For Maximum Number of Equal Rows.
+//Memory Usage: 44.7 MB, less than 100.00% of C++ online submissions for Flip Columns For Maximum Number of Equal Rows.
+class Solution {
+public:
+    int maxEqualRowsAfterFlips(vector<vector<int>>& matrix) {
+        int m = matrix.size(), n = matrix[0].size();
+        map<vector<int>, int> counter;
+        vector<int> ones(n, 1), reversed(n);
+        
+        for(int i = 0; i < matrix.size(); i++){
+            transform(ones.begin(), ones.end(), matrix[i].begin(), reversed.begin(), minus<int>());
+            counter[matrix[i]]++;
+            counter[reversed]++;
+        }
+        
+        auto it = max_element(counter.begin(), counter.end(), 
+            [](const pair<vector<int>, int> & p1, const pair<vector<int>, int> & p2){
+            return p1.second < p2.second;
+        });
+
+        return it->second;
+    }
+};
