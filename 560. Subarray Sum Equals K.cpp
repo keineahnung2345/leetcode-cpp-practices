@@ -1,6 +1,6 @@
 //Runtime: 904 ms, faster than 5.05% of C++ online submissions for Subarray Sum Equals K.
 //Memory Usage: 9.3 MB, less than 100.00% of C++ online submissions for Subarray Sum Equals K.
-
+//time: O(n^2), space: O(n)
 class Solution {
 public:
     int subarraySum(vector<int>& nums, int k) {
