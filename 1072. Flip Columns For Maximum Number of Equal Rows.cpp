@@ -152,6 +152,7 @@ public:
 };
 
 //use a map
+//https://leetcode.com/problems/flip-columns-for-maximum-number-of-equal-rows/discuss/303752/Python-1-Line
 //Runtime: 212 ms, faster than 50.49% of C++ online submissions for Flip Columns For Maximum Number of Equal Rows.
 //Memory Usage: 44.7 MB, less than 100.00% of C++ online submissions for Flip Columns For Maximum Number of Equal Rows.
 class Solution {
