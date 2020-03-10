@@ -116,3 +116,37 @@ public:
         return ans;
     }
 };
+
+//speed the solution above with a set
+//Runtime: 632 ms, faster than 9.71% of C++ online submissions for Flip Columns For Maximum Number of Equal Rows.
+//Memory Usage: 27.4 MB, less than 100.00% of C++ online submissions for Flip Columns For Maximum Number of Equal Rows.
+class Solution {
+public:
+    int maxEqualRowsAfterFlips(vector<vector<int>>& matrix) {
+        int m = matrix.size(), n = matrix[0].size();
+        int ans = 0;
+        vector<int> sum(n);
+        vector<int> reversed(n);
+        set<int> grouped;
+        
+        for(int i = 0; i < m; i++){
+            int row_friend = 0;
+            //skip rows that can be grouped to earlier rows
+            if(grouped.find(i) != grouped.end()) continue;
+            for(int j = 0; j < m; j++){
+                for(int k = 0; k < n; k++){
+                    reversed[k] = 1 - matrix[j][k];
+                }
+                if(matrix[i] == matrix[j] || matrix[i] == reversed){
+                    row_friend++;
+                    grouped.insert(i);
+                    grouped.insert(j);
+                }
+            }
+            //row_friend's minimum is 1
+            ans = max(ans, row_friend);
+        }
+        
+        return ans;
+    }
+};
