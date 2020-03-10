@@ -69,3 +69,50 @@ public:
         return ans;
     }
 };
+
+//https://leetcode.com/problems/flip-columns-for-maximum-number-of-equal-rows/discuss/303897/Java-easy-solution-%2B-explanation
+//Runtime: 1620 ms, faster than 5.34% of C++ online submissions for Flip Columns For Maximum Number of Equal Rows.
+//Memory Usage: 26.7 MB, less than 100.00% of C++ online submissions for Flip Columns For Maximum Number of Equal Rows.
+class Solution {
+public:
+    bool all1(vector<int>& arr){
+        return accumulate(arr.begin(), arr.end(), 1, multiplies<int>()) == 1;
+    };
+    
+    bool allSame(vector<int>& a, vector<int>& b){
+        bool flag = true;
+        for(int i = 0; i < a.size(); i++){
+            if(a[i] != b[i]){
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    };
+    
+    int maxEqualRowsAfterFlips(vector<vector<int>>& matrix) {
+        int m = matrix.size(), n = matrix[0].size();
+        int ans = 0;
+        vector<int> sum(n);
+        vector<int> reversed(n);
+        
+        for(int i = 0; i < m; i++){
+            int row_friend = 0;
+            for(int j = 0; j < m; j++){
+                // transform(matrix[i].begin(), matrix[i].end(), matrix[j].begin(), sum.begin(), plus<int>());
+                for(int k = 0; k < n; k++){
+                    reversed[k] = 1 - matrix[j][k];
+                }
+                // if(allSame(matrix[i], matrix[j]) || all1(sum)){
+                // if(allSame(matrix[i], matrix[j]) || allSame(matrix[i], reversed)){
+                if(matrix[i] == matrix[j] || matrix[i] == reversed){
+                    row_friend++;
+                }
+            }
+            //row_friend's minimum is 1
+            ans = max(ans, row_friend);
+        }
+        
+        return ans;
+    }
+};
