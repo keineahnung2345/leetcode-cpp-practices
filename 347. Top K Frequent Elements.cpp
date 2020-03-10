@@ -44,6 +44,8 @@ public:
 
 //official solution
 //improve efficiency by keeping priority queue small
+//Runtime: 24 ms, faster than 39.54% of C++ online submissions for Top K Frequent Elements.
+//Memory Usage: 10.3 MB, less than 100.00% of C++ online submissions for Top K Frequent Elements.
 class valuecomparator
 {
 public:
