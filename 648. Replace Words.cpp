@@ -38,3 +38,57 @@ public:
         return ans;
     }
 };
+
+class TrieNode {
+public:
+    vector<TrieNode*> children;
+    string word;
+    TrieNode(){
+        children = vector<TrieNode*>(26, NULL);
+        word = "";
+    }
+};
+
+//Runtime: 68 ms, faster than 60.86% of C++ online submissions for Replace Words.
+//Memory Usage: 55.8 MB, less than 28.57% of C++ online submissions for Replace Words.
+//time: O(N), length of sentence 
+//space: O(N), size of trie
+class Solution {
+public:
+    string replaceWords(vector<string>& dict, string sentence) {
+        TrieNode* root = new TrieNode();
+        //build trie, mark a node as end by setting the attribute "word"
+        for(string& word : dict){
+            TrieNode* cur = root;
+            for(char c : word){
+                if(cur->children[c-'a'] == NULL){
+                    cur->children[c-'a'] = new TrieNode();
+                }
+                cur = cur->children[c-'a'];
+            }
+            cur->word = word;
+        }
+        
+        string ans;
+        istringstream is(sentence);
+        string token;
+        
+        while(is >> token){
+            //find current "token" in the trie
+            TrieNode* cur = root;
+            for(char c : token){
+                //stop search while coming to leaf or finding a "word" that matches it
+                if(cur->children[c-'a'] == NULL || cur->word != ""){
+                    break;
+                }
+                cur = cur->children[c-'a'];
+            }
+            if(ans.size() > 0){
+                ans += " ";
+            }
+            ans += (cur->word != "") ? cur->word : token;
+        }
+        
+        return ans;
+    }
+};
