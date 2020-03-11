@@ -113,3 +113,69 @@ public:
  * obj->buildDict(dict);
  * bool param_2 = obj->search(word);
  */
+
+//Trie
+//https://leetcode.com/problems/implement-magic-dictionary/discuss/107453/Easiest-JAVA-with-Trie-no-need-to-count-the-number-of-changes
+//Runtime: 76 ms, faster than 7.67% of C++ online submissions for Implement Magic Dictionary.
+//Memory Usage: 136.9 MB, less than 33.33% of C++ online submissions for Implement Magic Dictionary.
+class TrieNode {
+public:
+    vector<TrieNode*> children;
+    bool isEnd;
+    
+    TrieNode(){
+        children = vector<TrieNode*>(26);
+        //initialize bool to avoid the following error!
+        //runtime error: load of value 190, which is not a valid value for type 'bool' (solution.cpp)
+        isEnd = false;
+    }
+};
+
+class MagicDictionary {
+public:
+    TrieNode* root;
+    /** Initialize your data structure here. */
+    MagicDictionary() {
+        root = new TrieNode();
+    }
+    
+    /** Build a dictionary through a list of words */
+    void buildDict(vector<string> dict) {
+        for(string& word : dict){
+            for(int i = 0; i < word.size(); i++){
+                string neighbor = word;
+                //generate its 25 neighbors(by replacing 1 char)
+                for(int j = 0; j < 26; j++){
+                    if('a'+j == word[i]) continue;
+                    neighbor[i] = 'a'+j;
+                    //put the neighbor into trie
+                    TrieNode* cur = root;
+                    for(char c : neighbor){
+                        if(cur->children[c-'a'] == NULL){
+                            cur->children[c-'a'] = new TrieNode();
+                        }
+                        cur = cur->children[c-'a'];
+                    }
+                    cur->isEnd = true;
+                }
+            }
+        }
+    }
+    
+    /** Returns if there is any word in the trie that equals to the given word after modifying exactly one character */
+    bool search(string word) {
+        TrieNode* cur = root;
+        for(char c : word){
+            cur = cur->children[c-'a'];
+            if(cur == NULL) return false;
+        }
+        return cur->isEnd;
+    }
+};
+
+/**
+ * Your MagicDictionary object will be instantiated and called as such:
+ * MagicDictionary* obj = new MagicDictionary();
+ * obj->buildDict(dict);
+ * bool param_2 = obj->search(word);
+ */
