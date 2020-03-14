@@ -62,6 +62,7 @@ public:
 };
 
 //Stack
+//https://leetcode.com/problems/add-two-numbers-ii/discuss/92623/Easy-O(n)-Java-Solution-using-Stack
 //Runtime: 32 ms, faster than 54.73% of C++ online submissions for Add Two Numbers II.
 //Memory Usage: 13.7 MB, less than 22.22% of C++ online submissions for Add Two Numbers II.
 //time: O(n)
