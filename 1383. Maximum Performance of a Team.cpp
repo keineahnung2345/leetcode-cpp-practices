@@ -91,3 +91,39 @@ public:
         return res % (int)(1e9+7);
     }
 };
+
+//Solution 1: Binary Insert
+//TLE
+//52 / 53 test cases passed.
+//time: O(N^2), space: O(N)
+class Solution {
+public:
+    int maxPerformance(int n, vector<int>& speed, vector<int>& efficiency, int k) {
+        vector<pair<int, int>> ess;
+        for(int i = 0; i < n; i++){
+            ess.emplace_back(efficiency[i], speed[i]);
+        }
+        //descending
+        sort(ess.rbegin(), ess.rend());
+        
+        //sorted array of speeds, descending
+        vector<int> speedComb;
+        
+        long sSum = 0, res = 0;
+        
+        for(int i = 0; i < n; i++){
+            //use insertion sort
+            vector<int>::iterator it = find_if(speedComb.begin(), speedComb.end(), 
+                [&ess, &i](int e){return e < ess[i].second;});
+            speedComb.insert(it, ess[i].second);
+            sSum += ess[i].second;
+            if(speedComb.size() > k){
+                sSum -= speedComb[speedComb.size()-1];
+                speedComb.pop_back();
+            }
+            res = max(res, sSum * ess[i].first);
+        }
+        
+        return res % (int)(1e9+7);
+    }
+};
