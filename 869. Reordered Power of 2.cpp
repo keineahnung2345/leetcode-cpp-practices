@@ -116,3 +116,31 @@ public:
         return permutations(nums, 0);
     }
 };
+
+//Approach 2: Counting
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Reordered Power of 2.
+//Memory Usage: 7.8 MB, less than 100.00% of C++ online submissions for Reordered Power of 2.
+//time: O((logN)^2), space: O(logN)
+class Solution {
+public:
+    vector<int> count(int N){
+        vector<int> ans(10);
+        while(N){
+            ans[N%10]++;
+            N /= 10;
+        }
+        return ans;
+    };
+    
+    bool reorderedPowerOf2(int N) {
+        vector<int> arr = count(N);
+        //pow(2,30) is 1073741824
+        //and N's upper bound is pow(10,9)
+        for(int i = 0; i < 31; i++){
+            if(arr == count(1 << i)){
+                return true;
+            }
+        }
+        return false;
+    }
+};
