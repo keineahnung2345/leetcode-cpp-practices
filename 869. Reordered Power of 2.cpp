@@ -60,3 +60,59 @@ public:
         return backtrack(perm, nums, used);
     }
 };
+
+//Approach 1: Permutations
+//Runtime: 356 ms, faster than 6.98% of C++ online submissions for Reordered Power of 2.
+//Memory Usage: 7.3 MB, less than 100.00% of C++ online submissions for Reordered Power of 2.
+//time: O(log(N)! * log(N)), space: O(log(N))
+class Solution {
+public:
+    void swap(vector<int>& nums, int i, int j){
+        int t = nums[i];
+        nums[i] = nums[j];
+        nums[j] = t;
+    };
+    
+    bool isPowerOf2(vector<int>& nums){
+        if(nums[0] == 0) return false;
+        
+        int N = 0;
+        for(int e : nums){
+            N = N * 10 + e;
+        }
+        
+        //the parenthesis around "N & 1" is required here!!
+        while(N > 0 && ((N & 1) == 0)){
+            N >>= 1;
+        }
+        
+        return N == 1;
+    }
+    
+    bool permutations(vector<int>& nums, int start){
+        if(start == nums.size()){
+            return isPowerOf2(nums);
+        }
+        
+        for(int i = start; i < nums.size(); i++){
+            swap(nums, start, i);
+            
+            if(permutations(nums, start+1))
+                return true;
+            
+            swap(nums, start, i);
+        }
+        
+        return false;
+    };
+    
+    bool reorderedPowerOf2(int N) {
+        vector<int> nums;
+        while(N){
+            nums.push_back(N%10);
+            N /= 10;
+        }
+        
+        return permutations(nums, 0);
+    }
+};
