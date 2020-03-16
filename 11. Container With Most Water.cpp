@@ -33,3 +33,19 @@ public:
         return ans;
     }
 };
+
+//TLE
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        int N = height.size();
+        int ans = 0;
+        for(int i = 0; i < N-1; i++){
+            for(int j = i+1; j < N; j++){
+                ans = max(ans, min(height[i], height[j]) * (j-i));
+            }
+        }
+            
+        return ans;
+    }
+};
