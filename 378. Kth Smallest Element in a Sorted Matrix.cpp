@@ -67,6 +67,8 @@ public:
 
 //Solution 2 : Binary Search in range
 //https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/discuss/85173/Share-my-thoughts-and-Clean-Java-Code
+//Runtime: 36 ms, faster than 94.39% of C++ online submissions for Kth Smallest Element in a Sorted Matrix.
+//Memory Usage: 11.1 MB, less than 100.00% of C++ online submissions for Kth Smallest Element in a Sorted Matrix.
 class Solution {
 public:
     int kthSmallest(vector<vector<int>>& matrix, int k) {
