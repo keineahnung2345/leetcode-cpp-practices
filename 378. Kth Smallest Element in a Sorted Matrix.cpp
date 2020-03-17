@@ -64,3 +64,42 @@ public:
         return pq.top()->val;
     }
 };
+
+//Solution 2 : Binary Search in range
+//https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/discuss/85173/Share-my-thoughts-and-Clean-Java-Code
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        int m = matrix.size(), n = matrix[0].size();
+        int lo = matrix[0][0], hi = matrix[m - 1][n - 1] + 1;//[lo, hi)
+        //hi is exclusive, so not "lo <= hi"!!
+        while(lo < hi) {
+            /*
+            lo: -5, hi: -4
+            we want mid to be -5(hi is exclusive)
+            using  mid = (hi + lo) / 2", we get -4
+            using "mid = lo + (hi - lo) / 2", we get -5
+            */
+            // int mid = (hi + lo) / 2; //should not use this!!!
+            //this makes mid closer to lo
+            int mid = lo + (hi - lo) / 2; //should use this!!!
+            // cout << "range: " << lo << " " << mid << " " << hi << endl;
+            //get the number of elements <= mid
+            int count = 0;
+            for(int i = 0; i < m; i++) {
+                int j = n - 1;
+                while(j >= 0 && matrix[i][j] > mid) j--;
+                //for current row, matrix[i][0] ~ matrix[i][j] <= mid
+                count += (j + 1);
+                // cout << i << " " << j << " " << count << endl;
+            }
+            //mid is count-th smallest number
+            //if count < k, we need to increase the lower bound of search range
+            //if count >= k, we set hi = mid to find smallest possible value
+            if(count < k) lo = mid + 1;
+            else hi = mid; //hi is exclusive, so not "hi = mid-1;"!!
+            // cout << "====================" << endl;
+        }
+        return lo;
+    }
+};
