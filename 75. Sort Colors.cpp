@@ -19,8 +19,9 @@ public:
     }
 };
 
-//two pointer
+//two pointer, dutch partitioning problem
 //https://leetcode.com/problems/sort-colors/discuss/26679/C%2B%2B-one-pass-concise-solution.
+//https://leetcode.com/problems/sort-colors/discuss/26481/Python-O(n)-1-pass-in-place-solution-with-explanation
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
