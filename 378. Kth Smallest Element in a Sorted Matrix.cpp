@@ -1,3 +1,4 @@
+//Priority queue
 //Runtime: 84 ms, faster than 14.51% of C++ online submissions for Kth Smallest Element in a Sorted Matrix.
 //Memory Usage: 12.4 MB, less than 59.09% of C++ online submissions for Kth Smallest Element in a Sorted Matrix.
 class Solution {
@@ -18,5 +19,48 @@ public:
         //the answer is the k-th smallest element,
         //which is the smallest element in the heap of size k
         return pq.top();
+    }
+};
+
+//Priority queue(optimized)
+//https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/discuss/85173/Share-my-thoughts-and-Clean-Java-Code
+//Runtime: 68 ms, faster than 27.19% of C++ online submissions for Kth Smallest Element in a Sorted Matrix.
+//Memory Usage: 14.2 MB, less than 9.09% of C++ online submissions for Kth Smallest Element in a Sorted Matrix.
+class Tuple{
+public:
+    int x;
+    int y;
+    int val;
+    Tuple(int x, int y, int val) : x(x), y(y), val(val) {};
+};
+
+class TupleGreater{
+public:
+    TupleGreater(){}
+    bool operator() (const Tuple* lhs, const Tuple* rhs) const{
+        return lhs->val > rhs->val;
+    }
+};
+
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        priority_queue<Tuple*, vector<Tuple*>, TupleGreater> pq;
+        //push first row into pq
+        for(int y = 0; y < matrix[0].size(); y++){
+            pq.push(new Tuple(0, y, matrix[0][y]));
+        }
+        
+        k--;
+        //do k-1 times, a.k.a, pop the smaller k-1 elements
+        while(k-- > 0){
+            Tuple* t = pq.top(); pq.pop();
+            // cout << "pop: " << t->val << endl;
+            if(t->x+1 == matrix.size()) continue;
+            pq.push(new Tuple(t->x+1, t->y, matrix[t->x+1][t->y]));
+        }
+        
+        //now the top of pq is k th smallest element
+        return pq.top()->val;
     }
 };
