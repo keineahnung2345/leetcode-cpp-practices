@@ -92,3 +92,46 @@ public:
         return ans;
     }
 };
+
+//https://leetcode.com/problems/search-suggestions-system/discuss/436674/C%2B%2BJavaPython-Sort-and-Binary-Search-the-Prefix
+//sort and binary search the prefix
+//Runtime: 48 ms, faster than 80.56% of C++ online submissions for Search Suggestions System.
+//Memory Usage: 37.3 MB, less than 100.00% of C++ online submissions for Search Suggestions System.
+//sort: time: O(nlogn), space: O(logn)
+//each query: time: O(logn), space: O(query word's size)
+class Solution {
+public:
+    vector<vector<string>> suggestedProducts(vector<string>& products, string searchWord) {
+        auto it = products.begin();
+        sort(it, products.end());
+        
+        // for(string& product: products){
+        //     cout << product << " ";
+        // }
+        // cout << endl;
+        
+        vector<vector<string>> res;
+        string cur = "";
+        for (char c : searchWord) {
+            cur += c;
+            vector<string> suggested;
+            //the position of first element >= cur
+            it = lower_bound(it, products.end(), cur);
+            // cout << cur << " " << it - products.begin() << endl;
+            for (int i = 0; i < 3 && it + i != products.end(); i++) {
+                string& s = *(it + i);
+                // cout << s << " " << s.find(cur) << " | ";
+                if (s.find(cur) != 0){
+                    //s.find(cur) returns the position of substring
+                    //if not found(18446744073709551615) or not at the start, 
+                    //then stop searching
+                    break;
+                }
+                suggested.push_back(s);
+            }
+            // cout << endl;
+            res.push_back(suggested);
+        }
+        return res;
+    }
+};
