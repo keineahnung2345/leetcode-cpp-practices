@@ -31,3 +31,36 @@ public:
         return boats;
     }
 };
+
+//Approach 1: Greedy (Two Pointer)
+//Runtime: 108 ms, faster than 92.83% of C++ online submissions for Boats to Save People.
+//Memory Usage: 13 MB, less than 100.00% of C++ online submissions for Boats to Save People.
+//time: O(nlogn), space: O(n)
+class Solution {
+public:
+    int numRescueBoats(vector<int>& people, int limit) {
+        int N = people.size();
+        int i = 0, j = N-1;
+        int ans = 0;
+        
+        sort(people.begin(), people.end());
+        // for(int k = 0; k < N; k++){
+        //     cout << people[k] << " ";
+        // }
+        // cout << endl;
+        
+        while(i <= j){
+            ans++;
+            //when i equals to j, people[i] may be added twice
+            //, but that doesn't affect the ans
+            
+            if(people[i] + people[j] <= limit){
+                i++;
+            }
+            j--;
+            // cout << "[" << i << ", " << j << "]" << endl;
+        }
+        
+        return ans;
+    }
+};
