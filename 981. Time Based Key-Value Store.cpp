@@ -11,7 +11,8 @@ public:
     
     void set(string key, string value, int timestamp) {
         db[key].push_back(make_pair(timestamp, value));
-        sort(db[key].begin(), db[key].end());
+        //actually the input is already sorted by timestamp, so we don't this
+        // sort(db[key].begin(), db[key].end());
     }
     
     string get(string key, int timestamp) {
