@@ -106,14 +106,15 @@ public:
     }
 };
 
-//findNSum, recursive
+//findNSum, recursive, optimized
 //https://leetcode.com/problems/4sum/discuss/8545/Python-140ms-beats-100-and-works-for-N-sum-(Ngreater2)
-//Runtime: 12 ms, faster than 91.14% of C++ online submissions for 4Sum.
-//Memory Usage: 9.1 MB, less than 96.49% of C++ online submissions for 4Sum.
+//Runtime: 8 ms, faster than 98.35% of C++ online submissions for 4Sum.
+//Memory Usage: 8.5 MB, less than 100.00% of C++ online submissions for 4Sum.
 class Solution {
 public:
-    void findNSum(int l, int r, int target, int N, vector<int>& nums, vector<int> result, vector<vector<int>>& results){
+    void findNSum(int l, int r, int target, int N, vector<int>& nums, vector<int>& result, vector<vector<int>>& results){
         if(r-l+1 < N || N < 2 || target < nums[l]*N || target > nums[r]*N){
+            //r-l+1 < N: range's width should >= N
             return;
         }
         if(N == 2){
@@ -127,6 +128,7 @@ public:
                     // }
                     // cout << endl;
                     results.push_back(result);
+                    //need to revert the push_back above for later use!
                     result.pop_back();
                     result.pop_back();
                     while(l < r && nums[l] == nums[l+1]){
@@ -145,12 +147,14 @@ public:
             }
         }else{
             //recursively reduce N
-            for(int i = l; i <= r; i++){
+            //i <= r+1-N: because r-i+1 should >= N
+            for(int i = l; i <= r+1-N; i++){
                 //skip duplicate nums[i]
                 if(i == l || (i > l && nums[i] != nums[i-1])){
                     result.push_back(nums[i]);
-                    // cout << "[" << i+1 << ",  " << r  << "], target: " << target-nums[i] << ", nums[i]: " << nums[i] << " , N: " << N-1 << endl;
+                    // cout << "i: " << i << ", nums[i]: " << nums[i] << ", [" << i+1 << ",  " << r  << "], target: " << target-nums[i] << " , N: " << N-1 << endl;
                     findNSum(i+1, r, target-nums[i], N-1, nums, result, results);
+                    //need to revert the push_back above for later use!
                     result.pop_back();
                 }
             }
