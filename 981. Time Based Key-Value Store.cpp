@@ -106,6 +106,12 @@ public:
 //space: O(n)
 class TimeMap {
 public:
+    /*
+    the outer map uses unordered_map to speed up
+    if we change the outer map into map, the running time will be:
+    Runtime: 420 ms, faster than 39.75% of C++ online submissions for Time Based Key-Value Store.
+    */
+    //the inner map should be in order, so that we can use std::map::upper_bound!
     unordered_map<string, map<int, string>> db;
     
     /** Initialize your data structure here. */
