@@ -139,3 +139,37 @@ public:
  * obj->set(key,value,timestamp);
  * string param_2 = obj->get(key,timestamp);
  */
+
+//hash map + vector of pair
+//https://leetcode.com/problems/time-based-key-value-store/discuss/226664/C%2B%2B-3-lines-hash-map-%2B-map
+//Runtime: 388 ms, faster than 85.11% of C++ online submissions for Time Based Key-Value Store.
+//Memory Usage: 133.1 MB, less than 100.00% of C++ online submissions for Time Based Key-Value Store.
+class TimeMap {
+public:
+    unordered_map<string, vector<pair<int, string>>> db;
+    
+    /** Initialize your data structure here. */
+    TimeMap() {
+        
+    }
+    
+    void set(string key, string value, int timestamp) {
+        db[key].push_back({timestamp, value});
+    }
+    
+    string get(string key, int timestamp) {
+        auto it = upper_bound(begin(db[key]), end(db[key]), 
+            pair<int, string>(timestamp, ""), 
+            [](const pair<int, string>& a, const pair<int, string>& b) { 
+                return a.first < b.first; 
+            });
+        return it == db[key].begin() ? "" : prev(it)->second;
+    }
+};
+
+/**
+ * Your TimeMap object will be instantiated and called as such:
+ * TimeMap* obj = new TimeMap();
+ * obj->set(key,value,timestamp);
+ * string param_2 = obj->get(key,timestamp);
+ */
