@@ -105,3 +105,67 @@ public:
         return lo;
     }
 };
+
+//findNSum, recursive
+//https://leetcode.com/problems/4sum/discuss/8545/Python-140ms-beats-100-and-works-for-N-sum-(Ngreater2)
+//Runtime: 12 ms, faster than 91.14% of C++ online submissions for 4Sum.
+//Memory Usage: 9.1 MB, less than 96.49% of C++ online submissions for 4Sum.
+class Solution {
+public:
+    void findNSum(int l, int r, int target, int N, vector<int>& nums, vector<int> result, vector<vector<int>>& results){
+        if(r-l+1 < N || N < 2 || target < nums[l]*N || target > nums[r]*N){
+            return;
+        }
+        if(N == 2){
+            while(l < r){
+                if(nums[l] + nums[r] == target){
+                    result.push_back(nums[l]);
+                    result.push_back(nums[r]);
+                    // cout << "result: " << endl;
+                    // for(int i = 0; i < result.size(); i++){
+                    //     cout << result[i] << " ";
+                    // }
+                    // cout << endl;
+                    results.push_back(result);
+                    result.pop_back();
+                    result.pop_back();
+                    while(l < r && nums[l] == nums[l+1]){
+                        l++;
+                    }
+                    l++;
+                    while(l < r && nums[r] == nums[r-1]){
+                        r--;
+                    }
+                    r--;
+                }else if(nums[l] + nums[r] < target){
+                    l++;
+                }else{
+                    r--;
+                }
+            }
+        }else{
+            //recursively reduce N
+            for(int i = l; i <= r; i++){
+                //skip duplicate nums[i]
+                if(i == l || (i > l && nums[i] != nums[i-1])){
+                    result.push_back(nums[i]);
+                    // cout << "[" << i+1 << ",  " << r  << "], target: " << target-nums[i] << ", nums[i]: " << nums[i] << " , N: " << N-1 << endl;
+                    findNSum(i+1, r, target-nums[i], N-1, nums, result, results);
+                    result.pop_back();
+                }
+            }
+        }
+    };
+    
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        sort(nums.begin(), nums.end());
+        // for(int i = 0; i < nums.size(); i++){
+        //     cout << nums[i] << " ";
+        // }
+        // cout << endl;
+        vector<int> result;
+        vector<vector<int>> results;
+        findNSum(0, nums.size()-1, target, 4, nums, result, results);
+        return results;
+    }
+};
