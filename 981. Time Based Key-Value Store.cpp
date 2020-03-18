@@ -98,3 +98,38 @@ public:
  * obj->set(key,value,timestamp);
  * string param_2 = obj->get(key,timestamp);
  */
+
+//hash map + map
+//https://leetcode.com/problems/time-based-key-value-store/discuss/226664/C%2B%2B-3-lines-hash-map-%2B-map
+//suppose there are n set and m get operations
+//time: set O(1) each, O(n) total/ get O(logn) each, O(mlogn) total
+//space: O(n)
+class TimeMap {
+public:
+    unordered_map<string, map<int, string>> db;
+    
+    /** Initialize your data structure here. */
+    TimeMap() {
+        
+    }
+    
+    void set(string key, string value, int timestamp) {
+        //both work
+        db[key][timestamp] = value;
+        // db[key].insert({timestamp, value});
+    }
+    
+    string get(string key, int timestamp) {
+        auto it = db[key].upper_bound(timestamp);
+        if(it == db[key].begin()) return "";
+        it--; //get previous pair
+        return it->second;
+    }
+};
+
+/**
+ * Your TimeMap object will be instantiated and called as such:
+ * TimeMap* obj = new TimeMap();
+ * obj->set(key,value,timestamp);
+ * string param_2 = obj->get(key,timestamp);
+ */
