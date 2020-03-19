@@ -45,3 +45,46 @@ public:
         return ans;
     }
 };
+
+//Rolling hash, Rabin Karp algorithm, two pointer
+//https://leetcode.com/problems/longest-chunked-palindrome-decomposition/discuss/350711/Close-to-O(n)-Python-Rabin-Karp-Algorithm-with-two-pointer-technique-with-explanation-(~40ms)
+//WA(long long int overflow)
+//62 / 82 test cases passed.
+class Solution {
+public:
+    int longestDecomposition(string text) {
+        int magic_prime = 107;
+        int low = 0, high = text.size()-1;
+        int cur_low_hash = 0, cur_high_hash = 0, cur_hash_length = 0;
+        int ans = 0;
+        
+        while(low < high){
+            cur_low_hash = (cur_low_hash * 26)%magic_prime;
+            cur_low_hash += (text[low]-'a');
+            cur_low_hash %= magic_prime;
+            
+            //pow(26, cur_hash_length) cannot give corrent result even if using long long int in C++
+            cur_high_hash += (text[high]-'a')*((long long int)pow(26, cur_hash_length)%magic_prime);
+            cur_high_hash %= magic_prime;
+            
+            low++;
+            high--;
+            cur_hash_length++;
+            
+            if(cur_low_hash == cur_high_hash && text.substr(low-cur_hash_length, cur_hash_length) == text.substr(high+1, cur_hash_length)){
+                ans += 2;
+                cur_low_hash = 0;
+                cur_high_hash = 0;
+                cur_hash_length = 0;
+            }
+        }
+        
+        //only leave a char in the middle(odd N)
+        //cannot find palindrome pair on two sides of the middle(even N)
+        if((cur_hash_length == 0 && low == high) || cur_hash_length > 0){
+            ans++;
+        }
+        
+        return ans;
+    }
+};
