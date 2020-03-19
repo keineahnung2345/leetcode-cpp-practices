@@ -137,7 +137,7 @@ public:
     }
 };
 
-//Greedy
+//Greedy, brute force
 //https://leetcode.com/problems/longest-chunked-palindrome-decomposition/discuss/350560/JavaC%2B%2BPython-Easy-Greedy-with-Prove
 //Runtime: 4 ms, faster than 88.52% of C++ online submissions for Longest Chunked Palindrome Decomposition.
 //Memory Usage: 10.8 MB, less than 100.00% of C++ online submissions for Longest Chunked Palindrome Decomposition.
@@ -169,5 +169,34 @@ public:
             }
         }
         return ans;
+    }
+};
+
+//Greedy, tail recursion
+//https://leetcode.com/problems/longest-chunked-palindrome-decomposition/discuss/350560/JavaC%2B%2BPython-Easy-Greedy-with-Prove
+//Runtime: 4 ms, faster than 88.52% of C++ online submissions for Longest Chunked Palindrome Decomposition.
+//Memory Usage: 10.7 MB, less than 100.00% of C++ online submissions for Longest Chunked Palindrome Decomposition.
+class Solution {
+public:
+    int longestDecomposition(string text, int res = 0) {
+        int n = text.length();
+        //l is 1-based
+        for (int l = 1; l <= n / 2; ++l){
+            //this if is just for speed up
+            if (text[0] == text[n - l] && text[l - 1] == text[n - 1]){
+                if (text.substr(0, l) == text.substr(n - l)){
+                    // cout << l << " " << text.substr(0, l) << endl;
+                    //remove current palindrome from text
+                    return longestDecomposition(text.substr(l, n - l - l), res + 2);
+                }
+            }
+        }
+        /*
+        the recursion ends when:
+        1. we cannot find any palindrome for text(res + 1)
+        2. text's length is 0(res)
+        */
+        // cout << "n: " << n << endl;
+        return n ? res + 1 : res;
     }
 };
