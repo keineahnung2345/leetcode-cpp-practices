@@ -33,3 +33,32 @@ public:
         return false;
     }
 };
+
+//https://leetcode.com/problems/search-a-2d-matrix-ii/discuss/66140/My-concise-O(m%2Bn)-Java-solution
+//Runtime: 64 ms, faster than 85.79% of C++ online submissions for Search a 2D Matrix II.
+//Memory Usage: 12.1 MB, less than 100.00% of C++ online submissions for Search a 2D Matrix II.
+//time: O(m+n)
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int m = matrix.size();
+        if(m == 0) return false;
+        int n = matrix[0].size();
+        if(n == 0) return false;
+        
+        int row = 0, col = n-1;
+        while(col >= 0 && row < m){
+            if(matrix[row][col] == target){
+                return true;
+            }else if(target < matrix[row][col]){
+                //the current column's value are all larger than target
+                col--;
+            }else{
+                //the current row's value are all smaller than target
+                row++;
+            }
+        }
+        
+        return false;
+    }
+};
