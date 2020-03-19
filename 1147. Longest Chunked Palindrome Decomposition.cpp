@@ -136,3 +136,38 @@ public:
         return ((N % 2 == 0) && dp[N/2] != 0) ? dp[N/2] : ans+1;
     }
 };
+
+//Greedy
+//https://leetcode.com/problems/longest-chunked-palindrome-decomposition/discuss/350560/JavaC%2B%2BPython-Easy-Greedy-with-Prove
+//Runtime: 4 ms, faster than 88.52% of C++ online submissions for Longest Chunked Palindrome Decomposition.
+//Memory Usage: 10.8 MB, less than 100.00% of C++ online submissions for Longest Chunked Palindrome Decomposition.
+//time: O(N) * O(string), space O(N)
+class Solution {
+public:
+    int longestDecomposition(string text) {
+        int ans = 0, N = text.size();
+        string l = "", r = "";
+        for(int i = 0; i < N; i++){
+            l += text[i];
+            r = text[N-i-1] + r;
+            /*
+            "ghiabcdefhelloadamhelloabcdefghi"
+            the character in the middle can also be processed correctly
+            2 ghi
+            8 abcdef
+            13 hello
+            17 adam
+            22 hello
+            28 abcdef
+            31 ghi
+            */
+            if(l == r){
+                // cout << i << " " << l << endl;
+                l = "";
+                r = "";
+                ans++;
+            }
+        }
+        return ans;
+    }
+};
