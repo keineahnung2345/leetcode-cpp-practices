@@ -62,3 +62,38 @@ public:
         return false;
     }
 };
+
+//divide and conquer
+//https://leetcode.com/problems/search-a-2d-matrix-ii/discuss/66285/C%2B%2BC-divide-and-conquer-solution
+//Runtime: 160 ms, faster than 22.49% of C++ online submissions for Search a 2D Matrix II.
+//Memory Usage: 12.5 MB, less than 100.00% of C++ online submissions for Search a 2D Matrix II.
+class Solution {
+public:
+    bool binarySearch(vector<vector<int>>& matrix, int target
+        , int row_min, int row_max, int col_min, int col_max){
+        if(row_min > row_max) return false;
+        if(col_min > col_max) return false;
+        int row = (row_min + row_max)/2;
+        int col = (col_min + col_max)/2;
+        
+        if(target == matrix[row][col]){
+            return true;
+        }else if(target > matrix[row][col]){
+            //exclude matrix[row_min:row][col_min:col] from matrix[row_min:row_max][col_min:col_max]
+            return binarySearch(matrix, target, row_min, row_max, col+1, col_max) ||
+                binarySearch(matrix, target, row+1, row_max, col_min, col);
+        }else{
+            //these two rectangle together with matrix[row][col] construct matrix[row_min:row][col_min:col]
+            return binarySearch(matrix, target, row_min, row_max, col_min, col-1) ||
+                binarySearch(matrix, target, row_min, row-1, col, col_max);
+        }
+    };
+    
+    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+        int m = matrix.size();
+        if(m == 0) return false;
+        int n = matrix[0].size();
+        if(n == 0) return false;
+        return binarySearch(matrix, target, 0, m-1, 0, n-1);
+    }
+};
