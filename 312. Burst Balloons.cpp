@@ -32,3 +32,37 @@ public:
         return burst(memo, nums, 0, N-1);
     }
 };
+
+//DP
+//https://leetcode.com/problems/burst-balloons/discuss/76228/Share-some-analysis-and-explanations
+//Runtime: 16 ms, faster than 89.04% of C++ online submissions for Burst Balloons.
+//Memory Usage: 8.5 MB, less than 100.00% of C++ online submissions for Burst Balloons.
+//time: O(n^3)
+class Solution {
+public:
+    int maxCoins(vector<int>& nums) {
+        nums.insert(nums.begin(), 1);
+        nums.push_back(1);
+        int N = nums.size();
+        
+        vector<vector<int>> dp(N, vector<int>(N, 0));
+        
+        //width: the valid width of range of balloons able to be burst
+        for(int width = 1; width <= N-2; width++){
+            for(int left = 0; left + width + 1 < N; left++){
+                //left, right: the outer element of valid range
+                int right = left + width + 1;
+                //split is the position of last balloon to burst
+                //its valid range is (left, right)
+                for(int split = left+1; split <= right-1; split++){
+                    dp[left][right] = max(dp[left][right],
+                        nums[left]*nums[split]*nums[right] + 
+                        dp[left][split] +
+                        dp[split][right]);
+                }
+            }
+        }
+        
+        return dp[0][N-1];
+    }
+};
