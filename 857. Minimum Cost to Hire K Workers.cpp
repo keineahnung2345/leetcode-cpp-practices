@@ -51,3 +51,33 @@ public:
         return ans;
     }
 };
+
+//Approach 1: Greedy
+//TLE
+//41 / 46 test cases passed.
+//time: O(N^2logN), space: O(N)
+class Solution {
+public:
+    double mincostToHireWorkers(vector<int>& quality, vector<int>& wage, int K) {
+        int N = quality.size();
+        double ans = DBL_MAX;
+        
+        for(int captin = 0; captin < N; captin++){
+            double factor = (double)wage[captin]/quality[captin];
+            vector<double> prices; //the price of workers whose wq ratio above factor
+            for(int worker = 0; worker < N; worker++){
+                double price = factor * quality[worker];
+                if(price >= wage[worker]){
+                    prices.push_back(price);
+                }
+            }
+            
+            if(prices.size() < K) continue;
+            
+            sort(prices.begin(), prices.end());
+            ans = min(ans, accumulate(prices.begin(), prices.begin()+K, 0.0));
+        }
+        
+        return ans;
+    }
+};
