@@ -1,5 +1,7 @@
+//Heap
 //Runtime: 24 ms, faster than 13.26% of C++ online submissions for Top K Frequent Words.
 //Memory Usage: 9.1 MB, less than 100.00% of C++ online submissions for Top K Frequent Words.
+//time: O(Nlogk), push N times, each O(logk), space: O(N), space taken by map
 class Solution {
 public:
     vector<string> topKFrequent(vector<string>& words, int k) {
