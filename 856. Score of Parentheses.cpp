@@ -68,3 +68,35 @@ public:
         return F(S, 0, S.size());
     }
 };
+
+//Approach 2: Stack
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Score of Parentheses.
+//Memory Usage: 6.1 MB, less than 100.00% of C++ online submissions for Score of Parentheses.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    int scoreOfParentheses(string S) {
+        stack<int> stk;
+        stk.push(0);
+        
+        for(char c : S){
+            if(c == '('){
+                stk.push(0);
+            }else{
+                int v = stk.top(); stk.pop();
+                int w = stk.top(); stk.pop();
+                //max(2*v, 1): v could be 
+                /*
+                if v is 0, a.k.a. last char is '(',
+                then score becomes 1
+                else if v is not 0
+                then use score specified by v
+                */
+                stk.push(w + max(2*v, 1));
+                // cout << v << " " << w << " " << w + max(2*v, 1) << endl;
+            }
+        }
+        
+        return stk.top();
+    }
+};
