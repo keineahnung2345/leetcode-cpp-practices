@@ -52,6 +52,63 @@ public:
     }
 };
 
+//Approach 2: Heap(My answer optimized with priority queue)
+//Runtime: 80 ms, faster than 17.64% of C++ online submissions for Minimum Cost to Hire K Workers.
+//Memory Usage: 9.9 MB, less than 100.00% of C++ online submissions for Minimum Cost to Hire K Workers.
+//time: O(NlogN), space: O(N)
+class Solution {
+public:
+    double mincostToHireWorkers(vector<int>& quality, vector<int>& wage, int K) {
+        vector<pair<int, int>> qws;
+        int N = quality.size();
+        
+        for(int i = 0; i < N; i++){
+            qws.push_back(make_pair(quality[i], wage[i]));
+        }
+        
+        //sort by wage/quality ratio, ascending
+        sort(qws.begin(), qws.end(), 
+            [](const pair<int, int>& p1, const pair<int, int>& p2){
+                return (double)p1.second/p1.first < (double)p2.second/p2.first;
+            });
+        
+        // for(int i = 0; i < N; i++){
+        //     cout << qws[i].first << " " << qws[i].second << " " << (double)qws[i].second/qws[i].first << endl;
+        // }
+        
+        //multiply the sum of quality with current wage/quality ratio
+        double ans = DBL_MAX;
+        double wqRatio;
+        vector<int> qualities;
+        //the greater the earlier to be popped
+        priority_queue<int, vector<int>, less<int>> pq;
+        int qualitySum = 0;
+        
+        for(int i = 0; i < N; i++){
+            pair<int, int> p = qws[i];
+            int q = p.first, w = p.second;
+            // cout << q << " " << w << endl;
+            wqRatio = (double)w/q;
+            // cout << "wqRatio: " << wqRatio << endl;
+            
+            pq.push(q);
+            qualitySum += q;
+            
+            if(pq.size() > K){
+                int popped = pq.top(); pq.pop();
+                qualitySum -= popped;
+            }
+            
+            if(i+1 >= K){
+                ans = min(ans, qualitySum * wqRatio);
+            }
+            
+        }
+        
+        return ans;
+    }
+};
+
 //Approach 1: Greedy
 //TLE
 //41 / 46 test cases passed.
