@@ -25,3 +25,27 @@ public:
         return stk.size() == 0;
     }
 };
+
+//Approach 1: Greedy
+//Runtime: 8 ms, faster than 90.81% of C++ online submissions for Validate Stack Sequences.
+//Memory Usage: 7 MB, less than 100.00% of C++ online submissions for Validate Stack Sequences.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+        int N = pushed.size();
+        stack<int> stk;
+        
+        int j = 0; //index to popped
+        for(int x : pushed){
+            stk.push(x);
+            //pop once we can do that, greedy algorithm
+            while(!stk.empty() && j < N && stk.top() == popped[j]){
+                stk.pop();
+                j++;
+            }
+        }
+        
+        return j == N;
+    }
+};
