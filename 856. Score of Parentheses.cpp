@@ -100,3 +100,28 @@ public:
         return stk.top();
     }
 };
+
+//Approach 3: Count Cores
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Score of Parentheses.
+//Memory Usage: 6.2 MB, less than 100.00% of C++ online submissions for Score of Parentheses. 
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int scoreOfParentheses(string S) {
+        int ans = 0, balance = 0;
+        
+        for(int i = 0; i < S.size(); i++){
+            if(S[i] == '('){
+                balance++;
+            }else{
+                balance--;
+                if(S[i-1] == '('){
+                    ans += (1 << balance);
+                }
+            }
+            // cout << balance << " " << ans << endl;
+        }
+        
+        return ans;
+    }
+};
