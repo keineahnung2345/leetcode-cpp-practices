@@ -85,4 +85,51 @@ public:
  * obj->push(x);
  * int param_2 = obj->pop();
  */
- 
+
+//Approach 1: Stack of Stacks
+//Runtime: 408 ms, faster than 10.44% of C++ online submissions for Maximum Frequency Stack.
+//Memory Usage: 73.1 MB, less than 91.67% of C++ online submissions for Maximum Frequency Stack.
+//time: push and pop, O(1), space: O(n)
+class FreqStack {
+public:
+    map<int, int> freq;
+    map<int, stack<int>> group;
+    int maxfreq;
+    
+    FreqStack() {
+        maxfreq = 0;
+    }
+    
+    void push(int x) {
+        int f = freq[x] + 1;
+        freq[x] = f;
+        maxfreq = max(maxfreq, f);
+        
+        // don't need to check whether group[f] is initialized?
+        group[f].push(x);
+        
+        /*
+        if x is pushed multiple times, 
+        then group[1], group[2], group[3], ... will all have x 
+        */
+    }
+    
+    int pop() {
+        int x = group[maxfreq].top(); group[maxfreq].pop();
+        freq[x]--;
+        if(group[maxfreq].size() == 0){
+            /*
+            In this circumstance, maxfreq is consecutive
+            */
+            maxfreq--;
+        }
+        return x;
+    }
+};
+
+/**
+ * Your FreqStack object will be instantiated and called as such:
+ * FreqStack* obj = new FreqStack();
+ * obj->push(x);
+ * int param_2 = obj->pop();
+ */
