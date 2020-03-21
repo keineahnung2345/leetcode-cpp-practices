@@ -67,3 +67,36 @@ public:
         return true;
     }
 };
+
+//optimized by using map(map is ordered by key)
+class Solution {
+public:
+    bool isPossibleDivide(vector<int>& nums, int k) {
+        int N = nums.size();
+        if(N % k != 0) return false;
+        int times = N/k;
+        map<int, int> counter;
+        map<int, int>::iterator it;
+        
+        for(int num : nums){
+            counter[num]++;
+        }
+        
+        while(times > 0){
+            it = counter.begin();
+            int smallest = it->first;
+            int freq = it->second;
+            for(int i = smallest; i < smallest + k; i++){
+                if(counter.find(i) != counter.end() && counter[i] >= freq){
+                    counter[i]-=freq;
+                    if(counter[i] == 0) counter.erase(i);
+                }else{
+                    return false;
+                }
+            }
+            times-=freq;
+        }
+        
+        return true;
+    }
+};
