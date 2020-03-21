@@ -82,6 +82,7 @@ public:
     }
 };
 
+//Two pass
 //https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/discuss/252242/JavaC%2B%2BPython-Different-Ideas
 //Runtime: 120 ms, faster than 83.05% of C++ online submissions for Minimum Domino Rotations For Equal Row.
 //Memory Usage: 16.7 MB, less than 100.00% of C++ online submissions for Minimum Domino Rotations For Equal Row.
@@ -124,6 +125,48 @@ public:
             if(i == N-1) return min(aSwap, bSwap);
         }
         
+        return -1;
+    }
+};
+
+//Set
+//https://leetcode.com/problems/minimum-domino-rotations-for-equal-row/discuss/252242/JavaC%2B%2BPython-Different-Ideas
+//Runtime: 732 ms, faster than 5.03% of C++ online submissions for Minimum Domino Rotations For Equal Row.
+//Memory Usage: 114.6 MB, less than 16.67% of C++ online submissions for Minimum Domino Rotations For Equal Row.
+class Solution {
+public:
+    int minDominoRotations(vector<int>& A, vector<int>& B) {
+        set<int> mainset = {1,2,3,4,5,6};
+        vector<int> countA(7, 0), countB(7, 0);
+        int N = A.size();
+        
+        for (int i = 0; i < N; ++i) {
+            set<int> tmpset = {A[i], B[i]};
+            set<int> result;
+            set_intersection(mainset.begin(), mainset.end(), 
+                                 tmpset.begin(), tmpset.end(),
+                                 inserter(result, result.begin()));
+            mainset.swap(result);
+            countA[A[i]]++;
+            countB[B[i]]++;
+        }
+        
+        //here we get the value either exist in row A or B for every position
+        // for(int i : mainset){
+        //     cout << i << " ";
+        // }
+        // cout << endl;
+        
+        /*
+        if there are 2 values in mainset, for example:
+        [2,1,2,1,2,2]
+        [1,2,1,2,1,1]
+        their max(countA[i], countB[i]) will be the same,
+        so we can jsut calculate N - max(countA[i], countB[i]) for one value and return
+        */
+        for(int i : mainset){
+            return N - max(countA[i], countB[i]);
+        }
         return -1;
     }
 };
