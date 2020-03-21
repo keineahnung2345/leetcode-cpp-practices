@@ -69,6 +69,10 @@ public:
 };
 
 //optimized by using map(map is ordered by key)
+//Runtime: 440 ms, faster than 5.11% of C++ online submissions for Divide Array in Sets of K Consecutive Numbers.
+//Memory Usage: 27.9 MB, less than 100.00% of C++ online submissions for Divide Array in Sets of K Consecutive Numbers.
+//time: O(NlogN), map is sorted and each lookup takes O(logN)
+//space: O(N)
 class Solution {
 public:
     bool isPossibleDivide(vector<int>& nums, int k) {
