@@ -1,3 +1,4 @@
+//erase while iterating
 //TLE
 //36 / 39 test cases passed.
 class Solution {
@@ -25,7 +26,7 @@ public:
     }
 };
 
-//sort each partition
+//not erasing, sort each partition while iterating
 //TLE
 //36 / 39 test cases passed.
 class Solution {
