@@ -53,3 +53,44 @@ public:
         return ans;
     }
 };
+
+//math
+//https://leetcode.com/problems/task-scheduler/discuss/104500/Java-O(n)-time-O(1)-space-1-pass-no-sorting-solution-with-detailed-explanation
+//Runtime: 140 ms, faster than 28.22% of C++ online submissions for Task Scheduler.
+//Memory Usage: 7.6 MB, less than 100.00% of C++ online submissions for Task Scheduler.
+//time: O(n), space: O(1)
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        map<int, int> counter;
+        int most = 0; //AAABBBCC, A is the task with max count, whichi is 3
+        int numMost = 0; //the number of tasks whose count is equal to max, 2 in above example
+            
+        for(char task : tasks){
+            counter[task]++;
+            if(most < counter[task]){
+                most = counter[task];
+                numMost = 1;
+            }else if(most == counter[task]){
+                numMost++;
+            }
+        }
+        
+        //the task with count "most" are splitted by "partCount" parts
+        int partCount = most - 1;
+        //task with count of "most" will take the empty slot
+        /*
+        when numMost is too large, "partLength" could be 0 or negative
+        in this case, we can make the interval wider than "n" and put all
+        tasks into the widened interval so that there will be no idle position
+        ("idles" will be 0)
+        */
+        int partLength = n - (numMost - 1);
+        //the empty slots formed by the task with count "most"
+        int emptySlots = partCount * partLength;
+        int availableTasks = tasks.size() - most * numMost;
+        int idles = max(0, emptySlots - availableTasks);
+        
+        return tasks.size() + idles;
+    }
+};
