@@ -62,3 +62,40 @@ public:
         return "";
     }
 };
+
+//KMP
+//Runtime: 48 ms, faster than 28.57% of C++ online submissions for Longest Happy Prefix.
+//Memory Usage: 19 MB, less than 100.00% of C++ online submissions for Longest Happy Prefix.
+class Solution {
+public:
+    vector<int> preprocess(string& pattern){
+        int n = pattern.size();
+        vector<int> lps(n, 0);
+        
+        for(int i = 1, len = 0; i < n; ){
+            if(pattern[i] == pattern[len]){
+                len++;
+                lps[i] = len;
+                i++;
+            }else if(len > 0){
+                len = lps[len-1];
+            }else{
+                i++;
+            }
+        }
+        
+        return lps;
+    };
+    
+    string longestPrefix(string s) {
+        vector<int> lps = preprocess(s);
+        // for(int e : lps){
+        //     cout << e;
+        // }
+        // cout << endl;
+        
+        // int length = *max_element(lps.begin(), lps.end());
+        int length = lps[lps.size()-1];
+        return s.substr(0, length);
+    }
+};
