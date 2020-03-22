@@ -77,3 +77,23 @@ public:
         return KMPSearch(haystack, needle, next);
     }
 };
+
+//https://leetcode.com/problems/implement-strstr/discuss/12807/Elegant-Java-solution
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Implement strStr().
+//Memory Usage: 7 MB, less than 100.00% of C++ online submissions for Implement strStr().
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if(needle.size() == 0) return 0;
+        //i + max possible value of j should less than haystack.size()
+        for(int i = 0; i + needle.size() - 1 < haystack.size(); i++){
+            //break and use next i when we encounter mismatch
+            for(int j = 0; j < needle.size() && haystack[i+j] == needle[j]; j++){
+                //we can match to the end of needle
+                if(j == needle.size()-1) return i;
+            }
+        }
+        
+        return -1;
+    }
+};
