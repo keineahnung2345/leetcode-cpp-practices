@@ -99,3 +99,60 @@ public:
         return s.substr(0, length);
     }
 };
+
+//Rolling hash
+//https://leetcode.com/problems/longest-happy-prefix/discuss/547448/Python-rolling-hash
+//Runtime: 296 ms, faster than 14.29% of C++ online submissions for Longest Happy Prefix.
+//Memory Usage: 14.3 MB, less than 100.00% of C++ online submissions for Longest Happy Prefix.
+class Solution {
+public:
+    //https://www.geeksforgeeks.org/modular-exponentiation-power-in-modular-arithmetic/
+    long long int power(long long int x, long long int y, long long int p){  
+        long long int res = 1;
+
+        // Update x if it is more than or equal to p
+        x = x % p; 
+
+        while(y > 0){
+            // If y is odd, multiply x with result
+            if(y & 1){
+                res = (res*x) % p;
+            }
+
+            // y must be even now
+            y >>= 1;
+            x = (x*x) % p;
+        }
+        
+        return res;  
+    };
+    
+    string longestPrefix(string s) {
+        int N = s.size();
+        if(N == 1) return "";
+        long long int mod = pow(10, 9) + 7;
+        
+        long long int prefixHash = 0, suffixHash = 0;
+        
+        int res = -1;
+        
+        //i cannot be N-1 because we only want the proper substrings
+        for(int i = 0; i < N-1; i++){
+            // prefixHash += (s[i]-'a') * ((long long int)pow(26, i) % mod);
+            prefixHash += (s[i]-'a') * power(26, i, mod);
+            prefixHash %= mod;
+            
+            //Note it's s[N-1-i] here!
+            suffixHash = suffixHash * 26 + (s[N-1-i] - 'a');
+            suffixHash %= mod;
+            
+            // cout << i << " " << prefixHash << " " << suffixHash << endl;
+            
+            if(prefixHash == suffixHash){
+                res = i;
+            }
+        }
+        
+        return (res == -1) ? "" : s.substr(0, res+1);
+    }
+};
