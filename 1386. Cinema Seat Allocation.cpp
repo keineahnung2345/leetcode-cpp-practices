@@ -1,5 +1,9 @@
+//map
 //Runtime: 420 ms, faster than 39.39% of C++ online submissions for Cinema Seat Allocation.
 //Memory Usage: 76 MB, less than 100.00% of C++ online submissions for Cinema Seat Allocation.
+//unordered_map
+//Runtime: 380 ms, faster than 44.97% of C++ online submissions for Cinema Seat Allocation.
+//Memory Usage: 75.1 MB, less than 100.00% of C++ online submissions for Cinema Seat Allocation.
 class Solution {
 public:
     int maxNumberOfFamilies(int n, vector<vector<int>>& reservedSeats) {
