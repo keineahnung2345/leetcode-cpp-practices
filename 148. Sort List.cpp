@@ -55,3 +55,125 @@ public:
         return head;
     }
 };
+
+//Runtime: 124 ms, faster than 16.37% of C++ online submissions for Sort List.
+//Memory Usage: 48.8 MB, less than 5.00% of C++ online submissions for Sort List.
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* merge(ListNode* a, ListNode* b){
+        ListNode *newHead = new ListNode(0);
+        ListNode *cur = newHead;
+        
+        // cout << "in merge a: " << endl;
+        cur = a;
+        while(cur){
+            // cout << cur->val << " ";
+            cur = cur->next;
+        }
+        // cout << endl;
+        
+        // cout << "in merge b: " << endl;
+        // cur = b;
+        // while(cur){
+        //     cout << cur->val << " ";
+        //     cur = cur->next;
+        // }
+        // cout << endl;
+        
+        cur = newHead;
+        
+        // cout << "building list: " << endl;
+        while(a && b){
+            if(a->val <= b->val){
+                // cur->next = new ListNode(a->val);
+                cur->next = a;
+                // cout << a->val << " ";
+                a = a->next;
+            }else{
+                // cur->next = new ListNode(b->val);
+                cur->next = b;
+                // cout << b->val << " ";
+                b = b->next;
+            }
+            cur = cur->next;
+        }
+        
+        //Method 1 to add remaining list
+//         while(a){
+//             cur->next = new ListNode(a->val);
+//             cout << a->val << " ";
+//             a = a->next;
+//             cur = cur->next;
+//         }
+        
+//         while(b){
+//             cur->next = new ListNode(b->val);
+//             cout << b->val << " ";
+//             b = b->next;
+//             cur = cur->next;
+//         }
+        
+        //Method 2 to add remaining list
+        if(a){
+            cur->next = a;
+        }else if(b){
+            cur->next = b;
+        }
+        
+        // cout << endl;
+        
+        // cout << "list built: " << endl;
+        // cur = newHead->next;
+        // while(cur){
+        //     cout << cur->val << " ";
+        //     cur = cur->next;
+        // }
+        // cout << endl;
+
+        return newHead->next;
+    };
+    
+    ListNode* sortList(ListNode* head) {
+        //length 0 or length 1, we cannot split anymore
+        if(!head || !head->next) return head;
+        
+        // cout << "current list: " << endl;
+        ListNode* cur = head;
+        while(cur){
+            // cout << cur->val << " ";
+            cur = cur->next;
+        }
+        // cout << endl;
+        
+        //split list
+        ListNode *slow = head, *fast = head;
+        ListNode *slowPrev; //used to cut the list into half
+        
+        while(fast && fast->next){
+            slowPrev = slow;
+            
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        /*
+        now "head" and "slow" are the head of two lists,
+        we need to split them by setting "slow"'s previous node's next to nullptr
+        */
+        slowPrev->next = nullptr;
+        
+        //sort the splitted lists
+        head = sortList(head);
+        slow = sortList(slow);
+        
+        return merge(head, slow);
+    }
+};
