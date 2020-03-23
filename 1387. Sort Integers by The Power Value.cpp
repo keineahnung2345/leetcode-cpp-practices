@@ -1,8 +1,13 @@
+//map
 //Runtime: 452 ms, faster than 8.45% of C++ online submissions for Sort Integers by The Power Value.
 //Memory Usage: 49.1 MB, less than 100.00% of C++ online submissions for Sort Integers by The Power Value.
+//unordered_map
+//Runtime: 284 ms, faster than 20.76% of C++ online submissions for Sort Integers by The Power Value.
+//Memory Usage: 47.1 MB, less than 100.00% of C++ online submissions for Sort Integers by The Power Value.
 class Solution {
 public:
-    map<int, int> power;
+    //map<int, int> power;
+    unordered_map<int, int> power;
     
     int getPower(int x){
         if(x == 1) return 0;
