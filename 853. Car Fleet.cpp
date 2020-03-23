@@ -39,3 +39,32 @@ public:
         return fleets;
     }
 };
+
+//use approach time to determine whether to merge two cars
+//Approach 1: Sort
+//Runtime: 56 ms, faster than 45.36% of C++ online submissions for Car Fleet.
+//Memory Usage: 9.1 MB, less than 100.00% of C++ online submissions for Car Fleet.
+//time: O(NlogN), space: O(N)
+class Solution {
+public:
+    int carFleet(int target, vector<int>& position, vector<int>& speed) {
+        int N = position.size();
+        vector<pair<int, double>> pts(N);
+        for(int i = 0; i < N; i++){
+            pts[i] = make_pair(position[i], (double)(target - position[i])/speed[i]);
+        }
+        sort(pts.begin(), pts.end());
+        
+        int ans = N; //we have N fleets initially
+        for(int i = N-2; i >= 0; i--){
+            //if car i will catch car (i+1) some time, we merge them
+            if(pts[i].second <= pts[i+1].second){
+                ans--;
+                //car i's speed is set to that of car i+1
+                pts[i].second = pts[i+1].second;
+            }
+        }
+        
+        return ans;
+    }
+};
