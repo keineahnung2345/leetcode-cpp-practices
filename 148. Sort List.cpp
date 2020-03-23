@@ -56,8 +56,14 @@ public:
     }
 };
 
+//merge sort
+//https://leetcode.com/problems/sort-list/discuss/46714/Java-merge-sort-solution
+//use new
 //Runtime: 124 ms, faster than 16.37% of C++ online submissions for Sort List.
 //Memory Usage: 48.8 MB, less than 5.00% of C++ online submissions for Sort List.
+//don't use new to speed up
+//Runtime: 72 ms, faster than 26.62% of C++ online submissions for Sort List.
+//Memory Usage: 26.7 MB, less than 5.00% of C++ online submissions for Sort List.
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -93,7 +99,9 @@ public:
         // cout << "building list: " << endl;
         while(a && b){
             if(a->val <= b->val){
+                //use new -> time and space specified in first two rows
                 // cur->next = new ListNode(a->val);
+                //not use new -> time and space specified in second two rows
                 cur->next = a;
                 // cout << a->val << " ";
                 a = a->next;
