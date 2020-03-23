@@ -56,13 +56,18 @@ public:
 
 //math
 //https://leetcode.com/problems/task-scheduler/discuss/104500/Java-O(n)-time-O(1)-space-1-pass-no-sorting-solution-with-detailed-explanation
+//using map
 //Runtime: 140 ms, faster than 28.22% of C++ online submissions for Task Scheduler.
 //Memory Usage: 7.6 MB, less than 100.00% of C++ online submissions for Task Scheduler.
+//using unordered_map
+//Runtime: 92 ms, faster than 40.84% of C++ online submissions for Task Scheduler.
+//Memory Usage: 7.5 MB, less than 100.00% of C++ online submissions for Task Scheduler.
 //time: O(n), space: O(1)
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
-        map<int, int> counter;
+        //map<int, int> counter;
+        unordered_map<int, int> counter;
         int most = 0; //AAABBBCC, A is the task with max count, whichi is 3
         int numMost = 0; //the number of tasks whose count is equal to max, 2 in above example
             
