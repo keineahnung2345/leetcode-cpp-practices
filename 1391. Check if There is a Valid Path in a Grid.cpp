@@ -182,3 +182,100 @@ public:
         return visited[m-1][n-1];
     }
 };
+
+//disjoint set unit DSU
+//https://leetcode.com/problems/check-if-there-is-a-valid-path-in-a-grid/discuss/547229/Python-Union-Find
+//Runtime: 564 ms, faster than 25.21% of C++ online submissions for Check if There is a Valid Path in a Grid.
+//Memory Usage: 41.9 MB, less than 100.00% of C++ online submissions for Check if There is a Valid Path in a Grid.
+//time: O(m*n)*O(union find), space: O(m*n)
+class DSU{
+public:
+    vector<int> parent;
+    
+    DSU(int size){
+        parent = vector<int>(size);
+        iota(parent.begin(), parent.end(), 0);
+    }
+    
+    int find(int x){
+        if(parent[x] != x){
+            parent[x] = find(parent[x]);
+        }
+        return parent[x];
+    };
+    
+    void unite(int x, int y){
+        parent[find(x)] = find(y);
+    }
+};
+
+class Solution {
+public:
+    int n;
+    
+    int getId(int i, int j){
+        return 2*i*n + j;
+    };
+    
+    bool hasValidPath(vector<vector<int>>& grid) {
+        int m = grid.size(), n = grid[0].size();
+        //used by getId
+        this->n = n;
+        
+        //each grid has 4 points: its center, right, bottom, and bottom right
+        //we only use center, right and bottom
+        DSU dsu = DSU((2*m) * (2*n));
+        
+        //this type of street can connect to top
+        set<int> top = {2,5,6};
+        set<int> bottom = {2,3,4};
+        set<int> left = {1,3,5};
+        set<int> right = {1,4,6};
+        
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                int cur = grid[i][j];
+                //current grid's center
+                int curId = getId(2*i, 2*j);
+                int nextId;
+                
+                if(top.find(cur) != top.end()){
+                    nextId = getId(2*i-1, 2*j);
+                    if(nextId >= 0){
+                        //connect this grid's center and its top
+                        //current grid's top is just its top grid's bottom
+                        dsu.unite(nextId, curId);
+                    }
+                }
+                
+                if(bottom.find(cur) != bottom.end()){
+                    nextId = getId(2*i+1, 2*j);
+                    if(nextId >= 0){
+                        dsu.unite(nextId, curId);
+                    }
+                }
+                
+                if(left.find(cur) != left.end()){
+                    nextId = getId(2*i, 2*j-1);
+                    if(nextId >= 0){
+                        dsu.unite(nextId, curId);
+                    }
+                }
+                
+                if(right.find(cur) != right.end()){
+                    nextId = getId(2*i, 2*j+1);
+                    if(nextId >= 0){
+                        dsu.unite(nextId, curId);
+                    }
+                }
+            }
+        }
+        
+        /*
+        if grid(0,0) and grid(m-1,n-1)'s center are 
+        in the same disjoint set unit, 
+        then they are connected
+        */
+        return dsu.find(0) == dsu.find(getId((m-1)*2, ((n-1)*2)));
+    }
+};
