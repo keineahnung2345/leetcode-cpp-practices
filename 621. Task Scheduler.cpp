@@ -99,3 +99,72 @@ public:
         return tasks.size() + idles;
     }
 };
+
+//sort by value and then by key
+class VKComparison{
+public:
+    VKComparison(){}
+    /*
+    sort by count(the larger the earlier to be popped), 
+    and then by char(the smaller the earlier to be popped)
+    */
+    bool operator() (const pair<char, int>& lhs, const pair<char, int>&rhs) const{
+        return (lhs.second == rhs.second) ? (lhs.first > rhs.first) : (lhs.second < rhs.second);
+    }
+};
+
+//Priority queue, greedy
+//https://leetcode.com/problems/task-scheduler/discuss/104501/Java-PriorityQueue-solution-Similar-problem-Rearrange-string-K-distance-apart
+//Runtime: 236 ms, faster than 5.64% of C++ online submissions for Task Scheduler.
+//Memory Usage: 22.2 MB, less than 6.38% of C++ online submissions for Task Scheduler.
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        unordered_map<char, int> counter;
+        priority_queue<pair<char, int>, vector<pair<char, int>>, VKComparison> pq;
+        
+        for(char task : tasks){
+            counter[task]++;
+        }
+        
+        for(auto it = counter.begin(); it != counter.end(); it++){
+            pq.push(make_pair(it->first, it->second));
+        }
+        
+        int ans = 0;
+        
+        while(!pq.empty()){
+            //current part's size
+            int part = n+1;
+            
+            vector<pair<char, int>> tmpRemoved;
+            
+            //while we still have space or we still have different task
+            while(part > 0 && !pq.empty()){
+                pair<char, int> cur = pq.top(); pq.pop();
+                cur.second--;
+                tmpRemoved.push_back(cur);
+                part--;
+                //we've put a task into this part
+                ans++;
+                // cout << cur.first;
+            }
+            
+            for(pair<char, int> p : tmpRemoved){
+                if(p.second > 0){
+                    pq.push(p);
+                }
+            }
+            
+            //we've done all tasks
+            if(pq.empty()) break;
+            //if part > 0, that means there are "part" idle timeslots
+            ans += part;
+            //note that we only add these idle slots into ans if we still have some tasks to do(pq is not empty)
+            // cout << string(part, ' ');
+        }
+        // cout << endl;
+        
+        return ans;
+    }
+};
