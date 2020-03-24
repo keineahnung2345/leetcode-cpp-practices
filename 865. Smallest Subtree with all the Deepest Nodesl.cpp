@@ -81,3 +81,53 @@ public:
         return nullptr;
     }
 };
+
+//DFS, recursion
+//Runtime: 4 ms, faster than 86.00% of C++ online submissions for Smallest Subtree with all the Deepest Nodes.
+//Memory Usage: 15.7 MB, less than 7.14% of C++ online submissions for Smallest Subtree with all the Deepest Nodes.
+//time: O(N), space: O(N)
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    unordered_map<TreeNode*, int> depth;
+    int maxDepth;
+    
+    void dfs(TreeNode* node, TreeNode* parent){
+        if(node == nullptr) return;
+        depth[node] = depth[parent] + 1;
+        maxDepth = max(maxDepth, depth[node]);
+        dfs(node->left, node);
+        dfs(node->right, node);
+    };
+    
+    TreeNode* answer(TreeNode* node){
+        //the return value nullptr will be ignored by its caller
+        if(node == nullptr) return node;
+        if(depth[node] == maxDepth) return node;
+        TreeNode *L = answer(node->left);
+        TreeNode *R = answer(node->right);
+        if(L && R) return node;
+        if(L) return L;
+        if(R) return R;
+        return nullptr;
+    };
+    
+    TreeNode* subtreeWithAllDeepest(TreeNode* root) {
+        maxDepth = -1;
+        /*root's parent is nullptr, 
+        we want root's depth be 0, so nullptr's depth should be -1
+        */
+        depth[nullptr] = -1;
+        dfs(root, nullptr);
+        
+        return answer(root);
+    }
+};
