@@ -131,3 +131,38 @@ public:
         return answer(root);
     }
 };
+
+//Recursion
+//Runtime: 4 ms, faster than 86.00% of C++ online submissions for Smallest Subtree with all the Deepest Nodes.
+//Memory Usage: 13.2 MB, less than 100.00% of C++ online submissions for Smallest Subtree with all the Deepest Nodes.
+//time: O(N), space: O(N)
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    pair<TreeNode*, int> dfs(TreeNode* node){
+        /*
+        calculate depth from bottom:
+        null node has depth 0, leaf node has depth 1, ...
+        we return the child with larger depth
+        */
+        if(!node) return make_pair(nullptr, 0);
+        pair<TreeNode*, int> L = dfs(node->left);
+        pair<TreeNode*, int> R = dfs(node->right);
+        if(L.second > R.second) return make_pair(L.first, L.second+1);
+        if(L.second < R.second) return make_pair(R.first, R.second+1);
+        //L.second and R.second are equal
+        return make_pair(node, L.second+1);
+    };
+    
+    TreeNode* subtreeWithAllDeepest(TreeNode* root) {
+        return dfs(root).first;
+    }
+};
