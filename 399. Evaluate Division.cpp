@@ -96,3 +96,52 @@ public:
         return ans;
     }
 };
+
+//Floyd Warshall
+//https://leetcode.com/problems/evaluate-division/discuss/88175/9-lines-%22Floydu2013Warshall%22-in-Python
+//Runtime: 8 ms, faster than 5.22% of C++ online submissions for Evaluate Division.
+//Memory Usage: 6.9 MB, less than 100.00% of C++ online submissions for Evaluate Division.
+class Solution {
+public:
+    vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
+        unordered_map<string, unordered_map<string, double>> quot;
+        
+        int N = equations.size();
+        
+        for(int i = 0; i < N; i++){
+            vector<string> equation = equations[i];
+            string num = equation[0], den = equation[1];
+            double value = values[i];
+            quot[num][num] = 1.0;
+            quot[den][den] = 1.0;
+            quot[num][den] = value;
+            quot[den][num] = 1.0/value;
+        }
+        
+        for(auto it = quot.begin(); it != quot.end(); it++){
+            string k = it->first;
+            for(auto it2 = quot[k].begin(); it2 != quot[k].end(); it2++){
+                string i = it2->first;
+                for(auto it3 = quot[k].begin(); it3 != quot[k].end(); it3++){
+                    string j = it3->first;
+                    quot[i][j] = quot[i][k] * quot[k][j];
+                    quot[j][i] = quot[j][k] * quot[k][i];
+                }
+            }
+        }
+        
+        vector<double> ans;
+        
+        for(vector<string> query : queries){
+            string num = query[0], den = query[1];
+            
+            if(quot[num].find(den) == quot[num].end()){
+                ans.push_back(-1.0);
+            }else{
+                ans.push_back(quot[num][den]);
+            }
+        }
+        
+        return ans;
+    }
+};
