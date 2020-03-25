@@ -1,6 +1,6 @@
 //Runtime: 12 ms, faster than 71.71% of C++ online submissions for Regions Cut By Slashes.
 //Memory Usage: 9.9 MB, less than 50.00% of C++ online submissions for Regions Cut By Slashes.
-/Approach 1: Union-Find
+//Approach 1: Union-Find
 class DSU{
 public:
     vector<int> parent;
