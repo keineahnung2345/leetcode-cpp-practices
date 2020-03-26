@@ -39,3 +39,27 @@ public:
         return output;
     }
 };
+
+//Optimize the array R
+//Runtime: 40 ms, faster than 75.01% of C++ online submissions for Product of Array Except Self.
+//Memory Usage: 10.4 MB, less than 100.00% of C++ online submissions for Product of Array Except Self.
+//time: O(N), space O(1)
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int N = nums.size();
+        int R = 1;
+        vector<int> ans(N, 1);
+        
+        for(int i = 1; i < N; i++){
+            ans[i] = ans[i-1] * nums[i-1];
+        }
+        
+        for(int i = N-2; i >= 0; i--){
+            R *= nums[i+1];
+            ans[i] *= R;
+        }
+        
+        return ans;
+    }
+};
