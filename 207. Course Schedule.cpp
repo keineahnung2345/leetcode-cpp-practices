@@ -16,10 +16,12 @@ public:
         for(int nei : edges[cur]){
             // cout << cur << " -- " << nei << endl;
             if(!visited[nei]){
+                //find whether its neighbor is cyclic
                 if(isCyclicUtil(nei, edges, visited, recStack)){
                     return true;
                 }
             }else if(recStack[nei]){
+                //that means nei is both cur's ancestor and its descendent
                 // cout << cur << " -- " << nei << ", nei in recStack" << endl;
                 return true;
             }
