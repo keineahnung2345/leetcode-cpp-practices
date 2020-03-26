@@ -1,6 +1,6 @@
 //https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
-//Runtime: 32 ms, faster than 32.36% of C++ online submissions for Course Schedule.
-//Memory Usage: 12.8 MB, less than 96.36% of C++ online submissions for Course Schedule.
+//Runtime: 24 ms, faster than 64.54% of C++ online submissions for Course Schedule.
+//Memory Usage: 12.7 MB, less than 100.00% of C++ online submissions for Course Schedule.
 class Solution {
 public:
     bool isCyclicUtil(int cur, unordered_map<int, vector<int>>& edges, vector<bool>& visited, vector<bool>& recStack){
@@ -43,7 +43,10 @@ public:
         
         unordered_map<int, vector<int>> edges;
         for(vector<int>& pre : prerequisites){
-            edges[pre[0]].push_back(pre[1]);
+            //this is correct according to the problem definition
+            edges[pre[1]].push_back(pre[0]);
+            //however this also gives correct answer
+            // edges[pre[0]].push_back(pre[1]);
         }
         
         for(int i = 0; i < numCourses; i++){
