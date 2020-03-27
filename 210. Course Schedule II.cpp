@@ -1,5 +1,7 @@
+//Approach 2: Using Node Indegree
 //Runtime: 24 ms, faster than 81.55% of C++ online submissions for Course Schedule II.
 //Memory Usage: 10.9 MB, less than 100.00% of C++ online submissions for Course Schedule II.
+//time: O(N), space: O(N)
 class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
