@@ -97,6 +97,7 @@ public:
 };
 
 //Approach 3: Segment Tree
+//tree[0] is not used in this implementation, only tree[1...2n-1] are meaningful
 //Runtime: 44 ms, faster than 50.75% of C++ online submissions for Range Sum Query - Mutable.
 //Memory Usage: 16.7 MB, less than 100.00% of C++ online submissions for Range Sum Query - Mutable.
 //Build segment tree - time O(n), space O(n)
