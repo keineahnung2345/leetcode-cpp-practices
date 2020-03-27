@@ -96,7 +96,7 @@ public:
     }
 };
 
-//Approach 3: Segment Tree
+//Approach 3: Segment Tree, iterative version
 //tree[0] is not used in this implementation, only tree[1...2n-1] are meaningful
 //Runtime: 44 ms, faster than 50.75% of C++ online submissions for Range Sum Query - Mutable.
 //Memory Usage: 16.7 MB, less than 100.00% of C++ online submissions for Range Sum Query - Mutable.
@@ -193,6 +193,126 @@ public:
             j /= 2;
         }
         
+        return sum;
+    }
+};
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray* obj = new NumArray(nums);
+ * obj->update(i,val);
+ * int param_2 = obj->sumRange(i,j);
+ */
+
+//Segment tree, recursive version
+//https://leetcode.com/articles/a-recursive-approach-to-segment-trees-range-sum-queries-lazy-propagation/
+//Runtime: 44 ms, faster than 50.75% of C++ online submissions for Range Sum Query - Mutable.
+//Memory Usage: 17 MB, less than 100.00% of C++ online submissions for Range Sum Query - Mutable.
+//Build segment tree - time O(n), space O(n)
+//Update segment tree - time O(logn), space O(1)
+//Range Sum Query - time O(logn), space O(1)
+class NumArray {
+public:
+    vector<int> tree;
+    int n;
+    
+    int merge(int a, int b){
+        return a+b;
+    }
+    
+    void buildSegTree(vector<int>& arr, int treeIndex, int lo, int hi){
+        if(lo == hi){
+            tree[treeIndex] = arr[lo];
+            return;
+        }
+        
+        int mid = (lo + hi)/2;
+        buildSegTree(arr, treeIndex*2+1, lo, mid);
+        buildSegTree(arr, treeIndex*2+2, mid+1, hi);
+        
+        tree[treeIndex] = merge(tree[treeIndex*2+1], tree[treeIndex*2+2]);
+    };
+    
+    int querySegTree(int treeIndex, int lo, int hi, int i, int j){
+        // cout << "treeIndex: " << treeIndex << ", lo: " << lo << ", hi: " << hi << ", i: " << i << ", j: " << j << endl;
+        //query for arr[i ... j]
+        //we are currently looking at tree[lo ... hi]
+        if(lo > j || hi < i){
+            //the part we are looking has no intersection with arr[i...j]
+            return 0;
+        }
+        
+        if(i <= lo && hi <= j){
+            //tree[treeIndex] is inside [i...j]
+            return tree[treeIndex];
+        }
+        
+        int mid = (lo+hi)/2;
+        
+        // cout << "mid: " << mid << endl;
+        
+        //when the query range falls into either left or right part of current subtree
+        if(i > mid){
+            // cout << "i > mid, go right" << endl;
+            //the query range is completely in right subtree?
+            return querySegTree(treeIndex*2+2, mid+1, hi, i, j);
+        }else if(j <= mid){
+            // cout << "j <= mid, go left" << endl;
+            //the query range is completely in left subtree?
+            return querySegTree(treeIndex*2+1, lo, mid, i, j);
+        }
+        
+        //the query range cross the middle point of current subtree
+        //divide and conquer
+        // cout << "leftQuery" << endl;
+        int leftQuery = querySegTree(treeIndex*2+1, lo, mid, i, mid);
+        // cout << "rightQuery" << endl;
+        int rightQuery = querySegTree(treeIndex*2+2, mid+1, hi, mid+1, j);
+        
+        return merge(leftQuery, rightQuery);
+    };
+    
+    void updateValSegTree(int treeIndex, int lo, int hi, int arrayIndex, int val){
+        // cout << "treeIndex: " << treeIndex << ", lo: " << lo << ", hi: " << hi << endl;
+        if(lo == hi){
+            tree[treeIndex] = val;
+            return;
+        }
+        
+        int mid = (lo + hi)/2;
+        
+        if(arrayIndex > mid){
+            //find in right subtree
+            updateValSegTree(treeIndex*2+2, mid+1, hi, arrayIndex, val);
+        }else{
+            //find in left subtree
+            updateValSegTree(treeIndex*2+1, lo, mid, arrayIndex, val);
+        }
+        
+        tree[treeIndex] = merge(tree[treeIndex*2+1], tree[treeIndex*2+2]);
+    };
+    
+    NumArray(vector<int>& nums) {
+        n = nums.size();
+        if(n > 0){
+            //A segment tree for an nn element range can be comfortably represented using an array of size is approximately 4∗n.
+            tree = vector<int>(4*n, 0);
+            buildSegTree(nums, 0, 0, n-1);
+            // for(int i = 0; i < 4*n; i++){
+            //     cout << tree[i] << " ";
+            // }
+            // cout << endl;
+        }
+    }
+    
+    void update(int i, int val) {
+        updateValSegTree(0, 0, n-1, i, val);
+    }
+    
+    int sumRange(int i, int j) {
+        // cout << endl << "query " << i << ", " << j << endl;
+        int sum = querySegTree(0, 0, n-1, i, j);
+        // cout << endl;
         return sum;
     }
 };
