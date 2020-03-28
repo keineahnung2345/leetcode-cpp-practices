@@ -1,5 +1,8 @@
+//Approach #1: Brute Force
 //TLE
 //42 / 58 test cases passed.
+//time: O(N*(3^N)), 3^N possible strings, check each string takes O(N)
+//space: O(N)
 class Solution {
 public:
     bool ans;
