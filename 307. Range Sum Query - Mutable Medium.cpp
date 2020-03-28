@@ -323,3 +323,85 @@ public:
  * obj->update(i,val);
  * int param_2 = obj->sumRange(i,j);
  */
+
+//Binary Indexed Tree
+//https://leetcode.com/problems/range-sum-query-mutable/discuss/75753/Java-using-Binary-Indexed-Tree-with-clear-explanation
+//https://cs.stackexchange.com/questions/10538/bit-what-is-the-intuition-behind-a-binary-indexed-tree-and-how-was-it-thought-a
+//Runtime: 48 ms, faster than 46.27% of C++ online submissions for Range Sum Query - Mutable.
+//Memory Usage: 16.7 MB, less than 100.00% of C++ online submissions for Range Sum Query - Mutable.
+class NumArray {
+public:
+    vector<int> nums;
+    vector<int> BIT;
+    int n;
+    
+    void init(int i, int val){
+        i++;
+        // cout << "init: ";
+        while(i <= n){
+            // cout << i << " ";
+            BIT[i] += val;
+            //double least significant bit
+            /*
+            current node is next node's left child or grandson,
+            so next node's value should contain current node's value
+            */
+            i += (i&-i);
+        }
+        // cout << endl;
+    };
+    
+    NumArray(vector<int>& nums) {
+        this->nums = nums;
+        n = nums.size();
+        BIT = vector<int>(n+1);
+        for(int i = 0; i < n; i++){
+            init(i, nums[i]);
+        }
+        
+        // cout << "BIT: ";
+        // for(int i = 1; i <= n; i++){
+        //     cout << BIT[i] << " ";
+        // }
+        // cout << endl;
+    }
+    
+    void update(int i, int val) {
+        int diff = val - nums[i];
+        nums[i] = val;
+        init(i, diff);
+    }
+    
+    int getSum(int i){
+        int sum = 0;
+        
+        i++;
+        
+        // cout << "getSum: ";
+        while(i > 0){
+            // cout << i << " ";
+            sum += BIT[i];
+            //remove least significant bit
+            /*
+            current node is next node's right child or grandson,
+            so next node's value doesn't contain current node's value.
+            So to get cumulative sum, we should continue to add next node's value
+            */
+            i -= (i&-i);
+        }
+        // cout << endl;
+        
+        return sum;
+    };
+    
+    int sumRange(int i, int j) {
+        return getSum(j) - getSum(i-1);
+    }
+};
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray* obj = new NumArray(nums);
+ * obj->update(i,val);
+ * int param_2 = obj->sumRange(i,j);
+ */
