@@ -98,3 +98,25 @@ public:
         return dp[0][N-1];
     }
 };
+
+//Approach #3: Greedy
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Valid Parenthesis String.
+//Memory Usage: 6 MB, less than 100.00% of C++ online submissions for Valid Parenthesis String.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    bool checkValidString(string s) {
+        int lo = 0, hi = 0;
+        for(char c : s){
+            lo += (c == '(') ? 1 : -1;
+            hi += c != ')' ? 1 : -1;
+            //if there are more ) than ( in a prefix, it cannot be fixed
+            if(hi < 0) break;
+            lo = max(lo, 0);
+            // cout << lo << ", " << hi << endl;
+        }
+        // cout << lo << ", " << hi << endl;
+        // cout << endl;
+        return lo == 0;
+    }
+};
