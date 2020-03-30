@@ -125,9 +125,11 @@ public:
                 so we can start the comparison from lps[len-1](x).
                 */
                 len = lps[len-1];
+                //not increment i here!
             }else{
                 //len = 0 now
                 lps[i] = len;
+                //we cannot fallback anymore, so we have nothing but to increase i
                 i++;
             }
         }
@@ -163,13 +165,24 @@ public:
                 i-1 - (j-1) is the start of matching
                 */
                 return i - j;
-            }
-            if (i < m && text[i] != pattern[j]) {
+            }else if (i < m && text[i] != pattern[j]) {
                 if(j > 0){
                     //fallback
+                    /*
+                    we know that text[i-j...i-1] equlas to pattern[0...j-1],
+                    and assume lps[j-1] is x, so pattern[0...x-1] equals to pattern[j-x...j-1],
+                    text[i-x...i-1] = pattern[j-x...j-1] = pattern[0...x-1],
+                    so we can skip the comparison of text[i-x...i-1] and pattern[0...x-1],
+                    and start the next comparison from current i and next j = x
+                    */
                     j = lps[j-1];
                 }else{
-                    /*in next iteration, 
+                    /*
+                    j equals to 0 here, we cannot fallback, 
+                    so we have nothing but to increase i
+                    */
+                    /*
+                    in next iteration, 
                     we match next char in text with the start of pattern
                     */
                     i++;
