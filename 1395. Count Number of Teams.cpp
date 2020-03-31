@@ -75,3 +75,62 @@ public:
         return ans;
     }
 };
+
+//Binary Indexed Tree, BIT
+//https://leetcode.com/problems/count-number-of-teams/discuss/554907/Java-Detailed-Explanation-TreeSet-greater-BIT-(Fenwick-Tree)-O(NlogN)
+//Runtime: 16 ms, faster than 73.69% of C++ online submissions for Count Number of Teams.
+//Memory Usage: 55.6 MB, less than 100.00% of C++ online submissions for Count Number of Teams.
+class Solution {
+public:
+    void update(vector<int>& BIT, int idx, int val){
+        while(idx < BIT.size()){
+            BIT[idx] += val;
+            idx += idx & (-idx);
+        }
+    };
+    
+    int getPrefixSum(vector<int>& BIT, int idx){
+        int sum = 0;
+        
+        while(idx > 0){
+            sum += BIT[idx];
+            idx -= idx & (-idx);
+        }
+        
+        return sum;
+    };
+    
+    int getSuffixSum(vector<int>& BIT, int idx){
+        return getPrefixSum(BIT, BIT.size()-1) - getPrefixSum(BIT, idx-1);
+    };
+    
+    int numTeams(vector<int>& rating) {
+        int N = rating.size();
+        if(N < 3) return 0;
+        
+        //rating's range: [1, 1e5]
+        //use rating as index, and count as value
+        vector<int> leftTree(1e5+1, 0);
+        vector<int> rightTree(1e5+1, 0);
+        
+        for(int r : rating){
+            update(rightTree, r, 1);
+        }
+        
+        int ans = 0;
+        
+        //store the count of each rating into rightTree
+        for(int r : rating){
+            //rightTree contains the info of soldiers to the right of current soldier, so we need to remove the info of current soldier from rightTree
+            update(rightTree, r, -1);
+            
+            ans += getPrefixSum(leftTree, r-1)*getSuffixSum(rightTree,r+1);
+            ans += getSuffixSum(leftTree, r+1)*getPrefixSum(rightTree, r-1);
+            
+            //record current soldier's info into leftTree
+            update(leftTree, r, 1);
+        }
+        
+        return ans;
+    }
+};
