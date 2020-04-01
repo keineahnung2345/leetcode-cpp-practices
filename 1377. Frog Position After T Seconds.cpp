@@ -66,3 +66,47 @@ public:
         return ans;
     }
 };
+
+//BFS
+//https://leetcode.com/problems/frog-position-after-t-seconds/discuss/532505/Java-Straightforward-BFS-Clean-code-O(N)
+//Runtime: 24 ms, faster than 69.53% of C++ online submissions for Frog Position After T Seconds.
+//Memory Usage: 11.3 MB, less than 100.00% of C++ online submissions for Frog Position After T Seconds.
+class Solution {
+public:
+    double frogPosition(int n, vector<vector<int>>& edges, int t, int target) {
+        vector<vector<int>> children(n+1);
+        vector<bool> visited(n+1, false);
+        vector<double> prob(n+1, 0.0);
+        queue<int> q;
+        
+        for(vector<int>& edge : edges){
+            children[edge[0]].push_back(edge[1]);
+            children[edge[1]].push_back(edge[0]);
+        }
+        
+        q.push(1);
+        visited[1] = true;
+        prob[1] = 1.0;
+        //we can only go to "t"th levels
+        while(!q.empty() && t-- > 0){
+            for(int levelCount = q.size(); levelCount > 0; levelCount--){
+                int node = q.front(); q.pop();
+                int nextLevelCount = 0;
+                for(int child : children[node]){
+                    if(!visited[child])nextLevelCount++;
+                }
+                for(int child : children[node]){
+                    if(visited[child]) continue;
+                    visited[child] = true;
+                    prob[child] = prob[node] / nextLevelCount;
+                    q.push(child);
+                }
+                if(nextLevelCount > 0){
+                    //current node is not leaf
+                    prob[node] = 0.0;
+                }
+            }
+        }
+        return prob[target];
+    }
+};
