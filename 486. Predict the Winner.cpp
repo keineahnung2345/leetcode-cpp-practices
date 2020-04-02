@@ -112,3 +112,30 @@ public:
         return memo[0][n-1] >= 0;
     }
 };
+
+//Approach #3 Dynamic Programming(2d)
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Predict the Winner.
+//Memory Usage: 6.6 MB, less than 100.00% of C++ online submissions for Predict the Winner.
+//time: O(n^2), space: O(n^2)
+class Solution {
+public:
+    bool PredictTheWinner(vector<int>& nums) {
+        int n = nums.size();
+        vector<vector<int>> dp = vector(n, vector(n, 0));
+        
+        for(int s = n-1; s >= 0; s--){
+            for(int e = s+1; e < n; e++){
+                /*
+                if e == s+1, dp[s+1][e] and dp[s][e-1] equal to 0,
+                so a = nums[s] and b = nums[e],
+                this is edge case
+                */
+                int a = nums[s] - dp[s+1][e];
+                int b = nums[e] - dp[s][e-1];
+                dp[s][e] = max(a, b);
+            }
+        }
+        
+        return dp[0][n-1] >= 0;
+    }
+};
