@@ -31,3 +31,31 @@ public:
         return memo[0][n-1] >= accumulate(nums.begin(), nums.end(), 0)/2.0;
     }
 };
+
+//DP
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Predict the Winner.
+//Memory Usage: 6.3 MB, less than 100.00% of C++ online submissions for Predict the Winner.
+class Solution {
+public:
+    bool PredictTheWinner(vector<int>& nums) {
+        int n = nums.size();
+        if(n <= 2) return true;
+        
+        vector<vector<int>> dp = vector<vector<int>>(n, vector<int>(n, -1));
+        
+        for(int dist = 1; dist < n; dist++){
+            for(int i = 0; i+dist < n; i++){
+                int j = i+dist;
+                if(dist == 1){
+                    dp[dist][i] = max(nums[i], nums[j]);
+                }else{
+                    dp[dist][i] = max(
+                        nums[i] + accumulate(nums.begin()+i+1, nums.begin()+j+1, 0)-dp[dist-1][i+1],
+                        nums[j] + accumulate(nums.begin()+i, nums.begin()+j,0) - dp[dist-1][i]);
+                }
+            }
+        }
+        
+        return dp[n-1][0] >= accumulate(nums.begin(), nums.end(), 0)/2.0;
+    }
+};
