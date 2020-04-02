@@ -139,3 +139,23 @@ public:
         return dp[0][n-1] >= 0;
     }
 };
+
+//Approach #4 1-D Dynamic Programming
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Predict the Winner.
+//Memory Usage: 6.1 MB, less than 100.00% of C++ online submissions for Predict the Winner.
+//time: O(n^2), space: O(n)
+class Solution {
+public:
+    bool PredictTheWinner(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> dp(n, 0);
+        for(int s = n-2; s >= 0; s--){
+            for(int e = s+1; e < n; e++){
+                int a = nums[s] - dp[e];
+                int b = nums[e] - dp[e-1];
+                dp[e] = max(a, b);
+            }
+        }
+        return dp[n-1] >= 0;
+    }
+};
