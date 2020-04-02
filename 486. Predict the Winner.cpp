@@ -82,3 +82,33 @@ public:
         return winner(nums, 0, nums.size()-1, 1) >= 0;
     }
 };
+
+//Approach #2 Similar Approach, Recursion, min-max, memorization
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Predict the Winner.
+//Memory Usage: 6.5 MB, less than 100.00% of C++ online submissions for Predict the Winner.
+//time: O(n^2), space: O(n^2)
+class Solution {
+public:
+    vector<vector<int>> memo;
+    
+    int winner(vector<int>& nums, int s, int e){
+        if(memo[s][e] != -1) return memo[s][e];
+        if(s == e){
+            memo[s][e] = nums[s];
+            return memo[s][e];
+        }
+        //score's definition is still player1' score - player2's score
+        int a = nums[s] - winner(nums, s+1, e);
+        int b = nums[e] - winner(nums, s, e-1);
+        memo[s][e] = max(a, b);
+        return memo[s][e];
+    };
+    
+    bool PredictTheWinner(vector<int>& nums) {
+        int n = nums.size();
+        memo = vector(n, vector(n, -1));
+        
+        winner(nums, 0, n-1);
+        return memo[0][n-1] >= 0;
+    }
+};
