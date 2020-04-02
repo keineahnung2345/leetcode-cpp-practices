@@ -59,3 +59,26 @@ public:
         return dp[n-1][0] >= accumulate(nums.begin(), nums.end(), 0)/2.0;
     }
 };
+
+//Approach #1 Recursion, Min-Max algorithm
+//Runtime: 276 ms, faster than 5.16% of C++ online submissions for Predict the Winner.
+//Memory Usage: 6.3 MB, less than 100.00% of C++ online submissions for Predict the Winner.
+//time: O(2^n), space: O(n)
+class Solution {
+public:
+    int winner(vector<int>& nums, int s, int e, int turn){
+        if(s == e) return turn * nums[s];
+        int a = turn * nums[s] + winner(nums, s+1, e, -turn);
+        int b = turn * nums[e] + winner(nums, s, e-1, -turn);
+        /*
+        for player2, it equals to -max(-a,-b) = min(a, b)
+        it want to minimize the score
+        */
+        return turn * max(turn*a, turn*b);
+    };
+    
+    bool PredictTheWinner(vector<int>& nums) {
+        //it calculates Player1's score - Player2's score
+        return winner(nums, 0, nums.size()-1, 1) >= 0;
+    }
+};
