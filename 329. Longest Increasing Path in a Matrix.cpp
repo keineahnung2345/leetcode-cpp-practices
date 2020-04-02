@@ -46,3 +46,58 @@ public:
         return ans;
     }
 };
+
+//DFS, recursive, memorization
+//https://leetcode.com/problems/longest-increasing-path-in-a-matrix/discuss/78308/15ms-Concise-Java-Solution
+//Runtime: 56 ms, faster than 39.66% of C++ online submissions for Longest Increasing Path in a Matrix.
+//Memory Usage: 12.6 MB, less than 90.91% of C++ online submissions for Longest Increasing Path in a Matrix.
+class Solution {
+public:
+    //the longest path starting from i, j
+    vector<vector<int>> cache;
+    vector<vector<int>> dirs;
+    vector<vector<int>> matrix;
+    int m, n;
+    
+    int dfs(int i, int j){
+        if(cache[i][j] != 0) return cache[i][j];
+        
+        int maxLen = 1;
+
+        for(vector<int>& dir : dirs){
+            int ni = i+dir[0];
+            int nj = j+dir[1];
+
+            if(ni >= 0 && ni < m && nj >= 0 && nj < n && matrix[ni][nj] > matrix[i][j]){
+                int curLen = 1 + dfs(ni, nj);
+                //try all 4 directions and choose the best one
+                maxLen = max(maxLen, curLen);
+            }
+        }
+        
+        cache[i][j] = maxLen;
+        
+        return maxLen;
+    }
+    
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        this->m = matrix.size();
+        if(m == 0) return 0;
+        this->n = matrix[0].size();
+        if(n == 0) return 0;
+        
+        this->matrix = matrix;
+        cache = vector<vector<int>>(m, vector<int>(n, 0));
+        dirs = {{0,1}, {0,-1}, {1,0}, {-1,0}};
+        
+        int ans = 0;
+        
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                ans = max(ans, dfs(i, j));
+            }
+        }
+        
+        return ans;
+    }
+};
