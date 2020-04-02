@@ -153,6 +153,7 @@ public:
             for(int e = s+1; e < n; e++){
                 int a = nums[s] - dp[e];
                 int b = nums[e] - dp[e-1];
+                //we can overwrite the only row
                 dp[e] = max(a, b);
             }
         }
