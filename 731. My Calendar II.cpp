@@ -85,3 +85,36 @@ public:
  * bool param_1 = obj->book(start,end);
  */
  
+//Approach #1: Brute Force
+//Runtime: 216 ms, faster than 39.61% of C++ online submissions for My Calendar II.
+//Memory Usage: 31.3 MB, less than 100.00% of C++ online submissions for My Calendar II.
+//time: O(N^2), space: O(N)
+class MyCalendarTwo {
+public:
+    vector<vector<int>> sgl, dbl;
+    
+    MyCalendarTwo() {
+        
+    }
+    
+    bool book(int start, int end) {
+        for(vector<int>& event : dbl){
+            if(event[0] < end && event[1] > start){
+                return false;
+            }
+        }
+        for(vector<int>& event : sgl){
+            if(event[0] < end && start < event[1]){
+                dbl.push_back({max(start, event[0]), min(end, event[1])});
+            }
+        }
+        sgl.push_back({start, end});
+        return true;
+    }
+};
+
+/**
+ * Your MyCalendarTwo object will be instantiated and called as such:
+ * MyCalendarTwo* obj = new MyCalendarTwo();
+ * bool param_1 = obj->book(start,end);
+ */
