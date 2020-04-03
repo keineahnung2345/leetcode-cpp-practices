@@ -11,8 +11,10 @@ public:
     int rand10() {
         int row, col, idx;
         do{
+            //we can generate 7*7=49 numbers by calling rand7() twice
             row = rand7();
             col = rand7();
+            //this is the index on an 2-D table
             idx = (row - 1)*7 + col;
         }while(idx > 40);
         //idx's range : [1-40]
