@@ -105,6 +105,7 @@ public:
         }
         for(vector<int>& event : sgl){
             if(event[0] < end && start < event[1]){
+                //current booking may overlap with multiple previous events, so no break here!
                 dbl.push_back({max(start, event[0]), min(end, event[1])});
             }
         }
