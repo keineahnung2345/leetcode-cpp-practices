@@ -114,3 +114,84 @@ public:
         return minStr;
     }
 };
+
+//Approach 2: Optimized Sliding Window, further optimized by filter unrelated char from s first
+//Runtime: 144 ms, faster than 8.96% of C++ online submissions for Minimum Window Substring.
+//Memory Usage: 18.9 MB, less than 20.00% of C++ online submissions for Minimum Window Substring.
+//time: O(|S|+|T|), space: O(|S|+|T|)
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        if(s.size() == 0 || t.size() == 0) return "";
+        
+        int l = 0, r = 0;
+        int minLen = INT_MAX;
+        string minStr;
+        map<char, int> tCount, curCount;
+        
+        for(int i = 0; i < t.size(); i++){
+            tCount[t[i]]++;
+        }
+        
+        //filteredS contains only the char in t
+        vector<pair<int, char>> filteredS;
+        for(int i = 0; i < s.size(); i++){
+            if(tCount.find(s[i]) != tCount.end()){
+                filteredS.push_back(make_pair(i, s[i]));
+            }
+        }
+        
+        //#unique char in t
+        int required = tCount.size();
+        //#unique char required in s
+        int possessed = 0;
+        
+        //window is initially [0...0]
+        //now we iterate through filteredS
+        while(r < filteredS.size()){
+            int end = filteredS[r].first;
+            char c = filteredS[r].second;
+            
+            //meet new char, update our data structure
+            curCount[c]++;
+            
+            // cout << s.substr(l, r-l+1) << endl;
+            if((tCount.find(c) != tCount.end()) && 
+              curCount[c] == tCount[c]){
+                //we have just collected enough char of c
+                possessed++;
+            }
+            
+            //try contract windows size
+            while((possessed == required) && (l <= r)){
+                char c = filteredS[l].second;
+                int start = filteredS[l].first;
+                
+                // cout << "found" << endl;
+                if(end-start+1 < minLen){
+                    //we use l, r to index filteredS
+                    //, and use start, end to index s
+                    minLen = end-start+1;
+                    minStr = s.substr(start, end-start+1);
+                }
+                
+                //s[l] is discarded
+                curCount[c]--;
+                if(tCount.find(c) != tCount.end()
+                  && curCount[c] == tCount[c]-1){
+                    /*
+                    the char count of s[l] is just deduced,
+                    and not enough to form t
+                    */
+                    possessed--;
+                }
+                //move forward l
+                l++;
+            }
+            
+            r++;            
+        }
+        
+        return minStr;
+    }
+};
