@@ -37,3 +37,49 @@ public:
         return ans;
     }
 };
+
+//C++ multiset and middle iterator
+//https://leetcode.com/problems/sliding-window-median/discuss/96340/O(n-log-k)-C%2B%2B-using-multiset-and-updating-middle-iterator
+//Runtime: 80 ms, faster than 46.39% of C++ online submissions for Sliding Window Median.
+//Memory Usage: 12.8 MB, less than 100.00% of C++ online submissions for Sliding Window Median.
+//time: O(Nlogk)
+class Solution {
+public:
+    vector<double> medianSlidingWindow(vector<int>& nums, int k) {
+        multiset<int> window(nums.begin(), nums.begin()+k);
+        /*
+        if k is odd, midIt points to the median
+        if k is even, we average *midIt and *prev(midIt)
+        */
+        auto midIt = next(window.begin(), k/2);
+        vector<double> ans;
+        int l = 0;
+        
+        while(l+k-1 < nums.size()){
+            //window is initialized, so we don't update window when l == 0
+            if(l > 0){
+                //l+k-1 is now inside the window
+                //insert nums[l+k-1]
+                window.insert(nums[l+k-1]);
+                if (nums[l+k-1] < *midIt){
+                    //move the iterator to correct position
+                    midIt--;
+                }
+
+                //l-1 is now outside the window
+                //erase nums[l-1]
+                if (nums[l-1] <= *midIt){
+                    midIt++;
+                }
+                window.erase(window.lower_bound(nums[l-1]));
+            }
+            
+            //to avoid overflow
+            ans.push_back(*midIt/2.0 + *prev(midIt, 1 - k%2)/2.0);
+            
+            l++;
+        }
+        
+        return ans;
+    }
+};
