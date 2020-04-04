@@ -35,3 +35,33 @@ public:
         return ans;
     }
 };
+
+//Brute Force
+//TLE
+//894 / 987 test cases passed.
+//time: O(N^3), space: O(min(size_of_string, size_of_charset))
+class Solution {
+public:
+    bool allUnique(string& s, int start, int end){
+        set<char> chars;
+        
+        for(int i = start; i <= end; i++){
+            auto res = chars.insert(s[i]);
+            if(res.second == false) return false;
+        }
+        
+        return true;
+    };
+    
+    int lengthOfLongestSubstring(string s) {
+        int ans = 0;
+        for(int i = 0; i < s.size(); i++){
+            for(int j = i; j < s.size(); j++){
+                if(allUnique(s, i, j)){
+                    ans = max(ans, j-i+1);
+                }
+            }
+        }
+        return ans;
+    }
+};
