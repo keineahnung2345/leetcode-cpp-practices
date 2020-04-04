@@ -93,3 +93,26 @@ public:
         return ans;
     }
 };
+
+//Approach 3: Sliding Window Optimized
+//Runtime: 44 ms, faster than 27.74% of C++ online submissions for Longest Substring Without Repeating Characters.
+//Memory Usage: 8.3 MB, less than 100.00% of C++ online submissions for Longest Substring Without Repeating Characters.
+//time: O(N), space: O(min(size_of_string, size_of_charset))
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int n = s.size();
+        map<char, int> position;
+        int ans = 0;
+        
+        for(int i = 0, j = 0; j < n; j++){
+            if(position.find(s[j]) != position.end()){
+                i = max(i, position[s[j]]+1);
+            }
+            ans = max(ans, j-i+1);
+            position[s[j]] = j;
+        }
+        
+        return ans;
+    }
+};
