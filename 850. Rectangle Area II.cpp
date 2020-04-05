@@ -49,3 +49,64 @@ public:
         return ans;
     }
 };
+
+//Approach #2: Coordinate Compression
+//Runtime: 196 ms, faster than 6.10% of C++ online submissions for Rectangle Area II.
+//Memory Usage: 8.3 MB, less than 100.00% of C++ online submissions for Rectangle Area II.
+//time: O(N^3), space: O(N^2)
+class Solution {
+public:
+    int rectangleArea(vector<vector<int>>& rectangles) {
+        int n = rectangles.size();
+        set<int> xvals, yvals;
+        
+        for(vector<int>& rec : rectangles){
+            xvals.insert(rec[0]);
+            yvals.insert(rec[1]);
+            xvals.insert(rec[2]);
+            yvals.insert(rec[3]);
+        }
+        
+        vector<int> imapx(xvals.begin(), xvals.end());
+        vector<int> imapy(yvals.begin(), yvals.end());
+        sort(imapx.begin(), imapx.end());
+        sort(imapy.begin(), imapy.end());
+        
+        map<int, int> mapx, mapy;
+        // cout << "imapx: " << endl;
+        for(int i = 0; i < imapx.size(); i++){
+            mapx[imapx[i]] = i;
+            // cout << i << " " << imapx[i] << endl;
+        }
+        // cout << "imapy: " << endl;
+        for(int i = 0; i < imapy.size(); i++){
+            mapy[imapy[i]] = i;
+            // cout << i << " " << imapy[i] << endl;
+        }
+        
+        vector<vector<bool>> grid = vector(imapx.size(), vector(imapy.size(), false));
+        for(vector<int>& rec : rectangles){
+            //fill the corresponding grids
+            for(int x = mapx[rec[0]]; x < mapx[rec[2]]; x++){
+                for(int y = mapy[rec[1]]; y < mapy[rec[3]]; y++){
+                    grid[x][y] = true;
+                }
+            }
+        }
+        
+        long ans = 0;
+        
+        for(int x = 0; x < grid.size(); x++){
+            for(int y = 0; y < grid[0].size(); y++){
+                if(grid[x][y]){
+                    ans += (long)(imapx[x+1] - imapx[x]) * (imapy[y+1] - imapy[y]) % ((int)1e9+7);
+                    ans %= ((int)1e9+7);
+                }
+            }
+        }
+        
+        ans %= ((int)1e9+7);
+        
+        return ans;
+    }
+};
