@@ -43,3 +43,20 @@ public:
         return false;
     }
 };
+
+//Find point in rectangle closest to circle first
+//https://leetcode.com/problems/circle-and-rectangle-overlapping/discuss/563441/JAVA-compare-distance-between-radius-and-closest-point-on-rectangle-to-circle
+//Runtime: 4 ms, faster than 100.00% of C++ online submissions for Circle and Rectangle Overlapping.
+//Memory Usage: 6 MB, less than 100.00% of C++ online submissions for Circle and Rectangle Overlapping.
+class Solution {
+public:
+    bool checkOverlap(int radius, int x_center, int y_center, int x1, int y1, int x2, int y2) {
+        int x_closest = (x_center < x1) ? x1 : (x_center > x2) ? x2 : x_center;
+        int y_closest = (y_center < y1) ? y1 : (y_center > y2) ? y2 : y_center;
+        
+        int dist_squared = (x_center-x_closest)*(x_center-x_closest) + 
+            (y_center-y_closest)*(y_center-y_closest);
+        
+        return dist_squared <= radius * radius;
+    }
+};
