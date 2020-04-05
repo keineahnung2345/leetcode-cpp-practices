@@ -110,3 +110,82 @@ public:
         return ans;
     }
 };
+
+//Approach #3: Line Sweep
+//Runtime: 16 ms, faster than 43.29% of C++ online submissions for Rectangle Area II.
+//Memory Usage: 7.1 MB, less than 100.00% of C++ online submissions for Rectangle Area II.
+//time: O(N^2* logN), space: O(N^2)
+class Solution {
+public:
+    int rectangleArea(vector<vector<int>>& rectangles) {
+        int OPEN = 0, CLOSE = 1;
+        int n = rectangles.size();
+        vector<vector<int>> events(n*2);
+        
+        int i = 0;
+        for(vector<int>& rec : rectangles){
+            //horizontal line, open or close, x1, x2
+            events[i++] = {rec[1], OPEN, rec[0], rec[2]};
+            events[i++] = {rec[3], CLOSE, rec[0], rec[2]};
+        }
+        //sort by y
+        sort(events.begin(), events.end(),
+            [](vector<int>& a, vector<int>& b){
+                return a[0] < b[0];
+            });
+        
+        vector<vector<int>> actives;
+        int last_y = events[0][0];
+        long ans = 0;
+        for(vector<int>& event : events){
+            int y = event[0];
+            bool isClose = event[1];
+            int x1 = event[2], x2 = event[3];
+            
+            /*
+            on current horizontal line, 
+            the length of intervals formed by active events
+            */
+            long query = 0;
+            int cur = INT_MIN;
+            // cout << "y: [" << last_y << ", " << y << "]" << endl;
+            for(vector<int>& active : actives){
+                cur = max(cur, active[0]);
+                // cout << "x: [" << active[0] << ", " << active[1] << "], cur: " << cur << ", width: " << max(active[1] - cur, 0) << endl;
+                query += max(active[1] - cur, 0);
+                cur = max(cur, active[1]);
+            }
+            
+            // cout << "width: " << query << ", height: " << y - last_y << endl;
+            ans += query * (y - last_y);
+            
+            //update actives(current open events)
+            if(!isClose){
+                actives.push_back({x1, x2});
+                sort(actives.begin(), actives.end(),
+                    [](vector<int>& a, vector<int>& b){
+                        return a[0] < b[0];
+                    });
+            }else{
+                //find out the corresponding open active event and erase it
+                for(auto it = actives.begin(); it != actives.end(); it++){
+                    if((*it)[0] == x1 && (*it)[1] == x2){
+                        actives.erase(it);
+                        break;
+                    }
+                }
+            }
+            
+            // cout << "actives: ";
+            // for(auto it = actives.begin(); it != actives.end(); it++){
+            //     cout << (*it)[0] << ", " << (*it)[1] << " | ";
+            // }
+            // cout << endl;
+            
+            last_y = y;
+        }
+        
+        ans %= (int)1e9+7;
+        return ans;
+    }
+};
