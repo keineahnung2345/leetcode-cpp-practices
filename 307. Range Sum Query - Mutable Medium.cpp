@@ -178,6 +178,10 @@ public:
                 */
                 // cout << "l: " << i << endl;
                 sum += tree[i];
+                /*
+                we will go to its right neighbor, 
+                and then go up to its parent
+                */
                 i++;
             }
             if(j % 2 == 0){
@@ -187,6 +191,10 @@ public:
                 */
                 // cout << "r: " << j << endl;
                 sum += tree[j];
+                /*
+                we will go to its left neighbor, 
+                and then go up to its parent
+                */
                 j--;
             }
             i /= 2;
