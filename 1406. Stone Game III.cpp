@@ -55,3 +55,31 @@ public:
         return "Tie";
     }
 };
+
+//DP, O(1) space
+//https://leetcode.com/problems/stone-game-iii/discuss/564260/JavaC%2B%2BPython-DP-O(1)-Space
+//Runtime: 492 ms, faster than 66.67% of C++ online submissions for Stone Game III.
+//Memory Usage: 126.5 MB, less than 100.00% of C++ online submissions for Stone Game III.
+//time: O(N^2), space: O(1)
+class Solution {
+public:
+    string stoneGameIII(vector<int>& stoneValue) {
+        int n = stoneValue.size();
+        //we only need to remember dp[i+1],dp[i+2],dp[i+2] to update dp[i]
+        vector<int> dp(4, INT_MIN);
+        
+        for(int i = n-1; i >= 0; i--){
+            //initialization
+            dp[i%4] = INT_MIN;
+            for(int k = 0, take = 0; k <= 2 && i+k < n; k++){
+                take += stoneValue[i+k];
+                dp[i%4] = max(dp[i%4], take - ((i+k+1<n)?dp[(i+k+1)%4]:0));
+            }
+            // cout << i << " " << dp[i] << endl;
+        }
+        
+        if(dp[0] > 0) return "Alice";
+        if(dp[0] < 0) return "Bob";
+        return "Tie";
+    }
+};
