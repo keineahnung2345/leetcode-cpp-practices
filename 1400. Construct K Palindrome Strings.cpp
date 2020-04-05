@@ -44,3 +44,21 @@ public:
         return odd <= k;
     }
 };
+
+//bitset
+//https://leetcode.com/problems/construct-k-palindrome-strings/discuss/563379/JavaC%2B%2BPython-Straight-Forward
+//Runtime: 80 ms, faster than 42.86% of C++ online submissions for Construct K Palindrome Strings.
+//Memory Usage: 12 MB, less than 100.00% of C++ online submissions for Construct K Palindrome Strings.
+//time: O(N), space : O(1)
+class Solution {
+public:
+    bool canConstruct(string s, int k) {
+        bitset<26> odd;
+        
+        for(char c : s){
+            odd.flip(c-'a');
+        }
+        
+        return odd.count() <= k && k <= s.size();
+    }
+};
