@@ -138,6 +138,7 @@ public:
         tree[2] = tree[4] + tree[5]
         tree[1] = tree[2] + tree[3] //total sum of leaves
         */
+        //note that tree[0] is meaningless
         for(int i = n-1; i > 0; i--){
             tree[i] = tree[i*2] + tree[i*2+1];
         }
@@ -147,6 +148,7 @@ public:
         //recall that the leaf node takes tree[n ... 2n-1]
         i += n;
         tree[i] = val;
+        //note that tree[0] is meaningless
         while(i > 0){
             int left = i;
             int right = i;
