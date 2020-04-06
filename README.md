@@ -69,6 +69,53 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [1248. Count Number of Nice Subarrays.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1248.%20Count%20Number%20of%20Nice%20Subarrays.cpp)
 
+## Binary Search
+[35. Search Insert Position.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/35.%20Search%20Insert%20Position.cpp)
+
+[69. Sqrt(x).cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/69.%20Sqrt(x).cpp)
+
+[74. Search a 2D Matrix.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/74.%20Search%20a%202D%20Matrix.cpp)
+
+[167. Two Sum II - Input array is sorted.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/167.%20Two%20Sum%20II%20-%20Input%20array%20is%20sorted.cpp)
+
+[230. Kth Smallest Element in a BST.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/230.%20Kth%20Smallest%20Element%20in%20a%20BST.cpp)
+
+[240. Search a 2D Matrix II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/240.%20Search%20a%202D%20Matrix%20II.cpp)
+
+[287. Find the Duplicate Number.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/287.%20Find%20the%20Duplicate%20Number.cpp)
+
+[349. Intersection of Two Arrays.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/349.%20Intersection%20of%20Two%20Arrays.cpp)
+
+[350. Intersection of Two Arrays II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/350.%20Intersection%20of%20Two%20Arrays%20II.cpp)
+
+[367. Valid Perfect Square.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/367.%20Valid%20Perfect%20Square.cpp)
+
+[374. Guess Number Higher or Lower.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/374.%20Guess%20Number%20Higher%20or%20Lower.cpp)
+
+[378. Kth Smallest Element in a Sorted Matrix.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/378.%20Kth%20Smallest%20Element%20in%20a%20Sorted%20Matrix.cpp)
+
+[392. Is Subsequence.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/392.%20Is%20Subsequence.cpp)
+
+[441. Arranging Coins.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/441.%20Arranging%20Coins.cpp)
+
+[454. 4Sum II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/454.%204Sum%20II.cpp)
+
+[704. Binary Search.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/704.%20Binary%20Search.cpp)
+
+[744. Find Smallest Letter Greater Than Target.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/744.%20Find%20Smallest%20Letter%20Greater%20Than%20Target.cpp)
+
+[852. Peak Index in a Mountain Array.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/852.%20Peak%20Index%20in%20a%20Mountain%20Array.cpp)
+
+[981. Time Based Key-Value Store.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/981.%20Time%20Based%20Key-Value%20Store.cpp)
+
+[1011. Capacity To Ship Packages Within D Days.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1011.%20Capacity%20To%20Ship%20Packages%20Within%20D%20Days.cpp)
+
+[1111. Maximum Nesting Depth of Two Valid Parentheses Strings.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1111.%20Maximum%20Nesting%20Depth%20of%20Two%20Valid%20Parentheses%20Strings.cpp)
+
+[1235. Maximum Profit in Job Scheduling.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1235.%20Maximum%20Profit%20in%20Job%20Scheduling.cpp)
+
+[1237. Find Positive Integer Solution for a Given Equation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1237.%20Find%20Positive%20Integer%20Solution%20for%20a%20Given%20Equation.cpp)
+
 ## Backtracking
 [40. Combination Sum II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/40.%20Combination%20Sum%20II.cpp)
 
