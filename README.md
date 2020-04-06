@@ -2,6 +2,33 @@
 
 Including problem statement, solution, runtime and complexity analysis.
 
+## Backtracking
+[40. Combination Sum II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/40.%20Combination%20Sum%20II.cpp)
+
+[46. Permutations.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/46.%20Permutations.cpp)
+
+[47. Permutations II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/47.%20Permutations%20II.cpp)
+
+[78. Subsets.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/78.%20Subsets.cpp)
+
+[90. Subsets II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/90.%20Subsets%20II.cpp)
+
+[131. Palindrome Partitioning.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/131.%20Palindrome%20Partitioning.cpp)
+
+[211. Add and Search Word - Data structure design.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/211.%20Add%20and%20Search%20Word%20-%20Data%20structure%20design.cpp)
+
+[401. Binary Watch.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/401.%20Binary%20Watch.cpp)
+
+[784. Letter Case Permutation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/784.%20Letter%20Case%20Permutation.cpp)
+
+[980. Unique Paths III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/980.%20Unique%20Paths%20III.cpp)
+
+[1079. Letter Tile Possibilities.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1079.%20Letter%20Tile%20Possibilities.cpp)
+
+[1219. Path with Maximum Gold.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1219.%20Path%20with%20Maximum%20Gold.cpp)
+
+[1286. Iterator for Combination.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1286.%20Iterator%20for%20Combination.cpp)
+
 ## Trie
 
 [208. Implement Trie (Prefix Tree).cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/208.%20Implement%20Trie%20(Prefix%20Tree).cpp)
