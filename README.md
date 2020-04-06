@@ -2,6 +2,73 @@
 
 Including problem statement, solution, runtime and complexity analysis.
 
+## Two pointers
+[11. Container With Most Water.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/11.%20Container%20With%20Most%20Water.cpp)
+
+[15. 3Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/15.%203Sum.cpp)
+
+[16. 3Sum Closest.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/16.%203Sum%20Closest.cpp)
+
+[18. 4Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/18.%204Sum.cpp)
+
+[26. Remove Duplicates from Sorted Array.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/26.%20Remove%20Duplicates%20from%20Sorted%20Array.cpp)
+
+[27. Remove Element.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/27.%20Remove%20Element.cpp)
+
+[28. Implement strStr().cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/28.%20Implement%20strStr().cpp)
+
+[42. Trapping Rain Water.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/42.%20Trapping%20Rain%20Water.cpp)
+
+[75. Sort Colors.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/75.%20Sort%20Colors.cpp)
+
+[76. Minimum Window Substring.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/76.%20Minimum%20Window%20Substring.cpp)
+
+[88. Merge Sorted Array.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/88.%20Merge%20Sorted%20Array.cpp)
+
+[125. Valid Palindrome.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/125.%20Valid%20Palindrome.cpp)
+
+[141. Linked List Cycle.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/141.%20Linked%20List%20Cycle.cpp)
+
+[142. Linked List Cycle II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/142.%20Linked%20List%20Cycle%20II.cpp)
+
+[167. Two Sum II - Input array is sorted.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/167.%20Two%20Sum%20II%20-%20Input%20array%20is%20sorted.cpp)
+
+[234. Palindrome Linked List.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/234.%20Palindrome%20Linked%20List.cpp)
+
+[283. Move Zeroes.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/283.%20Move%20Zeroes.cpp)
+
+[287. Find the Duplicate Number.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/287.%20Find%20the%20Duplicate%20Number.cpp)
+
+[344. Reverse String.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/344.%20Reverse%20String.cpp)
+
+[345. Reverse Vowels of a String.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/345.%20Reverse%20Vowels%20of%20a%20String.cpp)
+
+[349. Intersection of Two Arrays.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/349.%20Intersection%20of%20Two%20Arrays.cpp)
+
+[350. Intersection of Two Arrays II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/350.%20Intersection%20of%20Two%20Arrays%20II.cpp)
+
+[424. Longest Repeating Character Replacement.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/424.%20Longest%20Repeating%20Character%20Replacement.cpp)
+
+[524. Longest Word in Dictionary through Deleting.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/524.%20Longest%20Word%20in%20Dictionary%20through%20Deleting.cpp)
+
+[763. Partition Labels.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/763.%20Partition%20Labels.cpp)
+
+[838. Push Dominoes.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/838.%20Push%20Dominoes.cpp)
+
+[844. Backspace String Compare.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/844.%20Backspace%20String%20Compare.cpp)
+
+[881. Boats to Save People.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/881.%20Boats%20to%20Save%20People.cpp)
+
+[925. Long Pressed Name.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/925.%20Long%20Pressed%20Name.cpp)
+
+[977. Squares of a Sorted Array.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/977.%20Squares%20of%20a%20Sorted%20Array.cpp)
+
+[986. Interval List Intersections.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/986.%20Interval%20List%20Intersections.cpp)
+
+[1004. Max Consecutive Ones III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1004.%20Max%20Consecutive%20Ones%20III.cpp)
+
+[1248. Count Number of Nice Subarrays.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1248.%20Count%20Number%20of%20Nice%20Subarrays.cpp)
+
 ## Backtracking
 [40. Combination Sum II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/40.%20Combination%20Sum%20II.cpp)
 
