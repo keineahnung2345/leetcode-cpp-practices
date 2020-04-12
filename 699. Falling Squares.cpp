@@ -160,3 +160,54 @@ public:
         return ans;
     }
 };
+
+//Approach 2: Brute Force with Coordinate Compression
+//time: O(N^2), space: O(N)
+//Runtime: 100 ms, faster than 15.66% of C++ online submissions for Falling Squares.
+//Memory Usage: 12.3 MB, less than 100.00% of C++ online submissions for Falling Squares.
+class Solution {
+public:
+    vector<int> heights;
+    
+    int query(int L, int R){
+        return *max_element(heights.begin()+L, heights.begin()+R+1);
+    }
+    
+    void update(int L, int R, int h){
+        for(int i = L; i <= R; i++){
+            // heights[i] = max(h, heights[i]);
+            heights[i] = h;
+        }
+    }
+    
+    vector<int> fallingSquares(vector<vector<int>>& positions) {
+        set<int> coords;
+        for(vector<int>& pos : positions){
+            coords.insert(pos[0]);
+            coords.insert(pos[0]+pos[1]-1);
+        }
+        
+        vector<int> sortedCoords(coords.begin(), coords.end());
+        sort(sortedCoords.begin(), sortedCoords.end());
+        
+        map<int, int> index;
+        for(int i = 0; i < sortedCoords.size(); i++){
+            index[sortedCoords[i]] = i;
+        }
+        
+        heights =vector<int>(sortedCoords.size());
+        int best = 0;
+        vector<int> ans;
+        
+        for(vector<int>& pos : positions){
+            int L = index[pos[0]];
+            int R = index[pos[0]+pos[1]-1];
+            int h = query(L, R) + pos[1];
+            update(L, R, h);
+            best = max(best, h);
+            ans.push_back(best);
+        }
+        
+        return ans;
+    }
+};
