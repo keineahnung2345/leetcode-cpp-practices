@@ -211,3 +211,96 @@ public:
         return ans;
     }
 };
+
+//Approach 3: Block (Square Root) Decomposition
+//time: O(Nsqrt(N)), space: O(N)
+//Runtime: 60 ms, faster than 45.78% of C++ online submissions for Falling Squares.
+//Memory Usage: 12.6 MB, less than 100.00% of C++ online submissions for Falling Squares.
+class Solution {
+public:
+    vector<int> heights;
+    vector<int> blocks;
+    vector<int> blocks_read;
+    int B;
+    
+    int query(int left, int right){
+        int ans = 0;
+        
+        //left is not at the beginning of a block
+        while(left % B > 0 && left <= right){
+            ans = max(ans, heights[left]);
+            //?
+            ans = max(ans, blocks[left/B]);
+            left++;
+        }
+        
+        //right is not at the end of a block
+        while(right % B != B-1 && left <= right){
+            ans = max(ans, heights[right]);
+            ans = max(ans, blocks[right/B]);
+            right--;
+        }
+        
+        //now left is at the beginning and right is at the end of block
+        while(left <= right){
+            ans = max(ans, blocks[left/B]);
+            //?
+            ans = max(ans, blocks_read[left/B]);
+            left += B;
+        }
+        
+        return ans;
+    }
+    
+    void update(int left, int right, int h){
+        while(left % B > 0 && left <= right){
+            heights[left] = max(heights[left], h);
+            blocks_read[left/B] = max(blocks_read[left/B], h);
+            left++;
+        }
+        while(right % B != B-1 && left <= right){
+            heights[right] = max(heights[right], h);
+            blocks_read[right/B] = max(blocks_read[right/B], h);
+            right--;
+        }
+        while(left <= right){
+            blocks[left/B] = max(blocks[left/B], h);
+            left+=B;
+        }
+    }
+    
+    vector<int> fallingSquares(vector<vector<int>>& positions) {
+        set<int> coords;
+        for(vector<int>& pos : positions){
+            coords.insert(pos[0]);
+            coords.insert(pos[0]+pos[1]-1);
+        }
+        
+        vector<int> sortedCoords(coords.begin(), coords.end());
+        sort(sortedCoords.begin(), sortedCoords.end());
+        
+        map<int, int> index;
+        for(int i = 0; i < sortedCoords.size(); i++){
+            index[sortedCoords[i]] = i;
+        }
+        
+        heights = vector<int>(sortedCoords.size());
+        B = (int)sqrt(sortedCoords.size());
+        blocks = vector<int>(B+2, 0);
+        blocks_read = vector<int>(B+2, 0);
+        
+        int best = 0;
+        vector<int> ans;
+        
+        for(vector<int>& pos : positions){
+            int L = index[pos[0]];
+            int R = index[pos[0]+pos[1]-1];
+            int h = query(L, R) + pos[1];
+            update(L, R, h);
+            best = max(best, h);
+            ans.push_back(best);
+        }
+        
+        return ans;
+    }
+};
