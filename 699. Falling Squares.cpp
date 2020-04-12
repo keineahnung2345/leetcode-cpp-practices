@@ -123,3 +123,40 @@ public:
         return res;
     }
 };
+
+//Approach 1: Offline Propagation
+//Runtime: 84 ms, faster than 18.90% of C++ online submissions for Falling Squares.
+//Memory Usage: 9 MB, less than 100.00% of C++ online submissions for Falling Squares.
+//time: O(N^2), space: O(N)
+class Solution {
+public:
+    vector<int> fallingSquares(vector<vector<int>>& positions) {
+        vector<int> qans(positions.size());
+        for(int i = 0; i < positions.size(); i++){
+            int left = positions[i][0];
+            int height = positions[i][1];
+            int right = left + height -1;
+            qans[i] += height;
+            
+            // for(int j = 0; j < i; j++){ //why not?
+            for(int j = i+1; j < positions.size(); j++){
+                int left2 = positions[j][0];
+                int height2 = positions[j][1];
+                int right2 = left2 + height2 -1;
+                if(left2 <= right && right2 >= left){
+                    //the two squares have intersection
+                    qans[j] = max(qans[j], qans[i]);
+                }
+            }
+        }
+        
+        vector<int> ans;
+        int cur = -1;
+        for(int h : qans){
+            cur = max(cur, h);
+            ans.push_back(cur);
+        }
+        
+        return ans;
+    }
+};
