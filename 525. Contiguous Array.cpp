@@ -64,3 +64,36 @@ public:
         return ans;
     }
 };
+
+//Approach #3 Using HashMap [Accepted]
+//Runtime: 180 ms, faster than 46.37% of C++ online submissions for Contiguous Array.
+//Memory Usage: 17.7 MB, less than 100.00% of C++ online submissions for Contiguous Array.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    int findMaxLength(vector<int>& nums) {
+        //count can range from -n to n
+        unordered_map<int, int> count2index;
+        count2index[0] = -1;
+        
+        int ans = 0, count = 0;
+        
+        for(int i = 0; i < nums.size(); i++){
+            count += (nums[i] == 0 ? -1 : 1);
+            if(count2index.find(count) != count2index.end()){
+                // cout << i << ": " << count << " -> len: " << i-count2index[count] << endl;
+                /*
+                the interval [0, count2index[count]] has count2index[count] more 1 than 0,
+                and so does  the interval [0, i], 
+                so the interval [count2index[count]+1, i] has equal 0s and  1s
+                */
+                ans = max(ans, i-count2index[count]);
+            }else{
+                // cout << i << ": " << count << " -> ix: " << i << endl;
+                count2index[count] = i;
+            }
+        }
+        
+        return ans;
+    }
+};
