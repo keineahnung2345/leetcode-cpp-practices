@@ -234,6 +234,11 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [720. Longest Word in Dictionary.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/720.%20Longest%20Word%20in%20Dictionary.cpp)
 
+## Suffix Tree
+[Trie, Suffix Tree, Suffix Array](https://www.hackerearth.com/de/practice/notes/trie-suffix-tree-suffix-array/)
+
+[Ukkonen's suffix tree algorithm in plain English](https://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english?rq=1)
+
 ## Union Find
 [959. Regions Cut By Slashes.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/959.%20Regions%20Cut%20By%20Slashes.cpp)
 
