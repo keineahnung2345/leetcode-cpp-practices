@@ -32,16 +32,31 @@ public:
 class Solution {
 public:
     int findMaxLength(vector<int>& nums) {
+        //count can range from -n to n
         vector<int> arr(2*nums.size()+1, -2);
         
-        arr[nums.size()] = -1;
+        arr[nums.size()] = -1; //arr[nums.size()] corresponds to count = 0
         int ans = 0, count = 0;
         
         for(int i = 0; i < nums.size(); i++){
             count += (nums[i] == 0 ? -1 : 1);
+            //the index "count + nums.size()" corresponds to count = "count"
             if(arr[count + nums.size()] >= -1){
+                /*
+                the initial value in "arr" is -2, 
+                so if its value >= -1, the value is meaningful
+                
+                when count is 0, we will enter this part automatically,
+                e.g. [0, 0, 1, 1], when "i" is 3, 
+                i-arr[count+nums.size()] will be 4,
+                that means we can find a continuous array from the start of nums
+                */
                 ans = max(ans, i-arr[count+nums.size()]);
             }else{
+                /*
+                the value in current index is meaningless,
+                so we update it
+                */
                 arr[count+nums.size()] = i;
             }
         }
