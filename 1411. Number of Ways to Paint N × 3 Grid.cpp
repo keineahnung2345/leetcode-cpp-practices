@@ -5,13 +5,22 @@ class Solution {
 public:
     int solve(int A) {
         // When we to fill single column 
-        long int color3 = 6; 
-        long int color2 = 6; 
+        long int color3 = 6; //P 3 takes 3
+        long int color2 = 6; //(C 3 takes 2) * (2 possible position)
         long int temp = 0; 
 
         for (int i = 2; i <= A; i++)  
         { 
-            temp = color3; 
+            temp = color3; //previous color3
+            /*
+            when current row is of three color
+            next row could have 2 possible two color comb and 
+            2 possible three color comb
+            
+            when current row is of two color
+            next row could have 3 possible two color comb and 
+            2 possible three color comb
+            */
             color3 = (2 * color3 + 2 * 
                   color2 ) % 1000000007; 
 
