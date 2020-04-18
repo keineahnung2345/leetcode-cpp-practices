@@ -220,6 +220,19 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [1406. Stone Game III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1406.%20Stone%20Game%20III.cpp)
 
+## KMP
+[KMP Algorithm for Pattern Searching](https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/)
+
+[28. Implement strStr().cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/28.%20Implement%20strStr().cpp)
+
+[187. Repeated DNA Sequences.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/187.%20Repeated%20DNA%20Sequences.cpp)
+
+[796. Rotate String.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/796.%20Rotate%20String.cpp)
+
+[1392. Longest Happy Prefix.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1392.%20Longest%20Happy%20Prefix.cpp)
+
+[1397. Find All Good Strings.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1397.%20Find%20All%20Good%20Strings.cpp)
+
 ## Trie
 
 [208. Implement Trie (Prefix Tree).cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/208.%20Implement%20Trie%20(Prefix%20Tree).cpp)
