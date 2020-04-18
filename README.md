@@ -233,6 +233,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [1397. Find All Good Strings.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1397.%20Find%20All%20Good%20Strings.cpp)
 
+[1408. String Matching in an Array.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1408.%20String%20Matching%20in%20an%20Array.cpp)
+
 ## Trie
 
 [208. Implement Trie (Prefix Tree).cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/208.%20Implement%20Trie%20(Prefix%20Tree).cpp)
