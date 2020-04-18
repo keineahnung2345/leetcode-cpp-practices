@@ -239,6 +239,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [Ukkonen's suffix tree algorithm in plain English](https://stackoverflow.com/questions/9452701/ukkonens-suffix-tree-algorithm-in-plain-english?rq=1)
 
+[1408. String Matching in an Array.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1408.%20String%20Matching%20in%20an%20Array.cpp)
+
 ## Union Find
 [959. Regions Cut By Slashes.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/959.%20Regions%20Cut%20By%20Slashes.cpp)
 
