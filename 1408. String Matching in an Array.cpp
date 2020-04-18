@@ -88,3 +88,75 @@ public:
         return ans;
     }
 };
+
+//counting on trie nodes in suffix tree
+//https://leetcode.com/problems/string-matching-in-an-array/discuss/575147/Clean-Python-3-suffix-trie-O(NlogN-%2B-N-*-S2)
+//Runtime: 36 ms, faster than 23.11% of C++ online submissions for String Matching in an Array.
+//Memory Usage: 29 MB, less than 100.00% of C++ online submissions for String Matching in an Array.
+//time: O(N * S^2), space: O(N * S^2)
+class Node{
+public:
+    vector<Node*> children;
+    int count;
+    
+    Node(){
+        children = vector<Node*>(26, nullptr);
+        count = 0;
+    }
+};
+
+class SuffixTree{
+public:
+    Node* root = new Node();
+    
+    void add(string& word){
+        Node* cur = root;
+        for(char c: word){
+            if(cur->children[c-'a'] == nullptr){
+                cur->children[c-'a'] = new Node();
+            }
+            cur = cur->children[c-'a'];
+            //first go to that child and then increase its visit count
+            cur->count += 1;
+            // cout << c << " " << cur->count << " | ";
+        }
+        // cout << endl;
+    };
+    
+    bool get(string& word){
+        Node* cur = root;
+        for(char c : word){
+            if(cur->children[c-'a'] == nullptr){
+                return false;
+            }
+            cur = cur->children[c-'a'];
+        }
+        // cout << word << " " << cur->count << endl;
+        //if cur has been visited more than once, it's a suffix of others
+        return cur->count > 1;
+    };
+};
+
+class Solution {
+public:
+    vector<string> stringMatching(vector<string>& words) {
+        SuffixTree* st = new SuffixTree();
+        vector<string> ans;
+        
+        for(string& word : words){
+            //add suffix of word into the suffix tree
+            for(int i = 0; i < word.size(); i++){
+                string suffix = word.substr(i, word.size()-i);
+                st->add(suffix);
+            }
+        }
+        
+        for(string& word : words){
+            if(st->get(word)){
+                ans.push_back(word);
+            }
+        }
+        
+        return ans;
+    }
+};
