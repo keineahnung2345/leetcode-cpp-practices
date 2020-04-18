@@ -80,3 +80,96 @@ public:
         return text;
     }
 };
+
+//Two pointer + Trie
+//https://leetcode.com/problems/html-entity-parser/discuss/575416/C%2B%2B-two-pointers-O(n)-or-O(1)
+//Runtime: 180 ms, faster than 95.80% of C++ online submissions for HTML Entity Parser.
+//Memory Usage: 18 MB, less than 100.00% of C++ online submissions for HTML Entity Parser.
+//time: O(N)
+class TrieNode{
+public:
+    vector<TrieNode*> children;
+    char mappedSymbol;
+    
+    TrieNode(){
+        children = vector<TrieNode*>(26, nullptr);
+        mappedSymbol = '\0';
+    }
+};
+
+class Trie{
+public:
+    TrieNode* root;
+    
+    Trie(){
+        root = new TrieNode();
+    };
+    
+    void add(string word, char symbol){
+        TrieNode* cur = root;
+        for(char c : word){
+            if(cur->children[c-'a'] == nullptr){
+                cur->children[c-'a'] = new TrieNode();
+            }
+            cur = cur->children[c-'a'];
+        }
+        //the trie contains the info mapping by itself
+        cur->mappedSymbol = symbol;
+    };
+    
+    char search(string word){
+        TrieNode* cur = root;
+        for(char c : word){
+            if(cur->children[c-'a'] == nullptr)
+                return '\0';
+            cur = cur->children[c-'a'];
+        }
+        return cur->mappedSymbol;
+    };
+};
+
+class Solution {
+public:
+    string entityParser(string text) {
+        map<string, char> entityMap = {
+            {"&quot;" , '\"'},
+            {"&apos;",  '\''}, 
+            {"&amp;" , '&'}, 
+            {"&gt;" , '>'}, 
+            {"&lt;" , '<'}, 
+            {"&frasl;" , '/'}
+            };
+        
+        int slow = 0;
+        map<string, char>::iterator it;
+        Trie* trie = new Trie();
+        
+        for(it = entityMap.begin(); it != entityMap.end(); it++){
+            //remove key's head's & and tail's ;
+            // cout << it->first.substr(1, it->first.size()-2) << endl;
+            trie->add(it->first.substr(1, it->first.size()-2), it->second);
+        }
+        
+        for (int fast = 0, lastAnd = 0; fast < text.size(); ++fast, ++slow) {
+            text[slow] = text[fast];
+            
+            if (text[slow] == '&')
+                lastAnd = slow;
+            
+            if (text[slow] == ';') {
+                // cout << text << " " << lastAnd << " " << slow << endl;
+                char c;
+                if((c = trie->search(text.substr(lastAnd+1, slow-1-lastAnd))) != '\0'){
+                    // cout << text.substr(lastAnd+1, slow-1-lastAnd) << ", " << c << endl;
+                    slow = lastAnd;
+                    text[slow] = c;
+                    
+                }
+                lastAnd = slow + 1;
+            }
+        }
+        
+        text.resize(slow);
+        return text;
+    }
+};
