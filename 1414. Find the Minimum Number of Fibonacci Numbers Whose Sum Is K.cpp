@@ -1,3 +1,4 @@
+//Greedy
 //Runtime: 4 ms, faster than 80.46% of C++ online submissions for Find the Minimum Number of Fibonacci Numbers Whose Sum Is K.
 //Memory Usage: 6.5 MB, less than 100.00% of C++ online submissions for Find the Minimum Number of Fibonacci Numbers Whose Sum Is K.
 class Solution {
