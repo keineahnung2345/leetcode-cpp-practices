@@ -38,3 +38,37 @@ public:
         return root;
     }
 };
+
+//Recursive
+//Runtime: 4 ms, faster than 86.93% of C++ online submissions for Construct Binary Search Tree from Preorder Traversal.
+//Memory Usage: 11.6 MB, less than 28.57% of C++ online submissions for Construct Binary Search Tree from Preorder Traversal.
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* rbstFromPreorder(vector<int>& preorder, int l, int r){
+        // cout << l << " " << r << endl;
+        if(l > r) return nullptr;
+        //[l, r]: inclusive
+        TreeNode* node = new TreeNode(preorder[l]);
+        
+        //the smallest number > x
+        auto it = upper_bound(preorder.begin()+l+1, preorder.begin()+r+1, preorder[l]);
+        
+        node->left = rbstFromPreorder(preorder, l+1, it-preorder.begin()-1);
+        node->right = rbstFromPreorder(preorder, it-preorder.begin(), r);
+        
+        return node;
+    };
+    
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        return rbstFromPreorder(preorder, 0, preorder.size()-1);
+    }
+};
