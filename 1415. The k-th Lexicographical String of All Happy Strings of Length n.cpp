@@ -49,6 +49,7 @@ public:
 };
 
 //Math
+//https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/discuss/585590/C%2B%2B-DFS-and-Math
 //Runtime: 0 ms, faster than 100.00% of C++ online submissions for The k-th Lexicographical String of All Happy Strings of Length n.
 //Memory Usage: 5.8 MB, less than 100.00% of C++ online submissions for The k-th Lexicographical String of All Happy Strings of Length n.
 //time: O(N), space: O(1)
@@ -91,5 +92,32 @@ public:
         }
         
         return ans;
+    }
+};
+
+//DFS
+//https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strings-of-length-n/discuss/585590/C%2B%2B-DFS-and-Math
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for The k-th Lexicographical String of All Happy Strings of Length n.
+//Memory Usage: 5.9 MB, less than 100.00% of C++ online submissions for The k-th Lexicographical String of All Happy Strings of Length n.
+//time: O(N*k), space: O(N)
+class Solution {
+public:
+    string getHappyString(int n, int& k, int l = 0, char last = '\0') {
+        //l: the length of building string
+        //last: last character in the building string
+        //note that k is passed by reference
+        if(l == n){
+            //we have built a happy string
+            k--;
+        }else{
+            for(char cur = 'a'; cur <= 'c'; cur++){
+                if(cur == last) continue;
+                string res = getHappyString(n, k, l+1, cur);
+                if(k == 0){
+                    return string(1, cur) + res;
+                }
+            }
+        }
+        return "";
     }
 };
