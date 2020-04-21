@@ -39,3 +39,36 @@ public:
         return (ans == INT_MAX) ? -1 : ans;
     }
 };
+
+//Hint 2, greedy
+/**
+ * // This is the BinaryMatrix's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * class BinaryMatrix {
+ *   public:
+ *     int get(int x, int y);
+ *     vector<int> dimensions();
+ * };
+ */
+
+class Solution {
+public:
+    int leftMostColumnWithOne(BinaryMatrix &binaryMatrix) {
+        vector<int> nm = binaryMatrix.dimensions();
+        int n = nm[0], m = nm[1];
+        
+        int i = 0, j = m-1;
+        int ans = INT_MAX;
+        
+        while(i < n && j >= 0){
+            if(binaryMatrix.get(i, j) == 0){
+                i++;
+            }else{
+                ans = min(ans, j);
+                j--;
+            }
+        }
+        
+        return (ans == INT_MAX) ? -1 : ans;
+    }
+};
