@@ -133,3 +133,44 @@ public:
         return count[n] % MOD;
     }
 };
+
+//1-D DP
+//https://leetcode.com/problems/restore-the-array/discuss/587726/Java-DP-(bottom-up)-16-line-solution-2x100-O(n-log-k)-time-O(n)-space-with-simple-explanation
+//Runtime: 640 ms, faster than 19.77% of C++ online submissions for Restore The Array.
+//Memory Usage: 12 MB, less than 100.00% of C++ online submissions for Restore The Array.
+class Solution {
+public:
+    int numberOfArrays(string s, int k) {
+        int n = s.size();
+        //the max length of valid token
+        int intMaxLen = to_string(INT_MAX).size();
+        int maxLen = min((int)to_string(k).size(), intMaxLen);
+        int MOD = 1e9 + 7;
+        vector<int> dp(n, 0);  //count for s[0:end]
+        for(int end = 0; end < n; end++){
+            for(int start = end; start >= 0 && (end-start+1) <= maxLen; start--){
+                //we are looking at s[start:end]
+                
+                //leading 0
+                if(s[start] == '0') continue;
+                //[start,end]
+                string sub = s.substr(start, end-start+1);
+                //stoi(sub) must >= 1, don't need to check
+                //same digits as INT_MAX, first check its leading digit
+                if(sub.size() == intMaxLen && sub[0] != '1') continue;
+                //don't need to worry about overflow now
+                if(stoi(sub) > k) continue;
+                /*
+                now s[start:end] is a valid token,
+                meaning s[0:end] can be split into s[0:start-1] and s[start:end],
+                so for s[0:end], its count is increased by the count of s[0:start-1]
+                if start is 0, s[0:end] is a valid token by itself, we only find "one" valid token, so increase one
+                */ 
+                dp[end] += (start > 0) ? dp[start-1] : 1;
+                dp[end] %= MOD;
+            }
+            // cout << "dp[" << end << "]: " << dp[end] << endl;
+        }
+        return dp[n-1];
+    }
+};
