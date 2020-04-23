@@ -24,3 +24,19 @@ public:
         return ans;
     }
 };
+
+//https://leetcode.com/explore/challenge/card/30-day-leetcoding-challenge/531/week-4/3308/discuss/593317/Simple-3-line-Java-solution-faster-than-100
+class Solution {
+public:
+    int rangeBitwiseAnd(int m, int n) {
+        while(n > m){
+            /*
+            suppose a >= b
+            the result of a & b must <= min(a, b) = b,
+            so we can skip numbers between b and (a&b)
+            */
+            n &= (n-1);
+        }
+        return n & m;
+    }
+};
