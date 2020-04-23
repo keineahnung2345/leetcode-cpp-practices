@@ -3,7 +3,7 @@
 class Solution {
 public:
     int minNumberOfFrogs(string croakOfFrogs) {
-        int pos = -2;
+        int pos = -2; //represents for meaningless value
         int visited = 0;
         int count = 0;
         
@@ -11,15 +11,20 @@ public:
         
         while(visited < croakOfFrogs.size()){
             pos = -2;
-            bool jump = false;
+            bool jump = false; //whether to jump from inner loop
             while(pos == -2 || (pos >= 0 && pos < croakOfFrogs.size())){
                 for(string s : croak){
                     pos = croakOfFrogs.find(s, (pos == -2) ? 0 : pos+1);
                     if(pos != string::npos){
+                        //revise the char in-place, so the char won't be visited again
                         croakOfFrogs[pos] = '#';
                         visited++;
                     }else{
-                        //not jump at first char, invalid string
+                        /*
+                        not jump at first char, invalid string,
+                        for example, we have found 'c', 'r', 'o',
+                        but we cannot find 'a', it must be invalid string
+                        */
                         if(s != "c") return -1;
                         //we need another frog
                         jump = true;
@@ -29,6 +34,7 @@ public:
                 if(jump) break;
             }
             
+            //we have used one frog
             count++;
         }
         
