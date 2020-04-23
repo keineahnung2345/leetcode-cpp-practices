@@ -41,3 +41,45 @@ public:
         return count;
     }
 };
+
+//one pass
+//https://leetcode.com/problems/minimum-number-of-frogs-croaking/discuss/586543/C%2B%2BJava-with-picture-simulation
+//Runtime: 76 ms, faster than 69.22% of C++ online submissions for Minimum Number of Frogs Croaking.
+//Memory Usage: 9.5 MB, less than 100.00% of C++ online submissions for Minimum Number of Frogs Croaking.
+class Solution {
+public:
+    int minNumberOfFrogs(string croakOfFrogs) {
+        unordered_map<char, int> croak2id = {
+            {'c', 0},
+            {'r', 1},
+            {'o', 2},
+            {'a', 3},
+            {'k', 4}
+        };
+        
+        vector<int> count(5, 0);
+        int curFrogs = 0, maxFrogs = 0;
+        
+        for(char c : croakOfFrogs){
+            int id = croak2id[c];
+            if(id == 0){
+                //we need a new frog
+                count[0]++;
+                curFrogs++;
+                maxFrogs = max(maxFrogs, curFrogs);
+            }else if(id == 4){
+                //one frog finish singing
+                count[3]--;
+                curFrogs--;
+            }else{
+                //one frog sing from previous char to current char
+                --count[id-1];
+                ++count[id];
+                if(count[id-1] < 0) return -1;
+            }
+        }
+        
+        //curFrogs == 0: check if all frogs successfully finish
+        return (curFrogs == 0) ? maxFrogs : -1;
+    }
+};
