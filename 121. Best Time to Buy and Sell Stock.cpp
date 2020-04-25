@@ -60,14 +60,11 @@ The points of interest are the peaks and valleys in the given graph. We need to 
 **/
 
 /**
-Complexity Analysis
-
-Time complexity : O(n)O(n). Only a single pass is needed.
-
-Space complexity : O(1)O(1). Only two variables are used.
+Time complexity : O(n). Only a single pass is needed.
+Space complexity : O(1). Only two variables are used.
 **/
 
-/**
+
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
@@ -77,10 +74,31 @@ public:
             if(prices[i] < valley){
                 valley = prices[i];
             }else if(prices[i] - valley > ans){
-                asn = prices[i] - valley;
+                ans = prices[i] - valley;
             }
         }
         return ans;
     }
 };
-**/
+
+//Greedy
+//Runtime: 4 ms, faster than 97.14% of C++ online submissions for Best Time to Buy and Sell Stock.
+//Memory Usage: 7.5 MB, less than 100.00% of C++ online submissions for Best Time to Buy and Sell Stock.
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        
+        int maxToTail = 0;
+        int profit, maxProfit = 0;
+        
+        for(int i = n-1; i >= 0; i--){
+            maxToTail = max(maxToTail, prices[i]);
+            profit = max(maxToTail - prices[i], 0);
+            maxProfit = max(maxProfit, profit);
+        }
+        
+        return maxProfit;
+    }
+};
+
