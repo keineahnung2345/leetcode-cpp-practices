@@ -45,7 +45,8 @@ public:
         int n = nums.size();
         
         for(int i = 0; i < n; i++){
-            for(int j = max(0, i-nums[i]); j <= min(n-1, i+nums[i]); j++){
+            // for(int j = max(0, i-nums[i]); j <= min(n-1, i+nums[i]); j++){
+            for(int j = i; j <= min(n-1, i+nums[i]); j++){
                 graph[i].push_back(j);
             }
         }
@@ -151,25 +152,6 @@ public:
     };
     
     vector<Index> memo;
-    
-    bool canJumpFromPos(vector<int>& nums, int pos){
-        int N = nums.size();
-        if(memo[pos] != Index::UNKNOWN){
-            return memo[pos] == GOOD ? true : false;
-        }
-        
-        int furthestJump = min(pos+nums[pos], N-1);
-        // for(int nextPos = pos+1; nextPos <= furthestJump; nextPos++){
-        for(int nextPos = furthestJump; nextPos > pos; nextPos--){
-            if(canJumpFromPos(nums, nextPos)){
-                memo[pos] = Index::GOOD;
-                return true;
-            }
-        }
-        
-        memo[pos] = Index::BAD;
-        return false;
-    };
     
     bool canJump(vector<int>& nums) {
         int N = nums.size();
