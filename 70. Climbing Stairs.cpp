@@ -36,7 +36,6 @@ Space complexity : O(1)O(1). Constant space is used.
 
 //Runtime: 4 ms, faster than 100.00% of C++ online submissions for Climbing Stairs.
 //Memory Usage: 8.2 MB, less than 97.68% of C++ online submissions for Climbing Stairs.
-/**
 class Solution {
 public:
     int climbStairs(int n) {
@@ -55,7 +54,29 @@ public:
         return last2;
     }
 };
-**/
+
+//DP and Fibonacci, no edge case
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Climbing Stairs.
+//Memory Usage: 5.9 MB, less than 100.00% of C++ online submissions for Climbing Stairs.
+class Solution {
+public:
+    int climbStairs(int n) {
+        // vector<int> dp(n+1, 0);
+        
+        //0: padding, used when dp[2] = dp[1] + dp[0]
+        // dp[0] = dp[1] = 1;
+        int last1 = 1, last2 = 1;
+        
+        for(int i = 2; i <= n; i++){
+            // dp[i] = dp[i-1] + dp[i-2];
+            last2 += last1;
+            swap(last1, last2);
+        }
+        
+        // return dp[n];
+        return last1;
+    }
+};
 
 /**
 Approach 5: Binets Method
