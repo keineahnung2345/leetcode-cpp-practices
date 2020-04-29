@@ -54,7 +54,7 @@ public:
         
         //find LCA
         //only one leaf
-        cout << level_nodes.size() << endl;
+        // cout << level_nodes.size() << endl;
         if(level_nodes.size() == 1) return level_nodes[0];
         
         //more than one leaf
@@ -71,6 +71,7 @@ public:
             }
             if(same_parent) break;
             //if parent not common, use grandparent
+            //this is valid because all "level_nodes" are at the same level!
             for(int i = 0; i < level_nodes.size(); i++){
                 parent[level_nodes[i]] = parent[parent[level_nodes[i]]];
             }
