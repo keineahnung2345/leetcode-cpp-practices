@@ -116,3 +116,56 @@ public:
         return ans;
     }
 };
+
+//Approach 2: Iterative using parent pointers
+//Runtime: 44 ms, faster than 10.21% of C++ online submissions for Lowest Common Ancestor of a Binary Tree.
+//Memory Usage: 17.8 MB, less than 20.00% of C++ online submissions for Lowest Common Ancestor of a Binary Tree.
+//time: O(N), space: O(N)
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        unordered_map<TreeNode*, TreeNode*> parents;
+        stack<TreeNode*> stk;
+        TreeNode *cur;
+        
+        parents[root] = nullptr;
+        stk.push(root);
+        
+        //either p or q is not visited
+        while(parents.find(p) == parents.end() || parents.find(q) == parents.end()){
+            cur = stk.top(); stk.pop();
+            
+            if(cur->left){
+                parents[cur->left] = cur;
+                stk.push(cur->left);
+            }
+            if(cur->right){
+                parents[cur->right] = cur;
+                stk.push(cur->right);
+            }
+        }
+        
+        //record all p's ancestors(including itself) into a set
+        set<TreeNode*> pAncestors;
+        while(p){
+            pAncestors.insert(p);
+            p = parents[p];
+        }
+        
+        //find q's least ancestor which is also p's ancestor
+        while(pAncestors.find(q) == pAncestors.end()){
+            q = parents[q];
+        }
+        
+        return q;
+    }
+};
