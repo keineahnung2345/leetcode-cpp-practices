@@ -1,4 +1,5 @@
 //MLE
+//26 / 40 test cases passed.
 class Solution {
 public:
     int maxScore(vector<int>& cardPoints, int k) {
