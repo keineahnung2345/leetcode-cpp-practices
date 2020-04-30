@@ -73,3 +73,34 @@ public:
         return backtrack(root, path) == COMP_RES::SAME;
     }
 };
+
+//recursive
+//https://leetcode.com/explore/featured/card/30-day-leetcoding-challenge/532/week-5/3315/discuss/604349/CPP-SIMPLE-EASY-DFS-SOLUTION-WITH-COMMENTS
+//Runtime: 96 ms
+//Memory Usage: 48.9 MB
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    bool isValidSequence(TreeNode* root, vector<int>& arr, int i = 0) {
+        if(i <= arr.size() && !root){
+            return false;
+        }
+        //stop when i is equal to arr.size()-1
+        if(i == arr.size()-1){
+            //check if its leaf
+            return root->val == arr[i] && !root->left && !root->right;
+        }
+        //continue to increase i
+        return root->val == arr[i] && (isValidSequence(root->left, arr, i+1) || isValidSequence(root->right, arr, i+1));
+    }
+};
