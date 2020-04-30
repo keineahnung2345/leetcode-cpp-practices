@@ -94,3 +94,35 @@ public:
         return ans;
     }
 };
+
+//bucket(hashmap)
+//https://leetcode.com/problems/diagonal-traverse-ii/discuss/597741/Clean-Simple-Easiest-Explanation-with-a-picture-and-code-with-comments
+//Runtime: 504 ms, faster than 86.78% of C++ online submissions for Diagonal Traverse II.
+//Memory Usage: 94.3 MB, less than 100.00% of C++ online submissions for Diagonal Traverse II.
+class Solution {
+public:
+    vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
+        unordered_map<int, vector<int>> bucket;
+        int maxKey = INT_MIN;
+        int count = 0;
+        
+        for(int i = 0; i < nums.size(); i++){
+            for(int j = 0; j < nums[i].size(); j++){
+                bucket[i+j].push_back(nums[i][j]);
+                maxKey = max(maxKey, i+j);
+                count++;
+            }
+        }
+        
+        vector<int> ans(count);
+        int idx = 0;
+        
+        for(int i = 0; i <= maxKey; i++){
+            for(int j = bucket[i].size()-1; j >= 0; j--){
+                ans[idx++] = bucket[i][j];
+            }
+        }
+        
+        return ans;
+    }
+};
