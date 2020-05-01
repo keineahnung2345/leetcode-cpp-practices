@@ -102,3 +102,31 @@ public:
         return ans;
     }
 };
+
+//center expansion
+//https://leetcode.com/problems/palindromic-substrings/discuss/105687/Python-Straightforward-with-Explanation-(Bonus-O(N)-solution)
+//O(N^2)
+class Solution {
+public:
+    int countSubstrings(string s) {
+        int n = s.size();
+        int ans = 0;
+        
+        //center could be n char of s and also n-1 spaces between chars
+        for(int center = 0; center < 2*n-1; center++){
+            //center = 0(0th char) -> left: 0, right: 0
+            //center = 1(btw 0th and 1st char) -> left: 0, right: 1
+            //center = 5(btw 2nd and 3rd char) -> left: 2, right: 3
+            int left = center/2;
+            int right = center/2 + center%2;
+            
+            while(left >= 0 && right < n && s[left] == s[right]){
+                ans++;
+                left--;
+                right++;
+            }
+        }
+        
+        return ans;
+    }
+};
