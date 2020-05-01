@@ -35,3 +35,29 @@ public:
         return ans;
     }
 };
+
+//Approach #2 Better Brute Force
+//time: O(N^2), space: O(1)
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& A) {
+        int ans = 0;
+        int n = A.size();
+        
+        for(int l = 0; l+2 < n; l++){
+            int d = A[l+1] - A[l];
+            //looking at [l...l+2], [l...l+3], [l...l+4], [l...n-1]
+            for(int r = l+2; r < n; r++){
+                //only check last pair to determine if a slice is valid
+                if(A[r] - A[r-1] == d){
+                    ans++;
+                }else{
+                    //skip all [l...r+1], ... [l...n-1] if [l...r] is invalid
+                    break;
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
