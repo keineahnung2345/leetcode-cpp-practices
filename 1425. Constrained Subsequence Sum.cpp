@@ -73,6 +73,11 @@ public:
             we only use the deque to extract max dp value,
             so if current dp value are largest,
             the stored dp values are useless
+            
+            every elements in the deque < dp[i] will be discarded,
+            so dp[i] will be the smallest value in the deque,
+            and we may push dp[i] to the back of the deque,
+            so we can say that the deque is decreasing
             */
             while(window.size() > 0 && dp[i] > window.back()){
                 window.pop_back();
