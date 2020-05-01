@@ -71,3 +71,34 @@ public:
         return ans;
     }
 };
+
+//DP, O(N) space
+//Runtime: 12 ms, faster than 60.81% of C++ online submissions for Palindromic Substrings.
+//Memory Usage: 6.4 MB, less than 100.00% of C++ online submissions for Palindromic Substrings.
+class Solution {
+public:
+    int countSubstrings(string s) {
+        int n = s.size();
+        vector<int> dp(n+2, 0);
+        int ans = 0;
+        
+        for(int l = n; l >= 1; l--){
+            //note taht we have changed the r to reverse order!
+            for(int r = n; r >= l; r--){
+                /*
+                dp[r-1] is dp[l+1][r-1] in previous method,
+                so we want dp[r-1] to be updated after dp[r],
+                so that dp[r-1] means dp[l+1][r-1], not dp[l][r-1]
+                */
+                if((l+1 >= r-1 || dp[r-1] != 0) && s[l-1] == s[r-1]){
+                    dp[r] = 1;
+                    ans += dp[r];
+                }else{
+                    dp[r] = 0;
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
