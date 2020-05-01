@@ -19,7 +19,8 @@ public:
                     if((dp[l+1][r] != INT_MIN) && (dp[l+1][r] == dp[l][r-1])){
                         /*
                         [l...r] is valid only if 
-                        windows of size w-1 are valid
+                        windows of size w-1 are valid,
+                        and the two windows' common differences are same
                         */
                         dp[l][r] = dp[l+1][r]+1;
                     }
