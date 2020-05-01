@@ -65,6 +65,7 @@ public:
 //Recursion?
 //Runtime: 0 ms, faster than 100.00% of C++ online submissions for Arithmetic Slices.
 //Memory Usage: 8 MB, less than 100.00% of C++ online submissions for Arithmetic Slices.
+//time: O(N), space: O(N)
 class Solution {
 public:
     int sum = 0;
@@ -94,6 +95,7 @@ public:
 //1-D DP
 //Runtime: 4 ms, faster than 45.89% of C++ online submissions for Arithmetic Slices.
 //Memory Usage: 7.5 MB, less than 100.00% of C++ online submissions for Arithmetic Slices.
+//time: O(N), space: O(N)
 class Solution {
 public:
     int numberOfArithmeticSlices(vector<int>& A) {
@@ -110,6 +112,32 @@ public:
                 */
                 dp[r] = dp[r-1] + 1;
                 ans += dp[r];
+            }
+        }
+        
+        return ans;
+    }
+};
+
+//O(1) space DP
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Arithmetic Slices.
+//Memory Usage: 7.4 MB, less than 100.00% of C++ online submissions for Arithmetic Slices.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& A) {
+        int n = A.size();
+        int dp = 0;
+        int ans = 0;
+        
+        for(int r = 2; r < n; r++){
+            if(A[r] - A[r-1] == A[r-1] - A[r-2]){
+                //we only need last dp value
+                dp += 1;
+                ans += dp;
+            }else{
+                //need to reset dp value!
+                dp = 0;
             }
         }
         
