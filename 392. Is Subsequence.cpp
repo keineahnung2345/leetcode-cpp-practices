@@ -1,3 +1,4 @@
+//Greedy
 //Runtime: 60 ms, faster than 87.38% of C++ online submissions for Is Subsequence.
 //Memory Usage: 17.1 MB, less than 66.67% of C++ online submissions for Is Subsequence.
 class Solution {
@@ -8,7 +9,14 @@ public:
             for(; ti < t.size() && s[si] != t[ti]; ti++){
                 // cout << s[si] << " " << t[ti] << endl;
             }
-            
+            /*
+            Greedy, unlike KMP, in which we need to fallback when encounted by a mismatch
+            In this case, the matched characters can always be kept, no need to drop them in a mismatch
+            In the example s = "abc", t = "ahbgdc", 
+            when we know 'b' in s is different from 'h' in t, 
+            we don't need to compare from 'a' in s again,
+            we just move forward the index on t.
+            */
             if(s[si] == t[ti]){
                 //s[si] and t[ti] match, both seq go ahead
                 si++; //only if s[si] matches, we can go ahead in seq "s"
@@ -21,6 +29,7 @@ public:
     }
 };
 
+//Greedy
 //https://leetcode.com/problems/is-subsequence/discuss/87272/3-lines-C
 class Solution {
 public:
