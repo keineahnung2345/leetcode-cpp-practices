@@ -235,6 +235,11 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [1408. String Matching in an Array.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1408.%20String%20Matching%20in%20an%20Array.cpp)
 
+## Deque
+[239. Sliding Window Maximum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/239.%20Sliding%20Window%20Maximum.cpp)
+
+[1425. Constrained Subsequence Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1425.%20Constrained%20Subsequence%20Sum.cpp)
+
 ## Trie
 
 [208. Implement Trie (Prefix Tree).cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/208.%20Implement%20Trie%20(Prefix%20Tree).cpp)
