@@ -90,3 +90,29 @@ public:
         return sum;
     }
 };
+
+//1-D DP
+//Runtime: 4 ms, faster than 45.89% of C++ online submissions for Arithmetic Slices.
+//Memory Usage: 7.5 MB, less than 100.00% of C++ online submissions for Arithmetic Slices.
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& A) {
+        int n = A.size();
+        vector<int> dp(n);
+        int ans = 0;
+        
+        for(int r = 2; r < n; r++){
+            if(A[r] - A[r-1] == A[r-1] - A[r-2]){
+                /*
+                dp[r-1] : count of arithmetic slices ending at r-1
+                suppose these are [r-k...r-1], ..., [r-3...r-1]
+                dp[r] : [r-k...r], ..., [r-3...r], its count is then be dp[r-1]+1
+                */
+                dp[r] = dp[r-1] + 1;
+                ans += dp[r];
+            }
+        }
+        
+        return ans;
+    }
+};
