@@ -61,3 +61,32 @@ public:
         return ans;
     }
 };
+
+//Recursion?
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Arithmetic Slices.
+//Memory Usage: 8 MB, less than 100.00% of C++ online submissions for Arithmetic Slices.
+class Solution {
+public:
+    int sum = 0;
+    
+    int slices(vector<int>& A, int i){
+        if(i < 2) return 0;
+        int ap = 0;
+        if(A[i] - A[i-1] == A[i-1] - A[i-2]){
+            /*
+            A[0...i]'s subsequence's count is that of A[0...i-1] + 1
+            */
+            ap = 1 + slices(A, i-1);
+            sum += ap;
+        }else{
+            slices(A, i-1);
+        }
+        // cout << i << ", " << ap << ", " << sum << endl;
+        return ap;
+    };
+    
+    int numberOfArithmeticSlices(vector<int>& A) {
+        slices(A, A.size()-1);
+        return sum;
+    }
+};
