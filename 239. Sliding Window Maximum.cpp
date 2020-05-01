@@ -30,3 +30,42 @@ public:
         return ans;
     }
 };
+
+//deque
+//Runtime: 36 ms, faster than 99.52% of C++ online submissions for Sliding Window Maximum.
+//Memory Usage: 16.7 MB, less than 21.31% of C++ online submissions for Sliding Window Maximum.
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        vector<int> ans;
+        deque<pair<int, int>> window; //decreasing
+        
+        //prepare window: [0, k-2]
+        //used when calculate first element of ans
+        for(int i = 0; i < k-1; i++){
+            while(window.size() > 0 && window.back().first < nums[i]){
+                window.pop_back();
+            }
+            window.push_back(make_pair(nums[i], i));
+        }
+        
+        for(int i = k-1; i < nums.size(); i++){
+            //window range: i-k+1, ... , i
+            
+            //keep it decreasing
+            while((window.size() > 0) && (nums[i] > window.back().first)){
+                window.pop_back();
+            }
+            window.push_back(make_pair(nums[i], i));
+            
+            //discard the element outside window range
+            if(window.front().second == i-k){
+                window.pop_front();
+            }
+            
+            ans.push_back(window.front().first);
+        }
+        
+        return ans;
+    }
+};
