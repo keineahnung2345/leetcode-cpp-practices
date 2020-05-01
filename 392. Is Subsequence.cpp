@@ -41,3 +41,29 @@ public:
         return si == s.end();
     }
 };
+
+//Follow-up, compare vector<string> ss(S1,S2,...Sk) with string t
+//https://leetcode.com/problems/is-subsequence/discuss/87272/3-lines-C/92233
+//O(len(t) * K)
+class Solution {
+public:
+    bool isSubsequence(vector<string> ss, string t) {
+        int n = ss.size();
+        vector<int> cursors(n, 0);
+        
+        for(char c : t){
+            //compare current char c in t with multiple strings in ss
+            for(int i = 0; i < n; i++){
+                cursors[i] += (ss[i][cursors[i]] == c);
+            }
+        }
+        
+        vector<int> ans(n);
+        for(int i = 0; i < ss.size(); i++){
+            ans[i] == (cursors[i] == ss[i].size());
+        }
+        
+        return ans;
+    }
+};
+
