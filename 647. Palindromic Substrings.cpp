@@ -33,3 +33,41 @@ public:
         return ans;
     }
 };
+
+//DP
+//Runtime: 24 ms, faster than 40.82% of C++ online submissions for Palindromic Substrings.
+//Memory Usage: 20.4 MB, less than 12.00% of C++ online submissions for Palindromic Substrings.
+class Solution {
+public:
+    int countSubstrings(string s) {
+        int n = s.size();
+        /*
+        padding 0 and n+1,
+        used for dp[l+1][r-1]
+        */
+        vector<vector<int>> dp(n+2, vector<int>(n+2, 0));
+        int ans = 0;
+        
+        //valid range is [1...n]
+        for(int l = n; l >= 1; l--){
+            for(int r = l; r <= n; r++){
+                /*
+                l and r is 1-based, 
+                need to convert them to 0-based to index s
+                */
+                /*
+                l+1 >= r-1 : s[l+1...r-1] will always be palindrome
+                */
+                if((l+1 >= r-1 || dp[l+1][r-1] != 0) && s[l-1] == s[r-1]){
+                    dp[l][r] = 1; //dp[l+1][r-1]+1;
+                    // cout << l << ", " << r << ", " << dp[l][r] << endl;
+                    ans += dp[l][r];
+                }else{
+                    dp[l][r] = 0;
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
