@@ -131,7 +131,15 @@ public:
                 so a = nums[s] and b = nums[e],
                 this is edge case
                 */
+                /*
+                note that we use dp[s+1] here, 
+                so we should iterate s in reverse order
+                */
                 int a = nums[s] - dp[s+1][e];
+                /*
+                note that we use dp[s][e-1] here, 
+                so we should iterate e in increasing order
+                */
                 int b = nums[e] - dp[s][e-1];
                 dp[s][e] = max(a, b);
             }
