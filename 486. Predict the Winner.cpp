@@ -98,6 +98,7 @@ public:
             return memo[s][e];
         }
         //score's definition is still player1' score - player2's score
+        //notice the minus sign here
         int a = nums[s] - winner(nums, s+1, e);
         int b = nums[e] - winner(nums, s, e-1);
         memo[s][e] = max(a, b);
@@ -113,7 +114,7 @@ public:
     }
 };
 
-//Approach #3 Dynamic Programming(2d)
+//Approach #3 O(n^2) space Dynamic Programming
 //Runtime: 0 ms, faster than 100.00% of C++ online submissions for Predict the Winner.
 //Memory Usage: 6.6 MB, less than 100.00% of C++ online submissions for Predict the Winner.
 //time: O(n^2), space: O(n^2)
@@ -140,7 +141,7 @@ public:
     }
 };
 
-//Approach #4 1-D Dynamic Programming
+//Approach #4 O(n) space Dynamic Programming
 //Runtime: 0 ms, faster than 100.00% of C++ online submissions for Predict the Winner.
 //Memory Usage: 6.1 MB, less than 100.00% of C++ online submissions for Predict the Winner.
 //time: O(n^2), space: O(n)
@@ -151,7 +152,13 @@ public:
         vector<int> dp(n, 0);
         for(int s = n-2; s >= 0; s--){
             for(int e = s+1; e < n; e++){
+                //dp[e] is dp[s+1][e] in previous approach
                 int a = nums[s] - dp[e];
+                /*
+                dp[e-1] is dp[s][e-1] in previous approach,
+                because we increase e in each iteration,
+                when we are calculating dp[e], dp[e-1] is already calculated
+                */
                 int b = nums[e] - dp[e-1];
                 //we can overwrite the only row
                 dp[e] = max(a, b);
