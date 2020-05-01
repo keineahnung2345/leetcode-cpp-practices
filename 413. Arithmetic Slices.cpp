@@ -144,3 +144,29 @@ public:
         return ans;
     }
 };
+
+//Approach #6 Using Formula
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& A) {
+        int n = A.size();
+        int count = 0;
+        int ans = 0;
+        
+        for(int r = 2; r < n; r++){
+            if(A[r] - A[r-1] == A[r-1] - A[r-2]){
+                //length of consecutive arithmetic slice is count+2
+                count++;
+            }else{
+                //an slice of length count+2 can generate (count+1) * count/2 differenct subslices
+                ans += (count+1) * count/2;
+                //need to reset its value!
+                count = 0;
+            }
+        }
+        
+        //handle last iteration
+        return (ans += (count+1) * count/2);
+    }
+};
