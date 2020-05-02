@@ -125,7 +125,6 @@ Time complexity : O(n). Single pass.
 Space complexity : O(1). Constant space required. 
 **/
 
-/**
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
@@ -151,7 +150,6 @@ public:
         return ans;
     }
 };
-**/
 
 /**
 Approach 3: Simple One Pass
@@ -176,7 +174,6 @@ Time complexity : O(n)O(n). Single pass.
 Space complexity: O(1)O(1). Constant space needed.
 **/
 
-/**
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
@@ -188,4 +185,28 @@ public:
         return ans;
     }
 };
-**/
+
+//Greedy
+//Runtime: 12 ms, faster than 15.03% of C++ online submissions for Best Time to Buy and Sell Stock II.
+//Memory Usage: 13.4 MB, less than 6.35% of C++ online submissions for Best Time to Buy and Sell Stock II.
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int lastMin = INT_MAX;
+        int ans = 0;
+        
+        for(int price : prices){
+            if(price - lastMin > 0){
+                ans += (price - lastMin);
+                //lastMin is used, so update it
+                lastMin = price;
+            }else{
+                //continue to find the minimum
+                lastMin = min(lastMin, price);
+            }
+        }
+        
+        return ans;
+    }
+};
+
