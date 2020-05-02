@@ -152,6 +152,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [121. Best Time to Buy and Sell Stock.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/121.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock.cpp)
 
+[122. Best Time to Buy and Sell Stock II](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/122.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20II.cpp)
+
 [123. Best Time to Buy and Sell Stock III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/123.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20III.cpp)
 
 [198. House Robber.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/198.%20House%20Robber.cpp)
