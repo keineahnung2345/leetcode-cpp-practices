@@ -45,3 +45,18 @@ public:
         return count;
     }
 };
+
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Jewels and Stones.
+//Memory Usage: 6.3 MB, less than 100.00% of C++ online submissions for Jewels and Stones.
+class Solution {
+public:
+    int numJewelsInStones(string J, string S) {
+        int ans = 0;
+        for(char s : S){
+            if(J.find(string(1, s)) != string::npos){
+                ans++;
+            }
+        }
+        return ans;
+    }
+};
