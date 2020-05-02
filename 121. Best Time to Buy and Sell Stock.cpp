@@ -102,3 +102,26 @@ public:
     }
 };
 
+//Greedy
+//Runtime: 8 ms, faster than 49.52% of C++ online submissions for Best Time to Buy and Sell Stock.
+//Memory Usage: 13 MB, less than 5.51% of C++ online submissions for Best Time to Buy and Sell Stock.
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int ans = 0;
+        int buy = INT_MAX;
+        int cash = 0;
+        
+        for(int price : prices){
+            /*
+            meaningless for first iteration,
+            in which buy is not set
+            */
+            cash = max(cash, price-buy);
+            buy = min(buy, price);
+            ans = max(ans, cash);
+        }
+        
+        return ans;
+    }
+};
