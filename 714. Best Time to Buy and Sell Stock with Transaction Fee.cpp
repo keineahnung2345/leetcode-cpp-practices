@@ -58,6 +58,30 @@ public:
     }
 };
 
+//DP with O(1) space
+//Runtime: 232 ms, faster than 11.12% of C++ online submissions for Best Time to Buy and Sell Stock with Transaction Fee.
+//Memory Usage: 55.3 MB, less than 5.88% of C++ online submissions for Best Time to Buy and Sell Stock with Transaction Fee.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int maxProfit(vector<int>& prices, int fee) {
+        int n = prices.size();
+        int hold = INT_MIN, empty = 0;
+        int newhold;
+        
+        for(int i = 1; i <= n; i++){
+            //no op or buy
+            newhold = max(hold, empty-prices[i-1]-fee);
+            //no op or sell
+            empty = max(empty, hold+prices[i-1]);
+            // cout << hold[i] << ", " << empty[i] << endl;
+            hold = newhold;
+        }
+        
+        return max(hold, empty);
+    }
+};
+
 //Approach #1: Dynamic Programming with O(1) space
 //Runtime: 148 ms, faster than 32.31% of C++ online submissions for Best Time to Buy and Sell Stock with Transaction Fee.
 //Memory Usage: 13 MB, less than 100.00% of C++ online submissions for Best Time to Buy and Sell Stock with Transaction Fee.
