@@ -130,3 +130,57 @@ public:
         return ans;
     }
 };
+
+//Manacher’s Algorithm
+//https://www.geeksforgeeks.org/manachers-algorithm-linear-time-longest-palindromic-substring-part-4/
+//https://leetcode.com/problems/palindromic-substrings/discuss/105687/Python-Straightforward-with-Explanation-(Bonus-O(N)-solution)
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Palindromic Substrings.
+//Memory Usage: 6.6 MB, less than 100.00% of C++ online submissions for Palindromic Substrings.
+//time: O(N)
+class Solution {
+public:
+    vector<int> L;
+    
+    template <typename Iter>
+    std::string join(Iter begin, Iter end, std::string const& separator)
+    {
+        std::ostringstream result;
+        result.precision(2); //for floating point
+        if (begin != end)
+            result << *begin++;
+        while (begin != end)
+            //std::fixed : for floating point
+            result << std::fixed << separator << *begin++;
+        return result.str();
+    }
+    
+    void manachers(string s){
+        s = join(s.begin(), s.end(), "#");
+        s = "^#" + s + "#$";
+        L = vector<int>(s.size(), 0);
+        int C = 0, R = 0;
+        //from first # to last #
+        //i: currentRightPosition
+        for(int i = 1; i < s.size()-1; i++){
+            if(R - i > 0){
+                L[i] = min(L[2*C-i], R-i);
+            }
+            while(s[i-L[i]-1] == s[i+L[i]+1]){
+                L[i]++;
+            }
+            if(R < i + L[i]){
+                R = i + L[i];
+                C = i;
+            }
+        }
+    };
+    
+    int countSubstrings(string s) {
+        manachers(s);
+        int ans = 0;
+        for(int l : L){
+            ans += (1+l)/2;
+        }
+        return ans;
+    }
+};
