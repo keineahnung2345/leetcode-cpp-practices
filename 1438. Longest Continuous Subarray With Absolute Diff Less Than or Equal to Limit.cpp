@@ -1,3 +1,4 @@
+//sliding windows + heap
 //Runtime: 364 ms, faster than 14.29% of C++ online submissions for Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.
 //Memory Usage: 34.6 MB, less than 100.00% of C++ online submissions for Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.
 class Solution {
@@ -52,6 +53,58 @@ public:
             }
             while(pqMin.top().second < slow){
                 pqMin.pop();
+            }
+        }
+        
+        return ans;
+    }
+};
+
+//sliding window + deque, revised from 1425. Constrained Subsequence Sum.cpp
+//Runtime: 136 ms, faster than 42.86% of C++ online submissions for Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.
+//Memory Usage: 35.1 MB, less than 100.00% of C++ online submissions for Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums, int limit) {
+        int n = nums.size();
+        int ans = 0;
+        int slow = 0;
+        
+        deque<pair<int,int>> maxQ;
+        deque<pair<int,int>> minQ;
+        
+        int wMaxIdx = 0, wMinIdx = 0;
+        for(int fast = 0; fast < n; fast++){
+            while(maxQ.size() > 0 && maxQ.back().first < nums[fast]){
+                maxQ.pop_back();
+            }
+            while(minQ.size() > 0 && minQ.back().first > nums[fast]){
+                minQ.pop_back();
+            }
+            maxQ.push_back(make_pair(nums[fast], fast));
+            minQ.push_back(make_pair(nums[fast], fast));
+            
+            //find a valid slow
+            while(maxQ.front().first - minQ.front().first > limit){
+                if(maxQ.front().second < minQ.front().second){
+                    //remove max value
+                    slow = max(slow, maxQ.front().second+1);
+                    maxQ.pop_front();
+                }else{
+                    slow = max(slow, minQ.front().second+1);
+                    minQ.pop_front();
+                }
+            }
+            
+            // cout << slow << ", " << fast << endl;
+            ans = max(ans, fast - slow + 1);
+            
+            //outside the window
+            while(maxQ.front().second < slow){
+                maxQ.pop_front();
+            }
+            while(minQ.front().second < slow){
+                minQ.pop_front();
             }
         }
         
