@@ -111,3 +111,53 @@ public:
         return ans;
     }
 };
+
+//sliding window + deque, cleaner
+//https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/discuss/609771/JavaC%2B%2BPython-Deques-O(N)
+//Runtime: 108 ms, faster than 71.43% of C++ online submissions for Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.
+//Memory Usage: 32.8 MB, less than 100.00% of C++ online submissions for Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums, int limit) {
+        int n = nums.size();
+        int ans = 0;
+        int slow = 0;
+        
+        deque<int> maxQ;
+        deque<int> minQ;
+        
+        for(int fast = 0; fast < n; fast++){
+            while(!maxQ.empty() && maxQ.back() < nums[fast]) maxQ.pop_back();
+            while(!minQ.empty() && minQ.back() > nums[fast]) minQ.pop_back();
+            /*
+            we don't need to record the index, why? 
+            */
+            maxQ.push_back(nums[fast]);
+            minQ.push_back(nums[fast]);
+            
+            //find a valid slow, dealing with the data structure and slow pointer at the same time
+            while(maxQ.front() - minQ.front() > limit){
+                // cout << slow << ", " << fast << endl;
+                if(maxQ.front() == nums[slow])maxQ.pop_front();
+                if(minQ.front() == nums[slow])minQ.pop_front();
+                slow++;
+            }
+            
+            // cout << "** " << slow << ", " << fast << " **" << endl;
+            ans = max(ans, fast - slow + 1);
+            
+            // the data structure is already processed together with slow
+            // //outside the window
+            // while(maxQ.front().second < slow){
+            //     maxQ.pop_front();
+            // }
+            // while(minQ.front().second < slow){
+            //     minQ.pop_front();
+            // }
+        }
+        cout << endl;
+        
+        return ans;
+    }
+};
