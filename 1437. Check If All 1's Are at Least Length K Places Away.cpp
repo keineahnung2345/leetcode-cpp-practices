@@ -8,6 +8,7 @@ public:
         for(int i = 0; i < n; i++){
             if(nums[i] == 0) continue;
             // if(last != INT_MIN)cout << i << ", " << i-last << endl;
+            //i-last-1: the space count between last and i
             if(last != INT_MIN && i-last-1 < k){
                 // cout <<endl;
                 return false;
