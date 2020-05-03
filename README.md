@@ -222,6 +222,11 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [1406. Stone Game III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1406.%20Stone%20Game%20III.cpp)
 
+## Dynamic Programming + Bitmask
+[A simple tutorial on this bitmasking problem](https://leetcode.com/problems/maximum-students-taking-exam/discuss/503686/A-simple-tutorial-on-this-bitmasking-problem)
+
+[1349. Maximum Students Taking Exam.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1349.%20Maximum%20Students%20Taking%20Exam.cpp)
+
 ## KMP
 [KMP Algorithm for Pattern Searching](https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/)
 
