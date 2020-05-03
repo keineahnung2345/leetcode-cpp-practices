@@ -14,21 +14,22 @@ public:
         // }
         // cout << endl;
         
-        priority_queue<pair<int,int>, vector<pair<int,int>>> pqMax;
-        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pqMin;
+        priority_queue<pair<int,int>, vector<pair<int,int>>> pqMax; //max popped first
+        priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pqMin; //min popped first
         
         int wMaxIdx = 0, wMinIdx = 0;
         for(int fast = 0; fast < n; fast++){
             pqMax.push(make_pair(nums[fast], fast));
             pqMin.push(make_pair(nums[fast], fast));
             
-            //find a valid slow
+            //find a valid slow, pop all invalid element from pqMin and pqMax
             // cout << "before [" << slow << ", " << fast << "]" << endl;
             // cout << "max: " << pqMax.top().first << ", " << pqMax.top().second << endl;
             // cout << "min: " << pqMin.top().first << ", " << pqMin.top().second << endl;
             while(pqMax.top().first - pqMin.top().first > limit){
                 if(pqMax.top().second < pqMin.top().second){
                     //remove max value
+                    //can't simply use "slow = pqMax.top().second+1;"
                     slow = max(slow, pqMax.top().second+1);
                     pqMax.pop();
                 }else{
@@ -42,6 +43,7 @@ public:
             // if(fast - slow + 1 > ans){
                 // cout << "after [" << slow << ", " << fast << "]" << endl;
             // }
+            //fast - slow + 1: window size
             ans = max(ans, fast - slow + 1);
             
             //outside the window
