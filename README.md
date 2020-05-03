@@ -249,6 +249,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [1425. Constrained Subsequence Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1425.%20Constrained%20Subsequence%20Sum.cpp)
 
+[1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1438.%20Longest%20Continuous%20Subarray%20With%20Absolute%20Diff%20Less%20Than%20or%20Equal%20to%20Limit.cpp)
+
 ## Trie
 
 [208. Implement Trie (Prefix Tree).cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/208.%20Implement%20Trie%20(Prefix%20Tree).cpp)
