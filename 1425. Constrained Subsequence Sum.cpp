@@ -50,8 +50,8 @@ public:
 
 //sliding window, dp, decreasing deque
 //https://leetcode.com/problems/constrained-subsequence-sum/discuss/597751/JavaC%2B%2BPython-O(N)-Decreasing-Deque
-//Runtime: 240 ms, faster than 51.00% of C++ online submissions for Constrained Subsequence Sum.
-//Memory Usage: 41.1 MB, less than 100.00% of C++ online submissions for Constrained Subsequence Sum.
+//Runtime: 168 ms, faster than 67.18% of C++ online submissions for Constrained Subsequence Sum.
+//Memory Usage: 40.9 MB, less than 100.00% of C++ online submissions for Constrained Subsequence Sum.
 class Solution {
 public:
     int constrainedSubsetSum(vector<int>& nums, int k) {
@@ -66,7 +66,7 @@ public:
             in decreasing order
             */
             dp[i] = nums[i] + ((window.size() > 0) ? window.front() : 0);
-            cout << dp[i] << " ";
+            //cout << dp[i] << " ";
             ans = max(ans, dp[i]);
             
             /*
