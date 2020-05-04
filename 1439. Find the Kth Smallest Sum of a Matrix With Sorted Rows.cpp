@@ -40,3 +40,27 @@ public:
         return res.back();
     }
 };
+
+//https://leetcode.com/problems/find-the-kth-smallest-sum-of-a-matrix-with-sorted-rows/discuss/609678/Python-O(k-*-logk-*-len(mat))-with-detailed-explanations-%2B-4-lines-python.
+//Runtime: 552 ms, faster than 51.37% of C++ online submissions for Find the Kth Smallest Sum of a Matrix With Sorted Rows.
+//Memory Usage: 10.3 MB, less than 100.00% of C++ online submissions for Find the Kth Smallest Sum of a Matrix With Sorted Rows.
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& mat, int k) {
+        vector<int> res = mat[0];
+        vector<int> tmp;
+        
+        for(int i = 1; i < mat.size(); i++){
+            tmp.clear();
+            for(int a : res){
+                for(int b : mat[i]){
+                    tmp.push_back(a+b);
+                }
+            }
+            sort(tmp.begin(), tmp.end());
+            res = vector<int>(tmp.begin(), tmp.begin()+min((int)tmp.size(), k));
+        }
+        // cout << res.size() << endl;
+        return res.back();
+    }
+};
