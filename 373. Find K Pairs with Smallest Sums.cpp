@@ -97,6 +97,11 @@ public:
         if(nums1.size() == 0 || nums2.size() == 0 || k == 0) return ans;
         
         priority_queue<PairJ*, vector<PairJ*>, PairJGreater> pq;
+        /*
+        if nums1.size() > k, 
+        then only the former k elements are useful,
+        because they are not belong to the first k smallest numbers
+        */
         for(int i = 0; i < k && i < nums1.size(); i++){
             pq.push(new PairJ(nums1[i], nums2[0], 0));
         }
@@ -104,6 +109,8 @@ public:
         while(k-- > 0 && !pq.empty()){
             PairJ* p = pq.top(); pq.pop();
             ans.push_back({p->a, p->b});
+            //once we pop (i,j), (i,j+1) is our candidate
+            //pq.size() will always <= original k!
             if(p->j+1 >= nums2.size()) continue;
             pq.push(new PairJ(p->a, nums2[p->j+1], p->j+1));
         }
