@@ -62,3 +62,29 @@ public:
         return max(s0[n-1], s2[n-1]);
     }
 };
+
+//1-D DP
+//https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/discuss/75927/Share-my-thinking-process
+//Runtime: 4 ms, faster than 60.34% of C++ online submissions for Best Time to Buy and Sell Stock with Cooldown.
+//Memory Usage: 11.5 MB, less than 7.41% of C++ online submissions for Best Time to Buy and Sell Stock with Cooldown.
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+        if(n == 0) return 0;
+        //padding
+        vector<int> buy(n+1, 0);
+        vector<int> sell(n+1, 0);
+        prices.insert(prices.begin(), 0);
+        
+        buy[1] = -prices[1];
+        
+        for(int i = 2; i <= n; i++){
+            buy[i] = max(buy[i-1], sell[i-2]-prices[i]);
+            sell[i] = max(sell[i-1], buy[i-1]+prices[i]);
+        }
+        
+        return sell[n];
+    }
+};
+
