@@ -79,6 +79,10 @@ public:
             // segment = segments.front();
             // start = segment[0];
             // end = segment[1];
+            /*
+            greedily choose the segment with longest width,
+            this may be the reason of WA
+            */
             pair<int, int> p = pq.top(); pq.pop();
             start = p.second;
             end = start+p.first-1;
