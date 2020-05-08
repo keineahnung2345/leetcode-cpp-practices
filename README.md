@@ -304,11 +304,19 @@ Including problem statement, solution, runtime and complexity analysis.
 [399. Evaluate Division.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/399.%20Evaluate%20Division.cpp)
 
 ## Segment Tree
+[307. Range Sum Query - Mutable(solution)](https://leetcode.com/articles/range-sum-query-mutable/)
+
+[A Recursive approach to Segment Trees, Range Sum Queries & Lazy Propagation](https://leetcode.com/articles/a-recursive-approach-to-segment-trees-range-sum-queries-lazy-propagation/)
+
 [307. Range Sum Query - Mutable Medium.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/307.%20Range%20Sum%20Query%20-%20Mutable%20Medium.cpp)
 
 [850. Rectangle Area II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/850.%20Rectangle%20Area%20II.cpp)
 
 ## Binary Indexed Tree
+
+[Java using Binary Indexed Tree with clear explanation](https://leetcode.com/problems/range-sum-query-mutable/discuss/75753/Java-using-Binary-Indexed-Tree-with-clear-explanation)
+
+[Topcode binary indexed trees tutorial](https://www.topcoder.com/community/competitive-programming/tutorials/binary-indexed-trees)
 
 [307. Range Sum Query - Mutable Medium.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/307.%20Range%20Sum%20Query%20-%20Mutable%20Medium.cpp)
 
