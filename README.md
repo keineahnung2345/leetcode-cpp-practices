@@ -117,6 +117,10 @@ Including problem statement, solution, runtime and complexity analysis.
 [1237. Find Positive Integer Solution for a Given Equation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1237.%20Find%20Positive%20Integer%20Solution%20for%20a%20Given%20Equation.cpp)
 
 ## Backtracking
+[A general approach to backtracking questions in Java (Subsets, Permutations, Combination Sum, Palindrome Partioning)](https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning))
+
+[39. Combination Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/39.%20Combination%20Sum.cpp)
+
 [40. Combination Sum II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/40.%20Combination%20Sum%20II.cpp)
 
 [46. Permutations.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/46.%20Permutations.cpp)
@@ -128,6 +132,8 @@ Including problem statement, solution, runtime and complexity analysis.
 [90. Subsets II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/90.%20Subsets%20II.cpp)
 
 [131. Palindrome Partitioning.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/131.%20Palindrome%20Partitioning.cpp)
+
+***
 
 [211. Add and Search Word - Data structure design.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/211.%20Add%20and%20Search%20Word%20-%20Data%20structure%20design.cpp)
 
