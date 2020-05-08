@@ -150,10 +150,6 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [70. Climbing Stairs.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/70.%20Climbing%20Stairs.cpp)
 
-[198. House Robber.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/198.%20House%20Robber.cpp)
-
-[213. House Robber II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/213.%20House%20Robber%20II.cpp)
-
 [303. Range Sum Query - Immutable.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/303.%20Range%20Sum%20Query%20-%20Immutable.cpp)
 
 [312. Burst Balloons.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/312.%20Burst%20Balloons.cpp)
@@ -229,6 +225,13 @@ Including problem statement, solution, runtime and complexity analysis.
 [309. Best Time to Buy and Sell Stock with Cooldown.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/309.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Cooldown.cpp)
 
 [714. Best Time to Buy and Sell Stock with Transaction Fee.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/714.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20with%20Transaction%20Fee.cpp)
+
+### House bobber seires
+[198. House Robber.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/198.%20House%20Robber.cpp)
+
+[213. House Robber II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/213.%20House%20Robber%20II.cpp)
+
+[337. House Robber III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/337.%20House%20Robber%20III.cpp)
 
 ## Dynamic Programming + Bitmask
 [A simple tutorial on this bitmasking problem](https://leetcode.com/problems/maximum-students-taking-exam/discuss/503686/A-simple-tutorial-on-this-bitmasking-problem)
