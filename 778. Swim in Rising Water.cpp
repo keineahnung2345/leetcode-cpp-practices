@@ -76,3 +76,54 @@ public:
         return left;
     }
 };
+
+//dfs + binary search
+//https://leetcode.com/problems/swim-in-rising-water/discuss/113758/C%2B%2B-two-solutions-Binary-Search%2BDFS-and-Dijkstra%2BBFS-O(n2logn)-11ms
+//Runtime: 32 ms, faster than 76.63% of C++ online submissions for Swim in Rising Water.
+//Memory Usage: 10.1 MB, less than 50.00% of C++ online submissions for Swim in Rising Water.
+class Solution {
+    bool validPos(int i, int j, int n){
+        return i >= 0 && i < n && j >= 0 && j < n;
+    };
+    
+    bool dfs(vector<vector<int>>& grid, vector<vector<int>>& dirs, vector<vector<bool>>& visited, int t, int i, int j){
+        int n = grid.size();
+        for(vector<int>& dir : dirs){
+            int ni = i+dir[0];
+            int nj = j+dir[1];
+            if(validPos(ni, nj, n) && !visited[ni][nj] && grid[ni][nj] <= t){
+                visited[ni][nj] = true;
+                if(ni == n-1 && nj == n-1) return true;
+                if(dfs(grid, dirs, visited, t, ni, nj)) return true;
+            }
+        }
+        return false;
+    };
+    
+    bool valid(vector<vector<int>>& grid, int t){
+        int n = grid.size();
+        vector<vector<bool>> visited(n, vector(n, false));
+        visited[0][0] = true;
+        vector<vector<int>> dirs = {{0,1},{0,-1},{1,0},{-1,0}};
+        return dfs(grid, dirs, visited, t, 0, 0);
+    };
+public:
+    int swimInWater(vector<vector<int>>& grid) {
+        int n = grid.size();
+        
+        int left = max(grid[0][0], grid[n-1][n-1]);
+        int right = n*n-1; //grid is a permutation of [0,...,n*n-1]
+        int mid;
+        
+        while(left <= right){
+            mid = left + (right-left)/2;
+            if(valid(grid, mid)){
+                right = mid-1;
+            }else{
+                left = mid+1;
+            }
+        }
+        
+        return left;
+    }
+};
