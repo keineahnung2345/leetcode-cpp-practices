@@ -1,5 +1,6 @@
 //Runtime: 28 ms, faster than 50.39% of C++ online submissions for Kth Smallest Number in Multiplication Table.
 //Memory Usage: 5.9 MB, less than 100.00% of C++ online submissions for Kth Smallest Number in Multiplication Table.
+//time: O(m*log(mn)), space: O(1)
 class Solution {
 public:
     int findKthNumber(int m, int n, int k) {
