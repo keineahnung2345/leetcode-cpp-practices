@@ -127,3 +127,51 @@ public:
         return left;
     }
 };
+
+//Dijkstra using Priority Queue
+//https://leetcode.com/problems/swim-in-rising-water/discuss/113758/C%2B%2B-two-solutions-Binary-Search%2BDFS-and-Dijkstra%2BBFS-O(n2logn)-11ms
+//Runtime: 108 ms, faster than 16.72% of C++ online submissions for Swim in Rising Water.
+//Memory Usage: 11.3 MB, less than 25.00% of C++ online submissions for Swim in Rising Water.
+//time: O(N^2logN), space: O(N^2)
+class Solution {
+    bool validPos(int i, int j, int n){
+        return i >= 0 && i < n && j >= 0 && j < n;
+    };
+public:
+    int swimInWater(vector<vector<int>>& grid) {
+        int n = grid.size();
+        
+        vector<vector<bool>> visited(n, vector(n, false));
+        
+        vector<vector<int>> dirs = {{0,1},{0,-1},{1,0},{-1,0}};
+        //the smaller the earlier be popped
+        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+        
+        pq.push({grid[0][0], 0, 0});
+        visited[0][0] = true;
+        
+        int ans = max(grid[0][0], grid[n-1][n-1]);
+        
+        //visit node in increasing height order
+        while(!pq.empty()){
+            vector<int> node = pq.top(); pq.pop();
+            int i = node[1], j = node[2];
+            //update ans when we actually visit the node
+            ans = max(ans, node[0]);
+            // visited[i][j] = true;
+            for(vector<int>& dir : dirs){
+                int ni = i+dir[0];
+                int nj = j+dir[1];
+                if(validPos(ni, nj, n) && !visited[ni][nj]){
+                    if(ni == n-1 && nj == n-1) return ans;
+                    //here mark neighbor as visited just to avoid it be added to pq again
+                    visited[ni][nj] = true;
+                    pq.push({grid[ni][nj], ni, nj});
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
+
