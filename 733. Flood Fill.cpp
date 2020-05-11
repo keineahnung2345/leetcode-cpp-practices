@@ -68,6 +68,44 @@ public:
     }
 };
 
+//another BFS
+//Runtime: 20 ms, faster than 82.96% of C++ online submissions for Flood Fill.
+//Memory Usage: 15 MB, less than 11.11% of C++ online submissions for Flood Fill.
+class Solution {
+public:
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        int m = image.size();
+        if(m == 0) return vector<vector<int>>();
+        int n = image[0].size();
+        if(n == 0) return vector<vector<int>>();
+        
+        queue<vector<int>> q;
+        vector<vector<bool>> visited(m, vector(n, false));
+        vector<int> cur;
+        vector<vector<int>> dirs = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        int oldColor = image[sr][sc];
+        
+        q.push({sr, sc});
+        visited[sr][sc] = true;
+        
+        while(!q.empty()){
+            cur = q.front(); q.pop();
+            image[cur[0]][cur[1]] = newColor;
+            
+            for(vector<int>& dir : dirs){
+                int nr = cur[0] + dir[0];
+                int nc = cur[1] + dir[1];
+                if(nr >= 0 && nr < m && nc >= 0 && nc < n && !visited[nr][nc] && image[nr][nc] == oldColor){
+                    visited[nr][nc] = true;
+                    q.push({nr, nc});
+                }
+            }
+        }
+        
+        return image;
+    }
+};
+
 /**
 Approach #1: Depth-First Search [Accepted]
 Intuition
@@ -84,14 +122,14 @@ We can use a function dfs to perform a floodfill on a target pixel.
 /**
 Complexity Analysis
 
-Time Complexity: O(N)O(N), where NN is the number of pixels in the image. We might process every pixel.
+Time Complexity: O(N), where N is the number of pixels in the image. We might process every pixel.
 
-Space Complexity: O(N)O(N), the size of the implicit call stack when calling dfs.
+Space Complexity: O(N), the size of the implicit call stack when calling dfs.
 **/
 
 //Runtime: 24 ms, faster than 100.00% of C++ online submissions for Flood Fill.
 //Memory Usage: 10.2 MB, less than 99.22% of C++ online submissions for Flood Fill.
-/**
+
 class Solution {
 public:
     int oc;
@@ -117,5 +155,3 @@ public:
         return image;
     }
 };
-**/
-
