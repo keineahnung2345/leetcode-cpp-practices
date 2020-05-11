@@ -61,3 +61,23 @@ public:
         return vector<int>(arr.begin()+left , arr.begin()+right);
     }
 };
+
+//Approach 1: sort
+//Runtime: 284 ms, faster than 7.52% of C++ online submissions for Find K Closest Elements.
+//Memory Usage: 31.2 MB, less than 16.67% of C++ online submissions for Find K Closest Elements.
+//time: O(NlogN), space: O(k)
+class Solution {
+public:
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        sort(arr.begin(), arr.end(), [x](const int& a, const int& b){
+            return (abs(a-x) == abs(b-x)) ? a < b : (abs(a-x) < abs(b-x));
+        });
+        
+        vector<int> ans(arr.begin(), arr.begin()+k);
+        //now ans is not ascending, need to sort it again
+        
+        sort(ans.begin(), ans.end());
+        
+        return ans;
+    }
+};
