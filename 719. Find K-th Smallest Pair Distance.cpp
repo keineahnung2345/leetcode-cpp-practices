@@ -155,3 +155,39 @@ public:
         return left;
     }
 };
+
+//Approach #3: Binary Search + Sliding Window [Accepted]
+//Runtime: 20 ms, faster than 77.27% of C++ online submissions for Find K-th Smallest Pair Distance.
+//Memory Usage: 10 MB, less than 8.33% of C++ online submissions for Find K-th Smallest Pair Distance.
+//time: sort: O(NlogN) + binary search: O(logW * N), W = nums[n-1] - nums[0]
+//space: O(1)
+class Solution {
+public:
+    int smallestDistancePair(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        
+        int left = 0;
+        int right = nums[n-1] - nums[0];
+        int mid;
+        int count;
+        
+        while(left <= right){
+            mid = left + (right-left)/2;
+            // cout << "left: " << left << ", mid: " << mid << ", right: " << right << endl;
+            count = 0;
+            int slow = 0;
+            for(int fast = 0; fast < n; fast++){
+                //notice that "slow" pointer increases monotonically for increasing "fast" pointer!
+                while(nums[fast] - nums[slow] > mid) slow++;
+                count += (fast-slow);
+                // cout << "[" << slow << ", " << fast << "], count: " << count << endl;
+            }
+            
+            if(count >= k) right = mid-1;
+            else left = mid+1;
+        }
+        
+        return left;
+    }
+};
