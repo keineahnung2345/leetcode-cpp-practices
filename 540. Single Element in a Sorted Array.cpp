@@ -63,3 +63,36 @@ public:
         return nums[left];
     }
 };
+
+//https://leetcode.com/problems/single-element-in-a-sorted-array/discuss/100754/Java-Binary-Search-short-(7l)-O(log(n))-w-explanations
+//Runtime: 16 ms, faster than 29.23% of C++ online submissions for Single Element in a Sorted Array.
+//Memory Usage: 11.3 MB, less than 7.14% of C++ online submissions for Single Element in a Sorted Array.
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        int left = 0, right = nums.size()-1;
+        int mid;
+        
+        /*
+        althrough the boundary is inclusive in both ends: [left, right],
+        we don't use left <= right,
+        because we only search when the search range >= 2
+        (we examine two elements at a time)
+        */
+        while(left < right){
+            mid = left + (right - left)/2;
+            //if mid is odd
+            if(mid&1) mid--;
+            //here mid is always even!!
+            if(nums[mid] != nums[mid+1]){
+                right = mid-1;
+            }else{
+                //we have examined mid and mid+1
+                //left is always even!!
+                left = mid+2;
+            }
+        }
+        
+        return nums[left];
+    }
+};
