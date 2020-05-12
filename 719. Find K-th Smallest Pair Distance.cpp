@@ -96,3 +96,62 @@ public:
         return nums[cur[1]] - nums[cur[0]];
     }
 };
+
+//not understand
+//Approach #2: Binary Search + Prefix Sum [Accepted]
+//Runtime: 56 ms, faster than 22.59% of C++ online submissions for Find K-th Smallest Pair Distance.
+//Memory Usage: 36.9 MB, less than 8.33% of C++ online submissions for Find K-th Smallest Pair Distance.
+//time: sort: O(NlogN) + set "prefix": O(W) + binary search: O(logW * N), W = nums[n-1] - nums[0]
+//space: O(W+N)
+class Solution {
+public:
+    int smallestDistancePair(vector<int>& nums, int k) {
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+        int width = 2 * nums[n-1];
+        
+        vector<int> multiplicity(n);
+        //multiplicity[i]: before nums[i], there are how many element equal to nums[i]
+        // cout << "multiplicity: " << endl;
+        for(int i = 1; i < n; i++){
+            if(nums[i] == nums[i-1]){
+                multiplicity[i] = 1 + multiplicity[i-1];
+            }
+            // cout << multiplicity[i] << " ";
+        }
+        // cout << endl;
+        
+        //prefix[i]: how many numbers in nums <= i
+        vector<int> prefix(width);
+        // cout << "prefix: " << endl;
+        int l = 0;
+        for(int i = 0; i < width; i++){
+            while(l < n && nums[l] == i) l++;
+            prefix[i] = l;
+            // cout << prefix[i] << " ";
+        }
+        // cout << endl;
+        
+        int left = 0;
+        int right = nums[n-1] - nums[0];
+        int mid;
+        int count;
+        
+        while(left <= right){
+            mid = left + (right-left)/2;
+            // cout << "left: " << left << ", mid: " << mid << ", right: " << right << endl;
+            //count[i]: the count of j (j>i) s.t. nums[j] - nums[i] <= mid
+            count = 0;
+            for(int i = 0; i < n; i++){
+                //multiplicity[i] = count[i] - multiplicity[i]?
+                count += prefix[nums[i]+mid] - prefix[nums[i]] + multiplicity[i];
+                // cout << "prefix[" << nums[i]+mid << "]: " << prefix[nums[i]+mid] << ", prefix[" << nums[i] << "]: " << prefix[nums[i]] << ", multiplicity[" << i << "]: " << multiplicity[i] << ", add: " << prefix[nums[i]+mid] - prefix[nums[i]] + multiplicity[i] << ", count: " << count << endl;
+            }
+            
+            if(count >= k) right = mid-1;
+            else left = mid+1;
+        }
+        
+        return left;
+    }
+};
