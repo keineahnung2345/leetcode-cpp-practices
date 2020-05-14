@@ -17,7 +17,6 @@ Every cost[i] will be an integer in the range [0, 999].
 **/
 
 //TLE
-/**
 class Solution {
 public:
     int rMinCost(vector<int>& cost, int start){
@@ -33,7 +32,6 @@ public:
         return min(rMinCost(cost, 0), rMinCost(cost, 1));
     }
 };
-**/
 
 //Runtime: 12 ms, faster than 62.24% of C++ online submissions for Min Cost Climbing Stairs.
 //Memory Usage: 8.8 MB, less than 98.94% of C++ online submissions for Min Cost Climbing Stairs.
@@ -47,6 +45,12 @@ public:
             costSum[i] = cost[i] + min(costSum[i+1], costSum[i+2]);
         }
         
+        /*
+        the problem states: "reach the top of the floor",
+        it means reaching the -1th floor,
+        and we can go to -1th floor from either 0th or 1st floor,
+        so here we use min(costSum[0], costSum[1])
+        */
         return min(costSum[0], costSum[1]);
     }
 };
@@ -66,15 +70,12 @@ We can do even better than that. At the i-th step, let f1, f2 be the old value o
 
 /**
 Complexity Analysis
-
-Time Complexity: O(N)O(N) where NN is the length of cost.
-
-Space Complexity: O(1)O(1), the space used by f1, f2.
+Time Complexity: O(N) where N is the length of cost.
+Space Complexity: O(1), the space used by f1, f2.
 **/
 
 //Runtime: 8 ms, faster than 99.66% of C++ online submissions for Min Cost Climbing Stairs.
 //Memory Usage: 8.6 MB, less than 100.00% of C++ online submissions for Min Cost Climbing Stairs.
-/**
 class Solution {
 public:
     int minCostClimbingStairs(vector<int>& cost) {
@@ -87,5 +88,3 @@ public:
         return min(f1, f2);
     }
 };
-**/
-
