@@ -1,3 +1,4 @@
+//DP
 //TLE
 //58 / 182 test cases passed.
 class Solution {
@@ -32,5 +33,45 @@ public:
         // cout << "===========" << endl;
         
         return count[amount] == INT_MAX ? -1 : count[amount];
+    }
+};
+
+//recursion
+//Runtime: 1128 ms, faster than 5.02% of C++ online submissions for Coin Change.
+//Memory Usage: 66.5 MB, less than 5.88% of C++ online submissions for Coin Change.
+class Solution {
+public:
+    unordered_map<int, int> memo;
+    
+    int coinChange(vector<int>& coins, int amount) {
+        if(memo.find(amount) != memo.end()) return memo[amount];
+        
+        if(amount == 0){
+            memo[amount] = 0;
+            return memo[0];
+        }
+        
+        if(coins.size() > 0 && amount < *min_element(coins.begin(), coins.end())){
+            memo[amount] = -1;
+            return memo[amount];
+        }
+        
+        int count = INT_MAX;
+        for(int coin : coins){
+            if(amount == coin){
+                memo[amount] = 1;
+                return memo[amount];
+            }
+            int remainCount = coinChange(coins, amount-coin);
+            if(remainCount == -1) continue;
+            // cout << coin << " + " << amount - coin << " : " << 1 + remainCount << endl;
+            count = min(count, 1 + remainCount);
+        }
+        
+        if(count == INT_MAX) count = -1;
+        
+        memo[amount] = count;
+        
+        return memo[amount];
     }
 };
