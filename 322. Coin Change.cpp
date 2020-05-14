@@ -110,3 +110,32 @@ public:
         return memo[amount];
     }
 };
+
+//backtrack
+//TLE
+//57 / 182 test cases passed.
+//time: S is amount, ci means ith element in coins, S/c0 * S/c1 * S/cn-1 => O(S^n)
+//space: O(n), recursion depth
+class Solution {
+public:
+    int coinChange(int idxCoin, vector<int>& coins, int amount){
+        if(amount == 0) return 0;
+        if(idxCoin >= coins.size() || amount < 0) return -1;
+        
+        int minCost = INT_MAX;
+        for(int i = 0; i <= amount/coins[idxCoin]; i++){
+            //we use "i" coins[idxCoin]
+            if(amount >= i * coins[idxCoin]){
+                int res = coinChange(idxCoin+1, coins, amount-i*coins[idxCoin]);
+                if(res == -1) continue;
+                minCost = min(minCost, i + res);
+            }
+        }
+        
+        return (minCost == INT_MAX) ? -1 : minCost;
+    };
+    
+    int coinChange(vector<int>& coins, int amount) {
+        return coinChange(0, coins, amount);
+    }
+};
