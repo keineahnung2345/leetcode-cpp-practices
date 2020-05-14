@@ -71,6 +71,28 @@ public:
     }
 };
 
+//DP, more concise
+//Runtime: 120 ms, faster than 33.17% of C++ online submissions for Coin Change.
+//Memory Usage: 14 MB, less than 31.37% of C++ online submissions for Coin Change.
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        //we use "amount+1" in replace of INT_MAX
+        //padding ahead
+        vector<int> dp(amount+1, amount+1);
+        dp[0] = 0;
+        
+        for(int i = 1; i <= amount; i++){
+            for(int coin : coins){
+                if(coin > i) continue;
+                dp[i] = min(dp[i], dp[i-coin]+1);
+            }
+        }
+        
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+};
+
 //recursion
 //Runtime: 1128 ms, faster than 5.02% of C++ online submissions for Coin Change.
 //Memory Usage: 66.5 MB, less than 5.88% of C++ online submissions for Coin Change.
