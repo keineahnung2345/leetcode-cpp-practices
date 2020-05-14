@@ -93,6 +93,7 @@ public:
         
         int count = INT_MAX;
         for(int coin : coins){
+            //edge case
             if(amount == coin){
                 memo[amount] = 1;
                 return memo[amount];
@@ -107,6 +108,33 @@ public:
         
         memo[amount] = count;
         
+        return memo[amount];
+    }
+};
+
+//Approach #2 (Dynamic programming - Top down)
+//recursion, more concise
+//Runtime: 968 ms, faster than 5.02% of C++ online submissions for Coin Change.
+//Memory Usage: 61.6 MB, less than 9.80% of C++ online submissions for Coin Change.
+//time: O(S*n), S(amount): recursion depth, n(coins.size()): the for loop
+//space: O(S), the memo
+class Solution {
+public:
+    unordered_map<int, int> memo;
+    
+    int coinChange(vector<int>& coins, int amount) {
+        //edge case of "amount = coins[?]" can be replaced with this
+        if(amount == 0) return 0;
+        if(amount < 0) return -1;
+        if(memo.find(amount) != memo.end()) return memo[amount];
+        
+        int cost = INT_MAX;
+        for(int coin : coins){
+            int res = coinChange(coins, amount-coin);
+            if(res >= 0) cost = min(cost, 1+res);
+        }
+        
+        memo[amount] = (cost == INT_MAX) ? -1 : cost;
         return memo[amount];
     }
 };
