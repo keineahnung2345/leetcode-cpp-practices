@@ -33,3 +33,25 @@ public:
         return ans;
     }
 };
+
+//Kanade's Algorithm
+//https://medium.com/@rsinghal757/kadanes-algorithm-dynamic-programming-how-and-why-does-it-work-3fd8849ed73d
+//O(n)
+/*
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& A) {
+        int n = A.size();
+        int localMax = INT_MIN; // max sum of subarray which ends at i
+        int globalMax = INT_MIN;
+        
+        for(int i = 0; i < n; i++){
+            //enlong the old subarray or create a new one starting from i
+            localMax = max(A[i], (localMax == INT_MIN) ? INT_MIN : A[i] + localMax);
+            globalMax = max(globalMax, localMax);
+        }
+        
+        return globalMax;
+    }
+};
+*/
