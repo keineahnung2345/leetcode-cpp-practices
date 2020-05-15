@@ -34,7 +34,7 @@ public:
     }
 };
 
-//Kanade's Algorithm
+//Kadane's Algorithm
 //https://medium.com/@rsinghal757/kadanes-algorithm-dynamic-programming-how-and-why-does-it-work-3fd8849ed73d
 //O(n)
 /*
@@ -65,7 +65,7 @@ public:
     int maxSubarraySumCircular(vector<int>& A) {
         int n = A.size();
         
-        //kanade's algorithm
+        //kadane's algorithm
         int localMax = INT_MIN, globalMax = INT_MIN;
         
         for(int i = 0; i < n; i++){
@@ -150,5 +150,41 @@ public:
         }
         
         return ans;
+    }
+};
+
+//Approach 3: Kadane's (Sign Variant)
+//Runtime: 160 ms, faster than 18.47% of C++ online submissions for Maximum Sum Circular Subarray.
+//Memory Usage: 40.2 MB, less than 8.33% of C++ online submissions for Maximum Sum Circular Subarray..
+//time: O(n), space: O(1)
+class Solution {
+public:
+    int kadane(vector<int>& A, int start, int end, int sign){
+        int cur = INT_MIN, ans = INT_MIN;
+        
+        for(int i = start; i <= end; i++){
+            cur = sign * A[i] + max(cur, 0);
+            ans = max(ans, cur);
+        }
+        
+        return ans;
+    };
+    
+    int maxSubarraySumCircular(vector<int>& A) {
+        int sum = accumulate(A.begin(), A.end(), 0);
+        int n = A.size();
+        
+        //1-interval
+        int ans1 = kadane(A, 0, n-1, 1);
+        //2-intervals
+        /*
+        cannot set start as 0 and end as n-1,
+        if so, we may choose the empty array
+        */
+        int tmp;
+        int ans2 = ((tmp = kadane(A, 1, n-1, -1)) == INT_MIN) ? INT_MIN : (tmp + sum);
+        int ans3 = ((tmp = kadane(A, 0, n-2, -1)) == INT_MIN) ? INT_MIN : (tmp + sum);
+        
+        return max({ans1, ans2, ans3});
     }
 };
