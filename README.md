@@ -278,6 +278,8 @@ Including problem statement, solution, runtime and complexity analysis.
 ## Deque
 [239. Sliding Window Maximum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/239.%20Sliding%20Window%20Maximum.cpp)
 
+[918. Maximum Sum Circular Subarray.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/918.%20Maximum%20Sum%20Circular%20Subarray.cpp)
+
 [1425. Constrained Subsequence Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1425.%20Constrained%20Subsequence%20Sum.cpp)
 
 [1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1438.%20Longest%20Continuous%20Subarray%20With%20Absolute%20Diff%20Less%20Than%20or%20Equal%20to%20Limit.cpp)
