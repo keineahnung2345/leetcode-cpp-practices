@@ -102,3 +102,53 @@ public:
         return globalMax;
     }
 };
+
+//Approach 2: Prefix Sums + Monoqueue(deque)
+//Runtime: 204 ms, faster than 6.83% of C++ online submissions for Maximum Sum Circular Subarray.
+//Memory Usage: 44.9 MB, less than 8.33% of C++ online submissions for Maximum Sum Circular Subarray.
+//time: O(n), space: O(n)
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& A) {
+        int n = A.size();
+        
+        /*
+        image an array B = A + A,
+        P[i] is the prefix sum of B: ends at i-1,
+        so P[0] is 0, P[1] is A[0], ...
+        */
+        vector<int> P(2*n+1, 0);
+        for(int i = 0; i < 2*n; i++){
+            P[i+1] = P[i] + A[i%n];
+        }
+        
+        int ans = A[0];
+        deque<int> dq;
+        dq.push_back(0);
+        
+        //ends at j, exclusive
+        for(int j = 1; j <= 2*n; j++){
+            //subarray starts at dq.front()
+            if(j-dq.front() > n){
+                //if subarray's length > N, ignore this candidate
+                dq.pop_front();
+            }
+            
+            ans = max(ans, P[j] - P[dq.front()]);
+            
+            while(!dq.empty() && P[j] <= P[dq.back()]){
+                /*
+                j is the better starting point then dq.back(),
+                because P[j] is smaller, so P[later_j] - P[starting point]
+                can be larger
+                */
+                dq.pop_back();
+            }
+            
+            //push candidate starting index
+            dq.push_back(j);
+        }
+        
+        return ans;
+    }
+};
