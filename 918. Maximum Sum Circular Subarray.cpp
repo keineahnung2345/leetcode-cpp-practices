@@ -155,7 +155,7 @@ public:
 
 //Approach 3: Kadane's (Sign Variant)
 //Runtime: 160 ms, faster than 18.47% of C++ online submissions for Maximum Sum Circular Subarray.
-//Memory Usage: 40.2 MB, less than 8.33% of C++ online submissions for Maximum Sum Circular Subarray..
+//Memory Usage: 40.2 MB, less than 8.33% of C++ online submissions for Maximum Sum Circular Subarray.
 //time: O(n), space: O(1)
 class Solution {
 public:
@@ -182,8 +182,60 @@ public:
         if so, we may choose the empty array
         */
         int tmp;
+        /*
+        The two intervals are [0...i] and [j...n-1]
+        we need to make sure that the final subarray is not empty,
+        that is, to make sure kadane algorithm don't give a subarray which is equal to A
+        */
         int ans2 = ((tmp = kadane(A, 1, n-1, -1)) == INT_MIN) ? INT_MIN : (tmp + sum);
         int ans3 = ((tmp = kadane(A, 0, n-2, -1)) == INT_MIN) ? INT_MIN : (tmp + sum);
+        
+        return max({ans1, ans2, ans3});
+    }
+};
+
+//Approach 4: Kadane's (Min Variant)
+//Runtime: 160 ms, faster than 18.47% of C++ online submissions for Maximum Sum Circular Subarray.
+//Memory Usage: 40.2 MB, less than 8.33% of C++ online submissions for Maximum Sum Circular Subarray.
+//time: O(n), space: O(1)
+class Solution {
+public:
+    int kadaneMin(vector<int>& A, int start, int end){
+        int cur = INT_MAX, ans = INT_MAX;
+        
+        for(int i = start; i <= end; i++){
+            cur = A[i] + min(cur, 0);
+            ans = min(ans, cur);
+        }
+        
+        return ans;
+    };
+    
+    int kadane(vector<int>& A, int start, int end){
+        int cur = INT_MIN, ans = INT_MIN;
+        
+        for(int i = start; i <= end; i++){
+            cur = A[i] + max(cur, 0);
+            ans = max(ans, cur);
+        }
+        
+        return ans;
+    };
+    
+    int maxSubarraySumCircular(vector<int>& A) {
+        int sum = accumulate(A.begin(), A.end(), 0);
+        int n = A.size();
+        
+        //1-interval
+        int ans1 = kadane(A, 0, n-1);
+        //2-intervals
+        /*
+        cannot set start as 0 and end as n-1,
+        if so, we may choose the empty array
+        */
+        int tmp;
+        int ans2 = ((tmp = kadaneMin(A, 1, n-1)) == INT_MAX) ? INT_MIN : (sum - tmp);
+        int ans3 = ((tmp = kadaneMin(A, 0, n-2)) == INT_MAX) ? INT_MIN : (sum - tmp);
         
         return max({ans1, ans2, ans3});
     }
