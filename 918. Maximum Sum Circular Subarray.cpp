@@ -55,3 +55,50 @@ public:
     }
 };
 */
+
+//Approach 1: Next Array
+//Runtime: 172 ms, faster than 8.63% of C++ online submissions for Maximum Sum Circular Subarray.
+//Memory Usage: 43.2 MB, less than 8.33% of C++ online submissions for Maximum Sum Circular Subarray.
+//time: O(n), space: O(n)
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& A) {
+        int n = A.size();
+        
+        //kanade's algorithm
+        int localMax = INT_MIN, globalMax = INT_MIN;
+        
+        for(int i = 0; i < n; i++){
+            localMax = max(localMax, 0) + A[i];
+            globalMax = max(globalMax, localMax);
+        }
+        
+        //now consider 2-interval subarrays
+        vector<int> rightsums(n);
+        
+        rightsums[n-1] = A[n-1];
+        for(int i = n-2; i >= 0; i--){
+            rightsums[i] = rightsums[i+1] + A[i];
+        }
+        
+        //max rightsum starts at >= i
+        vector<int> maxrights(n, 0);
+        
+        for(int i = n-1; i >= 0; i--){
+            maxrights[i] = max((i+1 >= n ? INT_MIN : maxrights[i+1]), rightsums[i]);
+        }
+        
+        /*
+        leftsum: [0...i]
+        maxrights[i+2]: max of rightsum starts from i+2
+        start from i+2 to ensure this is a 2-interval subarray
+        */
+        int leftsum = 0;
+        for(int i = 0; i+2 < n; i++){
+            leftsum += A[i];
+            globalMax = max(globalMax, leftsum + maxrights[i+2]);
+        }
+        
+        return globalMax;
+    }
+};
