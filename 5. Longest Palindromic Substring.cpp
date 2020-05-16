@@ -29,3 +29,44 @@ public:
         return ans;
     }
 };
+
+//Approach 1: Longest Common Substring
+//https://www.geeksforgeeks.org/longest-common-substring-dp-29/
+//Runtime: 664 ms, faster than 10.25% of C++ online submissions for Longest Palindromic Substring.
+//Memory Usage: 191.6 MB, less than 5.51% of C++ online submissions for Longest Palindromic Substring.
+//time: O(N^2), space: O(N^2)
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        int n = s.size();
+        string rs(s.rbegin(), s.rend());
+        string ans = "";
+        
+        //find s and rs's longest common substring
+        
+        vector<vector<int>> dp(n+1, vector(n+1, 0));
+        
+        for(int i = 1; i <= n; i++){
+            for(int j = 1; j <= n; j++){
+                if(s[i-1] == rs[j-1]){
+                    dp[i][j] = dp[i-1][j-1] + 1;
+                }else{
+                    dp[i][j] = 0;
+                }
+                
+                /*
+                the additional condition turns the problem from
+                longest common substring to longest palindrome,
+                because it restricts the position of lc substring
+                */
+                if(dp[i][j] > ans.size() && i+j == dp[i][j]+n){
+                    //s[i-dp[i][j]...i] = sr[j-dp[i][j]...j]
+                    // cout << s.substr(i-dp[i][j], dp[i][j]) << ", " << rs.substr(j-dp[i][j], dp[i][j]) << endl;
+                    ans = s.substr(i-dp[i][j], dp[i][j]);
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
