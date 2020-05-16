@@ -275,6 +275,15 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [1408. String Matching in an Array.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1408.%20String%20Matching%20in%20an%20Array.cpp)
 
+## Manacher's algorithm
+[Longest Palindromic Substring O(N) Manacher's Algorithm](https://www.youtube.com/watch?v=nbTSfrEfo6M&feature=emb_logo)
+
+[Manacher’s Algorithm – Linear Time Longest Palindromic Substring – Part 4](https://www.geeksforgeeks.org/manachers-algorithm-linear-time-longest-palindromic-substring-part-4/)
+
+[5. Longest Palindromic Substring.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/5.%20Longest%20Palindromic%20Substring.cpp)
+
+[647. Palindromic Substrings.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/647.%20Palindromic%20Substrings.cpp)
+
 ## Deque
 [239. Sliding Window Maximum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/239.%20Sliding%20Window%20Maximum.cpp)
 
