@@ -134,3 +134,49 @@ public:
         return ans;
     }
 };
+
+//Approach 4: Expand Around Center
+//Runtime: 84 ms, faster than 52.27% of C++ online submissions for Longest Palindromic Substring.
+//Memory Usage: 102.1 MB, less than 18.62% of C++ online submissions for Longest Palindromic Substring.
+//time: O(N^2), space: O(1)
+class Solution {
+public:
+    int expandAroundCenter(string s, int l, int r){
+        //s[l...r], both inclusive
+        while(l >= 0 && r < s.size() && s[l] == s[r]){
+            l--;
+            r++;
+        }
+        
+        //return to previous valid status
+        l++; r--;
+        
+        return r-l+1;
+    };
+    
+    string longestPalindrome(string s) {
+        if(s.size() == 0) return "";
+        int start = 0, end = 0;
+        for(int i = 0; i < s.size(); i++){
+            int len1 = expandAroundCenter(s, i, i);
+            int len2 = expandAroundCenter(s, i, i+1);
+            int len = max(len1, len2);
+            // cout << "len: " << len1 << ", " << len2 << endl;
+            if(len > end-start+1){
+                /*
+                for odd len:
+                (len-1)/2 and len/2 are the same
+                
+                for even len:
+                (len-1)/2 = len/2 -1,
+                i.e. [i-(x-1), i, i+1, i+x]
+                */
+                start = i - (len-1)/2;
+                end = i + len/2;
+                // cout << "[" << start << ", " << end << "]" << endl;
+            }
+        }
+        // cout << "================" << endl;
+        return s.substr(start, end-start+1);
+    }
+};
