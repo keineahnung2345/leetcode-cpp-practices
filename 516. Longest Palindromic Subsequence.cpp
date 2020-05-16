@@ -59,7 +59,7 @@ public:
             between s[i] and s[j], 
             so dp[i+1][j-1] is at least 1
             */
-            dp_ip1_js1 = 1; //reset here!!
+            dp_ip1_js1 = 1; //reset here!!(reset for each row)
             
             for(int j = i; j < n; j++){
                 if(i == j){
