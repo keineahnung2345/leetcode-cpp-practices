@@ -180,3 +180,77 @@ public:
         return s.substr(start, end-start+1);
     }
 };
+
+//Approach 5: Manacher's Algorithm
+//https://www.youtube.com/watch?v=nbTSfrEfo6M&feature=emb_logo
+//Runtime: 8 ms, faster than 94.20% of C++ online submissions for Longest Palindromic Substring.
+//Memory Usage: 7.6 MB, less than 100.00% of C++ online submissions for Longest Palindromic Substring.
+//time: O(n), space: O(n)
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        string t(1, '^');
+        
+        for(int i = 0; i < s.size(); i++){
+            t += '#'; t += s[i];
+        }
+        
+        t += '#'; t += '$';
+        
+        // cout << t << endl;
+        
+        vector<int> p(t.size(), 0);
+        int mirror = 0;
+        int center = 0;
+        int right = 0;
+        int maxStart = 0;
+        
+        for(int i = 0; i < t.size(); i++){
+            //update mirror
+            mirror = 2 * center - i;
+            
+            /*
+            only if current position < last palindrome's right boundary,
+            we can use the mirror property of that palindrome
+            */
+            if(i < right){
+                /*
+                p[i] is supposed to be same as p[mirror],
+                but it's also restricted by 
+                the distance to the palindrome's right boundary(right-i)
+                */
+                p[i] = min(p[mirror], right - i);
+            }
+            
+            /*
+            try to expand it:
+            try assume the new p[i] is 1+p[i], and see if it works
+            */
+            while(i+(1+p[i]) < t.size() && i-(1+p[i]) >= 0 && t[i+(1+p[i])] == t[i-(1+p[i])]){
+                p[i]++;
+            }
+            
+            //update ans
+            if(p[i] > p[maxStart]){
+                maxStart = i;
+            }
+            
+            // cout << "i: " << i << ", center: " << center << ", mirror: " << mirror << ", p[i]: " << p[i] << endl;
+            
+            /*
+            find a palindrome whose right boundary exceeds 
+            the old palindrome's right boundary,
+            so update the variables "right" and "center" which
+            are related to palindrome
+            */
+            if(i+p[i] > right){
+                right = i+p[i];
+                center = i;
+            }
+        }
+        
+        // cout << "i: " << maxStart << ", p[i]: " << p[maxStart] << endl;
+        
+        return s.substr((maxStart-p[maxStart])/2, p[maxStart]);
+    }
+};
