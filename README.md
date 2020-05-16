@@ -164,6 +164,8 @@ Including problem statement, solution, runtime and complexity analysis.
 [1286. Iterator for Combination.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1286.%20Iterator%20for%20Combination.cpp)
 
 ## Dynamic Programming
+[Dynamic Programming Patterns](https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns)
+
 [62. Unique Paths.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/62.%20Unique%20Paths.cpp)
 
 [63. Unique Paths II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/63.%20Unique%20Paths%20II.cpp)
