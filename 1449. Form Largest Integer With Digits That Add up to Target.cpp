@@ -1,3 +1,44 @@
+//backtracking, combination of digits
+//TLE
+//4 / 96 test cases passed.
+class Solution {
+public:
+    void backtrack(int target, vector<int>& cost, string& ans, string& cur){
+        if(target == 0){
+            if(cur.size() > ans.size()){
+                ans = cur;
+            }else if(cur.size() == ans.size() && cur > ans){
+                ans = cur;
+            }
+            return;
+        }
+        
+        if(target < 0){
+            return;
+        }
+        
+        //target > 0
+        for(int i = 0; i < cost.size(); i++){
+            if(cost[i] <= target){
+                cur += (char)(i+1+'0');
+                backtrack(target- cost[i], cost, ans, cur);
+                cur.pop_back();
+            }
+        }
+    }
+    
+    string largestNumber(vector<int>& cost, int target) {
+        string ans;
+        string cur;
+        backtrack(target, cost, ans, cur);
+        
+        if(ans == "") ans = "0";
+        
+        return ans;
+    }
+};
+
+//backtracking, combination of unique costs
 //TLE
 //31 / 96 test cases passed.
 class Solution {
