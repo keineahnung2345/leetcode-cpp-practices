@@ -1,5 +1,5 @@
-//Runtime: 300 ms, faster than 33.33% of C++ online submissions for Count Good Nodes in Binary Tree.
-//Memory Usage: 86.6 MB, less than 100.00% of C++ online submissions for Count Good Nodes in Binary Tree.
+//Runtime: 244 ms, faster than 33.33% of C++ online submissions for Count Good Nodes in Binary Tree.
+//Memory Usage: 86.4 MB, less than 100.00% of C++ online submissions for Count Good Nodes in Binary Tree.
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
