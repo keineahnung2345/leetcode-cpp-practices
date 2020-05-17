@@ -1,5 +1,5 @@
-//Runtime: 224 ms, faster than 25.00% of C++ online submissions for Rearrange Words in a Sentence.
-//Memory Usage: 20.3 MB, less than 100.00% of C++ online submissions for Rearrange Words in a Sentence.
+//Runtime: 188 ms, faster than 25.00% of C++ online submissions for Rearrange Words in a Sentence.
+//Memory Usage: 20.1 MB, less than 100.00% of C++ online submissions for Rearrange Words in a Sentence.
 class Solution {
 public:
     std::vector<std::string> string_split2(std::string str)
