@@ -97,3 +97,48 @@ public:
         return ans;
     }
 };
+
+//DP
+//Runtime: 308 ms, faster than 66.67% of C++ online submissions for Form Largest Integer With Digits That Add up to Target.
+//Memory Usage: 117.5 MB, less than 100.00% of C++ online submissions for Form Largest Integer With Digits That Add up to Target.
+class Solution {
+public:
+    string stringDigitMax(string s1, string s2){
+        if(s1.size() == s2.size()){
+            return (s1 > s2) ? s1 : s2;
+        }
+        
+        return (s1.size() > s2.size()) ? s1 : s2;
+    };
+    
+    string largestNumber(vector<int>& cost, int target) {
+        //padding ahead
+        vector<string> dp(target+1);
+        
+        map<int, int> cost2maxNum;
+        for(int i = 0; i < cost.size(); i++){
+            //skip the digits whose cost is larger than target
+            if(cost[i] > target) continue;
+            //don't need max here because smaller (i+1) will be overwritten later
+            cost2maxNum[cost[i]] = i+1;
+            //base case
+            dp[cost[i]] = to_string(i+1);
+        }
+        
+        for(auto it = cost2maxNum.begin(); it != cost2maxNum.end(); it++){
+            // cout << "cost: " << it->first << ", digit: " << it->second << endl;
+        }
+        
+        for(int i = 1; i <= target; i++){
+            for(auto it = cost2maxNum.begin(); it != cost2maxNum.end(); it++){
+                if(it->first > i) break;
+                //to ensure it's a valid split
+                if(dp[i-it->first] == "") continue;
+                dp[i] = stringDigitMax(dp[i], dp[it->first]+dp[i-it->first]);
+                // cout << i << ": " << dp[i] << endl;
+            }
+        }
+        
+        return (dp[target] == "") ? "0" : dp[target];
+    }
+};
