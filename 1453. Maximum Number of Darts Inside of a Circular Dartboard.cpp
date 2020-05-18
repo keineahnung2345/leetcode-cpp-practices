@@ -88,3 +88,80 @@ public:
         return max(ans, 1);
     }
 };
+
+//angular sweep
+//https://www.geeksforgeeks.org/angular-sweep-maximum-points-can-enclosed-circle-given-radius/
+//Runtime: 52 ms, faster than 89.34% of C++ online submissions for Maximum Number of Darts Inside of a Circular Dartboard.
+//Memory Usage: 16.2 MB, less than 100.00% of C++ online submissions for Maximum Number of Darts Inside of a Circular Dartboard.
+//time: O(N^2logN), space: O(N^2)
+class Solution {
+public:
+    vector<vector<double>> dist;
+    
+    double getDist(vector<int>& p1, vector<int>& p2){
+        return sqrt(pow(p1[0]-p2[0], 2.0)+pow(p1[1]-p2[1], 2.0));
+    };
+    
+    int getPointsInside(vector<vector<int>>& points, int i, int r){
+        int n = points.size();
+        vector<pair<double, bool>> angles;
+        
+        for(int j = 0; j < n; j++){
+            if(j == i || dist[i][j] > 2*r) continue;
+            double B = acos(dist[i][j]/(2.0*r));
+            double A = atan2(points[j][1]-points[i][1], 
+                            points[j][0]-points[i][0]);
+            double alpha = A-B;
+            double beta = A+B;
+            //reversed definition with geeksforgeeks
+            //because we want alpha(which is entry point) be visited earlier than exit point!
+            angles.emplace_back(alpha, false);
+            angles.emplace_back(beta, true);
+            // cout << j << ", A: " << A << ", B: " << B << " alpha: " << alpha << ", beta: " << beta << endl;
+        }
+        
+        // cout << "angles.size() : " << angles.size() << endl;
+        
+        sort(angles.begin(), angles.end());
+        
+        // for(auto p : angles){
+        //     cout << p.first << ", " << p.second << endl;
+        // }
+        
+        int count = 1, res = 1;
+        
+        for(auto it = angles.begin(); it != angles.end(); it++){
+            if(!it->second){
+                count++;
+            }else{
+                count--;
+            }
+            // cout << "enter: " << (it->second) << ", " << it->first << ", count: " << count << endl;
+            res = max(res, count);
+        }
+        
+        // cout << i << ": " << res << endl;
+        
+        return res;
+    };
+    
+    int numPoints(vector<vector<int>>& points, int r) {
+        int n = points.size();
+        dist = vector<vector<double>>(n, vector<double>(n, 0.0));
+        
+        for(int i = 0; i < n-1; i++){
+            for(int j = i+1; j < n; j++){
+                dist[i][j] = dist[j][i] = getDist(points[i], points[j]);
+                // cout << i << ", " << j << " : " << dist[i][j] << endl;
+            }
+        }
+        
+        int ans = 0;
+        
+        for(int i = 0; i < n; i++){
+            ans = max(ans, getPointsInside(points, i, r));
+        }
+        
+        return ans;
+    }
+};
