@@ -2,6 +2,11 @@
 
 Including problem statement, solution, runtime and complexity analysis.
 
+## Monotonic stack
+[84. Largest Rectangle in Histogram.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/84.%20Largest%20Rectangle%20in%20Histogram.cpp)
+
+[901. Online Stock Span.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/901.%20Online%20Stock%20Span.cpp)
+
 ## Two pointers
 [11. Container With Most Water.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/11.%20Container%20With%20Most%20Water.cpp)
 
