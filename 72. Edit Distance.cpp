@@ -7,6 +7,11 @@ public:
         int m = word1.size();
         int n = word2.size();
         
+        /*
+        different from other problem,
+        here dp[0][?] and dp[?][0] are meaningful.
+        They represents the situation when word1 is "" and when word2 is ""
+        */
         vector<vector<int>> dp(m+1, vector(n+1, 0));
         
         for(int i = 0; i <= m; i++){
