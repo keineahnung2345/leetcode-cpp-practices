@@ -31,7 +31,7 @@ public:
     }
 };
 
-//DP, O(1) space
+//DP, O(N) space
 //Runtime: 20 ms, faster than 73.66% of C++ online submissions for Delete Operation for Two Strings.
 //Memory Usage: 6.7 MB, less than 100.00% of C++ online submissions for Delete Operation for Two Strings.
 class Solution {
