@@ -79,15 +79,31 @@ public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
         int n = nums.size();
         vector<int> ans(n-k+1);
+        /*
+        pair<int, int>: the element in sliding window, its index
+        
+        the headmost element in deque is the index of largest 
+        element in sliding window
+        */
         deque<pair<int, int>> window; //decreasing
         
         for(int i = 0; i < nums.size(); i++){
             //window range: i-k+1, ... , i
             
             //keep it decreasing
+            /*
+            because current element nums[i] is larger than the smallest 
+            element in sliding window and have larger index
+            (which means it will be popped from window later) , 
+            so now window.back() becomes useless
+            */
             while((window.size() > 0) && (nums[i] > window.back().first)){
                 window.pop_back();
             }
+            /*
+            although current element may not be the largest in the window,
+            it may be useful when larger elements in the window are popped
+            */
             window.push_back(make_pair(nums[i], i));
             
             //discard the element outside window range
@@ -95,6 +111,7 @@ public:
                 window.pop_front();
             }
             
+            //query
             //start to construct ans vector when we first see k elements
             if(i >= k-1) ans[i-(k-1)] = window.front().first;
         }
