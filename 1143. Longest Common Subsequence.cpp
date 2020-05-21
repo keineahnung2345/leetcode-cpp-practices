@@ -57,6 +57,36 @@ public:
     }
 };
 
+//DP, further memory optimization
+//Runtime: 20 ms, faster than 75.55% of C++ online submissions for Longest Common Subsequence.
+//Memory Usage: 6.7 MB, less than 100.00% of C++ online submissions for Longest Common Subsequence.
+//time: O(nm), space: O(n)
+class Solution {
+public:
+    int longestCommonSubsequence(string text1, string text2){
+        int m = text1.size();
+        int n = text2.size();
+        
+        vector<int> dp(n+1, 0);
+        
+        for(int i = 1; i <= m; i++){
+            int dp_is1_js1 = dp[0]; //will be used when j = 1
+            // cout << dp[0] << " "; //0
+            for(int j = 1; j <= n; j++){
+                int dp_is1_j = dp[j];
+                if(text1[i-1] == text2[j-1]){
+                    dp[j] = dp_is1_js1 + 1;
+                }else{
+                    dp[j] = max(dp[j-1], dp[j]);
+                }
+                dp_is1_js1 = dp_is1_j;
+            }
+        }
+        
+        return dp[n];
+    }
+};
+
 //recursion
 //https://leetcode.com/articles/delete-operation-for-two-strings/
 //TLE
