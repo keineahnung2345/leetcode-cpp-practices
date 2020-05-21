@@ -47,12 +47,8 @@ public:
         for(int i = 0; i <= m; i++){
             for(int j = 0; j <= n; j++){
                 int tmp = dp[j];
-                if(i == 0 && j == 0){
-                    dp[j] = 0;
-                }else if(i == 0){
-                    dp[j] = j;
-                }else if(j == 0){
-                    dp[j] = i;
+                if(i == 0 || j == 0){
+                    dp[j] = i+j;
                 }else if(word1[i-1] == word2[j-1]){
                     dp[j] = dp_is1_js1;
                 }else{
