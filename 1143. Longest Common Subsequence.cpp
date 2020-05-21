@@ -56,3 +56,27 @@ public:
         return dp[(m-1)%2][n-1];
     }
 };
+
+//recursion
+//https://leetcode.com/articles/delete-operation-for-two-strings/
+//TLE
+//time: O(2^max(m,n)), space: O(max(m,n))
+class Solution {
+public:
+    int longestCommonSubsequence(string text1, string text2, int m = -1, int n = -1) {
+        if(m == -1) m = text1.size();
+        if(n == -1) n = text2.size();
+        
+        if(m == 0 || n == 0){
+            return 0;
+        }
+        
+        if(text1[m-1] == text2[n-1]){
+            return 1 + longestCommonSubsequence(text1, text2, m-1, n-1);
+        }
+        
+        return max(longestCommonSubsequence(text1, text2, m-1, n), 
+                   longestCommonSubsequence(text1, text2, m, n-1)
+                  );
+    }
+};
