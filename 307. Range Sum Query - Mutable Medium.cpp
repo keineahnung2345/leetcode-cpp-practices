@@ -146,19 +146,22 @@ public:
     
     void update(int i, int val) {
         //recall that the leaf node takes tree[n ... 2n-1]
-        i += n;
+        i += n; //i is the index of nums, i+n is the index of tree
         tree[i] = val;
         //note that tree[0] is meaningless
+        //update tree[i]'s ancestor up to root
         while(i > 0){
             int left = i;
             int right = i;
             if(i % 2 == 0){
-                //it's left ndoe
+                //tree[i] is left node of its parent
+                //its sibling tree[i+1] is right node of its parent
                 right = i+1;
             }else{
                 //it's right node
                 left = i-1;
             }
+            //update parent
             tree[i/2] = tree[left] + tree[right];
             i /= 2;
         }
@@ -166,12 +169,12 @@ public:
     
     int sumRange(int i, int j){
         //recall that the leaf node takes tree[n ... 2n-1]
-        i += n;
+        i += n; //converts to index of tree
         j += n;
         
         int sum = 0;
         
-        while(i <= j){
+        while(i <= j){ // the range [i, j] is inclusive on both sides
             // cout << "[" << i << ", " << j << "]" << endl;
             if(i % 2 == 1){
                 /*
@@ -183,6 +186,7 @@ public:
                 /*
                 we will go to its right neighbor, 
                 and then go up to its parent
+                (note that tree[i] and tree[i+1]'s parents are different)
                 */
                 i++;
             }
@@ -196,6 +200,7 @@ public:
                 /*
                 we will go to its left neighbor, 
                 and then go up to its parent
+                (note that tree[j] and tree[j-1]'s parents are different)
                 */
                 j--;
             }
@@ -245,8 +250,12 @@ public:
     
     int querySegTree(int treeIndex, int lo, int hi, int i, int j){
         // cout << "treeIndex: " << treeIndex << ", lo: " << lo << ", hi: " << hi << ", i: " << i << ", j: " << j << endl;
-        //query for arr[i ... j]
-        //we are currently looking at tree[lo ... hi]
+        /*
+        query for arr[i ... j]
+        we are currently looking at arr[lo ... hi]
+        lo, hi, i, j are all index of arr
+        treeIndex is index of tree
+        */
         if(lo > j || hi < i){
             //the part we are looking has no intersection with arr[i...j]
             return 0;
@@ -264,11 +273,13 @@ public:
         //when the query range falls into either left or right part of current subtree
         if(i > mid){
             // cout << "i > mid, go right" << endl;
-            //the query range is completely in right subtree?
+            //the query range is completely in right subtree
+            //directly return!
             return querySegTree(treeIndex*2+2, mid+1, hi, i, j);
         }else if(j <= mid){
             // cout << "j <= mid, go left" << endl;
-            //the query range is completely in left subtree?
+            //the query range is completely in left subtree
+            //directly return!
             return querySegTree(treeIndex*2+1, lo, mid, i, j);
         }
         
@@ -291,6 +302,7 @@ public:
         
         int mid = (lo + hi)/2;
         
+        //update its child
         if(arrayIndex > mid){
             //find in right subtree
             updateValSegTree(treeIndex*2+2, mid+1, hi, arrayIndex, val);
@@ -299,6 +311,7 @@ public:
             updateValSegTree(treeIndex*2+1, lo, mid, arrayIndex, val);
         }
         
+        //current node needs to be updated, too!
         tree[treeIndex] = merge(tree[treeIndex*2+1], tree[treeIndex*2+2]);
     };
     
