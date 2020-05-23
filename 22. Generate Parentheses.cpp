@@ -32,3 +32,41 @@ public:
         return combs;
     }
 };
+
+//Approach 1: Brute Force, recursion
+//Runtime: 20 ms, faster than 11.14% of C++ online submissions for Generate Parentheses.
+//Memory Usage: 6.9 MB, less than 100.00% of C++ online submissions for Generate Parentheses.
+//time: O(2^n*n), space: O(2^n*n)
+class Solution {
+public:
+    bool valid(string& comb){
+        int balance = 0;
+        for(char c : comb){
+            if(c == '(') balance++;
+            else balance--;
+            if(balance < 0) return false;
+        }
+        return (balance == 0);
+    }
+    
+    void generateAll(string& comb, vector<string>& combs, int n){
+        if(comb.size() == 2*n){
+            // cout << comb << endl;
+            if(valid(comb))combs.push_back(comb);
+            return;
+        }
+        
+        for(char c : {'(', ')'}){
+            comb.push_back(c);
+            generateAll(comb, combs, n);
+            comb.pop_back();
+        }
+    }
+    
+    vector<string> generateParenthesis(int n) {
+        string comb;
+        vector<string> combs;
+        generateAll(comb, combs, n);
+        return combs;
+    }
+};
