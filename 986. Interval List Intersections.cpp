@@ -77,6 +77,11 @@ public:
                 intersection.push_back({low, high});
             }
             
+            /*
+            the interval with smaller endpoint 
+            cannot intersect with any other intervals, 
+            so discard it
+            */
             if(A[i][1] < B[j][1]){
                 i++;
             }else{
