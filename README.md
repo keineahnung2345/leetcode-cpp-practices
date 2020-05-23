@@ -341,6 +341,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [850. Rectangle Area II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/850.%20Rectangle%20Area%20II.cpp)
 
+[673. Number of Longest Increasing Subsequence.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/673.%20Number%20of%20Longest%20Increasing%20Subsequence.cpp)
+
 ## Binary Indexed Tree
 
 [Java using Binary Indexed Tree with clear explanation](https://leetcode.com/problems/range-sum-query-mutable/discuss/75753/Java-using-Binary-Indexed-Tree-with-clear-explanation)
