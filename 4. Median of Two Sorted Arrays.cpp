@@ -62,3 +62,75 @@ public:
         return 0.0;
     }
 };
+
+//binary search, revise to inclusive boundary on both sides(uglier)
+//Runtime: 40 ms, faster than 43.83% of C++ online submissions for Median of Two Sorted Arrays.
+//Memory Usage: 89.3 MB, less than 5.16% of C++ online submissions for Median of Two Sorted Arrays.
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int m = nums1.size();
+        int n = nums2.size();
+        //need to ensure that nums1 is shorter than or equal to nums2
+        if(m > n){
+            swap(nums1, nums2);
+            swap(m, n);
+        }
+        
+        // cout << nums1.size() << ", " << nums2.size() << ", " << m << ", " << n << endl;
+        
+        int xstart = 0;
+        int xend = m-1;
+        int xmid, ymid;
+        
+        while(xstart <= xend + 1){
+            /*
+            used to partition x into 2 parts,
+            xmid is the last index of left part in x,
+            xmid+1 is the left part's size
+            */
+            /*
+            need to take the minimum!
+            [100001]
+            [100000]
+            */
+            xmid = min(xstart, xend) + (xend-xstart)/2;
+            /*
+            the last index of left part in y,
+            ymid+1 is the right part's size,
+            so (xmid+1) + (ymid+1) is equal to (m+n+1)/2
+            */
+            ymid = (m+n+1)/2 - (xmid+2);
+            
+            // cout << "[" << xstart << ", " << xend << "], " << xmid << ", " << ymid << endl;
+            
+            int maxLeftX = (xmid >= 0) ? nums1[xmid] : INT_MIN;
+            int minRightX = (xmid+1 < m) ? nums1[xmid+1] : INT_MAX;
+            
+            int maxLeftY = (ymid >= 0) ? nums2[ymid] : INT_MIN;
+            int minRightY = (ymid+1 < n) ? nums2[ymid+1] : INT_MAX;
+            
+            // cout << maxLeftX << ", " << minRightX << ", " << maxLeftY << ", " << minRightY << endl;
+            
+            if((maxLeftX <= minRightY) && (maxLeftY <= minRightX)){
+                if((m+n) % 2 == 1){
+                    return max(maxLeftX, maxLeftY);
+                }else{
+                    return (max(maxLeftX, maxLeftY) + min(minRightX, minRightY)) / 2.0;
+                }
+            }
+            
+            if(maxLeftX > minRightY){
+                //x's left part is too large, so move left
+                xend = xmid-1;
+            }else if(maxLeftX < minRightY){
+                //x's left part is too small, move right
+                xstart = xmid+1;
+            }
+            
+            // cout << xstart << ", " << xend << endl;
+        }
+        
+        return 0.0;
+    }
+};
