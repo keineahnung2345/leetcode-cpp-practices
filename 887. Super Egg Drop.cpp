@@ -1,6 +1,7 @@
 //DP
 //TLE
 //64 / 121 test cases passed.
+//time: O(KN^2), space: O(KN)
 class Solution {
 public:
     int superEggDrop(int K, int N) {
@@ -47,6 +48,7 @@ public:
 //https://github.com/keineahnung2345/fucking-algorithm/blob/note/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B3%BB%E5%88%97/%E9%AB%98%E6%A5%BC%E6%89%94%E9%B8%A1%E8%9B%8B%E9%97%AE%E9%A2%98.md
 //Runtime: 144 ms, faster than 26.59% of C++ online submissions for Super Egg Drop.
 //Memory Usage: 29.5 MB, less than 14.29% of C++ online submissions for Super Egg Drop.
+//time: O(KNlogN), space: O(KN)
 class Solution {
 public:
     vector<vector<int>> dp;
