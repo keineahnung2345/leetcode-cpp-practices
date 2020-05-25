@@ -113,3 +113,41 @@ public:
         return dfs(K, N);
     }
 };
+
+//DP, different definition
+//https://github.com/keineahnung2345/fucking-algorithm/blob/note/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B3%BB%E5%88%97/%E9%AB%98%E6%A5%BC%E6%89%94%E9%B8%A1%E8%9B%8B%E8%BF%9B%E9%98%B6.md
+//time: O(KN), space: O(KN)
+//Runtime: 12 ms, faster than 61.24% of C++ online submissions for Super Egg Drop.
+//Memory Usage: 29.7 MB, less than 14.29% of C++ online submissions for Super Egg Drop.
+class Solution {
+public:
+    int superEggDrop(int K, int N) {
+        /*
+        dp[k][m]: how many floor we can test if we have k eggs and can throw m times
+        for k = 0(no eggs to throw) or m = 0(no chances to throw) dp[k][m] should be 0
+        */
+        vector<vector<int>> dp(K+1, vector(N+1, 0));
+        int m = 0;
+        
+        //keep increasing m until dp[k][m] can test n floors
+        while(dp[K][m] < N){
+            m++;
+            for(int k = 1; k <= K; k++){
+                /*
+                we throw an egg at current floor,
+                if the egg does not break, we then go up, 
+                we still have k eggs and m-1 times to throw eggs
+                dp[k][m-1]: how many floors higher than current floor
+                
+                1: current floor
+                
+                if the egg breaks, we then go down,
+                we still have k-1 eggs and m-1 times to throw eggs
+                dp[k-1][m-1]: how many floors lower than current floor
+                */
+                dp[k][m] = dp[k][m-1] + 1 + dp[k-1][m-1];
+            }
+        }
+        return m;
+    }
+};
