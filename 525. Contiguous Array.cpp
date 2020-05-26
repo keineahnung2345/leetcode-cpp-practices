@@ -32,9 +32,17 @@ public:
 class Solution {
 public:
     int findMaxLength(vector<int>& nums) {
-        //count can range from -n to n
+        /*
+        key: count, ranges from -n to n
+        (shifted n to the right, so count = -n takes the index 0)
+        value: the end index of previous subarray whose count is the key
+        */
         vector<int> arr(2*nums.size()+1, -2);
         
+        /*
+        the start of subarray with count equaling to 0 starts from index 0,
+        this is equivalent to saying a previous subarray with count 0 ends at index -1
+        */
         arr[nums.size()] = -1; //arr[nums.size()] corresponds to count = 0
         int ans = 0, count = 0;
         
@@ -50,12 +58,21 @@ public:
                 e.g. [0, 0, 1, 1], when "i" is 3, 
                 i-arr[count+nums.size()] will be 4,
                 that means we can find a continuous array from the start of nums
+                
+                i is the ending index of current subarray with specific count,
+                arr[count+nums.size()] is previous subarray with the same count
+                i-arr[count+nums.size()] is then the length of subarray with count equaling to 0 
                 */
                 ans = max(ans, i-arr[count+nums.size()]);
             }else{
                 /*
                 the value in current index is meaningless,
                 so we update it
+                
+                subarray of "count" ends at i
+                next time when we meet subarray with the same count,
+                we can calculate the length of that subarray by 
+                subtracting arr[count+nums.size()] from index at that time 
                 */
                 arr[count+nums.size()] = i;
             }
