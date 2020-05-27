@@ -46,3 +46,33 @@ public:
         return ans;
     }
 };
+
+//DP
+//https://leetcode.com/problems/2-keys-keyboard/discuss/105899/Java-DP-Solution
+//Runtime: 24 ms, faster than 35.04% of C++ online submissions for 2 Keys Keyboard.
+//Memory Usage: 6.8 MB, less than 100.00% of C++ online submissions for 2 Keys Keyboard.
+class Solution {
+public:
+    int minSteps(int n) {
+        //dp[i]: how many moves we need to take in order to get i A's
+        vector<int> dp(n+1, 0);
+        
+        //dp[1] is 0, 0 moves
+        for(int i = 2; i <= n; i++){
+            dp[i] = i;
+            for(int j = i-1; j >= 2; j--){
+                /*
+                i A's can be generated from j A's
+                by copy(1 move) and then paste i/j-1 times(i/j-1 moves),
+                so dp[i] is the move to get j A's(dp[j]) plus i/j moves
+                */
+                if(i % j == 0){
+                    dp[i] = dp[j] + i/j;
+                    break;
+                }
+            }
+        }
+        
+        return dp[n];
+    }
+};
