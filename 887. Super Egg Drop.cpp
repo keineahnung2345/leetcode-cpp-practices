@@ -151,3 +151,107 @@ public:
         return m;
     }
 };
+
+//Approach 3: Mathematical
+//time: O(KlogN), space: O(1)
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Super Egg Drop.
+//Memory Usage: 5.9 MB, less than 100.00% of C++ online submissions for Super Egg Drop.
+class Solution {
+public:
+    int comb(int K, int N){
+        /*
+        N!/((N-K)! * K!)
+        = N * (N-1) * (N-2) * ... * (N-(K-1)) / K!
+        */
+        
+        int res = 1;
+        
+        for(int i = 1; i <= K; i++){
+            res *= i * (N-(i-1));
+        }
+        
+        return res;
+    }
+    
+    /*
+    f(T, K) -> N
+    T: #moves, K: #eggs, N: #floors we can test
+    
+    // ...  = egg breaks + current try + egg not break
+    f(T, K) = f(T-1, K-1) + 1 + f(T-1, K)
+    
+    now define g(T, K) = f(T, K) - f(T, K-1)
+    g(T, K) = [f(T-1, K-1)-f(T-1, K-2)] + [f(T-1, K)-f(T-1, K-1)]
+    = g(T-1, K-1) + g(T-1, K)
+    
+    they are just binomial coefficient! 
+    (https://en.wikipedia.org/wiki/Binomial_coefficient)
+    so g(T, K) = comb(T, K)
+    
+    now we can write f(T, K)
+    = [f(T, K) - f(T, K-1)] + [f(T, K-1) - f(T, K-2)] + ... + [f(T,2)-f(T,1)] + f(T,1)
+    = g(T, K) + g(T, K-1) + ... g(T, 2) + f(T, 1)
+    because f(T, 1) = 1(only one eggs to try),
+    and g(T, 1) = comb(T, 1) = T = f(T, 1)
+    so f(T, K) = g(T, K) + g(T, K-1) + ... g(T, 2) + g(T, 1)
+    = sigma(x = 1 to K) g(T, x)
+    = sigma(x = 1 to K) comb(T, x)
+    */
+    int f_slow(int T, int K, int N){
+        //T: #moves
+        int res = 0;
+        for(int x = 1; x <= K; x++){
+            res += comb(K, N);
+            if(res >= N) break;
+        }
+        return res;
+    }
+    
+    //efficient version
+    int f(int T, int K, int N){
+        //T: #moves
+        int comb_N_x = 1;
+        int res = 0;
+        /*
+        comb_N_1: T/1 = T
+        comb_N_2: T*(T-1)/2
+        comb_N_3: T*(T-1)*(T-2)/(2*3)
+        ...
+        comb_N_K: T*(T-1)*(T-2)*...*(T-K)/K!
+        */
+        for(int x = 1; x <= K; x++){
+            comb_N_x *= (T-(x-1));
+            comb_N_x /= x;
+            res += comb_N_x;
+            if(res >= N) break;
+        }
+        return res;
+    }
+    
+    int superEggDrop(int K, int N) {
+        /*
+        moves taken to decide what F is,
+        it's in the range [1,N]
+        
+        note that when K=1 and N=1, 
+        we need to take 1 move to decide what F is
+        */
+        int lo = 1, hi = N;
+        
+        //binary search to find a mid s.t. f(mid, K, N)
+        while(lo <= hi){
+            int mid = (lo+hi)/2;
+            
+            int tmp;
+            if((tmp = f(mid, K, N)) == N){
+                return mid;
+            }else if(tmp < N){
+                lo = mid+1;
+            }else if(tmp > N){
+                hi = mid-1;
+            }
+        }
+        
+        return lo;
+    }
+};
