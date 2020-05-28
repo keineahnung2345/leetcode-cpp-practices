@@ -2,6 +2,9 @@
 
 Including problem statement, solution, runtime and complexity analysis.
 
+## Graph
+[Graph Problems For Beginners Practice [Problems and Sample Solutions]](https://leetcode.com/discuss/general-discussion/655708/graph-problems-for-beginners-practice-problems-and-sample-solutions)
+
 ## Monotonic stack
 [84. Largest Rectangle in Histogram.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/84.%20Largest%20Rectangle%20in%20Histogram.cpp)
 
