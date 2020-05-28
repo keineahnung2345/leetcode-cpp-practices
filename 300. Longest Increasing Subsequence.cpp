@@ -47,6 +47,11 @@ public:
         
         for(int poker : nums){
             int left = 0, right = top.size()-1;
+            /*
+            find the smallest top poker that is greater than current poker,
+            so we are finding lower bound,
+            that means we should focus on "left"
+            */
             while(left <= right){
                 int mid = left + (right-left)/2;
                 if(poker < top[mid]){
@@ -85,7 +90,7 @@ public:
         */
         if(cur == nums.size()) return 0;
         int taken = 0;
-        //we may append current element into sequence
+        //we may append current element into sequence, take
         /*
         initial state: prev is -1, and cur = 0,
         that means we are considering the 0th element,
@@ -94,7 +99,7 @@ public:
         if(prev < 0 || nums[cur] > nums[prev]){
             taken = 1 + lengthOfLIS(nums, cur, cur+1);
         }
-        //skip current element
+        //skip current element, not take
         int nottaken = lengthOfLIS(nums, prev, cur+1);
         // cout << prev << ", " << cur << " : " << taken << ", " << nottaken << endl;
         return max(taken, nottaken);
