@@ -176,6 +176,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [Checking for "Overlapping subproblem" property](https://github.com/keineahnung2345/fucking-algorithm/blob/note/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B3%BB%E5%88%97/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE.md#%E5%9B%9B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92)
 
+[How to solve DP - String? Template and 4 Steps to be followed.](https://leetcode.com/discuss/general-discussion/651719/how-to-solve-dp-string-template-and-4-steps-to-be-followed)
+
 [62. Unique Paths.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/62.%20Unique%20Paths.cpp)
 
 [63. Unique Paths II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/63.%20Unique%20Paths%20II.cpp)
