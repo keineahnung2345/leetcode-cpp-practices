@@ -47,3 +47,52 @@ public:
         }
     }
 };
+
+//recursion + memorization
+//https://github.com/keineahnung2345/fucking-algorithm/blob/note/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B3%BB%E5%88%97/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE.md
+//Runtime: 4 ms, faster than 95.00% of C++ online submissions for Regular Expression Matching.
+//Memory Usage: 7 MB, less than 100.00% of C++ online submissions for Regular Expression Matching.
+class Solution {
+public:
+    string s, p;
+    vector<vector<int>> memo;
+    
+    bool dfs(int i, int j){
+        //i for s, j for p
+        if(j == p.size()) return i == s.size();
+        
+        if(memo[i][j] != -1){
+            return memo[i][j];
+        }
+        
+        // cout << i << " " << j << endl;
+        
+        //edge case
+        if(i == s.size()){
+            //(p.size()-j): remaining size
+            if((p.size()-j) % 2 != 0) return false;
+            for(int k = j+1; k < p.size(); k+=2){
+                if(p[k] != '*') return false;
+            }
+            return true;
+        }
+        
+        bool first_match = (p[j] == '.' || p[j] == s[i]);
+        
+        if(j+1 < p.size() && p[j+1] == '*'){
+            memo[i][j] = (first_match && dfs(i+1, j)) ||
+                dfs(i, j+2);
+        }else{
+            memo[i][j] =  first_match && dfs(i+1, j+1);
+        }
+        
+        return memo[i][j];
+    }
+    
+    bool isMatch(string s, string p) {
+        this->s = s;
+        this->p = p;
+        memo = vector<vector<int>>(s.size()+1, vector(p.size()+1, -1));
+        return dfs(0, 0);
+    }
+};
