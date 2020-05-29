@@ -43,7 +43,11 @@ public:
         
         unordered_map<int, vector<int>> edges;
         for(vector<int>& pre : prerequisites){
-            //this is correct according to the problem definition
+            /*
+            this is correct according to the problem definition
+            pre[1] should be taken before pre[0],
+            so the edge is from pre[1] to pre[0]
+            */
             edges[pre[1]].push_back(pre[0]);
             //however this also gives correct answer
             // edges[pre[0]].push_back(pre[1]);
@@ -74,7 +78,7 @@ public:
         vector<vector<int>> edges(numCourses);
         
         for(vector<int>& pre : prerequisites){
-            //pre[1] points to pre[0]
+            //pre[1] points to pre[0](pre[1] should be taken before pre[0])
             incomingEdgeCount[pre[0]]++;
             edges[pre[1]].push_back(pre[0]);
         }
