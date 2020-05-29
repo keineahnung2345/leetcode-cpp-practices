@@ -2,6 +2,8 @@
 //https://github.com/keineahnung2345/fucking-algorithm/blob/note/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B3%BB%E5%88%97/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B9%8B%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE.md
 //Runtime: 616 ms, faster than 8.19% of C++ online submissions for Regular Expression Matching.
 //Memory Usage: 13.5 MB, less than 11.87% of C++ online submissions for Regular Expression Matching.
+//time: O((T+P)*2^(T+P/2))?
+//space: O(T^2+P^2)?
 class Solution {
 public:
     bool isMatch(string s, string p) {
