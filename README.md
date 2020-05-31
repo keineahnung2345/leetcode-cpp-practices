@@ -77,6 +77,9 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [1248. Count Number of Nice Subarrays.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1248.%20Count%20Number%20of%20Nice%20Subarrays.cpp)
 
+## Sliding Window
+[Sliding Window for Beginners [Problems | Template | Sample Solutions]](https://leetcode.com/discuss/general-discussion/657507/sliding-window-for-beginners-problems-template-sample-solutions)
+
 ## Binary Search
 
 [二分查找详解](https://github.com/keineahnung2345/fucking-algorithm/blob/note/%E7%AE%97%E6%B3%95%E6%80%9D%E7%BB%B4%E7%B3%BB%E5%88%97/%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E8%AF%A6%E8%A7%A3.md)
