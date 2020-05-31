@@ -1,6 +1,7 @@
 //counter
 //Runtime: 36 ms, faster than 75.00% of C++ online submissions for Make Two Arrays Equal by Reversing Sub-arrays.
 //Memory Usage: 15.5 MB, less than 100.00% of C++ online submissions for Make Two Arrays Equal by Reversing Sub-arrays.
+//time: O(N)
 class Solution {
 public:
     bool canBeEqual(vector<int>& target, vector<int>& arr) {
@@ -21,5 +22,18 @@ public:
         }
         
         return true;
+    }
+};
+
+//sorting
+//Runtime: 28 ms, faster than 75.00% of C++ online submissions for Make Two Arrays Equal by Reversing Sub-arrays.
+//Memory Usage: 13.8 MB, less than 100.00% of C++ online submissions for Make Two Arrays Equal by Reversing Sub-arrays.
+//time: O(NlogN)
+class Solution {
+public:
+    bool canBeEqual(vector<int>& target, vector<int>& arr) {
+        sort(target.begin(), target.end());
+        sort(arr.begin(), arr.end());
+        return target == arr;
     }
 };
