@@ -59,3 +59,32 @@ public:
         return minScoreTriangulation(A, 0, n-1);
     }
 };
+
+//DP
+//https://leetcode.com/problems/minimum-score-triangulation-of-polygon/discuss/286753/C%2B%2B-with-picture
+//Runtime: 8 ms, faster than 75.04% of C++ online submissions for Minimum Score Triangulation of Polygon.
+//Memory Usage: 8.5 MB, less than 100.00% of C++ online submissions for Minimum Score Triangulation of Polygon.
+//time: O(N^3), space: O(N^2)
+class Solution {
+public:
+    int minScoreTriangulation(vector<int>& A) {
+        int n = A.size();
+        vector<vector<int>> dp(n, vector<int>(n, 0));
+        
+        for(int i = n-1; i >= 0; i--){
+            for(int j = i+1; j < n; j++){
+                for(int k = i+1; k <= j-1; k++){
+                    // cout << i << ", " << k << ", " << j << endl;
+                    /*
+                    dp[0][2] = dp[0][1] + A[0]*A[1]*A[0] + dp[1][2],
+                    at this time, dp[0][1] and dp[1][2] should be 0
+                    */
+                    dp[i][j] = min(dp[i][j] == 0 ? INT_MAX : dp[i][j],
+                        dp[i][k] + A[i]*A[k]*A[j] + dp[k][j]);
+                }
+            }
+        }
+        
+        return dp[0][n-1];
+    }
+};
