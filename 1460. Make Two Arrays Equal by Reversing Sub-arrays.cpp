@@ -1,0 +1,25 @@
+//counter
+//Runtime: 36 ms, faster than 75.00% of C++ online submissions for Make Two Arrays Equal by Reversing Sub-arrays.
+//Memory Usage: 15.5 MB, less than 100.00% of C++ online submissions for Make Two Arrays Equal by Reversing Sub-arrays.
+class Solution {
+public:
+    bool canBeEqual(vector<int>& target, vector<int>& arr) {
+        map<int, int> counter;
+        
+        for(int e : target){
+            counter[e]+=1;
+        }
+        
+        for(int e : arr){
+            if(counter.find(e) == counter.end()){
+                return false;
+            }
+            counter[e]-=1;
+            if(counter[e] == 0){
+                counter.erase(e);
+            }
+        }
+        
+        return true;
+    }
+};
