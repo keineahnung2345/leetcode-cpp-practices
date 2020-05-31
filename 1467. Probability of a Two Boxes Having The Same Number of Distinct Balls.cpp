@@ -1,4 +1,12 @@
 //backtracking
+/*
+the ideas is to permute the "balls"(containing count of each colors),
+rather than permute the array "nums" containing all balls to avoid TLE
+
+e.g. 
+balls = [1,3,2]
+nums = [0, 1, 1, 1, 2, 2]
+*/
 //https://leetcode.com/problems/probability-of-a-two-boxes-having-the-same-number-of-distinct-balls/discuss/661723/Struggling-with-probability-problems-Read-this.
 //the function perm() borrows from https://leetcode.com/problems/probability-of-a-two-boxes-having-the-same-number-of-distinct-balls/discuss/661730/C%2B%2B-Backtrack-with-explanation
 //Runtime: 1336 ms, faster than 100.00% of C++ online submissions for Probability of a Two Boxes Having The Same Number of Distinct Balls.
