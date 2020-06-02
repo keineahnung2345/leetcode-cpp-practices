@@ -57,3 +57,39 @@ public:
         return dp[n][capacity];
     }
 };
+
+//optimization, O(N) space
+class Solution {
+public:
+    bool canPartition(vector<int>& nums) {
+        int n = nums.size(); //number of objects
+        int capacity = accumulate(nums.begin(), nums.end(), 0);
+        if((capacity & 1) == 1) return false;
+        capacity /= 2;
+        
+        /*
+        the +1 is not padding, it's meaningful!
+        i: number of objects in the backpack
+        j: current weight of backpack
+        dp[i][j]: whether the state: (i, j) exists or not
+        our goal is to find out dp[n][capacity]
+        */
+        vector<bool> dp(capacity+1, false);
+
+        dp[0] = true;
+        
+        for(int i = 1; i <= n; i++){
+            for(int j = capacity; j >= 0; j--){
+                if(j == 0){
+                    dp[j] = false;
+                }
+                
+                if(j - nums[i-1] >= 0){
+                    dp[j] = dp[j] | dp[j-nums[i-1]];
+                }
+            }
+        }
+
+        return dp[capacity];
+    }
+};
