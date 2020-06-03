@@ -35,3 +35,41 @@ public:
         return ans;
     }
 };
+
+//Floyd–Warshall(All Pairs Shortest Path)
+//https://leetcode.com/problems/course-schedule-iv/discuss/660509/JavaPython-FloydWarshall-Algorithm-Clean-code-O(n3)
+//Runtime: 1220 ms, faster than 20.27% of C++ online submissions for Course Schedule IV.
+//Memory Usage: 62.1 MB, less than 100.00% of C++ online submissions for Course Schedule IV.
+class Solution {
+public:
+    vector<bool> checkIfPrerequisite(int n, vector<vector<int>>& prerequisites, vector<vector<int>>& queries) {
+        vector<vector<bool>> connected(n, vector<bool>(n, false));
+        
+        for(auto pre : prerequisites){
+            connected[pre[0]][pre[1]] = true;
+        }
+        
+        for(int i = 0; i < n; i++){
+            connected[i][i] = true;
+        }
+        
+        //each time add a middle point
+        for(int k = 0; k < n; k++){
+            //check if the middle point make each pair of (i, j) connected
+            for(int i = 0; i < n; i++){
+                for(int j = 0; j < n; j++){
+                    connected[i][j] = connected[i][j] || 
+                        (connected[i][k] && connected[k][j]);
+                }
+            }
+        }
+        
+        vector<bool> ans(queries.size());
+        
+        for(int i = 0; i < queries.size(); i++){
+            ans[i] = connected[queries[i][0]][queries[i][1]];
+        }
+        
+        return ans;
+    }
+};
