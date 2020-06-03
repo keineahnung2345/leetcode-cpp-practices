@@ -67,3 +67,27 @@ public:
         return subset.size() == (1 << k);
     }
 };
+
+//brute-force
+//https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/discuss/660632/Incorrect-problem-statement!!!
+//TLE
+//195 / 196 test cases passed.
+class Solution {
+public:
+    bool hasAllCodes(string s, int k) {
+        int n = 1 << k;
+        //we want to find all 0 to n-1 in s
+        for (auto i{ 0 }; i < n; ++i) {
+            //32: just to ensure t can hold i
+            auto t = bitset<32>(i).to_string();
+            // cout << "size: " << t.size() << endl;
+            // cout << i << ", " << t << ", " << t.size() - k << endl;
+            //select the k least significant bis
+            t = t.substr(t.size() - k);
+            // cout << "t: " << t << endl;
+            if (s.find(t) == string::npos)
+                return false;
+        }
+        return true;
+    }
+};
