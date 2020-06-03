@@ -12,6 +12,7 @@ public:
         //bfs
         map<int, set<int>> graph;
         
+        //this only extends existing edges, so it gives WA!
         for(vector<int>& pre : prerequisites){
             graph[pre[0]].insert(pre[1]);
             for(auto it = graph.begin(); it != graph.end(); it++){
