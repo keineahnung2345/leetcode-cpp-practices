@@ -12,3 +12,32 @@ public:
         return codes.size() == pow(2, k);
     }
 };
+
+//sliding window + set
+//https://leetcode.com/problems/check-if-a-string-contains-all-binary-codes-of-size-k/discuss/660632/Incorrect-problem-statement!!!
+//Runtime: 1048 ms, faster than 30.69% of C++ online submissions for Check If a String Contains All Binary Codes of Size K.
+//Memory Usage: 61.3 MB, less than 100.00% of C++ online submissions for Check If a String Contains All Binary Codes of Size K.
+class Solution {
+public:
+    bool hasAllCodes(string s, int k) {
+        /*
+        choose deque so that we can use .begin() and .end()
+        */
+        deque<char> q;
+        /*
+        set<string> gives us TLE!!!
+        so use unordered_set here!
+        */
+        unordered_set<string> subset;
+        for(char c : s){
+            q.push_back(c);
+            if(q.size() == k){
+                // cout << string(q.begin(), q.end()) << endl;
+                subset.insert({q.begin(), q.end()});
+                q.pop_front();
+            }
+        }
+        
+        return subset.size() == (1 << k);
+    }
+};
