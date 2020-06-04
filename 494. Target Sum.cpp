@@ -94,3 +94,31 @@ public:
         return (S <= 1000) ? dp[0][S+1000] : 0;
     }
 };
+
+//DP, O(N) space
+//Runtime: 56 ms, faster than 60.66% of C++ online submissions for Target Sum.
+//Memory Usage: 13.7 MB, less than 38.46% of C++ online submissions for Target Sum.
+class Solution {
+public:
+    int findTargetSumWays(vector<int>& nums, int S) {
+        int n = nums.size();
+        vector<vector<int>> dp(2, vector(2001, 0));
+        
+        //base case
+        dp[(n-1)%2][nums[n-1]+1000] = 1;
+        dp[(n-1)%2][-nums[n-1]+1000] += 1;
+        
+        for(int i = n-2; i >= 0; i--){
+            for(int sum = -1000; sum <= 1000; sum++){
+                if(dp[(i+1)%2][sum+1000] > 0){
+                    dp[i%2][sum+nums[i]+1000] += dp[(i+1)%2][sum+1000];
+                    dp[i%2][sum-nums[i]+1000] += dp[(i+1)%2][sum+1000];
+                }
+                //need to reset it, it will be used in next iteration
+                dp[(i+1)%2][sum+1000] = 0;
+            }
+        }
+        return (S <= 1000) ? dp[0][S+1000] : 0;
+    }
+};
+
