@@ -272,12 +272,29 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [337. House Robber III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/337.%20House%20Robber%20III.cpp)
 
+### Knapsack problem
+
+#### 0/1 knapsack problem
+[416. Partition Equal Subset Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/416.%20Partition%20Equal%20Subset%20Sum.cpp)
+
+[494. Target Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/494.%20Target%20Sum.cpp)
+
+#### Unbounded knapsack problem
+[322. Coin Change.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/322.%20Coin%20Change.cpp)
+
+[518. Coin Change 2.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/518.%20Coin%20Change%202.cpp)
+
+#### Two-constraint knapsack problem
+[474. Ones and Zeroes.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/474.%20Ones%20and%20Zeroes.cpp)
+
 ## Dynamic Programming + Bitmask
 [A simple tutorial on this bitmasking problem](https://leetcode.com/problems/maximum-students-taking-exam/discuss/503686/A-simple-tutorial-on-this-bitmasking-problem)
 
 [1349. Maximum Students Taking Exam.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1349.%20Maximum%20Students%20Taking%20Exam.cpp)
 
 [1434. Number of Ways to Wear Different Hats to Each Other.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1434.%20Number%20of%20Ways%20to%20Wear%20Different%20Hats%20to%20Each%20Other.cpp)
+
+[698. Partition to K Equal Sum Subsets](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/698.%20Partition%20to%20K%20Equal%20Sum%20Subsets.cpp)
 
 ## KMP
 [KMP Algorithm for Pattern Searching](https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/)
