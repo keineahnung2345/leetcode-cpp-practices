@@ -100,3 +100,48 @@ public:
         return ans;
     }
 };
+
+//dp + bitmask
+//https://leetcode.com/problems/partition-to-k-equal-sum-subsets/discuss/480707/C%2B%2B-DP-bit-manipulation-in-20-lines
+//Runtime: 88 ms, faster than 26.04% of C++ online submissions for Partition to K Equal Sum Subsets.
+//Memory Usage: 17.4 MB, less than 12.91% of C++ online submissions for Partition to K Equal Sum Subsets.
+class Solution {
+public:
+    bool canPartitionKSubsets(vector<int>& nums, int k) {
+        int n = nums.size();
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+        if(sum % k != 0) return false;
+        int partitionSum = sum/k;
+        
+        //len(nums) <= 16, so there are 2^16 states
+        vector<int> dp(1<<n, -1);
+        dp[0] = 0;
+        
+        //each mask represents a state
+        for(int mask = 0; mask < (1 << n); mask++){
+            //skip invalid state
+            if(dp[mask] == -1) continue;
+            //try to add nums[i] into the state
+            for(int i = 0; i < n; i++){
+                /*
+                dp[mask]: (sum of all subsets) % partitionSum
+                dp[mask] + nums[i] <= partitionSum: we must choose a number
+                that can be fit into a subset
+                */
+                if(!(mask & (1<<i)) && dp[mask] + nums[i] <= partitionSum){
+                    /*
+                    we set the dp value as xxx % partitionSum,
+                    so that next time we can choose a number that can fit
+                    in a subset by checking 
+                    dp[mask] + nums[i] <= partitionSum
+                    */
+                    dp[mask | (1<<i)] = (dp[mask] + nums[i]) % partitionSum;
+                }
+            }
+        }
+        
+        //it's importatnt to add () around 1<<i !!
+        //'-' 's precedence is higher than '<<' !!
+        return dp[(1<<n) - 1] == 0;
+    }
+};
