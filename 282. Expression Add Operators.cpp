@@ -105,3 +105,122 @@ public:
         return exprs;
     }
 };
+
+//backtrack, evaluate expression on the fly
+//WA
+//14 / 20 test cases passed.
+class Solution {
+public:
+    vector<char> operators;
+    
+    void backtrack(vector<string>& exprs, string& expr, string& num, int target, int start, long long res, int lastOperand, char lastOperator){
+        // cout << "expr: " << expr << ", start: " << start << ", res: " << res << ", lastOperand: " << lastOperand << ", lastOp: " << lastOperator << endl;
+        //res: current evaluated result of expr
+        if(start == num.size()){
+            // cout << "expr: " << expr << endl;
+            //expr is already evaluated on the fly!
+            if(res == target){
+                exprs.push_back(expr);
+            }
+        // }else if(log10(res) - (num.size() - start) > log10(target)+1){
+        //     //early stopping
+        //     cout << res << ", " << start << ", " << target << endl;
+        }else{
+            int digit = num[start] - '0';
+            for(char op : operators){
+                int lastRes = res;
+                // cout << "curOp: " << op << ", res: " << res << ", lastOp: " << lastOperator << ", lastOperand: " << lastOperand << endl;
+                if(!expr.empty() && expr.back() == '0' && op == '\0'){
+                    //avoid generating "1+05"
+                    continue;
+                }
+                if(op != '\0') expr += op;
+                expr += num[start];
+                //calculate res on the fly!
+                switch(op){
+                    case '+':
+                        res += digit;
+                        // lastOperator = '+';
+                        break;
+                    case '-':
+                        res -= digit;
+                        // lastOperator = '-';
+                        break;
+                    case '*':
+                        //special case, '*' has higher precedence!
+                        switch(lastOperator){
+                            case '+':
+                                //undo previous operation
+                            	res -= lastOperand;
+                                //'*' has higher precedence than '+'
+                                res = res + lastOperand * digit;
+                                break;
+                            case '-':
+                                //undo previous operation
+                            	res += lastOperand;
+                                //'*' has higher precedence than '-'
+                                res = res - lastOperand * digit;
+                                break;
+                            case '*':
+                                //what if "10+2*3*4"?
+                            case '\0':
+                                //directly multiply?
+                                res *= digit;
+                        }
+                        /*
+                        don't change lastOperator, only change lastOperand
+                        since there is no chance that we undo the '*' operation!
+                        */
+                        // lastOperand *= digit;
+                        // curOperand = lastOperand * digit;
+                        //lastOperator = '*';
+                        break;
+                    case '\0':
+                        //special case, '*' has higher precedence!
+                        switch(lastOperator){
+                            case '+':
+                                //undo previous operation
+                            	res -= lastOperand;
+                                //'\0' has higher precedence than '+'
+                                res = res + (lastOperand * 10 + digit);
+                                break;
+                            case '-':
+                                //undo previous operation
+                            	res += lastOperand;
+                                //'\0' has higher precedence than '-'
+                                res = res - (lastOperand * 10 + digit);
+                                break;
+                            case '*':
+                            case '\0':
+                                //directly update?
+                                res = (res * 10 + digit);
+                        }
+                        // lastOperator = '\0';
+                        break;
+                }
+                // lastOperand = digit;
+                backtrack(exprs, expr, num, target, start+1, res, 
+                          (lastOperator == '*' && op == '*') ? lastOperand * digit: digit, 
+                          ((op == '*') ? lastOperator: op));
+                // cout << "before erase: " << expr << endl;
+                //erase two chars if we have added op
+                expr.erase(expr.size()-(1 + (op != '\0')), 1 + (op != '\0'));
+                res = lastRes;
+                // cout << "after erase: " << expr << endl;
+            }
+        }
+    }
+    
+    vector<string> addOperators(string num, int target) {
+        //'\0' means add nothing
+        operators = {'\0', '+', '-', '*'};
+        vector<string> exprs;
+        if(num.size() == 0) return {""};
+        string expr(1, num[0]);
+        int digit = num[0] - '0';
+        
+        backtrack(exprs, expr, num, target, 1, digit, digit, '\0');
+        
+        return exprs;
+    }
+};
