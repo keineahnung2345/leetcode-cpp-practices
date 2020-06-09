@@ -224,3 +224,99 @@ public:
         return exprs;
     }
 };
+
+//backtrack, evaluate expression on the fly, official solution
+//Runtime: 284 ms, faster than 78.51% of C++ online submissions for Expression Add Operators.
+//Memory Usage: 14.4 MB, less than 92.93% of C++ online submissions for Expression Add Operators.
+//time: O(4^N*N), space: O(N)
+class Solution {
+public:
+    vector<char> operators;
+    
+    void backtrack(vector<string>& exprs, string& expr, string& num, int target, int start, long long res, long long lastOperand, long long curOperand){
+        // cout << "expr: " << expr << ", start: " << start << ", res: " << res << ", lastOperand: " << lastOperand << ", curOperand: " << curOperand << endl;
+        //res: current evaluated result of expr
+        if(start == num.size()){
+            // cout << "expr: " << expr << endl;
+            // curOperand == 0: no operand is left unprocessed
+            // if(curOperand != 0){
+            //     cout << expr << endl;
+            // }
+            if(res == target && curOperand == 0){
+                //there is a '+' beforehand
+                exprs.push_back(expr.substr(1));
+            }
+        }else{
+            int digit = num[start] - '0';
+            curOperand = curOperand * 10 + digit;
+            string strCurOperand = to_string(curOperand);
+            for(char op : operators){
+                //calculate res on the fly!
+                // cout << "digit: " << digit << ", curOperand: " << curOperand << ", op: " << op << endl;
+                switch(op){
+                    case '+':
+                        expr += op;
+                        expr += strCurOperand;
+                        //when operator is '+' or '-', we don't need to maintain lastOperand, so we set it to 0
+                        /*
+                        note that we pass curOperand as the argument lastOperand
+                        and 0 as curOperand?
+                        */
+                        backtrack(exprs, expr, num, target, start+1, res + curOperand, curOperand, 0);
+                        /*
+                        erase total 1+strCurOperand.size() chars!
+                        strCurOperand's length is not always 1!
+                        */
+                        expr.erase(expr.size()-(1+strCurOperand.size()), 1+strCurOperand.size());
+                        break;
+                    case '-':
+                        if(expr.size() > 0){
+                            //don't allow expr starts with '-'
+                            expr += op;
+                            expr += strCurOperand;
+                            /*
+                            note that we pass -curOperand as the argument lastOperand
+                            and 0 as curOperand?
+                            */
+                            backtrack(exprs, expr, num, target, start+1, res - curOperand, -curOperand, 0);
+                            expr.erase(expr.size()-(1+strCurOperand.size()), 1+strCurOperand.size());
+                        }
+                        break;
+                    case '*':
+                        if(expr.size() > 0){
+                            //don't allow expr starts with '-'
+                            expr += op;
+                            expr += strCurOperand;
+                            backtrack(exprs, expr, num, target, start+1, res - lastOperand + lastOperand * curOperand, lastOperand * curOperand, 0);
+                            expr.erase(expr.size()-(1+strCurOperand.size()), 1+strCurOperand.size());
+                        }
+                        break;
+                    case '\0':
+                        if(curOperand > 0){
+                            /*
+                            note that unlike other operators,
+                            we don't append strCurOperand to expr!
+                            and also res, lastOperand, curOperand remain the same,
+                            that means when meeting '\0',
+                            we are still constructing curOperand
+                            */
+                            //so that we won't build expr like "05"
+                            backtrack(exprs, expr, num, target, start+1, res, lastOperand, curOperand);
+                        }
+                        break;
+                }
+            }
+        }
+    }
+    
+    vector<string> addOperators(string num, int target) {
+        if(num.size() == 0) return {};
+        operators = {'\0', '+', '-', '*'};
+        vector<string> exprs;
+        string expr = "";
+        
+        backtrack(exprs, expr, num, target, 0, 0, 0, 0);
+        
+        return exprs;
+    }
+};
