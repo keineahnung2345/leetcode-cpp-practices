@@ -1,6 +1,7 @@
 //backtrack
 //Runtime: 536 ms, faster than 19.94% of C++ online submissions for Beautiful Arrangement.
 //Memory Usage: 6 MB, less than 71.95% of C++ online submissions for Beautiful Arrangement.
+//time: O(#permutations), space: O(N)
 class Solution {
 public:
     int N;
