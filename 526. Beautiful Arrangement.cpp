@@ -68,3 +68,40 @@ public:
         return backtrack(1, used);
     }
 };
+
+//recursion with memorization
+//Runtime: 88 ms, faster than 72.42% of C++ online submissions for Beautiful Arrangement.
+//Memory Usage: 9.3 MB, less than 20.58% of C++ online submissions for Beautiful Arrangement.
+class Solution {
+public:
+    int N;
+    map<pair<int, int>, int> memo;
+    
+    int backtrack(int cur, bitset<15>& used){
+        pair<int, int> key = make_pair(cur, used.to_ulong());
+        
+        if(cur > N){
+            return 1;
+        }else if(memo.find(key) != memo.end()){
+            return memo[key];
+        }else{
+            for(int i = 0; i < N; i++){
+                //i+1: the value to be inserted
+                //cur: the value's index in perm(1-based)
+                if(!used[i] && ((i+1) % cur == 0 || cur % (i+1) == 0)){
+                    used[i] = 1;
+                    memo[key] += backtrack(cur+1, used);
+                    used[i] = 0;
+                }
+            }
+            
+            return memo[key];
+        }
+    }
+    
+    int countArrangement(int N) {
+        this->N = N;
+        bitset<15> used;
+        return backtrack(1, used);
+    }
+};
