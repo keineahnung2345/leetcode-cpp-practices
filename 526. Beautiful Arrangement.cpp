@@ -105,3 +105,43 @@ public:
         return backtrack(1, used);
     }
 };
+
+//top-down DP/recursion with memorization
+//Runtime: 16 ms, faster than 88.26% of C++ online submissions for Beautiful Arrangement.
+//Memory Usage: 11.6 MB, less than 19.82% of C++ online submissions for Beautiful Arrangement.
+class Solution {
+public:
+    int N;
+    vector<vector<int>> dp;
+    
+    int backtrack(int cur, bitset<15>& used){
+        int kused = used.to_ulong();
+        if(cur > N){
+            return 1;
+        }else if(dp[cur][kused] != -1){
+            return dp[cur][kused];
+        }else{
+            dp[cur][kused] = 0;
+            
+            for(int i = 0; i < N; i++){
+                //i+1: the value to be inserted
+                //cur: the value's index in perm(1-based)
+                if(!used[i] && ((i+1) % cur == 0 || cur % (i+1) == 0)){
+                    used[i] = 1;
+                    dp[cur][kused] += backtrack(cur+1, used);
+                    used[i] = 0;
+                }
+            }
+            // cout << "(" << cur << ", " << kused << "): " << dp[cur][kused] << endl;
+            return dp[cur][kused];
+        }
+    }
+    
+    int countArrangement(int N) {
+        this->N = N;
+        bitset<15> used;
+        dp = vector<vector<int>>(N+1, vector<int>(1<<N, -1));
+        backtrack(1, used);
+        return dp[1][0];
+    }
+};
