@@ -31,3 +31,58 @@ public:
         return ans;
     }
 }; 
+
+//DP
+//not understand
+//https://leetcode.com/problems/number-of-digit-one/discuss/254596/My-dynamic-programming-java-solution
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Number of Digit One.
+//Memory Usage: 6.3 MB, less than 8.98% of C++ online submissions for Number of Digit One.
+class Solution {
+public:
+    int countDigitOne(int n) {
+        /*
+        memo[i]: how many '1' in ith position (1-based)
+        memo[0]: 0
+        memo[1](one digit 0-9): 0*10+1 = 1
+        memo[2](two digits 0-99): 1*10+10 = 20
+        (00-09, 10-19, ..., 90-99)'s 1st digit + 10-19's 2nd digit
+        memo[3](three digits 0-999): 20*10 + 100 = 300
+        (000-099, 100-199, ..., 900-999)'s 1st and 2nd digits + 100-199's 3rd digit
+        */
+        vector<long long> memo(11);
+        int rest = n;
+        long long base = 1;
+        
+        for(int i = 1; rest > 0; i++){
+            memo[i] = memo[i-1] * 10 + base;
+            base *= 10;
+            rest /= 10;
+            // cout << rest << ", " << base << endl;
+        }
+        
+        rest = n;
+        base = 1e9;
+        int index = log10(base)+1;
+        int ans = 0;
+        
+        while(rest > 0 && index >= 1){
+            if(rest >= base){
+                int dividend = rest/base;
+                rest %= base;
+                // cout << "rest: " << rest << ", base: " << base << endl;
+                if(dividend == 1){
+                    ans += memo[index-1] + rest + 1;
+                    // cout << index << ", " << memo[index-1] << ", " << rest << ", " << ans << endl;
+                }else{
+                    ans += memo[index-1] * dividend + base;
+                    // cout << index << ", " << memo[index-1] << ", " << dividend << ", " << base << ", " << ans << endl;
+                }
+            }
+            index--;
+            base /= 10;
+        }
+        // cout << endl;
+        
+        return ans;
+    }
+};
