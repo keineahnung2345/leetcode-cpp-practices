@@ -26,13 +26,31 @@ class Solution {
 public:
     void sortColors(vector<int>& nums) {
         int left = 0, cur = 0, right = nums.size()-1;
+        /*
+        left: right boundary of 0(exclusive), serves as the next position to place 0
+        right: left boundary of 2(exclusive), serves as the next position to place 2
+        cur: the right boundary of 1(inclusive)
+        */
         while (cur <= right) {
             // cout << left << " " << cur << " " << right << endl;
             if (nums[cur] == 0){
+                /*
+                put the number 0 to the position "left"
+                nums[left] will be put in nums[cur], it will be visited later
+                */
                 swap(nums[cur++], nums[left++]);
             }else if (nums[cur] == 2){
+                /*
+                put the number 0 to the position "right"
+                nums[right] will be put in nums[cur], it will be visited later
+                (look at the condition cur <= right)
+                */
                 swap(nums[cur], nums[right--]);
             }else{
+                /*
+                the number "1" is in right position,
+                so just move forward
+                */
                 cur++;
             }
             
