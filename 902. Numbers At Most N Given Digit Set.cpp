@@ -74,3 +74,94 @@ public:
         return dp[0];
     }
 };
+
+//Math
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Numbers At Most N Given Digit Set.
+//Memory Usage: 8.2 MB, less than 41.15% of C++ online submissions for Numbers At Most N Given Digit Set.
+//time: O(log10(N)), space: O(log10(N))
+class Solution {
+public:
+    int atMostNGivenDigitSet(vector<string>& D, int N) {
+        string S = to_string(N);
+        int K = S.size();
+        //1-based
+        //bijectoin is the bijection representation of largest number that <= N
+        vector<int> bijectoin(K);
+        int t = 0;
+        
+        for(char c : S){
+            // cout << "c: " << c << endl;
+            int c_index = 0;
+            bool match = false;
+            for(int i = 0; i < D.size(); i++){
+                if(c-'0' >= stoi(D[i])){
+                    c_index = i+1;
+                }
+                if(c-'0' == stoi(D[i])){
+                    match = true;
+                }
+            }
+            
+            // cout << D[t] << " -> " << c_index << endl;
+            // cout << "match: " << match << endl;
+            /*
+            c_index is the index in D(1-based) pointing to
+            a number just <= c
+            c_index may be 0(it's invalid value)
+            */
+            bijectoin[t++] = c_index;
+            /*
+            if we can find c in D,
+            we just map current char in S to i+1(1-based)
+            and move forward
+            */
+            if(match) continue;
+            
+            if(c_index == 0){
+                /*
+                that means we cannot find a c >= all D[i],
+                i.e. c is smaller than all D[i],
+                so we need to subtract 1
+                
+                j starts from t-1: because we want to overwrite 
+                previous bijection[t]
+                
+                j ends at 1: because we will use bijection[j-1]
+                */
+                for(int j = t-1; j > 0; j--){
+                    //?
+                    if(bijectoin[j] > 0) break;
+                    // bijectoin[j] += D.size();
+                    bijectoin[j] = D.size();
+                    bijectoin[j-1]--;
+                    // cout << D[j] << " -> " << bijectoin[j] << endl;
+                    // cout << D[j-1] << " -> " << bijectoin[j-1] << endl;
+                }
+            }
+            
+            /*
+            D = ['2', '4', '6', '8'], N = 5123
+            c_index will be 2 for the most significant digit 5,
+            we want bijection become 2444(represents for 4888)
+            */
+            while(t < K){
+                // cout << D[t] << " -> " << D.size() << endl;
+                bijectoin[t++] = D.size();
+            }
+            break;
+        }
+        
+        /*
+        convert base-(D.size()) positional notation 
+        to base-10 position notation
+        */
+        int ans = 0;
+        
+        for(int e : bijectoin){
+            ans = ans * D.size() + e;
+            // cout << "e: " << e << ", ans: " << ans << endl;
+        }
+        
+        return ans;
+    }
+};
