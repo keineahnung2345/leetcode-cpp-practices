@@ -61,6 +61,7 @@ public:
 //TLE
 //25 / 60 test cases passed.
 //https://leetcode.com/problems/paint-house-iii/discuss/674313/Simple-Python-explanation-and-why-I-prefer-top-down-DP-to-bottom-up
+//time: O(m*n^2*target), space: O(m*n*target)
 class Solution {
 public:
     /*
