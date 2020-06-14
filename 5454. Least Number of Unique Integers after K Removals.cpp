@@ -32,3 +32,53 @@ public:
         return pq.size();
     }
 };
+
+//sort
+//https://leetcode.com/problems/least-number-of-unique-integers-after-k-removals/discuss/686376/Simple-C%2B%2B-O(N-log-N)-VIDEO-SOL
+//Runtime: 444 ms, faster than 20.00% of C++ online submissions for Least Number of Unique Integers after K Removals.
+//Memory Usage: 61.2 MB, less than 100.00% of C++ online submissions for Least Number of Unique Integers after K Removals.
+class Solution {
+public:
+    int findLeastNumOfUniqueInts(vector<int>& arr, int k) {
+        unordered_map<int, int> counter;
+        
+        for(int& num : arr){
+            counter[num] += 1;
+        }
+        
+        //the actual number is not important, we only care their counts!
+        vector<int> vcounter(counter.size());
+        int i = 0;
+        for(auto it = counter.begin(); it != counter.end(); it++){
+            vcounter[i++] = it->second;
+        }
+        
+        //the smaller count, the earlier be processed
+        sort(vcounter.begin(), vcounter.end());
+        
+        // for(int e : vcounter){
+        //     cout << e << " ";
+        // }
+        // cout << endl;
+        
+        for(i = 0; i < vcounter.size() && k > 0; ){
+            if(k >= vcounter[i]){
+                k -= vcounter[i];
+                i++;
+            }else{
+                k = 0;
+                /*
+                vcounter[i] is not completely used,
+                so don't increase i
+                */
+            }
+        }
+        
+        /*
+        [0,i-1] is the removed elements,
+        [i, vcounter.size()-1] is the remaining elements,
+        remaining elements' count is vcounter.size()-i
+        */
+        return (vcounter.size() - i);
+    }
+};
