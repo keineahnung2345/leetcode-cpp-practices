@@ -49,3 +49,26 @@ public:
         return arr;
     }
 };
+
+//partial_sort
+//https://leetcode.com/problems/the-k-strongest-values-in-an-array/discuss/674384/C%2B%2BJavaPython-Two-Pointers-%2B-3-Bonuses
+//Runtime: 1508 ms, faster than 23.09% of C++ online submissions for The k Strongest Values in an Array.
+//Memory Usage: 80.4 MB, less than 100.00% of C++ online submissions for The k Strongest Values in an Array.
+//time: O(nlogk)
+class Solution {
+public:
+    vector<int> getStrongest(vector<int>& arr, int k) {
+        int n = arr.size();
+        if(n == 0) return arr;
+        //O(n)
+        nth_element(arr.begin(), arr.begin() + (n-1)/2, arr.end());
+        int median = arr[(n-1)/2];
+        //O(nlogk)
+        partial_sort(arr.begin(), arr.begin()+k, arr.end(),
+            [&median](const int& a, const int& b){
+                return abs(a-median) == abs(b-median) ? a > b : abs(a-median) > abs(b-median);
+            });
+        arr.resize(k);
+        return arr;
+    }
+};
