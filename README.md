@@ -8,7 +8,11 @@ Including problem statement, solution, runtime and complexity analysis.
 ## Monotonic stack
 [84. Largest Rectangle in Histogram.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/84.%20Largest%20Rectangle%20in%20Histogram.cpp)
 
+[503. Next Greater Element II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/503.%20Next%20Greater%20Element%20II.cpp)
+
 [901. Online Stock Span.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/901.%20Online%20Stock%20Span.cpp)
+
+[1475. Final Prices With a Special Discount in a Shop.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1475.%20Final%20Prices%20With%20a%20Special%20Discount%20in%20a%20Shop.cpp)
 
 ## Two pointers
 [11. Container With Most Water.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/11.%20Container%20With%20Most%20Water.cpp)
