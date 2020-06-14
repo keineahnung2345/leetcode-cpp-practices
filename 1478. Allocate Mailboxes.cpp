@@ -25,6 +25,13 @@ public:
             put one mailbox in [start, end] and 
             remaining k-1 mailboxes in [end+1, n-1]
             */
+            /*
+            if there are even houses, 
+            cost is minimum when mailbox is put inbetween
+            the two middle houses
+            if there are odd houses,
+            cost is minimum when mailbox is put at the middle house
+            */
             int median = houses[(start+end)/2];
             int cost = 0;
             for(int i = start; i <= end; i++){
@@ -121,5 +128,52 @@ public:
         }
         
         return dfs(houses, k, 0);
+    }
+};
+
+//bottom-up dp
+//Runtime: 36 ms, faster than 100.00% of C++ online submissions for Allocate Mailboxes.
+//Memory Usage: 9.4 MB, less than 50.00% of C++ online submissions for Allocate Mailboxes.
+class Solution {
+public:
+    int MAX = 1e8;
+    
+    int minDistance(vector<int>& houses, int k) {
+        int n = houses.size();
+        sort(houses.begin(), houses.end());
+        
+        vector<vector<int>> dp(k+1, vector<int>(n+1));
+        
+        vector<vector<int>> cost(n, vector<int>(n));
+        for(int i = 0; i < n; i++){
+            for(int j = i; j < n; j++){
+                for(int k = i; k <= j; k++){
+                    cost[i][j] += abs(houses[(i+j)/2] - houses[k]);
+                }
+            }
+        }
+        
+        //if(k == 0 && start == houses.size()) return 0;
+        dp[0][n] = 0;
+        //if(k == 0 || start == houses.size()) return MAX;
+        for(int start = 1; start < n; start++){
+            dp[0][start] = MAX;
+        }
+        for(int kk = 1; kk <= k; kk++){
+            dp[kk][n] = MAX;
+        }
+        
+        for(int kk = 1; kk <= k; kk++){
+            for(int start = 0; start < n; start++){
+                int res = MAX;
+                for(int end = start; end < n; end++){
+                    res = min(res, cost[start][end] + dp[kk-1][end+1]);
+                }
+                
+                dp[kk][start] = res;
+            }
+        }
+        
+        return dp[k][0];
     }
 };
