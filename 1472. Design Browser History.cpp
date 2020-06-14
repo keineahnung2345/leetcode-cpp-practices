@@ -150,3 +150,39 @@ public:
  * string param_2 = obj->back(steps);
  * string param_3 = obj->forward(steps);
  */
+
+//speed up "visit"
+//Runtime: 272 ms, faster than 93.82% of C++ online submissions for Design Browser History.
+//Memory Usage: 55 MB, less than 100.00% of C++ online submissions for Design Browser History.
+class BrowserHistory {
+public:
+    int cur = 0;
+    vector<string> hist;
+    
+    BrowserHistory(string homepage) {
+        hist.push_back(homepage);
+    }
+    
+    void visit(string url) {
+        hist.resize(++cur);
+        hist.push_back(url);
+    }
+    
+    string back(int steps) {
+        cur = max(0, cur-steps);
+        return hist[cur];
+    }
+    
+    string forward(int steps) {
+        cur = min((int)hist.size()-1, cur+steps);
+        return hist[cur];
+    }
+};
+
+/**
+ * Your BrowserHistory object will be instantiated and called as such:
+ * BrowserHistory* obj = new BrowserHistory(homepage);
+ * obj->visit(url);
+ * string param_2 = obj->back(steps);
+ * string param_3 = obj->forward(steps);
+ */
