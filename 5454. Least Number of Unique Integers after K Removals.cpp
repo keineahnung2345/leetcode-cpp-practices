@@ -1,5 +1,5 @@
-//TLE
-//43 / 43 test cases passed, but took too long.
+//Runtime: 1172 ms, faster than 20.00% of C++ online submissions for Least Number of Unique Integers after K Removals.
+//Memory Usage: 106.5 MB, less than 20.00% of C++ online submissions for Least Number of Unique Integers after K Removals.
 class Solution {
 public:
     int findLeastNumOfUniqueInts(vector<int>& arr, int k) {
