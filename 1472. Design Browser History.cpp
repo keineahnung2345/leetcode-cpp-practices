@@ -105,3 +105,48 @@ public:
  * string param_2 = obj->back(steps);
  * string param_3 = obj->forward(steps);
  */
+
+//one vector holding backward and forward history
+//https://leetcode.com/problems/design-browser-history/discuss/674300/Two-Stacks-vs.-List
+//Runtime: 448 ms, faster than 39.59% of C++ online submissions for Design Browser History.
+//Memory Usage: 55 MB, less than 100.00% of C++ online submissions for Design Browser History.
+class BrowserHistory {
+public:
+    int cur = 0;
+    vector<string> hist;
+    
+    BrowserHistory(string homepage) {
+        hist.push_back(homepage);
+    }
+    
+    void visit(string url) {
+        /*
+        hist[0...cur] is backward history
+        hist[cur+1...] is forward history
+        */
+        //remove forward history
+        hist.resize(cur+1);
+        //store it into backward history
+        hist.push_back(url);
+        //cur now points to last element in hist
+        cur++;
+    }
+    
+    string back(int steps) {
+        cur = max(0, cur-steps);
+        return hist[cur];
+    }
+    
+    string forward(int steps) {
+        cur = min((int)hist.size()-1, cur+steps);
+        return hist[cur];
+    }
+};
+
+/**
+ * Your BrowserHistory object will be instantiated and called as such:
+ * BrowserHistory* obj = new BrowserHistory(homepage);
+ * obj->visit(url);
+ * string param_2 = obj->back(steps);
+ * string param_3 = obj->forward(steps);
+ */
