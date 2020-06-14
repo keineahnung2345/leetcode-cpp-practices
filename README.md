@@ -287,6 +287,13 @@ Including problem statement, solution, runtime and complexity analysis.
 #### Two-constraint knapsack problem
 [474. Ones and Zeroes.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/474.%20Ones%20and%20Zeroes.cpp)
 
+### LIS
+[300. Longest Increasing Subsequence.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/300.%20Longest%20Increasing%20Subsequence.cpp)
+
+[354. Russian Doll Envelopes.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/354.%20Russian%20Doll%20Envelopes.cpp)
+
+[368. Largest Divisible Subset.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/368.%20Largest%20Divisible%20Subset.cpp)
+
 ## Dynamic Programming + Bitmask
 [A simple tutorial on this bitmasking problem](https://leetcode.com/problems/maximum-students-taking-exam/discuss/503686/A-simple-tutorial-on-this-bitmasking-problem)
 
