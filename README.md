@@ -14,6 +14,9 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [1475. Final Prices With a Special Discount in a Shop.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1475.%20Final%20Prices%20With%20a%20Special%20Discount%20in%20a%20Shop.cpp)
 
+## Monotonic queue
+[Monotonic Queue Summary](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/204290/Monotonic-Queue-Summary)
+
 ## Two pointers
 [11. Container With Most Water.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/11.%20Container%20With%20Most%20Water.cpp)
 
