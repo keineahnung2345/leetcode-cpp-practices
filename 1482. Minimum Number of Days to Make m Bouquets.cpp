@@ -75,3 +75,46 @@ public:
         return counter[left][0];
     }
 };
+
+//just binary search
+//https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/discuss/686316/JavaC%2B%2BPython-Binary-Search
+//Runtime: 364 ms, faster than 88.50% of C++ online submissions for Minimum Number of Days to Make m Bouquets.
+//Memory Usage: 63.3 MB, less than 10.00% of C++ online submissions for Minimum Number of Days to Make m Bouquets.
+//time: O(log(max(bloomDay))), space: O(1)
+class Solution {
+public:
+    int minDays(vector<int>& bloomDay, int m, int k) {
+        int n = bloomDay.size();
+        if(m*k > n) return -1;
+        
+        int left = 1, right = 1e9;
+        
+        while(left <= right){
+            int mid = left + (right - left)/2;
+            //window size and window count
+            int wsize = 0, wcount = 0;
+            for(int i = 0; i < bloomDay.size(); i++){
+                if(mid < bloomDay[i]){
+                    //the old window is broken
+                    wsize = 0;
+                }else if(++wsize >= k){
+                    //the window is large enough
+                    wcount++;
+                    //prepare for next iteration
+                    wsize = 0;
+                }
+            }
+            
+            if(wcount >= m){
+                right = mid-1;
+            }else{
+                left = mid+1;
+            }
+        }
+        /*
+        we can definitely find a day s.t. we can hold m bouquets,
+        because n >= m*k, we just wait until all flowers blossom
+        */
+        return left;
+    }
+};
