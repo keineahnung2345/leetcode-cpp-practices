@@ -1,3 +1,4 @@
+//sliding window + binary search
 //Runtime: 1744 ms, faster than 10.00% of C++ online submissions for Minimum Number of Days to Make m Bouquets.
 //Memory Usage: 165.3 MB, less than 10.00% of C++ online submissions for Minimum Number of Days to Make m Bouquets.
 class Solution {
