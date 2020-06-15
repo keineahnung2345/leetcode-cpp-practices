@@ -48,3 +48,58 @@ public:
  * TreeAncestor* obj = new TreeAncestor(n, parent);
  * int param_1 = obj->getKthAncestor(node,k);
  */
+
+//dp
+//binary lifting
+//https://leetcode.com/problems/kth-ancestor-of-a-tree-node/discuss/686362/JavaC%2B%2BPython-Binary-Lifting
+//Runtime: 844 ms, faster than 71.18% of C++ online submissions for Kth Ancestor of a Tree Node.
+//Memory Usage: 107.3 MB, less than 100.00% of C++ online submissions for Kth Ancestor of a Tree Node.
+//class TreeAncestor {
+public:
+    int maxJump;
+    vector<vector<int>> jump;
+    
+    TreeAncestor(int n, vector<int>& parent) {
+        /*
+        for a tree of n nodes,
+        we can jump at most "maxJump" times
+        */
+        maxJump = ceil(log(n));
+        //from 0 to maxJump
+        jump = vector<vector<int>>(maxJump+1, vector<int>(n));
+        
+        //jump 2^0 steps upward
+        jump[0] = parent;
+        
+        for(int j = 1; j <= maxJump; j++){
+            for(int node = 0; node < n; node++){
+                //from node, jump 2^(j-1) steps upward
+                int halfway = jump[j-1][node];
+                jump[j][node] = (halfway == -1) ? -1 : jump[j-1][halfway];
+            }
+        }
+    }
+    
+    int getKthAncestor(int node, int k) {
+        int j = maxJump;
+        while(node != -1 && k > 0){
+            if(k >= (1 << j)){
+                node = jump[j][node];
+                k -= (1 << j);
+            }else{
+                j--;
+            }
+        }
+        /*
+        jump out the loop when either node doesn't exist or 
+        we have jump all k steps upward
+        */
+        return node;
+    }
+};
+
+/**
+ * Your TreeAncestor object will be instantiated and called as such:
+ * TreeAncestor* obj = new TreeAncestor(n, parent);
+ * int param_1 = obj->getKthAncestor(node,k);
+ */
