@@ -6,6 +6,8 @@ Including problem statement, solution, runtime and complexity analysis.
 [Graph Problems For Beginners Practice [Problems and Sample Solutions]](https://leetcode.com/discuss/general-discussion/655708/graph-problems-for-beginners-practice-problems-and-sample-solutions)
 
 ## Monotonic stack
+[Python solution using monotonic stack, similar pattern questions listed](https://leetcode.com/problems/daily-temperatures/discuss/314477/python-solution-using-monotonic-stack-similar-pattern-questions-listed)
+
 [84. Largest Rectangle in Histogram.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/84.%20Largest%20Rectangle%20in%20Histogram.cpp)
 
 [503. Next Greater Element II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/503.%20Next%20Greater%20Element%20II.cpp)
@@ -16,6 +18,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 ## Monotonic queue
 [Monotonic Queue Summary](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/204290/Monotonic-Queue-Summary)
+
+[Monotonic Queue Explained with LeetCode Problems](https://medium.com/algorithms-and-leetcode/monotonic-queue-explained-with-leetcode-problems-7db7c530c1d6)
 
 ## Two pointers
 [11. Container With Most Water.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/11.%20Container%20With%20Most%20Water.cpp)
