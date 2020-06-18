@@ -128,3 +128,142 @@ public:
         return canWin(choosable, desiredTotal);
     }
 };
+
+//top-bottom dp, use vector<int> 
+//https://leetcode.com/problems/can-i-win/discuss/95320/Clean-C%2B%2B-beat-98.4-DFS-with-early-termination-check-(detailed-explanation)
+//Runtime: 48 ms, faster than 63.89% of C++ online submissions for Can I Win.
+//Memory Usage: 149.1 MB, less than 7.81% of C++ online submissions for Can I Win.
+class Solution {
+public:
+    vector<int> memo;
+    // int memo[1<<20];
+    
+    int canWin(int maxChoosableInteger, int state, int target){
+        /*
+        state: can be thought as bits s.t. 
+        ith bit represents integer i+1 is chosen or not
+        */
+        // cout << state << endl;
+        if(memo[state] != 0){
+            return memo[state] == 1;
+        }
+        
+        if(target <= 0){
+            return false;
+        }
+        
+        //once we can make the next player lose, we win
+        /*
+        i's range is [0, maxChoosableInteger-1], 
+        but it represents for the numbers to be chosen: [1, maxChoosableInteger]
+        */
+        for(int i = 0; i < maxChoosableInteger; i++){
+            /*
+            state&(1<<i): ith bit of state, represents for i+1 is chosen or not
+            state|(1<<i): saying that ith bit is already chosen
+            */
+            if(!(state&(1<<i)) && !canWin(maxChoosableInteger, state|(1<<i), target-(i+1))){
+                memo[state] = 1;
+                return true;
+            }
+        }
+        //the next player will win anyway
+        memo[state] = -1;
+        return false;
+    }
+    
+    bool canIWin(int maxChoosableInteger, int desiredTotal) {
+        if(desiredTotal <= maxChoosableInteger){
+            return true;
+        }
+        
+        int sum = (1+maxChoosableInteger)*maxChoosableInteger/2;
+        
+        /*
+        can't make up desiredTotal using [1, maxChoosableInteger],
+        so neither can win
+        */
+        if(sum < desiredTotal){
+            return false;
+        }else if(sum == desiredTotal){
+            /*
+            we will reach desiredTotal at last step,
+            so the player who choose the last integer will win,
+            i.e. when maxChoosableInteger is odd, 1st player will win
+            */
+            return maxChoosableInteger % 2;
+        }
+        
+        memo = vector<int>(1<<20, 0);
+        return canWin(maxChoosableInteger, 0, desiredTotal);
+    }
+};
+
+//top-bottom dp, use int array
+//Runtime: 16 ms, faster than 90.35% of C++ online submissions for Can I Win.
+//Memory Usage: 10.5 MB, less than 93.88% of C++ online submissions for Can I Win.
+class Solution {
+public:
+    // vector<int> memo;
+    int memo[1<<20];
+    
+    int canWin(int maxChoosableInteger, int state, int target){
+        /*
+        state: can be thought as bits s.t. 
+        ith bit represents integer i+1 is chosen or not
+        */
+        // cout << state << endl;
+        if(memo[state] != 0){
+            return memo[state] == 1;
+        }
+        
+        if(target <= 0){
+            return false;
+        }
+        
+        //once we can make the next player lose, we win
+        /*
+        i's range is [0, maxChoosableInteger-1], 
+        but it represents for the numbers to be chosen: [1, maxChoosableInteger]
+        */
+        for(int i = 0; i < maxChoosableInteger; i++){
+            /*
+            state&(1<<i): ith bit of state, represents for i+1 is chosen or not
+            state|(1<<i): saying that ith bit is already chosen
+            */
+            if(!(state&(1<<i)) && !canWin(maxChoosableInteger, state|(1<<i), target-(i+1))){
+                memo[state] = 1;
+                return true;
+            }
+        }
+        //the next player will win anyway
+        memo[state] = -1;
+        return false;
+    }
+    
+    bool canIWin(int maxChoosableInteger, int desiredTotal) {
+        if(desiredTotal <= maxChoosableInteger){
+            return true;
+        }
+        
+        int sum = (1+maxChoosableInteger)*maxChoosableInteger/2;
+        
+        /*
+        can't make up desiredTotal using [1, maxChoosableInteger],
+        so neither can win
+        */
+        if(sum < desiredTotal){
+            return false;
+        }else if(sum == desiredTotal){
+            /*
+            we will reach desiredTotal at last step,
+            so the player who choose the last integer will win,
+            i.e. when maxChoosableInteger is odd, 1st player will win
+            */
+            return maxChoosableInteger % 2;
+        }
+        
+        // memo = vector<int>(1<<20, 0);
+        return canWin(maxChoosableInteger, 0, desiredTotal);
+    }
+};
