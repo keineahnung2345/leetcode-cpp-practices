@@ -10,18 +10,18 @@ public:
         vector<int> bucket(N+1, 0);
         
         for(int citation : citations){
-            if(citation >= N){
-                bucket[N]++;
-            }else{
-                bucket[citation]++;
-            }
+            bucket[min(N, citation)]++;
         }
         
         int count = 0;
         for(int i = N; i >= 0; i--){
-            // count += bucket[i];
-            cout << i << " " << count << endl;
+            count += bucket[i];
+            // cout << i << " " << count << endl;
             if(count >= i){
+                /*
+                there are count papers having at least i citation,
+                and the other N-i papers having citation <= i
+                */
                 return i;
             }
         }
