@@ -75,6 +75,7 @@ public:
         }
         
         int maxChoosable;
+        //choosable[0] is just for padding, so we end at 1!
         for(int i = choosable.size()-1; i >= 1; i--){
             if(choosable[i]){
                 maxChoosable = i;
@@ -99,6 +100,7 @@ public:
         }
         
         //once we can make the next player lose, we win
+        //choosable[0] is just for padding, so we start from 1!
         for(int i = 1; i < choosable.size(); i++){
             if(choosable[i]){
                 bool nextCanWin;
