@@ -106,9 +106,9 @@ public:
 
 //dp + bit manipulation
 //https://leetcode.com/problems/kth-ancestor-of-a-tree-node/discuss/686362/JavaC%2B%2BPython-Binary-Lifting
-//fails when set "maxJump = ceil(log(n));", don't know why?
-//Runtime: 764 ms, faster than 78.89% of C++ online submissions for Kth Ancestor of a Tree Node.
-//Memory Usage: 111.6 MB, less than 100.00% of C++ online submissions for Kth Ancestor of a Tree Node.
+//fails when set "maxJump = ceil(log(n));" (log is different from log2!!)
+//Runtime: 556 ms, faster than 90.22% of C++ online submissions for Kth Ancestor of a Tree Node.
+//Memory Usage: 110.3 MB, less than 100.00% of C++ online submissions for Kth Ancestor of a Tree Node.
 class TreeAncestor {
 public:
     int maxJump;
@@ -119,8 +119,9 @@ public:
         for a tree of n nodes,
         we can jump at most "maxJump" times
         */
-        // maxJump = ceil(log(n));
-        maxJump = 20;
+        //notice the difference between log(it's natural log!) and log2(2-based)!!!
+        maxJump = ceil(log2(n))+1;
+        // maxJump = 20;
         //from 0 to maxJump
         jump = vector<vector<int>>(maxJump+1, vector<int>(n));
         
