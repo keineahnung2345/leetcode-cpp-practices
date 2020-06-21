@@ -154,10 +154,21 @@ public:
         return true;
     }
     int repeatedStringMatch(string A, string B) {
+        /*
+        the expanded A's length should be >= B's length
+        A.size() * q = B.size() + A.size() -1,
+        which is just larger than B.size(),
+        because (B.size() + A.size() -1) - A.size() =
+        B.size() - 1, this is smaller than B.size()
+        */
         int q = (B.size() - 1)/A.size() + 1;
+        //p: just a prime number
         int p = 113, MOD = 1000000007;
         int pInv = modInverse(p, MOD);
         
+        /*
+        hash(S) = p^0 * S[0] + p^1 * S[1] + ... + p^(n-1) * S[n-1]
+        */
         long long bHash = 0, power = 1;
         for(int i = 0; i < B.size(); i++){
             bHash += power * int(B[i]);
@@ -165,6 +176,10 @@ public:
             power = (power * p) % MOD;
         }
         
+        /*
+        first expand string A to B.size()
+        aHash: the hash of expanded string A
+        */
         long long aHash = 0;
         power = 1;
         for(int i = 0; i < B.size(); i++){
@@ -173,14 +188,35 @@ public:
             power = (power * p) % MOD;
         }
         
+        //now power = p^(n-1) % MOD
+        
         if(aHash == bHash && check(0, A, B)) return q;
         power = (power * pInv) % MOD;
+        //now power = p^(n-2) % MOD = p^(-1) % MOD(by Fermat's Little Theorem)
         
         for(int i = B.size(); i < (q + 1) * A.size(); i++){
+            /*
+            in each iteration, pop a char from front and append a char to tail
+            the (string represented by aHash)'s size remains B.size()
+            
+            S: the expanded string A
+            x: the char to be appended
+            n: the size of the expanded string A, here it's B.size()
+            p: the prime number
+            hash(S[1:] + x) = [hash(S) - S[0]]/p + p^(n-1)*x
+            */
+            //-S[0]
             aHash -= int(A[(i - B.size()) % A.size()]);
+            //divided by p
             aHash *= pInv;
+            //power: p^(n-1)
+            //A[i % A.size()]: the appended char
             aHash += power * int(A[i % A.size()]);
             aHash %= MOD;
+            /*
+            i - B.size() + 1: the first char in current string 
+            represented by aHash is A[(i - B.size() + 1)%A.size()]
+            */
             if(aHash == bHash && check(i - B.size() + 1, A, B)){
                 return i < q * A.size() ? q : q+1;
             }
