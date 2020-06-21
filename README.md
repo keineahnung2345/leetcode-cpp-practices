@@ -342,6 +342,11 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [647. Palindromic Substrings.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/647.%20Palindromic%20Substrings.cpp)
 
+## Rolling hash, Rabin-Karp
+[686. Repeated String Match.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/686.%20Repeated%20String%20Match.cpp)
+
+[1147. Longest Chunked Palindrome Decomposition.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1147.%20Longest%20Chunked%20Palindrome%20Decomposition.cpp)
+
 ## Deque
 [239. Sliding Window Maximum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/239.%20Sliding%20Window%20Maximum.cpp)
 
