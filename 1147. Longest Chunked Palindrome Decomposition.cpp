@@ -59,28 +59,46 @@ public:
         int ans = 0;
         
         while(low < high){
+            /*
+            construct a substring from the beginning by appending text[low],
+            and cur_low_hash is its hash value,
+            note that the newest char has smallest multiplier
+            */
             cur_low_hash = (cur_low_hash * 26)%magic_prime;
             cur_low_hash += (text[low]-'a');
             cur_low_hash %= magic_prime;
             
             //pow(26, cur_hash_length) cannot give corrent result even if using long long int in C++
+            /*
+            construct a substring from the end by appending text[high],
+            and cur_high_hash is its hash value,
+            note that the newest char has largest multiplier
+            */
             cur_high_hash += (text[high]-'a')*((long long int)pow(26, cur_hash_length)%magic_prime);
             cur_high_hash %= magic_prime;
             
+            //move the two pointers
             low++;
             high--;
+            //the length of the substring represented by cur_low_hash and cur_high_hash
             cur_hash_length++;
             
+            /*
+            first compare the two substrings' hash values,
+            if they are equal, then compare the two substrings themselves
+            */
             if(cur_low_hash == cur_high_hash && text.substr(low-cur_hash_length, cur_hash_length) == text.substr(high+1, cur_hash_length)){
+                //found two more groups
                 ans += 2;
+                //reset the states
                 cur_low_hash = 0;
                 cur_high_hash = 0;
                 cur_hash_length = 0;
             }
         }
         
-        //only leave a char in the middle(odd N)
-        //cannot find palindrome pair on two sides of the middle(even N)
+        //edge case 1: only leave a char in the middle(odd N)
+        //edge case 2: cannot find palindrome pair on two sides of the middle(even N)
         if((cur_hash_length == 0 && low == high) || cur_hash_length > 0){
             ans++;
         }
