@@ -48,10 +48,19 @@ public:
 
 //Rolling hash, Rabin Karp algorithm, two pointer
 //https://leetcode.com/problems/longest-chunked-palindrome-decomposition/discuss/350711/Close-to-O(n)-Python-Rabin-Karp-Algorithm-with-two-pointer-technique-with-explanation-(~40ms)
-//WA(long long int overflow)
-//62 / 82 test cases passed.
+//Runtime: 4 ms, faster than 88.66% of C++ online submissions for Longest Chunked Palindrome Decomposition.
+//Memory Usage: 6.6 MB, less than 81.82% of C++ online submissions for Longest Chunked Palindrome Decomposition.
 class Solution {
 public:
+    int power(int x, unsigned int y, unsigned int m){ 
+        if (y == 0) 
+            return 1; 
+        long long p = power(x, y/2, m) % m; 
+        p = (p * p) % m; 
+
+        return (y%2 == 0)? p : (x * p) % m; 
+    };
+    
     int longestDecomposition(string text) {
         int magic_prime = 107;
         int low = 0, high = text.size()-1;
@@ -74,7 +83,7 @@ public:
             and cur_high_hash is its hash value,
             note that the newest char has largest multiplier
             */
-            cur_high_hash += (text[high]-'a')*((long long int)pow(26, cur_hash_length)%magic_prime);
+            cur_high_hash += (text[high]-'a')*(power(26, cur_hash_length, magic_prime));
             cur_high_hash %= magic_prime;
             
             //move the two pointers
