@@ -24,9 +24,13 @@ Including problem statement, solution, runtime and complexity analysis.
 [Monotonic Queue Explained with LeetCode Problems](https://medium.com/algorithms-and-leetcode/monotonic-queue-explained-with-leetcode-problems-7db7c530c1d6)
 
 ## Bit manipulation
+[Detailed explanation and generalization of the bitwise operation method for single numbers](https://leetcode.com/problems/single-number-ii/discuss/43295/Detailed-explanation-and-generalization-of-the-bitwise-operation-method-for-single-numbers)
+
 [136. Single Number.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/136.%20Single%20Number.cpp)
 
 [137. Single Number II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/137.%20Single%20Number%20II.cpp)
+
+[260. Single Number III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/260.%20Single%20Number%20III.cpp)
 
 [169. Majority Element.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/169.%20Majority%20Element.cpp)
 
