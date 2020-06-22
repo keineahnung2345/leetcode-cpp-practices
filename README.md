@@ -23,6 +23,29 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [Monotonic Queue Explained with LeetCode Problems](https://medium.com/algorithms-and-leetcode/monotonic-queue-explained-with-leetcode-problems-7db7c530c1d6)
 
+## Bit manipulation
+[136. Single Number.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/136.%20Single%20Number.cpp)
+
+[137. Single Number II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/137.%20Single%20Number%20II.cpp)
+
+[169. Majority Element.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/169.%20Majority%20Element.cpp)
+
+[187. Repeated DNA Sequences.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/187.%20Repeated%20DNA%20Sequences.cpp)
+
+[190. Reverse Bits.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/190.%20Reverse%20Bits.cpp)
+
+[191. Number of 1 Bits.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/191.%20Number%20of%201%20Bits.cpp)
+
+[239. Sliding Window Maximum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/239.%20Sliding%20Window%20Maximum.cpp)
+
+[268. Missing Number.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/268.%20Missing%20Number.cpp)
+
+[338. Counting Bits.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/338.%20Counting%20Bits.cpp)
+
+[342. Power of Four.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/342.%20Power%20of%20Four.cpp)
+
+[477. Total Hamming Distance.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/477.%20Total%20Hamming%20Distance.cpp)
+
 ## Two pointers
 [11. Container With Most Water.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/11.%20Container%20With%20Most%20Water.cpp)
 
