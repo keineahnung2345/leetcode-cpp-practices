@@ -19,3 +19,31 @@ public:
         return ans;
     }
 };
+
+//bit manipulation
+//https://leetcode.com/problems/single-number-iii/discuss/68900/Accepted-C%2B%2BJava-O(n)-time-O(1)-space-Easy-Solution-with-Detail-Explanations
+//Runtime: 20 ms, faster than 59.77% of C++ online submissions for Single Number III.
+//Memory Usage: 10.1 MB, less than 54.17% of C++ online submissions for Single Number III.
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+        //xor all the numbers
+        int diff = accumulate(nums.begin(), nums.end(), 0, bit_xor<int>());
+        //get least significant bit
+        diff &= ~(diff-1);
+        
+        vector<int> ans(2, 0);
+        
+        for(int& num : nums){
+            if(num & diff){
+                //group 1: set at "diff"'s bit
+                ans[0] ^= num;
+            }else{
+                //group 2: not set at "diff"'s bit
+                ans[1] ^= num;
+            }
+        }
+        
+        return ans;
+    }
+};
