@@ -4,6 +4,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [HassanElDesouky/AwesomeLeetCodeDiscussions](https://github.com/HassanElDesouky/AwesomeLeetCodeDiscussions)
 
+[Interview Preparation for Beginners - [ DS | Algorithms | OS | System Design ]](https://leetcode.com/discuss/general-discussion/698684/interview-preparation-for-beginners-ds-algorithms-os-system-design)
+
 ## Graph
 [Graph Problems For Beginners Practice [Problems and Sample Solutions]](https://leetcode.com/discuss/general-discussion/655708/graph-problems-for-beginners-practice-problems-and-sample-solutions)
 
