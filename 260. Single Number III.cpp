@@ -31,6 +31,8 @@ public:
         int diff = accumulate(nums.begin(), nums.end(), 0, bit_xor<int>());
         //get least significant bit
         diff &= ~(diff-1);
+        //another way
+        //diff &= -diff;
         
         vector<int> ans(2, 0);
         
