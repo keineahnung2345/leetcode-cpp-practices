@@ -20,7 +20,26 @@ public:
         
         for(int row = 1; row < m; ++row){
             for(int col = 1; col < n; ++col){
-                //starts from position with higher minhp
+                /*
+                starts from position with higher minhp
+                if minhp are the same, comes from higher hp
+                but this algorithm will fail on example like:
+                [[1,-3,3],
+                [0,-2,0],
+                [-3,-3,-3]]
+                because when we are at (1,2), it will choose to
+                start from (1,1), but actually start from (0,2)
+                give us higher hp
+                1 -2 1 
+                1 -1 -1 
+                -2 -4 -4 
+                (hp)
+                
+                1 -2 -2 
+                1 -1 -1 
+                -2 -4 -4
+                (minhp)
+                */
                 if(minhp[row-1][col] > minhp[row][col-1]){
                     //accumulated hp
                     hp[row][col] += hp[row-1][col];
