@@ -174,3 +174,62 @@ public:
         return minhp[0][0];
     }
 };
+
+//binary search, DP
+//https://leetcode.com/problems/dungeon-game/discuss/698212/Java-Binary-search-on-answer-and-check-if-true
+//Runtime: 40 ms, faster than 5.21% of C++ online submissions for Dungeon Game.
+//Memory Usage: 11.8 MB, less than 5.33% of C++ online submissions for Dungeon Game.
+class Solution {
+public:
+    int m, n;
+    bool isReachable(vector<vector<int>>& dungeon, int initial_hp){
+        //padding left and top
+        vector<vector<int>> hp(m, vector<int>(n));
+        
+        hp[0][0] = dungeon[0][0] + initial_hp;
+        
+        for(int i = 0; i < m; ++i){
+            for(int j = 0; j < n; ++j){
+                /*
+                we can come from (i-1,j) if we survive at (i-1,j),
+                i.e. hp[i-1][j] > 0
+                */
+                hp[i][j] = max({hp[i][j], 
+                (i > 0 && hp[i-1][j] > 0) ? hp[i-1][j] + dungeon[i][j] : 0,
+                (j > 0 && hp[i][j-1] > 0) ? hp[i][j-1] + dungeon[i][j] : 0});
+            }
+        }
+        
+        return hp[m-1][n-1] > 0;
+    };
+    
+    int calculateMinimumHP(vector<vector<int>>& dungeon) {
+        m = dungeon.size();
+        n = dungeon[0].size();
+        
+        int left = 1, right = 0;
+        int mid;
+        
+        for(int i = 0; i < m; ++i){
+            for(int j = 0; j < n; ++j){
+                if(dungeon[i][j] < 0){
+                    right += (-dungeon[i][j]);
+                }
+            }
+        }
+        ++right;
+        
+        //find left boundary
+        while(left <= right){
+            mid = left + (right - left)/2;
+            
+            if(isReachable(dungeon, mid)){
+                right = mid-1;
+            }else{
+                left = mid+1;
+            }
+        }
+        
+        return left;
+    }
+};
