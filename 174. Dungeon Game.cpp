@@ -146,6 +146,8 @@ public:
 
 //DP, cleaner
 //https://leetcode.com/problems/dungeon-game/discuss/698271/Python-Short-DP-7-lines-O(mn)-top-down-explained
+//Runtime: 12 ms, faster than 83.36% of C++ online submissions for Dungeon Game.
+//Memory Usage: 9 MB, less than 55.57% of C++ online submissions for Dungeon Game.
 class Solution {
 public:
     int calculateMinimumHP(vector<vector<int>>& dungeon) {
