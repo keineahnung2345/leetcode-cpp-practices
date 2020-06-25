@@ -69,3 +69,49 @@ public:
             (height(root->right) == h-1) ? (1 << h) + countNodes(root->right) : (1 << h-1) + countNodes(root->left);
     }
 };
+
+//iterative version
+//https://leetcode.com/problems/count-complete-tree-nodes/discuss/61958/Concise-Java-solutions-O(log(n)2)
+//Runtime: 48 ms, faster than 34.76% of C++ online submissions for Count Complete Tree Nodes.
+//Memory Usage: 30.9 MB, less than 73.37% of C++ online submissions for Count Complete Tree Nodes.
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int height(TreeNode* node){
+        return (node == nullptr) ? -1 : 1 + height(node->left);
+    };
+    
+    int countNodes(TreeNode* root) {
+        int count = 0, h = height(root);
+        
+        while(root != nullptr){
+            if(height(root->right) == h-1){
+                //add left subtree and root's count
+                count += (1<<h);
+                root = root->right;
+            }else{
+                //add right subtree and root's count
+                count += (1<<h-1);
+                root = root->left;
+            }
+            /*
+            in next iteration,
+            we look into the incomplete left or right subtree,
+            and it's height is current height -1
+            */
+            --h;
+        }
+        
+        return count;
+    }
+};
