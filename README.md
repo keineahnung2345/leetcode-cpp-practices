@@ -374,6 +374,8 @@ Including problem statement, solution, runtime and complexity analysis.
 ## Rolling hash, Rabin-Karp
 [686. Repeated String Match.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/686.%20Repeated%20String%20Match.cpp)
 
+[1044. Longest Duplicate Substring.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1044.%20Longest%20Duplicate%20Substring.cpp)
+
 [1147. Longest Chunked Palindrome Decomposition.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1147.%20Longest%20Chunked%20Palindrome%20Decomposition.cpp)
 
 ## Deque
