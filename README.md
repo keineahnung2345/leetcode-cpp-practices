@@ -4,7 +4,11 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [HassanElDesouky/AwesomeLeetCodeDiscussions](https://github.com/HassanElDesouky/AwesomeLeetCodeDiscussions)
 
+[Important and Useful links from all over the Leetcode](https://leetcode.com/discuss/general-discussion/665604/Important-and-Useful-links-from-all-over-the-Leetcode)
+
 [Interview Preparation for Beginners - [ DS | Algorithms | OS | System Design ]](https://leetcode.com/discuss/general-discussion/698684/interview-preparation-for-beginners-ds-algorithms-os-system-design)
+
+[Comprehensive Data Structure and Algorithm Study Guide](https://leetcode.com/discuss/general-discussion/494279/Comprehensive-Data-Structure-and-Algorithm-Study-Guide)
 
 ## Graph
 [Graph Problems For Beginners Practice [Problems and Sample Solutions]](https://leetcode.com/discuss/general-discussion/655708/graph-problems-for-beginners-practice-problems-and-sample-solutions)
@@ -227,6 +231,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [How to solve DP - String? Template and 4 Steps to be followed.](https://leetcode.com/discuss/general-discussion/651719/how-to-solve-dp-string-template-and-4-steps-to-be-followed)
 
+[My experience and notes for learning DP](https://leetcode.com/discuss/general-discussion/475924/My-experience-and-notes-for-learning-DP)
+
 [62. Unique Paths.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/62.%20Unique%20Paths.cpp)
 
 [63. Unique Paths II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/63.%20Unique%20Paths%20II.cpp)
@@ -371,6 +377,9 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [647. Palindromic Substrings.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/647.%20Palindromic%20Substrings.cpp)
 
+## Greedy
+[Greedy for Beginners [Problems | Sample solutions]](https://leetcode.com/discuss/general-discussion/669996/Greedy-for-Beginners-Problems-or-Sample-solutions)
+
 ## Rolling hash, Rabin-Karp
 [686. Repeated String Match.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/686.%20Repeated%20String%20Match.cpp)
 
@@ -388,6 +397,8 @@ Including problem statement, solution, runtime and complexity analysis.
 [1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1438.%20Longest%20Continuous%20Subarray%20With%20Absolute%20Diff%20Less%20Than%20or%20Equal%20to%20Limit.cpp)
 
 ## Trie
+
+[Article on Trie. General Template and List of problems.](https://leetcode.com/discuss/general-discussion/680706/Article-on-Trie.-General-Template-and-List-of-problems.)
 
 [208. Implement Trie (Prefix Tree).cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/208.%20Implement%20Trie%20(Prefix%20Tree).cpp)
 
