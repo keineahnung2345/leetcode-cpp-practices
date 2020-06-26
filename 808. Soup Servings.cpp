@@ -110,6 +110,7 @@ public:
     
     double soupServings(int N) {
         if(N > 4800) return 1.0;
+        //200 because 4800/25+1=193, it's around 200
         memo = vector<vector<double>>(200, vector<double>(200));
         //conversion from 25's multiple to the number of spoons
         return f(ceil((double)N/25), ceil((double)N/25));
