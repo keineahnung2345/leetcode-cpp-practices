@@ -93,7 +93,7 @@ public:
     }
 };
 
-//conversion
+//conversion, using array
 //https://leetcode.com/problems/soup-servings/discuss/121711/C%2B%2BJavaPython-When-N-greater-4800-just-return-1
 //Runtime: 4 ms, faster than 69.96% of C++ online submissions for Soup Servings.
 //Memory Usage: 6.2 MB, less than 95.45% of C++ online submissions for Soup Servings.
