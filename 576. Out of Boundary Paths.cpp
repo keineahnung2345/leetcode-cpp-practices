@@ -1,6 +1,8 @@
 //dfs + memorization
 //TLE
 //22 / 94 test cases passed.
+//without memorization: time: O(4^N), space: O(N)
+//time: O(mnN), space: O(mnN)
 class Solution {
 public:
     int dp[51][50][50];
