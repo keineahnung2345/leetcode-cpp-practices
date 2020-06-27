@@ -1,6 +1,8 @@
+//Pigeonhole principle
 //https://leetcode.com/problems/smallest-integer-divisible-by-k/discuss/260875/Python-O(K)-with-Detailed-Explanations
 //Runtime: 104 ms, faster than 7.42% of C++ online submissions for Smallest Integer Divisible by K.
 //Memory Usage: 14.4 MB, less than 5.63% of C++ online submissions for Smallest Integer Divisible by K.
+//time: O(K), space: O(K)
 class Solution {
 public:
     int smallestRepunitDivByK(int K) {
