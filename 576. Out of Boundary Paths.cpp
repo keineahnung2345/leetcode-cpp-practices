@@ -1,7 +1,40 @@
 //dfs + memorization
-//TLE
-//22 / 94 test cases passed.
+//Runtime: 12 ms, faster than 69.88% of C++ online submissions for Out of Boundary Paths.
+//Memory Usage: 9.5 MB, less than 40.39% of C++ online submissions for Out of Boundary Paths.
 //without memorization: time: O(4^N), space: O(N)
+//time: O(mnN), space: O(mnN)
+class Solution {
+public:
+    vector<vector<vector<int>>> dp;
+    int MOD = 1e9+7;
+    
+    int dfs(int m, int n, int N, int i, int j) {
+        if(i < 0 || i == m || j < 0 || j == n) return 1;
+        if(N == 0) return 0;
+        if(dp[N][i][j] >= 0) return dp[N][i][j];
+        
+        //dfs, not findPaths!!
+        int a = dfs(m, n, N-1, i, j-1);
+        int b = dfs(m, n, N-1, i, j+1);
+        int c = dfs(m, n, N-1, i-1, j);
+        int d = dfs(m, n, N-1, i+1, j);
+        
+        return dp[N][i][j] = (((a+b)%MOD + c)%MOD +d) % MOD;
+    }
+    
+    int findPaths(int m, int n, int N, int i, int j) {
+        if(i < 0 || i == m || j < 0 || j == n) return 1;
+        if(N == 0) return 0;
+        
+        dp = vector<vector<vector<int>>>(N+1, vector<vector<int>>(m, vector<int>(n, -1)));
+        
+        return dfs(m, n, N, i, j);
+    }
+};
+
+//dfs + memorization, change vector to array
+//Runtime: 4 ms, faster than 98.07% of C++ online submissions for Out of Boundary Paths.
+//Memory Usage: 6.5 MB, less than 86.03% of C++ online submissions for Out of Boundary Paths.
 //time: O(mnN), space: O(mnN)
 class Solution {
 public:
@@ -13,10 +46,10 @@ public:
         if(N == 0) return 0;
         if(dp[N][i][j] >= 0) return dp[N][i][j];
         
-        int a = findPaths(m, n, N-1, i, j-1);
-        int b = findPaths(m, n, N-1, i, j+1);
-        int c = findPaths(m, n, N-1, i-1, j);
-        int d = findPaths(m, n, N-1, i+1, j);
+        int a = dfs(m, n, N-1, i, j-1);
+        int b = dfs(m, n, N-1, i, j+1);
+        int c = dfs(m, n, N-1, i-1, j);
+        int d = dfs(m, n, N-1, i+1, j);
         
         return dp[N][i][j] = (((a+b)%MOD + c)%MOD +d) % MOD;
     }
