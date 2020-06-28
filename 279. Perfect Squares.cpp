@@ -96,3 +96,85 @@ public:
         return dp[n];
     }
 };
+
+//Math 1
+//https://leetcode.com/problems/perfect-squares/discuss/71533/O(sqrt(n))-in-Ruby-C%2B%2B-C
+//Runtime: 4 ms, faster than 98.45% of C++ online submissions for Perfect Squares.
+//Memory Usage: 5.9 MB, less than 96.71% of C++ online submissions for Perfect Squares.
+//time: O(sqrt(N)), space: O(1)
+class Solution {
+public:
+    int numSquares(int n) {
+        /*
+        if n = 4^a*(8b+7),
+        n is a sum of 4 squares
+        */
+        while(n % 4 == 0){
+            n /= 4;
+        }
+        
+        if(n%8 == 7) return 4;
+        
+        for(int a = 0; a*a <= n; ++a){
+            int b = sqrt(n-a*a);
+            if(a*a + b*b == n){
+                //!!a: (a != 0)
+                return 1 + !!a;
+            }
+        }
+        
+        return 3;
+    }
+};
+
+//Math 2
+//https://leetcode.com/problems/perfect-squares/discuss/71533/O(sqrt(n))-in-Ruby-C%2B%2B-C
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Perfect Squares.
+//Memory Usage: 5.9 MB, less than 99.60% of C++ online submissions for Perfect Squares.
+//time: O(sqrt(N)), space: O(1)
+class Solution {
+public:
+    int numSquares(int n) {
+        /*
+        if n = 4^a*(8b+7),
+        n is a sum of 4 squares
+        */
+        while(n % 4 == 0){
+            n /= 4;
+        }
+        
+        if(n%8 == 7) return 4;
+        
+        bool min2 = false;
+        
+        for(int factor = 2; factor <= n; ++factor){
+            //?
+            if(factor > n/factor){
+                factor = n;
+            }
+            
+            int exp = 0;
+            while(n % factor == 0){
+                n /= factor;
+                ++exp;
+            }
+            
+            //one of the factors is 3 modulo 4
+            if(factor%4 == 3 && exp%2 == 1){
+                return 3;
+            }
+            
+            /*
+            if there is a factor whose exp is odd,
+            then min2 will be 1
+            */
+            min2 |= exp%2;
+        }
+        
+        /*
+        if every factor's power is even,
+        then return 1, o.w. return 2
+        */
+        return 1 + min2;
+    }
+};
