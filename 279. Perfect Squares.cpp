@@ -178,3 +178,59 @@ public:
         return 1 + min2;
     }
 };
+
+//BFS
+//https://leetcode.com/problems/perfect-squares/discuss/71488/Summary-of-4-different-solutions-(BFS-DP-static-DP-and-mathematics)
+//Runtime: 32 ms, faster than 91.85% of C++ online submissions for Perfect Squares.
+//Memory Usage: 11 MB, less than 21.42% of C++ online submissions for Perfect Squares.
+class Solution {
+public:
+    int numSquares(int n) {
+        if(n <= 0) return 0;
+        
+        vector<int> perfectSquares;
+        //padding ahead
+        vector<int> cntPerfectSquares(n+1);
+        
+        for(int i = 0; i*i <= n; ++i){
+            perfectSquares.push_back(i*i);
+            cntPerfectSquares[i*i] = 1;
+        }
+        
+        if(perfectSquares.back() == n){
+            return 1;
+        }
+        
+        queue<int> q;
+        for(int& e : perfectSquares){
+            q.push(e);
+        }
+        
+        //also, the level of the tree
+        int currCntPerfectSquares = 1;
+        //bfs
+        while(!q.empty()){
+            ++currCntPerfectSquares;
+            int levelSize = q.size();
+            
+            while(levelSize-- > 0){
+                int node = q.front(); q.pop();
+                
+                for(auto& ps : perfectSquares){
+                    if(node + ps == n){
+                        return currCntPerfectSquares;
+                    }else if(node+ps <= n && cntPerfectSquares[node+ps] == 0){
+                        //node+ps is what we focus and not visited yet
+                        cntPerfectSquares[node+ps] = currCntPerfectSquares;
+                        q.push(node+ps);
+                    }else if(node+ps > n){
+                        //only focus on numbers <= n
+                        break;
+                    }
+                }
+            }
+        }
+        
+        return 0;
+    }
+};
