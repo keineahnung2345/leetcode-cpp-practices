@@ -62,7 +62,19 @@ public:
         //padding ahead
         /*
         https://leetcode.com/problems/perfect-squares/discuss/71512/Static-DP-C++-12-ms-Python-172-ms-Ruby-384-ms/173951
-        it's not magic by C++, but from leetcode, to save computing, leetcode will not clear your initialization in each testcase. that means, if you use static, your previous caching will be used by later case. you know, this is cheating. and I don't recommend people to use leetcode specified code. in the real interview, you won't have the cheating chance.
+        it's not magic by C++, but from leetcode, to save computing, 
+        leetcode will not clear your initialization in each testcase. 
+        that means, if you use static, 
+        your previous caching will be used by later case. 
+        you know, this is cheating. 
+        and I don't recommend people to use leetcode specified code. 
+        in the real interview, you won't have the cheating chance.
+        */
+        /*
+        note: if we create a fixed size vector, 
+        it will generate heap-buffer-overflow,
+        because leetcode is reusing the vector, 
+        so we need to dynamically change its size to fit different testcases
         */
         static vector<int> dp = {0};
         
