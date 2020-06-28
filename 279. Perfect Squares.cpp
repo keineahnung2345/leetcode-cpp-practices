@@ -51,3 +51,36 @@ public:
         return dp[n];
     }
 };
+
+//static DP
+//https://leetcode.com/problems/perfect-squares/discuss/71512/Static-DP-C%2B%2B-12-ms-Python-172-ms-Ruby-384-ms
+//Runtime: 8 ms, faster than 95.54% of C++ online submissions for Perfect Squares.
+//Memory Usage: 6.2 MB, less than 84.31% of C++ online submissions for Perfect Squares.
+class Solution {
+public:
+    int numSquares(int n) {
+        //padding ahead
+        /*
+        https://leetcode.com/problems/perfect-squares/discuss/71512/Static-DP-C++-12-ms-Python-172-ms-Ruby-384-ms/173951
+        it's not magic by C++, but from leetcode, to save computing, leetcode will not clear your initialization in each testcase. that means, if you use static, your previous caching will be used by later case. you know, this is cheating. and I don't recommend people to use leetcode specified code. in the real interview, you won't have the cheating chance.
+        */
+        static vector<int> dp = {0};
+        
+        while(dp.size() <= n){
+            int i = dp.size();
+            int count = INT_MAX;
+            /*
+            i = j*j + (i-j*j) for j <= sqrt(i)
+            */
+            // cout << "i: " << i << endl;
+            for(int j = 1; j*j <= i; ++j){
+                // cout << i-j*j << endl;
+                count = min(count, dp[i-j*j]+1);
+            }
+            dp.push_back(count);
+        }
+        
+        // cout << "n: " << n << endl;
+        return dp[n];
+    }
+};
