@@ -80,3 +80,45 @@ public:
         return head;
     }
 };
+
+//Approach 5: Merge with Divide And Conquer
+//Runtime: 16 ms, faster than 99.77% of C++ online submissions for Merge k Sorted Lists.
+//Memory Usage: 12.3 MB, less than 40.56% of C++ online submissions for Merge k Sorted Lists.
+//time: O(NlogK), space: O(1)
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        if(l1 == nullptr) return l2;
+        if(l2 == nullptr) return l1;
+        if(l1->val <= l2->val){
+            l1->next = mergeTwoLists(l1->next, l2);
+            return l1;
+        }else{
+            l2->next = mergeTwoLists(l2->next, l1);
+            return l2;
+        }
+    };
+    
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        int n = lists.size();
+        if(n == 0) return nullptr;
+        
+        int interval = 1;
+        
+        /*
+        divide and conquer
+        l0, l1, l2, l3, l4, l5
+        -> new l0(l0+l1), new l2(l2+l3), new l4(l4+l5)
+        -> new l0(l0+l2), l4
+        -> new l0(l0+l4)
+        */
+        while(interval < n){
+            for(int i = 0; i+interval < n; i += interval*2){
+                lists[i] = mergeTwoLists(lists[i], lists[i+interval]);
+            }
+            interval *= 2;
+        }
+        
+        return lists[0];
+    }
+};
