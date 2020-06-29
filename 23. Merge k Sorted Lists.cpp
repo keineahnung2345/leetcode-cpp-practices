@@ -51,10 +51,11 @@ public:
     }
 };
 
-//recursion
-//https://leetcode.com/problems/merge-two-sorted-lists/discuss/9715/Java-1-ms-4-lines-codes-using-recursion
-//Runtime: 8 ms, faster than 71.22% of C++ online submissions for Merge Two Sorted Lists.
-//Memory Usage: 14.3 MB, less than 94.06% of C++ online submissions for Merge Two Sorted Lists.
+//Approach 4: Merge lists one by one
+//extended from "21. Merge Two Sorted Lists"
+//Runtime: 248 ms, faster than 14.96% of C++ online submissions for Merge k Sorted Lists.
+//Memory Usage: 12.1 MB, less than 61.91% of C++ online submissions for Merge k Sorted Lists.
+//time: O(KN), space: O(1)
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
@@ -67,33 +68,15 @@ public:
             l2->next = mergeTwoLists(l2->next, l1);
             return l2;
         }
-    }
-};
-
-//iterative
-//https://leetcode.com/problems/merge-two-sorted-lists/discuss/9735/Python-solutions-(iteratively-recursively-iteratively-in-place).
-//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Merge Two Sorted Lists.
-//Memory Usage: 14.5 MB, less than 55.22% of C++ online submissions for Merge Two Sorted Lists.
-class Solution {
-public:
-    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        ListNode *head = new ListNode(-1);
-        ListNode *cur = head;
+    };
+    
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        ListNode *head = nullptr;
         
-        while(l1 != nullptr && l2 != nullptr){
-            if(l1->val <= l2->val){
-                cur->next = l1;
-                l1 = l1->next;
-            }else{
-                cur->next = l2;
-                l2 = l2->next;
-            }
-            cur = cur->next;
+        for(int i = 0; i < lists.size(); ++i){
+            head = mergeTwoLists(head, lists[i]);
         }
         
-        if(l1 != nullptr) cur->next = l1;
-        else if(l2 != nullptr) cur->next = l2;
-        
-        return head->next;
+        return head;
     }
 };
