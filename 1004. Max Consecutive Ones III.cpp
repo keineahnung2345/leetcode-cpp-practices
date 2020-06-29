@@ -35,3 +35,40 @@ public:
         return ans;
     }
 };
+
+//sliding window
+//not understand
+//https://leetcode.com/problems/max-consecutive-ones-iii/discuss/247564/JavaC%2B%2BPython-Sliding-Window
+//Runtime: 188 ms, faster than 15.66% of C++ online submissions for Max Consecutive Ones III.
+//Memory Usage: 55.5 MB, less than 50.08% of C++ online submissions for Max Consecutive Ones III.
+class Solution {
+public:
+    int longestOnes(vector<int>& A, int K) {
+        int slow, fast;
+        
+        /*
+        slow and fast are not exact index to the array,
+        they only specify the size of the window
+        in the process, we will continue to find a bigger window,
+        if we find one, we will carry this window forward until
+        we find a larger one
+        */
+        for(slow = 0, fast = 0; fast < A.size(); ++fast){
+            if(A[fast] == 0) --K;
+            // cout << "[" << slow << ", " << fast << "], K: " << K << endl;
+            /*
+            only when K >= 0,
+            it's in a valid state,
+            so when K < 0,
+            slow will be moved forward, too
+            so the window will be carried foward
+            
+            and if A[slow] is 0, 
+            we and increase K back
+            */
+            if(K < 0 && A[slow++] == 0) ++K;
+        }
+        
+        return fast - slow;
+    }
+};
