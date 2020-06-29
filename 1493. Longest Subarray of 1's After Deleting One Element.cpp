@@ -36,7 +36,7 @@ public:
     }
 };
 
-//sliding window
+//sliding window with at most one 0 inside
 //https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/discuss/708112/JavaC%2B%2BPython-Sliding-Window-at-most-one-0
 //Runtime: 132 ms, faster than 52.03% of C++ online submissions for Longest Subarray of 1's After Deleting One Element.
 //Memory Usage: 36.7 MB, less than 25.00% of C++ online submissions for Longest Subarray of 1's After Deleting One Element.
@@ -71,5 +71,26 @@ public:
         }
         
         return ans;
+    }
+};
+
+//sliding window that size doesn't shrink
+//1004. Max Consecutive Ones III
+//https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/discuss/708112/JavaC%2B%2BPython-Sliding-Window-at-most-one-0
+//Runtime: 152 ms, faster than 38.66% of C++ online submissions for Longest Subarray of 1's After Deleting One Element.
+//Memory Usage: 36.7 MB, less than 25.00% of C++ online submissions for Longest Subarray of 1's After Deleting One Element.
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) {
+        int slow, fast;
+        int k = 1;
+        
+        for(slow = 0, fast = 0; fast < nums.size(); ++fast){
+            if(nums[fast] == 0) --k;
+            if(k < 0 && nums[slow++] == 0) ++k;
+        }
+        
+        //window size - deleted element
+        return fast-slow-1;
     }
 };
