@@ -1,5 +1,16 @@
+//Approach 1: Brute Force
+//time: O(NlogN), collect all nodes and then sort
+//space: O(N)
+
+//Approach 2: Compare the head of linked list
+//time: O(KN), k: #linked list
+//space: O(N) -> O(1) if in-place
+
+//Approach 3: Optimize Approach 2 by Priority Queue
 //Runtime: 36 ms, faster than 64.12% of C++ online submissions for Merge k Sorted Lists.
 //Memory Usage: 12 MB, less than 71.35% of C++ online submissions for Merge k Sorted Lists.
+//time: O(NlogK)
+//space: O(K) for the priority queue
 /**
  * Definition for singly-linked list.
  * struct ListNode {
