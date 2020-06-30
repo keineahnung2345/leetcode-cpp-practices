@@ -347,11 +347,13 @@ Including problem statement, solution, runtime and complexity analysis.
 ## Dynamic Programming + Bitmask
 [A simple tutorial on this bitmasking problem](https://leetcode.com/problems/maximum-students-taking-exam/discuss/503686/A-simple-tutorial-on-this-bitmasking-problem)
 
+[698. Partition to K Equal Sum Subsets](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/698.%20Partition%20to%20K%20Equal%20Sum%20Subsets.cpp)
+
 [1349. Maximum Students Taking Exam.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1349.%20Maximum%20Students%20Taking%20Exam.cpp)
 
 [1434. Number of Ways to Wear Different Hats to Each Other.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1434.%20Number%20of%20Ways%20to%20Wear%20Different%20Hats%20to%20Each%20Other.cpp)
 
-[698. Partition to K Equal Sum Subsets](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/698.%20Partition%20to%20K%20Equal%20Sum%20Subsets.cpp)
+[1494. Parallel Courses II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1494.%20Parallel%20Courses%20II.cpp)
 
 ## KMP
 [KMP Algorithm for Pattern Searching](https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/)
