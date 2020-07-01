@@ -398,6 +398,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1438.%20Longest%20Continuous%20Subarray%20With%20Absolute%20Diff%20Less%20Than%20or%20Equal%20to%20Limit.cpp)
 
+[1499. Max Value of Equation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1499.%20Max%20Value%20of%20Equation.cpp)
+
 ## Trie
 
 [Article on Trie. General Template and List of problems.](https://leetcode.com/discuss/general-discussion/680706/Article-on-Trie.-General-Template-and-List-of-problems.)
