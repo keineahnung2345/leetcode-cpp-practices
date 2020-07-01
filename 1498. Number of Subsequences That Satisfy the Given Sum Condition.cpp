@@ -71,3 +71,38 @@ public:
         return count;
     }
 };
+
+//Two Sum
+//https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/discuss/709227/JavaC%2B%2BPython-Two-Sum
+//Runtime: 340 ms, faster than 86.87% of C++ online submissions for Number of Subsequences That Satisfy the Given Sum Condition.
+//Memory Usage: 50.1 MB, less than 100.00% of C++ online submissions for Number of Subsequences That Satisfy the Given Sum Condition.
+//time: O(NlogN), space: O(N) or O(1)
+class Solution {
+public:
+    int numSubseq(vector<int>& nums, int target) {
+        int n = nums.size();
+        int MOD = 1e9+7;
+        int ans = 0;
+        vector<int> power(n, 1);
+        
+        //precalculate the powers
+        for(int i = 1; i < n; ++i){
+            power[i] = (power[i-1] << 1) % MOD;
+        }
+        
+        sort(nums.begin(), nums.end());
+        
+        for(int l = 0, r = n-1; l <= r; ){
+            if(nums[l] + nums[r] > target){
+                //either decrease r or increase l
+                --r;
+            }else{
+                ans = (ans + power[r-l]) % MOD;
+                //either decrease r or increase l
+                ++l;
+            }
+        }
+        
+        return ans;
+    }
+};
