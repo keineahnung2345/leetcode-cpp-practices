@@ -31,3 +31,29 @@ public:
         return true;
     }
 };
+
+//remainder frequency
+//https://leetcode.com/problems/check-if-array-pairs-are-divisible-by-k/discuss/709331/Weak-TC-passes-my-1-liner-or-Correct-Solution-Using-Reminder-Frequency
+//Runtime: 272 ms, faster than 71.67% of C++ online submissions for Check If Array Pairs Are Divisible by k.
+//Memory Usage: 61.8 MB, less than 100.00% of C++ online submissions for Check If Array Pairs Are Divisible by k.
+class Solution {
+public:
+    bool canArrange(vector<int>& arr, int k) {
+        vector<int> remainderFreq(k);
+        
+        for(int& num : arr){
+            ++remainderFreq[(num%k+k)%k];
+        }
+        
+        if(remainderFreq[0] % 2 != 0)
+            return false;
+        
+        for(int remainder = 1; remainder < k - remainder; ++remainder){
+            if(remainderFreq[remainder] != remainderFreq[k-remainder]){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+};
