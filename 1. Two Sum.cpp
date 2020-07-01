@@ -1,6 +1,7 @@
+//sort + two pointer
 //Runtime: 8 ms, faster than 99.93% of C++ online submissions for Two Sum.
 //Memory Usage: 9.5 MB, less than 70.01% of C++ online submissions for Two Sum.
-
+//time: O(NlogN), space: O(N)
 class Solution {
 public:
     template <typename T>
@@ -36,6 +37,58 @@ public:
     }
 };
 
+//sort + two pointer, easier to understand
+//https://leetcode.com/problems/two-sum/discuss/7/Java-O(nlogn)-beats-98.85
+//Runtime: 340 ms, faster than 86.87% of C++ online submissions for Number of Subsequences That Satisfy the Given Sum Condition.
+//Memory Usage: 50.1 MB, less than 100.00% of C++ online submissions for Number of Subsequences That Satisfy the Given Sum Condition.
+//time: O(NlogN), space: O(N)
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        /*
+        we still need nums to get the numbers' indices,
+        so here we make a copy
+        */
+        int n = nums.size();
+        vector<int> nums2 = nums;
+        
+        sort(nums2.begin(), nums2.end());
+        
+        //find the two elements whose sum is target is the sorted array
+        int a, b;
+        for(int l = 0, r = n-1; l <= r; ){
+            if(nums2[l] + nums2[r] < target){
+                ++l;
+            }else if(nums2[l] + nums2[r] > target){
+                --r;
+            }else{
+                a = nums2[l];
+                b = nums2[r];
+                break;
+            }
+        }
+        
+        //find a and b's indices in original array
+        vector<int> ans(2);
+        
+        for(int i = 0; i < n; ++i){
+            if(nums[i] == a){
+                ans[0] = i;
+                break;
+            }
+        }
+        
+        for(int i = n-1; i >= 0; --i){
+            if(nums[i] == b){
+                ans[1] = i;
+                break;
+            }
+        }
+        
+        return ans;
+    }
+};
+
 /**
 Approach 1: Brute Force
 **/
@@ -63,8 +116,6 @@ Since the hash table reduces the look up time to O(1), the time complexity is O(
 Space complexity : O(n). 
 The extra space required depends on the number of items stored in the hash table, which stores exactly nn elements. 
 **/
-
-/**
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -83,7 +134,6 @@ public:
         return vector<int> {};
     }
 };
-**/
 
 /**
 Approach 3: One-pass Hash Table
@@ -99,7 +149,6 @@ Space complexity : O(n).
 The extra space required depends on the number of items stored in the hash table, which stores at most nn elements.
 **/
 
-/**
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
@@ -114,4 +163,3 @@ public:
         return vector<int> {};
     }
 };
-**/
