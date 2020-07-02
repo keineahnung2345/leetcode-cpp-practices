@@ -112,7 +112,7 @@ public:
 // Codec codec;
 // codec.deserialize(codec.serialize(root));
 
-//recursion
+//recursion, preorder
 //https://leetcode.com/problems/serialize-and-deserialize-binary-tree/discuss/74253/Easy-to-understand-Java-Solution
 //Runtime: 624 ms, faster than 5.05% of C++ online submissions for Serialize and Deserialize Binary Tree.
 //Memory Usage: 38.2 MB, less than 42.14% of C++ online submissions for Serialize and Deserialize Binary Tree.
