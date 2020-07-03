@@ -120,11 +120,12 @@ public:
     int rectangleArea(vector<vector<int>>& rectangles) {
         int OPEN = 0, CLOSE = 1;
         int n = rectangles.size();
+        //every rectangle form two events
         vector<vector<int>> events(n*2);
         
         int i = 0;
         for(vector<int>& rec : rectangles){
-            //horizontal line, open or close, x1, x2
+            //horizontal line(y-coordinate), open or close, x1, x2
             events[i++] = {rec[1], OPEN, rec[0], rec[2]};
             events[i++] = {rec[3], CLOSE, rec[0], rec[2]};
         }
@@ -134,6 +135,7 @@ public:
                 return a[0] < b[0];
             });
         
+        //actives: vector of (x1,x2), currently opening events
         vector<vector<int>> actives;
         int last_y = events[0][0];
         long ans = 0;
@@ -143,7 +145,7 @@ public:
             int x1 = event[2], x2 = event[3];
             
             /*
-            on current horizontal line, 
+            query: on current horizontal line, 
             the length of intervals formed by active events
             */
             long query = 0;
@@ -152,11 +154,20 @@ public:
             for(vector<int>& active : actives){
                 cur = max(cur, active[0]);
                 // cout << "x: [" << active[0] << ", " << active[1] << "], cur: " << cur << ", width: " << max(active[1] - cur, 0) << endl;
+                /*
+                cur: last right boundary, 
+                since rectangles may overlap,
+                so we need the max()
+                */
                 query += max(active[1] - cur, 0);
                 cur = max(cur, active[1]);
             }
             
             // cout << "width: " << query << ", height: " << y - last_y << endl;
+            /*
+            query: the total length in horizontal direction
+            y - last_y: the height of current rectangle
+            */
             ans += query * (y - last_y);
             
             //update actives(current open events)
