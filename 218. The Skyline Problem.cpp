@@ -91,3 +91,80 @@ public:
         return ans;
     }
 };
+
+//line sweep + heap
+//https://briangordon.github.io/2014/08/the-skyline-problem.html
+//Runtime: 256 ms, faster than 5.24% of C++ online submissions for The Skyline Problem.
+//Memory Usage: 18.2 MB, less than 19.85% of C++ online submissions for The Skyline Problem.
+//time: O(NlogN), space: O(N)
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        int OPEN = 0, CLOSE = 1;
+        //(height, x-coord, right boundary)
+        vector<vector<int>> points;
+        
+        for(int i = 0; i < buildings.size(); ++i){
+            points.push_back({buildings[i][2], buildings[i][0], buildings[i][1]});
+            points.push_back({buildings[i][2], buildings[i][1], buildings[i][1]});
+        }
+        
+        //sort by x-coordinate
+        sort(points.begin(), points.end(), 
+            [](const vector<int>& a, const vector<int>& b){
+                return a[1] < b[1];
+            });
+        
+        //max height on top
+        priority_queue<vector<int>, vector<vector<int>>> pq;
+        vector<vector<int>> ans;
+        
+        for(vector<int>& point : points){
+            int x = point[1];
+            bool isClose = (point[1] == point[2]);
+            // cout << "===x: " << x << ", left: " << !isClose << "===" << endl;
+            
+            /*
+            building whose right boundary <= x should be cleared
+            */
+            // if(!pq.empty()){
+            //     cout << "pq top x: " << pq.top()[1] << ", h: " << pq.top()[0] << endl;
+            // }
+            
+            // cout << "push x: " << x << ", h: " << point[0] << endl;
+            pq.push(point);
+            
+            //pop buildings whose right boundary <= current x-coord
+            while(!pq.empty() && /*pq.top()[2] == pq.top()[1] &&*/ pq.top()[2] <= x){
+                // cout << "pop x: " << pq.top()[1] << ", h: " << pq.top()[0] << endl;
+                pq.pop();
+            }
+            
+            // cout << "pq: " << pq.size() << endl;
+            
+            int height = pq.empty() ? 0 : pq.top()[0];
+            //don't pop from pq! since it could still be active!
+            
+            if(ans.empty()){
+                ans.push_back({x, height});
+                // cout << "add " << x << ", " << height << endl;
+            }else if(x == ans.back()[0]){
+                /*
+                [[0,2,3],[2,5,3]]
+                */
+                if(ans.size() >= 2 && ans[ans.size()-2][1] == max(ans.back()[1], height)){
+                    // cout << "erase " << ans.back()[0] << ", " << ans.back()[1] << endl;
+                    ans.erase(ans.begin()+ans.size()-1);
+                    // cout << "update " << x << ", " << height << endl;
+                }else{
+                    ans.back()[1] = max(ans.back()[1], height);
+                }
+            }else if(ans.back()[1] != height){
+                // cout << "add " << x << ", " << height << endl;
+                ans.push_back({x, height});
+            }
+        }
+        
+        return ans;
+    }
+};
