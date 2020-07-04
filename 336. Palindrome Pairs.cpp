@@ -162,6 +162,8 @@ public:
 };
 
 //trie, each node with a "palins" list
+//https://leetcode.com/problems/palindrome-pairs/discuss/79195/O(n-*-k2)-java-solution-with-Trie-structure
+//http://www.allenlipeng47.com/blog/index.php/2016/03/15/palindrome-pairs/
 //Runtime: 380 ms, faster than 74.84% of C++ online submissions for Palindrome Pairs.
 //Memory Usage: 269.4 MB, less than 10.56% of C++ online submissions for Palindrome Pairs.
 //time: O(n*k^2) for both building an searching
