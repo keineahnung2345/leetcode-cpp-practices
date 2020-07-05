@@ -34,3 +34,22 @@ public:
         return distance;
     }
 };
+
+//bit manipulation
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Hamming Distance.
+//Memory Usage: 5.9 MB, less than 84.29% of C++ online submissions for Hamming Distance.
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        int diff = x^y;
+        
+        int ans = 0;
+        
+        while(diff){
+            ans += (diff&1);
+            diff >>= 1;
+        }
+        
+        return ans;
+    }
+};
