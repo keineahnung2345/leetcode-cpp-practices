@@ -248,12 +248,15 @@ public:
     
     void buildSegTree(vector<int>& arr, int treeIndex, int lo, int hi){
         if(lo == hi){
+            //leaf node
             tree[treeIndex] = arr[lo];
             return;
         }
         
         int mid = (lo + hi)/2;
+        //the tree node "treeIndex*2+1" represents for the range [lo,mid]
         buildSegTree(arr, treeIndex*2+1, lo, mid);
+        //the tree node "treeIndex*2+2" represents for the range [mid+1,hi]
         buildSegTree(arr, treeIndex*2+2, mid+1, hi);
         
         tree[treeIndex] = merge(tree[treeIndex*2+1], tree[treeIndex*2+2]);
@@ -263,7 +266,8 @@ public:
         // cout << "treeIndex: " << treeIndex << ", lo: " << lo << ", hi: " << hi << ", i: " << i << ", j: " << j << endl;
         /*
         query for arr[i ... j]
-        we are currently looking at arr[lo ... hi]
+        we are currently at the tree node "treeIndex", 
+        and this tree node's range is arr[lo ... hi]
         lo, hi, i, j are all index of arr
         treeIndex is index of tree
         */
@@ -285,19 +289,23 @@ public:
         if(i > mid){
             // cout << "i > mid, go right" << endl;
             //the query range is completely in right subtree
+            //find in right subtree, which represents for range [mid+1,hi]
             //directly return!
             return querySegTree(treeIndex*2+2, mid+1, hi, i, j);
         }else if(j <= mid){
             // cout << "j <= mid, go left" << endl;
             //the query range is completely in left subtree
+            //find in left subtree, which represents for range [lo,mid]
             //directly return!
             return querySegTree(treeIndex*2+1, lo, mid, i, j);
         }
         
         //the query range cross the middle point of current subtree
         //divide and conquer
+        //first query for left part
         // cout << "leftQuery" << endl;
         int leftQuery = querySegTree(treeIndex*2+1, lo, mid, i, mid);
+        //and then query for right part
         // cout << "rightQuery" << endl;
         int rightQuery = querySegTree(treeIndex*2+2, mid+1, hi, mid+1, j);
         
@@ -307,6 +315,7 @@ public:
     void updateValSegTree(int treeIndex, int lo, int hi, int arrayIndex, int val){
         // cout << "treeIndex: " << treeIndex << ", lo: " << lo << ", hi: " << hi << endl;
         if(lo == hi){
+            //leaf node, directly update
             tree[treeIndex] = val;
             return;
         }
@@ -315,10 +324,10 @@ public:
         
         //update its child
         if(arrayIndex > mid){
-            //find in right subtree
+            //the element to be updated(arr[arrayIndex]) is in right subtree
             updateValSegTree(treeIndex*2+2, mid+1, hi, arrayIndex, val);
         }else{
-            //find in left subtree
+            //the element to be updated(arr[arrayIndex]) is in left subtree
             updateValSegTree(treeIndex*2+1, lo, mid, arrayIndex, val);
         }
         
@@ -331,6 +340,9 @@ public:
         if(n > 0){
             //A segment tree for an nn element range can be comfortably represented using an array of size is approximately 4∗n.
             tree = vector<int>(4*n, 0);
+            /*
+            index 0 is meaningful here!
+            */
             buildSegTree(nums, 0, 0, n-1);
             // for(int i = 0; i < 4*n; i++){
             //     cout << tree[i] << " ";
