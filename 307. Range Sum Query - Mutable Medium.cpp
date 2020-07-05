@@ -151,11 +151,19 @@ public:
         //note that tree[0] is meaningless
         //update tree[i]'s ancestor up to root
         while(i > 0){
+            /*
+            here we want to find current node and its sibling
+            
+            current node is either left or right child of its parent,
+            we can check it by "i%2 == 0",
+            it "i" is even, current node is left child of its parent,
+            so its sibling is its parent's right child
+            */
             int left = i;
             int right = i;
             if(i % 2 == 0){
-                //tree[i] is left node of its parent
-                //its sibling tree[i+1] is right node of its parent
+                //tree[i] is left child of its parent
+                //its sibling tree[i+1] is right child of its parent
                 right = i+1;
             }else{
                 //it's right node
@@ -179,11 +187,13 @@ public:
             if(i % 2 == 1){
                 /*
                 if i is right child of its parent,
-                then we cannot use its parent's value
+                then we cannot use its parent's value,
+                so we have nothing but to directly add "tree[i]" onto "sum"
                 */
                 // cout << "l: " << i << endl;
                 sum += tree[i];
                 /*
+                after adding "tree[i]", 
                 we will go to its right neighbor, 
                 and then go up to its parent
                 (note that tree[i] and tree[i+1]'s parents are different)
@@ -193,7 +203,8 @@ public:
             if(j % 2 == 0){
                 /*
                 if r is left child of its parent,
-                then we cannot use its parent's value
+                then we cannot use its parent's value,
+                so we have nothing but to directly add "tree[j]" onto "sum"
                 */
                 // cout << "r: " << j << endl;
                 sum += tree[j];
