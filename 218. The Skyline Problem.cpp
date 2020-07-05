@@ -304,3 +304,53 @@ public:
         return ans;
     }
 };
+
+//line sweep + multiset
+//multiset: elements are sorted, and have O(logN) "find" function
+//https://leetcode.com/problems/the-skyline-problem/discuss/61197/(Guaranteed)-Really-Detailed-and-Good-(Perfect)-Explanation-of-The-Skyline-Problem/62455
+//Runtime: 124 ms, faster than 29.41% of C++ online submissions for The Skyline Problem.
+//Memory Usage: 18 MB, less than 20.70% of C++ online submissions for The Skyline Problem.
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        //always sorted
+        multiset<vector<int>> points;
+        
+        for(vector<int>& building : buildings){
+            //negative height marks left boundary
+            points.insert({building[0], -building[2]});
+            points.insert({building[1], building[2]});
+        }
+        
+        /*
+        works just like the priority queue,
+        but equipped with O(logN) "find" function
+        */
+        multiset<int> heights;
+        vector<vector<int>> ans;
+        
+        for(const vector<int>& point : points){
+            if(point[1] < 0){
+                //left boundary
+                heights.insert(-point[1]);
+            }else{
+                /*
+                meet right boundary,
+                erase previously inserted left boundary
+                */
+                heights.erase(heights.find(point[1]));
+            }
+            
+            if(heights.empty()){
+                ans.push_back({point[0], 0});
+            }else{
+                int h = *heights.rbegin();
+                if(ans.empty() || h != ans.back()[1]){
+                    ans.push_back({point[0], h});
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
