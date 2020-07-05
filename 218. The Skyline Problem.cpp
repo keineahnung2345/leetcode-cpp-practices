@@ -168,3 +168,139 @@ public:
         return ans;
     }
 };
+
+//line sweep + heap with remove()
+//https://briangordon.github.io/2014/08/the-skyline-problem.html
+//https://leetcode.com/problems/the-skyline-problem/discuss/61197/(Guaranteed)-Really-Detailed-and-Good-(Perfect)-Explanation-of-The-Skyline-Problem/62461
+//TLE
+class compare_height{
+public:
+    compare_height(){}
+    bool operator() (const vector<int>& b1, const vector<int>& b2) const{
+        return b1[2] < b2[2];
+    }
+};
+
+//equip the original priority_queue with "remove"
+template<typename T>
+class custom_priority_queue : public std::priority_queue<T, std::vector<T>, compare_height>{
+public:
+    bool remove(const T& value) {
+        auto it = std::find(this->c.begin(), this->c.end(), value);
+        if (it != this->c.end()) {
+            this->c.erase(it);
+            std::make_heap(this->c.begin(), this->c.end(), this->comp);
+            return true;
+       } else {
+            return false;
+       }
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        //points sorted by their x-coord
+        map<int, vector<vector<int>>> points;
+        
+        for(vector<int>& building : buildings){
+            points[building[0]].push_back(building);
+            points[building[1]].push_back(building);
+        }
+        
+        custom_priority_queue<vector<int>> pq;
+        
+        vector<vector<int>> ans;
+        
+        for(auto it = points.begin(); it != points.end(); ++it){
+            int x = it->first;
+            vector<vector<int>> bs = it->second;
+            
+            //update heap
+            for(vector<int>& b : bs){
+                if(x == b[0]){
+                    //left edge
+                    pq.push(b);
+                }else{
+                    //x == b[1], right edge
+                    pq.remove(b);
+                }
+            }
+            
+            //update ans
+            if(pq.empty()){
+                ans.push_back({x, 0});
+            }else{
+                int h = pq.top()[2];
+                if(ans.empty() || h != ans.back()[1]){
+                    ans.push_back({x, h});
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
+
+//line sweep + heap, optimized
+//Runtime: 152 ms, faster than 15.75% of C++ online submissions for The Skyline Problem.
+//Memory Usage: 21.6 MB, less than 9.56% of C++ online submissions for The Skyline Problem.
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        //points sorted by their x-coord
+        map<int, vector<vector<int>>> points;
+        
+        for(vector<int>& building : buildings){
+            points[building[0]].push_back(building);
+            points[building[1]].push_back(building);
+        }
+        
+        //building with larger height will be put on top
+        auto comp = [](const vector<int>& b1, const vector<int>& b2){
+            return b1[2] < b2[2];
+        };
+        
+        priority_queue<vector<int>, vector<vector<int>>, decltype(comp)> pq(comp);
+        
+        vector<vector<int>> ans;
+        
+        for(auto it = points.begin(); it != points.end(); ++it){
+            int x = it->first;
+            vector<vector<int>> bs = it->second;
+            
+            //update heap
+            for(vector<int>& b : bs){
+                if(x == b[0]){
+                    //left edge
+                    pq.push(b);
+                }else{
+                    //x == b[1], right edge
+                    // pq.remove(b);
+                }
+            }
+            
+            /*
+            when you hit the right edge of a building 
+            you pop nodes off the top of the heap repeatedly 
+            until the top node is a building
+            whose right edge is still ahead.
+            */
+            while(!pq.empty() && pq.top()[1] <= x){
+                pq.pop();
+            }
+            
+            //update ans
+            if(pq.empty()){
+                ans.push_back({x, 0});
+            }else{
+                int h = pq.top()[2];
+                if(ans.empty() || h != ans.back()[1]){
+                    ans.push_back({x, h});
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
