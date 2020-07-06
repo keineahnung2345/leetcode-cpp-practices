@@ -354,3 +354,154 @@ public:
         return ans;
     }
 };
+
+//segment tree
+//https://leetcode.com/problems/the-skyline-problem/discuss/61313/A-segment-tree-solution/185639
+//TLE
+//35 / 36 test cases passed.
+class SegTree{
+public:
+    vector<int> tree;
+    
+    SegTree(int n){
+        //tree[0] is meaningless
+        //tree[1] is meaningful
+        tree = vector<int>(n);
+    }
+    
+    void update(int treeIdx, int left, int right, int qleft, int qright, int val){
+        if(left > right || qright < left || qleft > right){
+            /*
+            left > right: looking at wrong range
+            qright < left || qleft > right: 
+            looking range and query range has no intersection
+            */
+            return;
+        }
+        
+        // cout << "tree(" << treeIdx << ") covers [" << left << ", " << right << "], query for " << "[" << qleft << ", " << qright << "], val: " << val << endl;
+        
+        if(left == right){
+            //need to take max!
+            tree[treeIdx] = max(tree[treeIdx], val);
+        }else{
+            int mid = (left + right) >> 1;
+
+            /*
+            current node range: [left, right]
+            left subtree range: [left, mid]
+            right subtree range: [mid+1, right]
+            */
+            
+            if(qright <= mid){
+                //query range completely in left subtree
+                // cout << "complete in left subtree" << endl;
+                update(treeIdx << 1, left, mid, qleft, qright, val);
+                tree[treeIdx] = max(tree[treeIdx], tree[treeIdx << 1]);
+            }else if(qleft > mid){
+                //query range completely in right subtree
+                // // cout << "complete in right subtree" << endl;
+                update(treeIdx << 1 | 1, mid+1, right, qleft, qright, val);
+                tree[treeIdx] = max(tree[treeIdx], tree[treeIdx << 1 | 1]);
+            }else{
+                //query range cross left and right subtree
+
+                //note: qright becomes mid
+                // cout << "first go to left subtree" << endl;
+                update(treeIdx << 1, left, mid, qleft, mid, val);
+
+                //note: qleft becoems mid+1
+                // cout << "then go to right subtree" << endl;
+                update(treeIdx << 1 | 1, mid+1, right, mid+1, qright, val);
+                tree[treeIdx] = max({tree[treeIdx], tree[treeIdx << 1], tree[treeIdx << 1 | 1]});
+            }
+            
+            /*
+            or simply
+            update(treeIdx << 1, left, mid, qleft, min(mid, qright), val);
+            update(treeIdx << 1 | 1, mid+1, right, max(mid+1, qleft), qright, val);
+            tree[treeIdx] = max({tree[treeIdx], tree[treeIdx << 1], tree[treeIdx << 1 | 1]});
+            */
+        }
+        
+    }
+    
+    int query(int treeIdx, int left, int right, int qIdx){
+        if(left > qIdx || right < qIdx) return -1;
+        
+        // cout << "tree(" << treeIdx << ") covers [" << left << ", " << right << "], query for " << qIdx << endl;
+        
+        if(left == right){
+            // cout << "tree(" << treeIdx << "), arr(" << left << ") val: " << tree[treeIdx] << endl;
+            return tree[treeIdx];
+        }
+        
+        int mid = (left + right) >> 1;
+        
+        if(qIdx <= mid){
+            int res = query(treeIdx << 1, left, mid, qIdx);
+            // cout << "tree(" << treeIdx << ") val: " << res << endl;
+            return res;
+        }else if(qIdx > mid){
+            int res = query(treeIdx << 1 | 1, mid+1, right, qIdx);
+            // cout << "tree(" << treeIdx << ") val: " << res << endl;
+            return res;
+        }
+
+        return -1;
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        //its elements are sorted!
+        set<int> points;
+        
+        for(vector<int>& b : buildings){
+            points.insert(b[0]);
+            points.insert(b[1]);
+        }
+        
+        unordered_map<int, int> fw, bw;
+        int n = 0;
+        
+        for(const int& point : points){
+            fw[point] = n;
+            bw[n] = point;
+            // cout << n << " <---> " << point << endl;
+            ++n;
+        }
+        
+        SegTree* tree = new SegTree(n << 4);
+        
+        for(vector<int>& b : buildings){
+            //tree[1]: seg tree's root
+            //[0,n-1]: range covered by current node
+            /*
+            only update the range[b's left, b's right-1],
+            note that we don't set b's right to b[2]!
+            */
+            // cout << "========" << endl;
+            tree->update(1, 0, n-1, fw[b[0]], fw[b[1]]-1, b[2]);
+        }
+        
+        //build ans
+        vector<vector<int>> ans;
+        
+        int preH = INT_MIN, h;
+        
+        for(int i = 0; i < n; ++i){
+            // cout << "========" << endl;
+            //qeury in [0, n-1] for "i"th critical point
+            h = tree->query(1, 0, n-1, i);
+            //ignore different 
+            if(h == preH) continue;
+            ans.push_back({bw[i], h});
+            preH = h;
+        }
+        
+        return ans;
+    }
+};
+
