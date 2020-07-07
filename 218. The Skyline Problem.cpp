@@ -382,7 +382,8 @@ public:
         // cout << "tree(" << treeIdx << ") covers [" << left << ", " << right << "], query for " << "[" << qleft << ", " << qright << "], val: " << val << endl;
         
         if(left == right){
-            //need to take max!
+            //stop when the node is a leaf(it covers length-1 range)
+            //need to take max because a node can be updated multiple times!
             tree[treeIdx] = max(tree[treeIdx], val);
         }else{
             int mid = (left + right) >> 1;
@@ -397,6 +398,10 @@ public:
                 //query range completely in left subtree
                 // cout << "complete in left subtree" << endl;
                 update(treeIdx << 1, left, mid, qleft, qright, val);
+                /*
+                need to update the internal node so that 
+                it represents for the max in the range it covers
+                */
                 tree[treeIdx] = max(tree[treeIdx], tree[treeIdx << 1]);
             }else if(qleft > mid){
                 //query range completely in right subtree
@@ -432,6 +437,8 @@ public:
         // cout << "tree(" << treeIdx << ") covers [" << left << ", " << right << "], query for " << qIdx << endl;
         
         if(left == right){
+            //stop when the node is a leaf(it covers length-1 range)
+            //it can be optimized by stopping at internal nodes?
             // cout << "tree(" << treeIdx << "), arr(" << left << ") val: " << tree[treeIdx] << endl;
             return tree[treeIdx];
         }
@@ -441,6 +448,10 @@ public:
         if(qIdx <= mid){
             int res = query(treeIdx << 1, left, mid, qIdx);
             // cout << "tree(" << treeIdx << ") val: " << res << endl;
+            /*
+            different than lazy version,
+            don't need to take max of tree[treeIdx] and this subresult!
+            */
             return res;
         }else if(qIdx > mid){
             int res = query(treeIdx << 1 | 1, mid+1, right, qIdx);
