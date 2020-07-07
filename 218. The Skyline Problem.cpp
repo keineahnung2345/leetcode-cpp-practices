@@ -438,7 +438,10 @@ public:
         
         if(left == right){
             //stop when the node is a leaf(it covers length-1 range)
-            //it can be optimized by stopping at internal nodes?
+            /*
+            it can be optimized by stopping at internal nodes?
+            not in this problem, because our query interval is always length one!
+            */
             // cout << "tree(" << treeIdx << "), arr(" << left << ") val: " << tree[treeIdx] << endl;
             return tree[treeIdx];
         }
