@@ -669,3 +669,98 @@ public:
     }
 };
 
+//binary indexed tree(not understand?)
+//https://leetcode.com/problems/the-skyline-problem/discuss/61198/My-O(nlogn)-solution-using-Binary-Indexed-Tree(BIT)Fenwick-Tree/62473
+//Runtime: 136 ms, faster than 22.81% of C++ online submissions for The Skyline Problem.
+//Memory Usage: 17.2 MB, less than 28.04% of C++ online submissions for The Skyline Problem.
+class Solution {
+public:
+    /*
+    here the direction of "add" and "find" are
+    opposite to that in "307. Range Sum Query - Mutable Medium",
+    that's because here the interval node is 
+    the summary of itself and its right child?
+    (not left child just like "307"?)
+    */
+    void add(vector<int>& BIT, int i, int h){
+        //i is already BIT's index, not nums's
+        
+        while(i > 0){
+            BIT[i] = max(BIT[i], h);
+            // cout << "BIT[" << i << "]: " << BIT[i] << endl;
+            i -= i&(-i);
+        }
+    };
+    
+    int find(vector<int>& BIT, int i){
+        //i is already BIT's index, not nums's
+        
+        int h = 0;
+        
+        while(i < BIT.size()){
+            h = max(h, BIT[i]);
+            // cout << "BIT[" << i << "]: " << BIT[i] << endl;
+            i += i&(-i);
+        }
+        
+        return h;
+    };
+    
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        vector<vector<int>> points;
+        int OPEN = 0, CLOSE = 1;
+        
+        for(int i = 0; i < buildings.size(); ++i){
+            points.push_back({buildings[i][0], OPEN, i});
+            points.push_back({buildings[i][1], CLOSE, i});
+        }
+        
+        //sort by OPEN and CLOSE is important!!
+        sort(points.begin(), points.end(),
+             [](vector<int>& a, vector<int>& b){
+                 return a[0] == b[0] ? a[1] < b[1] : a[0] < b[0];
+             });
+        
+        unordered_map<int, int> fw;
+        int n = 1;
+        
+        //index starts from 1, aligned with "BIT"!!
+        for(const vector<int>& point : points){
+            fw[point[0]] = n;
+            // cout << n << " <---> " << point[0] << endl;
+            ++n;
+        }
+        
+        vector<int> BIT(n+1);
+        
+        vector<vector<int>> ans;
+        
+        int preH = INT_MIN, h;
+        
+        for(const vector<int>& point : points){
+            // cout << "========" << endl;
+            // cout << "x: " << point[0] << endl;
+            if(point[1] == OPEN){
+                //only update BIT when we meet left boundary
+                //set "arr[fw[point[1]]-1]" to the building's height
+                //-1 because right boundary won't contribute to skyline
+                // cout << "add: (" << fw[point[1]]-1 << ", " << point[2] << ")" << endl;
+                add(BIT, fw[buildings[point[2]][1]]-1, buildings[point[2]][2]);
+            }
+            // cout << "========" << endl;
+            //query for current x-coord
+            h = find(BIT, fw[point[0]]);
+            // cout << "query: " << fw[point[0]] << " -> " << h << endl;
+            if(h == preH) continue;
+            if(!ans.empty() && ans.back()[0] == point[0]){
+                ans.back()[1] = max(ans.back()[1], h);
+            }else{
+                ans.push_back({point[0], h});
+            }
+            preH = h;
+        }
+        
+        return ans;
+    }
+};
+
