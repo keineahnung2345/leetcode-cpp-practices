@@ -516,3 +516,153 @@ public:
     }
 };
 
+//segment tree with lazy propagation
+//https://leetcode.com/problems/the-skyline-problem/discuss/61313/A-segment-tree-solution/185639
+//Runtime: 120 ms, faster than 32.77% of C++ online submissions for The Skyline Problem.
+//Memory Usage: 17.4 MB, less than 24.52% of C++ online submissions for The Skyline Problem.
+class SegTree{
+public:
+    vector<int> tree;
+    
+    SegTree(int n){
+        tree = vector<int>(n);
+    }
+    
+    void update(int treeIdx, int left, int right, int qleft, int qright, int val){
+        if(left > right || qright < left || qleft > right){
+            return;
+        }
+        
+        // cout << "tree(" << treeIdx << ") covers [" << left << ", " << right << "], query for " << "[" << qleft << ", " << qright << "], val: " << val << endl;
+        
+        if(left == qleft && right == qright){
+            /*
+            not lazy version stops when left == right
+            (a leaf node)
+            
+            lazy propagation: stop updating when 
+            looking range matches update range
+            (so it may stop at interval nodes)
+            */
+            //take max because a node can be updated multiple times
+            tree[treeIdx] = max(tree[treeIdx], val);
+        }else{
+            int mid = (left + right) >> 1;
+
+            if(qright <= mid){
+                // cout << "complete in left subtree" << endl;
+                update(treeIdx << 1, left, mid, qleft, qright, val);
+            }else if(qleft > mid){
+                // // cout << "complete in right subtree" << endl;
+                update(treeIdx << 1 | 1, mid+1, right, qleft, qright, val);
+            }else{
+                // cout << "first go to left subtree" << endl;
+                update(treeIdx << 1, left, mid, qleft, mid, val);
+
+                // cout << "then go to right subtree" << endl;
+                update(treeIdx << 1 | 1, mid+1, right, mid+1, qright, val);
+            }
+            
+            /*
+            or simply
+            update(treeIdx << 1, left, mid, qleft, min(mid, qright), val);
+            update(treeIdx << 1 | 1, mid+1, right, max(mid+1, qleft), qright, val);
+            */
+        }
+        
+        // cout << "tree(" << treeIdx << ") covers [" << left << ", " << right << "], query for " << "[" << qleft << ", " << qright << "], set to: " << val << endl;
+    }
+    
+    int query(int treeIdx, int left, int right, int qIdx){
+        if(left > qIdx || right < qIdx) return -1;
+        
+        // cout << "tree(" << treeIdx << ") covers [" << left << ", " << right << "], query for " << qIdx << endl;
+        
+        if(left == right){
+            /*
+            for lazy version,
+            we can't stop query until
+            we are at a leaf node
+            */
+            // cout << "tree(" << treeIdx << "), arr(" << left << ") val: " << tree[treeIdx] << endl;
+            return tree[treeIdx];
+        }
+        
+        int mid = (left + right) >> 1;
+        
+        int res;
+        
+        /*
+        lazy propagation
+        query in left subtree or right subtree,
+        cannot return directly after return from subtree 
+        */
+        if(qIdx <= mid){
+            res = query(treeIdx << 1, left, mid, qIdx);
+            // cout << "tree(" << treeIdx << ") val: " << max(tree[treeIdx], res) << endl;
+        }else if(qIdx > mid){
+            res = query(treeIdx << 1 | 1, mid+1, right, qIdx);
+            // cout << "tree(" << treeIdx << ") val: " << max(tree[treeIdx], res) << endl;    
+        }
+        
+        // cout << "tree(" << treeIdx << "), arr(" << left << ", " << right << ") val: " << max(tree[treeIdx], res) << endl;
+         // cout << "tree(" << treeIdx << "), arr(" << left << ", " << right << ") val: " << res << endl; 
+        /*
+        for interval nodes,
+        we don't update its value if
+        the update range doesn't perfectly match its coverage
+        (this can be confirmed in "left != right" part,
+        in which we don't update tree[treeIdx]!)
+        
+        so while querying, only looking at a interval node
+        is not enough to determine the range max,
+        we need to go through all of its leaves
+        to determine the range max!!
+        */
+        return max(tree[treeIdx], res);
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        set<int> points;
+        
+        for(vector<int>& b : buildings){
+            points.insert(b[0]);
+            points.insert(b[1]);
+        }
+        
+        unordered_map<int, int> fw, bw;
+        int n = 0;
+        
+        for(const int& point : points){
+            fw[point] = n;
+            bw[n] = point;
+            // cout << n << " <---> " << point << endl;
+            ++n;
+        }
+        
+        SegTree* tree = new SegTree(n << 4);
+        
+        for(vector<int>& b : buildings){
+            // cout << "========" << endl;
+            tree->update(1, 0, n-1, fw[b[0]], fw[b[1]]-1, b[2]);
+        }
+        
+        vector<vector<int>> ans;
+        
+        int preH = INT_MIN, h;
+        
+        for(int i = 0; i < n; ++i){
+            // cout << "========" << endl;
+            h = tree->query(1, 0, n-1, i);
+            if(h == preH) continue;
+            ans.push_back({bw[i], h});
+            preH = h;
+        }
+        
+        return ans;
+    }
+};
+
