@@ -113,3 +113,93 @@ public:
     }
 };
 
+//monotonic stack
+//Runtime: 76 ms, faster than 89.47% of C++ online submissions for Count Submatrices With All Ones.
+//Memory Usage: 16.3 MB, less than 100.00% of C++ online submissions for Count Submatrices With All Ones.
+//https://leetcode.com/problems/count-submatrices-with-all-ones/discuss/720265/Java-Detailed-Explanation-From-O(MNM)-to-O(MN)-by-using-Stack
+//time: O(m*n)
+class Solution {
+public:
+    int helper(vector<int>& h){
+        /*
+        counts[j]: count of submatrix ending at column j
+        */
+        vector<int> counts(h.size());
+        /*
+        monotonic stack,
+        top element is the largest
+        */
+        stack<int> stk;
+        
+        for(int j = 0; j < h.size(); ++j){
+            /*
+            we want to find the former nearset column
+            which is lower
+            */
+            while(!stk.empty() && h[stk.top()] >= h[j]){
+                stk.pop();
+            }
+            
+            if(!stk.empty()){
+                int preIndex = stk.top();
+                /*
+                valid height range: [1,h[j]]
+                valid width range:［preIndex+1,j]
+             	
+             	add count of submatrices ending at 
+             	column preIndex: counts[preIndex]??
+                */
+                /*
+                why not adding the submatrices formed by
+                even former, even shorter columns??
+                */
+                counts[j] = h[j] * (j - preIndex) + counts[preIndex];
+            }else{
+                /*
+                all previous columns' are 
+                at least taller as current column,
+                so the submatrices can start at one of [0,j]
+                
+                valid height range: [1,h[j]]
+                valid width range: [0,j]
+                
+                so total we could have h[j] * (j+1) submatrices
+                ending at j
+                */
+                counts[j] = h[j] * (j+1);
+            }
+            
+            /*
+            current index j is pushed into stack,
+            it's used later as previous index
+            */
+            stk.push(j);
+        }
+        
+        return accumulate(counts.begin(), counts.end(), 0);
+    };
+    
+    int numSubmat(vector<vector<int>>& mat) {
+        int m = mat.size();
+        if(m == 0) return 0;
+        int n = mat[0].size();
+        if(n == 0) return 0;
+        
+        int count = 0;
+        
+        vector<int> h(n, 0);
+        for(int i = 0; i < m; ++i){
+            //construct h
+            for(int j = 0; j < n; ++j){
+                /*
+                h[j]: height of continuous ones in column j,
+                its bottom is row i
+                */
+                h[j] = (mat[i][j] == 0) ? 0 : h[j]+1;
+            }
+            count += helper(h);
+        }
+        
+        return count;
+    }
+};
