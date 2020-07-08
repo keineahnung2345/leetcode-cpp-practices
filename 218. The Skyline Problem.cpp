@@ -716,6 +716,7 @@ public:
         }
         
         //sort by OPEN and CLOSE is important!!
+        //otherwise it fails the testcase "[[0,2,3],[2,5,3]]"
         sort(points.begin(), points.end(),
              [](vector<int>& a, vector<int>& b){
                  return a[0] == b[0] ? a[1] < b[1] : a[0] < b[0];
