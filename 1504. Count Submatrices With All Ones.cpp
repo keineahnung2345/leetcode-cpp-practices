@@ -51,3 +51,65 @@ public:
         return ans;
     }
 };
+
+//compress submatrix into an array
+//https://leetcode.com/problems/count-submatrices-with-all-ones/discuss/720265/Java-Detailed-Explanation-From-O(MNM)-to-O(MN)-by-using-Stack
+//Runtime: 132 ms, faster than 39.02% of C++ online submissions for Count Submatrices With All Ones.
+//Memory Usage: 14.2 MB, less than 100.00% of C++ online submissions for Count Submatrices With All Ones.
+//time: O(m^2 * n)
+class Solution {
+public:
+    int numSubarr(vector<int>& arr){
+        int n = arr.size();
+        
+        int len = 0, count = 0;
+        
+        for(int i = 0; i < n; ++i){
+            /*
+            len: the count of all one subarray
+            ending at "i"
+            */
+            len = (arr[i] == 0) ? 0 : len+1;
+            /*
+            count is the sum of subarrays
+            ending at i=0~n-1
+            */
+            count += len;
+        }
+        
+        return count;
+    };
+    
+    int numSubmat(vector<vector<int>>& mat) {
+        int m = mat.size();
+        if(m == 0) return 0;
+        int n = mat[0].size();
+        if(n == 0) return 0;
+        
+        int count = 0;
+        
+        for(int up = 0; up < m; ++up){
+            /*
+            h is the compressed matrix mat[up~down, 0~n-1]
+            */
+            vector<int> h(n, 1);
+            for(int down = up; down < m; ++down){
+                /*
+                extend the submatrix by adding the row "down"
+                and add its info into the compressed matrix "h"
+                */
+                for(int i = 0; i < n; ++i){
+                    h[i] &= mat[down][i];
+                }
+                /*
+                sum of submatrices (up, down) = (0,0) to (m-1, m-1)
+                */
+                count += numSubarr(h);
+                // cout << "[" << up << ", " << down << "]: " << numSubarr(h) << endl;
+            }
+        }
+        
+        return count;
+    }
+};
+
