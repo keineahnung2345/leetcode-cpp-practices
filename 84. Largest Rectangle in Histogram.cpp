@@ -48,11 +48,21 @@ public:
         
         for(int i = 0; i < heights.size(); i++){
             //start to calculate area when we find a smaller element
+            //continue the process until i's height >= stk.top()'s
             while(!stk.empty() && heights[i] < heights[stk.top()]){
                 int cur = stk.top(); stk.pop();
                 /*
                 i-1: the right boundary of rectangle
+                we meet i, which is lower than stk.top(),
+                it is only used to trigger calculating area,
+                and our rectangle does not include column i
+                
                 stk.top()+1: the left boundary of rectangle
+                NOTE: cur and stk.top() are different!!
+                stk.top() if the index of rectangle which is even lower than cur
+                our rectangle can only extend to stk.top()+1
+                because stk.top()'s height is lower than heights[cur]
+                
                 heights[cur]: lowest element's height
                 */
                 // cout << heights[cur] << " * " << (stk.empty() ? i : (i -1 - stk.top())) << ", " << stk.size() << " elements in stack." << endl;
@@ -66,6 +76,7 @@ public:
                 // }
                 ans = max(ans, heights[cur] * (stk.empty() ? i : (i- 1 - stk.top())));
             }
+            //when stk.empty() || heights[i] >= heights[stk.top()]
             stk.push(i);
         }
         
