@@ -1,6 +1,7 @@
+//monotonic stack, 84. Largest Rectangle in Histogram
 //https://www.cnblogs.com/grandyang/p/4322667.html
-//Runtime: 96 ms, faster than 11.10% of C++ online submissions for Maximal Rectangle.
-//Memory Usage: 11.7 MB, less than 27.78% of C++ online submissions for Maximal Rectangle.
+//Runtime: 92 ms, faster than 20.43% of C++ online submissions for Maximal Rectangle.
+//Memory Usage: 12 MB, less than 35.98% of C++ online submissions for Maximal Rectangle.
 class Solution {
 public:
     int maximalRectangle(vector<vector<char>>& matrix) {
@@ -9,6 +10,7 @@ public:
         int n = matrix[0].size();
         if(n == 0) return 0;
         
+        //push back 0 to "h"!
         vector<int> heights(n+1);
         int ans = 0;
         
@@ -17,6 +19,13 @@ public:
             we view each row as a problem of 84.Largest Rectangle in Histogram
             */
             stack<int> stk;
+            /*
+            here the heights.size() is the size of h
+            after pushing a 0 into it,
+            so it's n+1,
+            that's because we want the last element of
+            original h to be processed
+            */
             for(int j = 0; j < heights.size(); j++){
                 //update heights for current row
                 if(j < n){
