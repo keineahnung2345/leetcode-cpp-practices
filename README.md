@@ -2,6 +2,8 @@
 
 Including problem statement, solution, runtime and complexity analysis.
 
+## DSA
+
 [HassanElDesouky/AwesomeLeetCodeDiscussions](https://github.com/HassanElDesouky/AwesomeLeetCodeDiscussions)
 
 [Important and Useful links from all over the Leetcode](https://leetcode.com/discuss/general-discussion/665604/Important-and-Useful-links-from-all-over-the-Leetcode)
@@ -12,55 +14,6 @@ Including problem statement, solution, runtime and complexity analysis.
 
 ## Graph
 [Graph Problems For Beginners Practice [Problems and Sample Solutions]](https://leetcode.com/discuss/general-discussion/655708/graph-problems-for-beginners-practice-problems-and-sample-solutions)
-
-## Monotonic stack
-[Python solution using monotonic stack, similar pattern questions listed](https://leetcode.com/problems/daily-temperatures/discuss/314477/python-solution-using-monotonic-stack-similar-pattern-questions-listed)
-
-[84. Largest Rectangle in Histogram.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/84.%20Largest%20Rectangle%20in%20Histogram.cpp)
-
-[85. Maximal Rectangle.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/85.%20Maximal%20Rectangle.cpp)
-
-[503. Next Greater Element II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/503.%20Next%20Greater%20Element%20II.cpp)
-
-[901. Online Stock Span.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/901.%20Online%20Stock%20Span.cpp)
-
-[1475. Final Prices With a Special Discount in a Shop.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1475.%20Final%20Prices%20With%20a%20Special%20Discount%20in%20a%20Shop.cpp)
-
-[1504. Count Submatrices With All Ones.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1504.%20Count%20Submatrices%20With%20All%20Ones.cpp)
-
-## Monotonic queue
-[Monotonic Queue Summary](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/204290/Monotonic-Queue-Summary)
-
-[Monotonic Queue Explained with LeetCode Problems](https://medium.com/algorithms-and-leetcode/monotonic-queue-explained-with-leetcode-problems-7db7c530c1d6)
-
-[122. Best Time to Buy and Sell Stock II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/122.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20II.cpp)
-
-## Bit manipulation
-[Detailed explanation and generalization of the bitwise operation method for single numbers](https://leetcode.com/problems/single-number-ii/discuss/43295/Detailed-explanation-and-generalization-of-the-bitwise-operation-method-for-single-numbers)
-
-[136. Single Number.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/136.%20Single%20Number.cpp)
-
-[137. Single Number II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/137.%20Single%20Number%20II.cpp)
-
-[260. Single Number III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/260.%20Single%20Number%20III.cpp)
-
-[169. Majority Element.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/169.%20Majority%20Element.cpp)
-
-[187. Repeated DNA Sequences.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/187.%20Repeated%20DNA%20Sequences.cpp)
-
-[190. Reverse Bits.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/190.%20Reverse%20Bits.cpp)
-
-[191. Number of 1 Bits.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/191.%20Number%20of%201%20Bits.cpp)
-
-[239. Sliding Window Maximum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/239.%20Sliding%20Window%20Maximum.cpp)
-
-[268. Missing Number.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/268.%20Missing%20Number.cpp)
-
-[338. Counting Bits.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/338.%20Counting%20Bits.cpp)
-
-[342. Power of Four.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/342.%20Power%20of%20Four.cpp)
-
-[477. Total Hamming Distance.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/477.%20Total%20Hamming%20Distance.cpp)
 
 ## Two pointers
 [11. Container With Most Water.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/11.%20Container%20With%20Most%20Water.cpp)
@@ -131,6 +84,65 @@ Including problem statement, solution, runtime and complexity analysis.
 
 ## Sliding Window
 [Sliding Window for Beginners [Problems | Template | Sample Solutions]](https://leetcode.com/discuss/general-discussion/657507/sliding-window-for-beginners-problems-template-sample-solutions)
+
+## Monotonic stack
+[Python solution using monotonic stack, similar pattern questions listed](https://leetcode.com/problems/daily-temperatures/discuss/314477/python-solution-using-monotonic-stack-similar-pattern-questions-listed)
+
+[84. Largest Rectangle in Histogram.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/84.%20Largest%20Rectangle%20in%20Histogram.cpp)
+
+[85. Maximal Rectangle.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/85.%20Maximal%20Rectangle.cpp)
+
+[503. Next Greater Element II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/503.%20Next%20Greater%20Element%20II.cpp)
+
+[901. Online Stock Span.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/901.%20Online%20Stock%20Span.cpp)
+
+[1475. Final Prices With a Special Discount in a Shop.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1475.%20Final%20Prices%20With%20a%20Special%20Discount%20in%20a%20Shop.cpp)
+
+[1504. Count Submatrices With All Ones.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1504.%20Count%20Submatrices%20With%20All%20Ones.cpp)
+
+## Monotonic queue(Deque)
+[Monotonic Queue Summary](https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/204290/Monotonic-Queue-Summary)
+
+[Monotonic Queue Explained with LeetCode Problems](https://medium.com/algorithms-and-leetcode/monotonic-queue-explained-with-leetcode-problems-7db7c530c1d6)
+
+[122. Best Time to Buy and Sell Stock II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/122.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20II.cpp)
+
+[239. Sliding Window Maximum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/239.%20Sliding%20Window%20Maximum.cpp)
+
+[918. Maximum Sum Circular Subarray.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/918.%20Maximum%20Sum%20Circular%20Subarray.cpp)
+
+[1425. Constrained Subsequence Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1425.%20Constrained%20Subsequence%20Sum.cpp)
+
+[1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1438.%20Longest%20Continuous%20Subarray%20With%20Absolute%20Diff%20Less%20Than%20or%20Equal%20to%20Limit.cpp)
+
+[1499. Max Value of Equation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1499.%20Max%20Value%20of%20Equation.cpp)
+
+## Bit manipulation
+[Detailed explanation and generalization of the bitwise operation method for single numbers](https://leetcode.com/problems/single-number-ii/discuss/43295/Detailed-explanation-and-generalization-of-the-bitwise-operation-method-for-single-numbers)
+
+[136. Single Number.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/136.%20Single%20Number.cpp)
+
+[137. Single Number II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/137.%20Single%20Number%20II.cpp)
+
+[260. Single Number III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/260.%20Single%20Number%20III.cpp)
+
+[169. Majority Element.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/169.%20Majority%20Element.cpp)
+
+[187. Repeated DNA Sequences.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/187.%20Repeated%20DNA%20Sequences.cpp)
+
+[190. Reverse Bits.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/190.%20Reverse%20Bits.cpp)
+
+[191. Number of 1 Bits.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/191.%20Number%20of%201%20Bits.cpp)
+
+[239. Sliding Window Maximum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/239.%20Sliding%20Window%20Maximum.cpp)
+
+[268. Missing Number.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/268.%20Missing%20Number.cpp)
+
+[338. Counting Bits.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/338.%20Counting%20Bits.cpp)
+
+[342. Power of Four.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/342.%20Power%20of%20Four.cpp)
+
+[477. Total Hamming Distance.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/477.%20Total%20Hamming%20Distance.cpp)
 
 ## Binary Search
 
@@ -394,17 +406,6 @@ Including problem statement, solution, runtime and complexity analysis.
 [1044. Longest Duplicate Substring.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1044.%20Longest%20Duplicate%20Substring.cpp)
 
 [1147. Longest Chunked Palindrome Decomposition.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1147.%20Longest%20Chunked%20Palindrome%20Decomposition.cpp)
-
-## Deque
-[239. Sliding Window Maximum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/239.%20Sliding%20Window%20Maximum.cpp)
-
-[918. Maximum Sum Circular Subarray.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/918.%20Maximum%20Sum%20Circular%20Subarray.cpp)
-
-[1425. Constrained Subsequence Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1425.%20Constrained%20Subsequence%20Sum.cpp)
-
-[1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1438.%20Longest%20Continuous%20Subarray%20With%20Absolute%20Diff%20Less%20Than%20or%20Equal%20to%20Limit.cpp)
-
-[1499. Max Value of Equation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1499.%20Max%20Value%20of%20Equation.cpp)
 
 ## Trie
 
