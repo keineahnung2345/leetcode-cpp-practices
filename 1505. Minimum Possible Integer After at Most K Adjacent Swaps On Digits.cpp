@@ -27,3 +27,33 @@ public:
         return num;
     }
 };
+
+//recursion
+//https://leetcode.com/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/discuss/720215/The-constraint-was-not-very-helpful...-C%2B%2BPython-Clean-56ms-O(n2)-solution
+//TLE
+//50 / 51 test cases passed.
+//time: O(N^2)
+class Solution {
+public:
+    string minInteger(string num, int k) {        
+        if(k <= 0) return num;
+        
+        int n = num.size();
+        
+        if(k >= n*(n-1)/2){
+            sort(num.begin(), num.end());
+            return num;
+        }
+        
+        //find '0'~'9'
+        for(int i = 0; i < 10; ++i){
+            int idx = num.find(to_string(i));
+            if(idx >= 0 && idx <= k){
+                //k-idx: move the char from idx to 0 cost "idx" swaps
+                return num[idx] + minInteger(num.substr(0, idx) + num.substr(idx+1), k - idx);
+            }
+        }
+        
+        return num;
+    }
+};
