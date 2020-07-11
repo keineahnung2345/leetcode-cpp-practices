@@ -460,6 +460,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [218. The Skyline Problem.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/218.%20The%20Skyline%20Problem.cpp)
 
+[1505. Minimum Possible Integer After at Most K Adjacent Swaps On Digits.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1505.%20Minimum%20Possible%20Integer%20After%20at%20Most%20K%20Adjacent%20Swaps%20On%20Digits.cpp)
+
 ## Binary Indexed Tree
 
 [Java using Binary Indexed Tree with clear explanation](https://leetcode.com/problems/range-sum-query-mutable/discuss/75753/Java-using-Binary-Indexed-Tree-with-clear-explanation)
@@ -471,6 +473,8 @@ Including problem statement, solution, runtime and complexity analysis.
 [1395. Count Number of Teams.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1395.%20Count%20Number%20of%20Teams.cpp)
 
 [218. The Skyline Problem.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/218.%20The%20Skyline%20Problem.cpp)
+
+[1505. Minimum Possible Integer After at Most K Adjacent Swaps On Digits.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1505.%20Minimum%20Possible%20Integer%20After%20at%20Most%20K%20Adjacent%20Swaps%20On%20Digits.cpp)
 
 ## Line Sweep
 [850. Rectangle Area II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/850.%20Rectangle%20Area%20II.cpp)
