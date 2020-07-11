@@ -179,3 +179,116 @@ public:
         return ans;
     }
 };
+
+//segment tree, optimized
+//https://leetcode.com/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/discuss/720548/O(n-logn)-or-Java-or-Heavily-Commented-or-Segment-Tree-or-Detailed-Explanation/606367
+//Runtime: 92 ms, faster than 75.82% of C++ online submissions for Minimum Possible Integer After at Most K Adjacent Swaps On Digits.
+//Memory Usage: 13.9 MB, less than 100.00% of C++ online submissions for Minimum Possible Integer After at Most K Adjacent Swaps On Digits.
+class SegTree{
+public:
+    vector<int> nodes;
+    int n;
+    
+    SegTree(int n){
+        this->n = n;
+        nodes = vector<int>(this->n << 2);
+    }
+    
+    void update(int treeIdx, int l, int r, int ql, int val){
+        if(ql < l || ql > r){
+            return;
+        }
+        
+        if(l == r){
+            nodes[treeIdx] += val;
+            return;
+        }
+        
+        int mid = (l+r) >> 1;
+        
+        if(ql <= mid){
+            update((treeIdx<<1)|1, l, mid, ql, val);
+        }else{
+            update((treeIdx<<1)+2, mid+1, r, ql, val);
+        }
+        
+        nodes[treeIdx] = nodes[(treeIdx<<1)|1] + nodes[(treeIdx<<1)+2];
+    }
+    
+    void increase(int ql){
+        update(0, 0, n-1, ql, 1);
+    }
+    
+    int query(int treeIdx, int l, int r, int ql, int qr){
+        if(l > qr || r < ql){
+            return 0;
+        }
+        
+        if(ql <= l && r <= qr){
+            return nodes[treeIdx];
+        }
+        
+        int mid = (l+r) >> 1;
+        
+        if(qr <= mid){
+            return query((treeIdx<<1)|1, l, mid, ql, qr);
+        }else if(ql > mid){
+            return query((treeIdx<<1)+2, mid+1, r, ql, qr);
+        }
+        
+        int leftRes = query((treeIdx<<1)|1, l, mid, ql, mid);
+        int rightRes = query((treeIdx<<1)+2, mid+1, r, mid+1, qr);
+        
+        return leftRes + rightRes;
+    }
+    
+    int queryLessThan(int qnum){
+        return query(0, 0, n-1, 0, qnum-1);
+    }
+};
+
+class Solution {
+public:
+    string minInteger(string num, int k) {
+        vector<queue<int>> qs(10);
+        int n = num.size();
+        
+        for(int i = 0; i < n; ++i){
+            qs[num[i]-'0'].push(i);
+        }
+        
+        string lhs;
+        vector<bool> removed(n, false);
+        SegTree* tree = new SegTree(n);
+        
+        while(k > 0){
+            bool found = false;
+            for(int d = 0; d <= 9; ++d){
+                if(!qs[d].empty()){
+                    int pos = qs[d].front();
+                    int shifted = tree->queryLessThan(pos);
+                    if(pos - shifted <= k){
+                        k -= pos-shifted;
+                        tree->increase(pos);
+                        qs[d].pop();
+                        lhs += ('0'+d);
+                        removed[pos] = true;
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            if(!found) break;
+        }
+        
+        string rhs;
+        for(int i = 0; i < n; ++i){
+            if(!removed[i]){
+                rhs += num[i];
+            }
+        }
+        
+        return lhs + rhs;
+    }
+};
+
