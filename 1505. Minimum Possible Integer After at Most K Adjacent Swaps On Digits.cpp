@@ -57,3 +57,125 @@ public:
         return num;
     }
 };
+
+//Segment tree
+//https://leetcode.com/problems/minimum-possible-integer-after-at-most-k-adjacent-swaps-on-digits/discuss/720548/O(n-logn)-or-Java-or-Heavily-Commented-or-Segment-Tree-or-Detailed-Explanation
+//Runtime: 184 ms, faster than 52.63% of C++ online submissions for Minimum Possible Integer After at Most K Adjacent Swaps On Digits.
+//Memory Usage: 13.3 MB, less than 100.00% of C++ online submissions for Minimum Possible Integer After at Most K Adjacent Swaps On Digits.
+//time: O(NlogN)
+class SegTree{
+public:
+    vector<int> nodes;
+    int n;
+    
+    SegTree(int n){
+        this->n = n;
+        nodes = vector<int>(this->n << 2);
+    }
+    
+    void update(int treeIdx, int l, int r, int ql, int val){
+        //update [ql,ql]
+        if(ql < l || ql > r){
+            return;
+        }
+        
+        if(l == r){
+            //leaf node
+            nodes[treeIdx] += val;
+            // cout << "nodes[" << treeIdx << "] = " << nodes[treeIdx] << endl;
+            return;
+        }
+        
+        int mid = (l+r)/2;
+        
+        if(ql <= mid){
+            //update left subtree
+            update(treeIdx*2+1, l, mid, ql, val);
+        }else{
+            update(treeIdx*2+2, mid+1, r, ql, val);
+        }
+        
+        nodes[treeIdx] = nodes[treeIdx*2+1] + nodes[treeIdx*2+2];
+        // cout << "nodes[" << treeIdx << "] = " << nodes[treeIdx] << endl;
+    }
+    
+    void increase(int ql){
+        update(0, 0, n-1, ql, 1);
+    }
+    
+    int query(int treeIdx, int l, int r, int ql, int qr){
+        if(l > qr || r < ql){
+            return 0;
+        }
+        
+        if(ql <= l && r <= qr){
+            //looking range is inside query range
+            return nodes[treeIdx];
+        }
+        
+        int mid = (l+r)/2;
+        
+        if(qr <= mid){
+            //complete in left subtree
+            return query(treeIdx*2+1, l, mid, ql, qr);
+        }else if(ql > mid){
+            //complete in right subtree
+            return query(treeIdx*2+2, mid+1, r, ql, qr);
+        }
+        
+        int leftRes = query(treeIdx*2+1, l, mid, ql, mid);
+        int rightRes = query(treeIdx*2+2, mid+1, r, mid+1, qr);
+        
+        return leftRes + rightRes;
+    }
+    
+    int queryLessThan(int qnum){
+        return query(0, 0, n-1, 0, qnum-1);
+    }
+};
+
+class Solution {
+public:
+    string minInteger(string num, int k) {
+        //0-9's locations in "num"
+        vector<queue<int>> qs(10);
+        int n = num.size();
+        
+        for(int i = 0; i < n; ++i){
+            qs[num[i]-'0'].push(i);
+        }
+        
+        string ans;
+        SegTree* tree = new SegTree(n);
+        
+        for(int i = 0; i < n; ++i){
+            for(int d = 0; d <= 9; ++d){
+                /*
+                qs[d]: contains the positions of unshifted digit d
+                */
+                if(!qs[d].empty()){
+                    //the nearest d's position
+                    int pos = qs[d].front();
+                    /*
+                    how many digits in front of pos is 
+                    already shifted to its right position
+                    */
+                    int shifted = tree->queryLessThan(pos);
+                    /*
+                    move from "pos" to the index "shifted"
+                    */
+                    if(pos - shifted <= k){
+                        k -= pos-shifted;
+                        //the digit originally in pos has been shifted
+                        tree->increase(pos);
+                        qs[d].pop();
+                        ans += ('0'+d);
+                        break;
+                    }
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
