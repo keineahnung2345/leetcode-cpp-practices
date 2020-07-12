@@ -15,6 +15,9 @@ Including problem statement, solution, runtime and complexity analysis.
 ## Graph
 [Graph Problems For Beginners Practice [Problems and Sample Solutions]](https://leetcode.com/discuss/general-discussion/655708/graph-problems-for-beginners-practice-problems-and-sample-solutions)
 
+### Tarjan's algorithm
+[1192. Critical Connections in a Network.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1192.%20Critical%20Connections%20in%20a%20Network.cpp)
+
 ## Two pointers
 [11. Container With Most Water.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/11.%20Container%20With%20Most%20Water.cpp)
 
