@@ -254,12 +254,6 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [My experience and notes for learning DP](https://leetcode.com/discuss/general-discussion/475924/My-experience-and-notes-for-learning-DP)
 
-[62. Unique Paths.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/62.%20Unique%20Paths.cpp)
-
-[63. Unique Paths II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/63.%20Unique%20Paths%20II.cpp)
-
-[70. Climbing Stairs.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/70.%20Climbing%20Stairs.cpp)
-
 [303. Range Sum Query - Immutable.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/303.%20Range%20Sum%20Query%20-%20Immutable.cpp)
 
 [312. Burst Balloons.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/312.%20Burst%20Balloons.cpp)
@@ -359,6 +353,36 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [368. Largest Divisible Subset.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/368.%20Largest%20Divisible%20Subset.cpp)
 
+### Digits
+[233. Number of Digit One.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/233.%20Number%20of%20Digit%20One.cpp)
+
+[902. Numbers At Most N Given Digit Set.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/902.%20Numbers%20At%20Most%20N%20Given%20Digit%20Set.cpp)
+
+[1015. Smallest Integer Divisible by K.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1015.%20Smallest%20Integer%20Divisible%20by%20K.cpp)
+
+### Counting
+[62. Unique Paths.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/62.%20Unique%20Paths.cpp)
+
+[63. Unique Paths II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/63.%20Unique%20Paths%20II.cpp)
+
+[96. Unique Binary Search Trees.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/96.%20Unique%20Binary%20Search%20Trees.cpp)
+
+### Recursion
+[70. Climbing Stairs.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/70.%20Climbing%20Stairs.cpp)
+
+[509. Fibonacci Number.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/509.%20Fibonacci%20Number.cpp)
+
+[935. Knight Dialer.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/935.%20Knight%20Dialer.cpp)
+
+[957. Prison Cells After N Days.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/957.%20Prison%20Cells%20After%20N%20Days.cpp)
+
+[1137. N-th Tribonacci Number.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1137.%20N-th%20Tribonacci%20Number.cpp)
+
+### Probability
+[808. Soup Servings.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/808.%20Soup%20Servings.cpp)
+
+[837. New 21 Game.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/837.%20New%2021%20Game.cpp)
+
 ### Game
 
 #### Stone game
@@ -374,6 +398,11 @@ Including problem statement, solution, runtime and complexity analysis.
 [794. Valid Tic-Tac-Toe State.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/794.%20Valid%20Tic-Tac-Toe%20State.cpp)
 
 [1275. Find Winner on a Tic Tac Toe Game.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1275.%20Find%20Winner%20on%20a%20Tic%20Tac%20Toe%20Game.cpp)
+
+#### DFS + memorization
+[329. Longest Increasing Path in a Matrix.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/329.%20Longest%20Increasing%20Path%20in%20a%20Matrix.cpp)
+
+[576. Out of Boundary Paths.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/576.%20Out%20of%20Boundary%20Paths.cpp)
 
 ## Dynamic Programming + Bitmask
 [A simple tutorial on this bitmasking problem](https://leetcode.com/problems/maximum-students-taking-exam/discuss/503686/A-simple-tutorial-on-this-bitmasking-problem)
