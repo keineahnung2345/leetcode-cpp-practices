@@ -278,8 +278,6 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [838. Push Dominoes.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/838.%20Push%20Dominoes.cpp)
 
-[877. Stone Game.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/877.%20Stone%20Game.cpp)
-
 [931. Minimum Falling Path Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/931.%20Minimum%20Falling%20Path%20Sum.cpp)
 
 [983. Minimum Cost For Tickets.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/983.%20Minimum%20Cost%20For%20Tickets.cpp)
@@ -293,8 +291,6 @@ Including problem statement, solution, runtime and complexity analysis.
 [1074. Number of Submatrices That Sum to Target.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1074.%20Number%20of%20Submatrices%20That%20Sum%20to%20Target.cpp)
 
 [1130. Minimum Cost Tree From Leaf Values.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1130.%20Minimum%20Cost%20Tree%20From%20Leaf%20Values.cpp)
-
-[1140. Stone Game II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1140.%20Stone%20Game%20II.cpp)
 
 [1143. Longest Common Subsequence.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1143.%20Longest%20Common%20Subsequence.cpp)
 
@@ -317,8 +313,6 @@ Including problem statement, solution, runtime and complexity analysis.
 [1402. Reducing Dishes.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1402.%20Reducing%20Dishes.cpp)
 
 [1405. Longest Happy String.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1405.%20Longest%20Happy%20String.cpp)
-
-[1406. Stone Game III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1406.%20Stone%20Game%20III.cpp)
 
 ### Stock series
 
@@ -364,6 +358,22 @@ Including problem statement, solution, runtime and complexity analysis.
 [354. Russian Doll Envelopes.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/354.%20Russian%20Doll%20Envelopes.cpp)
 
 [368. Largest Divisible Subset.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/368.%20Largest%20Divisible%20Subset.cpp)
+
+### Game
+
+#### Stone game
+[877. Stone Game.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/877.%20Stone%20Game.cpp)
+
+[1140. Stone Game II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1140.%20Stone%20Game%20II.cpp)
+
+[1406. Stone Game III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1406.%20Stone%20Game%20III.cpp)
+
+[1510. Stone Game IV.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1510.%20Stone%20Game%20IV.cpp)
+
+#### Tic Tac Toe game
+[794. Valid Tic-Tac-Toe State.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/794.%20Valid%20Tic-Tac-Toe%20State.cpp)
+
+[1275. Find Winner on a Tic Tac Toe Game.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1275.%20Find%20Winner%20on%20a%20Tic%20Tac%20Toe%20Game.cpp)
 
 ## Dynamic Programming + Bitmask
 [A simple tutorial on this bitmasking problem](https://leetcode.com/problems/maximum-students-taking-exam/discuss/503686/A-simple-tutorial-on-this-bitmasking-problem)
