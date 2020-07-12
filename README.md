@@ -353,6 +353,13 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [368. Largest Divisible Subset.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/368.%20Largest%20Divisible%20Subset.cpp)
 
+### DP + Tree
+[124. Binary Tree Maximum Path Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/124.%20Binary%20Tree%20Maximum%20Path%20Sum.cpp)
+
+[337. House Robber III.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/337.%20House%20Robber%20III.cpp)
+
+[543. Diameter of Binary Tree.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/543.%20Diameter%20of%20Binary%20Tree.cpp)
+
 ### Digits
 [233. Number of Digit One.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/233.%20Number%20of%20Digit%20One.cpp)
 
@@ -406,6 +413,10 @@ Including problem statement, solution, runtime and complexity analysis.
 
 ## Dynamic Programming + Bitmask
 [A simple tutorial on this bitmasking problem](https://leetcode.com/problems/maximum-students-taking-exam/discuss/503686/A-simple-tutorial-on-this-bitmasking-problem)
+
+[464. Can I Win.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/464.%20Can%20I%20Win.cpp)
+
+[526. Beautiful Arrangement.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/526.%20Beautiful%20Arrangement.cpp)
 
 [698. Partition to K Equal Sum Subsets](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/698.%20Partition%20to%20K%20Equal%20Sum%20Subsets.cpp)
 
