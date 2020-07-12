@@ -31,3 +31,26 @@ public:
         return dfs(n);
     }
 };
+
+//bottom-up DP
+//https://leetcode.com/problems/stone-game-iv/discuss/730582/JavaC%2B%2BPython-DP
+//Runtime: 80 ms, faster than 80.00% of C++ online submissions for Stone Game IV.
+//Memory Usage: 7.8 MB, less than 100.00% of C++ online submissions for Stone Game IV.
+class Solution {
+public:
+    bool winnerSquareGame(int n) {
+        vector<int> dp(n+1, false);
+        
+        for(int i = 1; i <= n; ++i){
+            for(int k = 1; k * k <= i; ++k){
+                //there is a 'k' s.t. we can make the opponent lose
+                if(!dp[i - k*k]){
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        
+        return dp[n];
+    }
+};
