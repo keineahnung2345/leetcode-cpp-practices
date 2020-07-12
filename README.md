@@ -254,6 +254,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [My experience and notes for learning DP](https://leetcode.com/discuss/general-discussion/475924/My-experience-and-notes-for-learning-DP)
 
+[DP problem categories](https://zhuanlan.zhihu.com/p/126546914)
+
 [303. Range Sum Query - Immutable.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/303.%20Range%20Sum%20Query%20-%20Immutable.cpp)
 
 [312. Burst Balloons.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/312.%20Burst%20Balloons.cpp)
