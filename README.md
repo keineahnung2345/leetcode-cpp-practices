@@ -394,6 +394,9 @@ Including problem statement, solution, runtime and complexity analysis.
 
 ### Game
 
+### Nim game
+[292. Nim Game.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/292.%20Nim%20Game.cpp)
+
 #### Stone game
 [877. Stone Game.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/877.%20Stone%20Game.cpp)
 
