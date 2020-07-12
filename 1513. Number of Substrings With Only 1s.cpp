@@ -1,5 +1,6 @@
 //Runtime: 84 ms, faster than 25.00% of C++ online submissions for Number of Substrings With Only 1s.
 //Memory Usage: 8.9 MB, less than 100.00% of C++ online submissions for Number of Substrings With Only 1s.
+//time: O(N), space: O(N)
 class Solution {
 public:
     int moduloMultiplication(int a, int b, int mod) {
@@ -69,6 +70,33 @@ public:
                 t = moduloMultiplication(t, it->second, MOD);
                 ans += t;
                 // ans += (it->first) * (it->first-1) / 2 * it->second;
+            }
+        }
+        
+        return ans;
+    }
+};
+
+//https://leetcode.com/problems/number-of-substrings-with-only-1s/discuss/731580/JavaC%2B%2BPython-Count
+//Runtime: 32 ms, faster than 100.00% of C++ online submissions for Number of Substrings With Only 1s.
+//Memory Usage: 8.9 MB, less than 100.00% of C++ online submissions for Number of Substrings With Only 1s.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int numSub(string s) {
+        int count = 0, ans = 0;
+        int MOD = 1e9+7;
+        
+        for(char c : s){
+            if(c == '1'){
+                /*
+                for each new '1',
+                there will be more "count" substrings with all '1's
+                */
+                ++count;
+                ans = (ans + count) % MOD;
+            }else{
+                count = 0;
             }
         }
         
