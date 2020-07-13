@@ -1,3 +1,44 @@
+//DFS
+//TLE
+//10 / 16 test cases passed.
+class Solution {
+public:
+    vector<vector<pair<int, double>>> adj;
+    
+    void dfs(int cur, int end, double prob, double& ans, vector<bool>& visited){
+        if(cur == end){
+            ans = max(ans, prob);
+        }else{
+            for(pair<int, double>& neiEdge : adj[cur]){
+                if(!visited[neiEdge.first] && prob * neiEdge.second > ans){
+                    visited[neiEdge.first] = true;
+                    dfs(neiEdge.first, end, prob * neiEdge.second, ans, visited);
+                    visited[neiEdge.first] = false;
+                }
+            }
+        }
+    };
+    
+    double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end) {
+        adj = vector<vector<pair<int, double>>>(n);
+        
+        for(int i = 0; i < edges.size(); ++i){
+            adj[edges[i][0]].push_back({edges[i][1], succProb[i]});
+            adj[edges[i][1]].push_back({edges[i][0], succProb[i]});
+        }
+        
+        // cout << "adj done" << endl;
+        
+        double ans = 0.0;
+        vector<bool> visited(n, false);
+        visited[start] = true;
+        
+        dfs(start, end, 1.0, ans, visited);
+        
+        return ans;
+    }
+};
+
 //Bellman Ford
 //https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/
 //TLE
