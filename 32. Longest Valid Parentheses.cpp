@@ -118,3 +118,49 @@ public:
         return maxLen;
     }
 };
+
+//O(1) space
+//Runtime: 8 ms, faster than 88.40% of C++ online submissions for Longest Valid Parentheses.
+//Memory Usage: 6.7 MB, less than 98.91% of C++ online submissions for Longest Valid Parentheses.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int longestValidParentheses(string s) {
+        int n = s.size();
+        int left = 0, right = 0;
+        int maxLen = 0;
+        
+        for(int i = 0; i < n; ++i){
+            if(s[i] == '('){
+                ++left;
+            }else{
+                ++right;
+            }
+            
+            if(right == left){
+                maxLen = max(maxLen, 2*left);
+            }else if(right > left){
+                //more close than open
+                left = right = 0;
+            }
+        }
+        
+        //traverse in reverse order
+        left = right = 0;
+        for(int i = n-1; i >= 0; --i){
+            if(s[i] == '('){
+                ++left;
+            }else{
+                ++right;
+            }
+            if(left == right){
+                maxLen = max(maxLen, 2*left);
+            }else if(left > right){
+                //more close than open
+                left = right = 0;
+            }
+        }
+        
+        return maxLen;
+    }
+};
