@@ -74,3 +74,47 @@ public:
         return maxLen;
     }
 };
+
+//stack, not understand
+//Runtime: 8 ms, faster than 88.40% of C++ online submissions for Longest Valid Parentheses.
+//Memory Usage: 7.2 MB, less than 74.62% of C++ online submissions for Longest Valid Parentheses. 
+//time: O(N), space: O(N)
+class Solution {
+public:
+    void print(stack<int>& stk){
+        int* end   = &stk.top() + 1;
+        int* begin = end - stk.size();
+        vector<int> stack_contents(begin, end);
+
+        //1 4 9 3
+        for(int e : stack_contents){
+            cout << e << " ";
+        }
+        cout << endl;
+    }
+    
+    int longestValidParentheses(string s) {
+        int n = s.size();
+        int maxLen = 0;
+        stack<int> stk;
+        
+        stk.push(-1);
+        
+        for(int i = 0; i < n; ++i){
+            if(s[i] == '('){
+                stk.push(i);
+            }else{
+                stk.pop();
+                if(stk.empty()){
+                    //used later, serves as ending of last substring 
+                    stk.push(i);
+                }else{
+                    maxLen = max(maxLen, i - stk.top());
+                }
+            }
+            // print(stk);
+        }
+        
+        return maxLen;
+    }
+};
