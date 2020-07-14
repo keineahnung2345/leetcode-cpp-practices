@@ -119,7 +119,8 @@ public:
     }
 };
 
-//O(1) space
+//O(1) space, not understand
+//Proof: https://leetcode.com/problems/longest-valid-parentheses/solution/
 //Runtime: 8 ms, faster than 88.40% of C++ online submissions for Longest Valid Parentheses.
 //Memory Usage: 6.7 MB, less than 98.91% of C++ online submissions for Longest Valid Parentheses.
 //time: O(N), space: O(1)
