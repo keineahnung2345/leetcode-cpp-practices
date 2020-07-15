@@ -19,6 +19,10 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [SPFA(Shortest Path Faster Algorithm)](https://www.geeksforgeeks.org/shortest-path-faster-algorithm)
 
+[Dijkstra’s algorithm - theorem](https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/)
+
+[Dijkstra's algorithm - C++ implementation](https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-using-priority_queue-stl/)
+
 ### Tarjan's algorithm
 [1192. Critical Connections in a Network.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1192.%20Critical%20Connections%20in%20a%20Network.cpp)
 
