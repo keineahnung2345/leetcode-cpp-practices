@@ -107,3 +107,67 @@ public:
         return maxProb[end];
     }
 };
+
+//Dijkstra's algorithm
+//https://www.geeksforgeeks.org/dijkstras-algorithm-for-adjacency-list-representation-greedy-algo-8/
+//https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-using-priority_queue-stl/
+//https://leetcode.com/problems/path-with-maximum-probability/discuss/731626/Java-Detailed-Explanation-BFS
+//Runtime: 460 ms, faster than 12.50% of C++ online submissions for Path with Maximum Probability.
+//Memory Usage: 66.2 MB, less than 100.00% of C++ online submissions for Path with Maximum Probability.
+class Solution {
+public:
+    double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end) {
+        vector<vector<pair<int, double>>> adjList(n);
+        
+        for(int i = 0; i < edges.size(); ++i){
+            adjList[edges[i][0]].push_back({edges[i][1], succProb[i]});
+            adjList[edges[i][1]].push_back({edges[i][0], succProb[i]});
+        }
+        
+        //max probability from start node
+        vector<double> maxProb(n, 0.0);
+        maxProb[start] = 1.0;
+        
+        auto comp = [](pair<int, double>& a, pair<int, double>& b){return a.second < b.second;};
+        priority_queue<pair<int, double>, vector<pair<int, double>>, decltype(comp)> pq(comp);
+        
+        pq.push({start, maxProb[start]});
+        
+        //while there are nodes that are not in SPT set
+        while(!pq.empty()){
+            /*
+            dijkstra's algorithm: greedy
+            it find the node with highest probability and 
+            add it to the set containing all nodes already 
+            included in SPT(shortest path tree)
+            */
+            pair<int, double> cur = pq.top(); pq.pop();
+            int curNode = cur.first;
+            double curProb = cur.second;
+            
+            if(curNode == end){
+                /*
+                the node "end" has been added to SPT set,
+                that means we have found shortest path
+                from start to end
+                */
+                //early stopping?
+                //cannot do early stopping in bellman ford?
+                break;
+            }
+            
+            //we still need to visit all neighbors of curNode, what's the meaning of using priority_queue?
+            for(pair<int, double>& nei : adjList[curNode]){
+                int neiNode = nei.first;
+                double neiProb = nei.second;
+                
+                if(curProb * neiProb > maxProb[neiNode]){
+                    maxProb[neiNode] = max(maxProb[neiNode], curProb * neiProb);
+                    pq.push({neiNode, maxProb[neiNode]});
+                }
+            }
+        }
+        
+        return maxProb[end];
+    }
+};
