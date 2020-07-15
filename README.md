@@ -17,6 +17,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [Bellman Ford(including proof)](http://courses.csail.mit.edu/6.006/spring11/lectures/lec15.pdf)
 
+[SPFA(Shortest Path Faster Algorithm)](https://www.geeksforgeeks.org/shortest-path-faster-algorithm)
+
 ### Tarjan's algorithm
 [1192. Critical Connections in a Network.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1192.%20Critical%20Connections%20in%20a%20Network.cpp)
 
