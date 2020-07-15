@@ -114,6 +114,7 @@ public:
 //https://leetcode.com/problems/path-with-maximum-probability/discuss/731626/Java-Detailed-Explanation-BFS
 //Runtime: 460 ms, faster than 12.50% of C++ online submissions for Path with Maximum Probability.
 //Memory Usage: 66.2 MB, less than 100.00% of C++ online submissions for Path with Maximum Probability.
+//time: O((V+E)logV), we may push E elements into heap, and it takes O(logV) to pop, space: O(V+E)
 class Solution {
 public:
     double maxProbability(int n, vector<vector<int>>& edges, vector<double>& succProb, int start, int end) {
