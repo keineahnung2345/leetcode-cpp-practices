@@ -41,6 +41,7 @@ public:
 
 //Bellman Ford
 //https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/
+//http://courses.csail.mit.edu/6.006/spring11/lectures/lec15.pdf
 //TLE
 //10 / 16 test cases passed.
 //time: O(VE)
@@ -65,8 +66,9 @@ public:
     }
 };
 
-//Bellman Ford, BFS, not understand(does it repeat for |V|-1 times?) 
+//Bellman Ford, BFS, SPFA(shortest path faster algorithm), not understand(does it repeat for |V|-1 times?) 
 //https://leetcode.com/problems/path-with-maximum-probability/discuss/731626/Java-Detailed-Explanation-BFS
+//https://www.geeksforgeeks.org/shortest-path-faster-algorithm/
 //Runtime: 576 ms, faster than 12.50% of C++ online submissions for Path with Maximum Probability.
 //Memory Usage: 68.9 MB, less than 100.00% of C++ online submissions for Path with Maximum Probability.
 class Solution {
