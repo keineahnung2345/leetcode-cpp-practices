@@ -132,6 +132,8 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 
 [Monotonic Queue Explained with LeetCode Problems](https://medium.com/algorithms-and-leetcode/monotonic-queue-explained-with-leetcode-problems-7db7c530c1d6)
 
+[45. Jump Game II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/45.%20Jump%20Game%20II.cpp)
+
 [122. Best Time to Buy and Sell Stock II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/122.%20Best%20Time%20to%20Buy%20and%20Sell%20Stock%20II.cpp)
 
 [239. Sliding Window Maximum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/239.%20Sliding%20Window%20Maximum.cpp)
