@@ -49,3 +49,35 @@ public:
         return count+1;
     }
 };
+
+//Math
+//https://leetcode.com/problems/consecutive-numbers-sum/discuss/129015/5-lines-C%2B%2B-solution-with-detailed-mathematical-explanation.
+//Runtime: 8 ms, faster than 33.16% of C++ online submissions for Consecutive Numbers Sum.
+//Memory Usage: 5.9 MB, less than 71.57% of C++ online submissions for Consecutive Numbers Sum.
+class Solution {
+public:
+    int consecutiveNumbersSum(int N) {
+        int count = 0;
+        
+        /*
+        k terms:
+        x + (x+1) + (x+2) + ... + (x+k-1) = N
+        kx + k*(k-1)/2 = N
+        (N - k*(k-1)/2) % k == 0 means
+        there is a window starting from x with size k sum to N
+
+        upper bound for k:
+        (N - k*(k-1)/2) should be greater than 0,
+        so N > k*(k-1)/2,
+        k*k-k < 2*N,
+        (k-1)*(k-1) < k*k-k < 2*N,
+        k-1 < sqrt(2*N),
+        k < sqrt(2*N)+1
+        */
+        for(int k = 2; k < sqrt(2*N)+1; ++k){
+            if((k*(k-1) < 2*N) && ((N - k*(k-1)/2) % k == 0)) ++count;
+        }
+        
+        return count+1;
+    }
+};
