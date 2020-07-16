@@ -62,3 +62,34 @@ public:
         return dq.front().first+1;
     }
 };
+
+//bfs
+//Runtime: 32 ms, faster than 23.31% of C++ online submissions for Jump Game II.
+//Memory Usage: 13.2 MB, less than 88.44% of C++ online submissions for Jump Game II.
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n = nums.size();
+        int start = 0, end = 0, jump = 0;
+        
+        //while we cannot reach n-1
+        while(end < n-1){
+            // cout << "jump: " << jump << ", [" << start << ", " << end << "]" << endl;
+            int nextend = end;
+            
+            //calculate the farthest position we can jump from current range
+            for(int i = start; i <= min(end, n-1); ++i){
+                // cout << "i: " << i << ", " << i + nums[i] << endl;
+                nextend = max(nextend, i + nums[i]);
+            }
+            
+            //assume we just jump one position from last end
+            start = end+1;
+            end = nextend;
+            ++jump;
+            // cout << "jump: " << jump << ", [" << start << ", " << end << "]" << endl;
+        }
+        
+        return jump;
+    }
+};
