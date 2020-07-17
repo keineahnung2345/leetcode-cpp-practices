@@ -75,6 +75,18 @@ public:
         k < sqrt(2*N)+1
         */
         for(int k = 2; k < sqrt(2*N)+1; ++k){
+            /*
+            https://leetcode.com/problems/consecutive-numbers-sum/discuss/129015/5-lines-C++-solution-with-detailed-mathematical-explanation./369550
+            N=15 and k=6,
+            the approximate condition: k < sqrt(2*N)+1 -> (k-1)*(k-1) < 2*N
+            -> 5*5 < 2*15, this allows k=6.
+            but the actual condition: 
+            N - k*(k-1)/2 > 0 -> k*(k-1) < 2*N -> 6*5 < 2*15,
+            this doesn't allow.
+            So our condition "k < sqrt(2*N)+1" is not tight enough. 
+            For N=15 it allows k=6 numbers starting from 0 (0,1,2,3,4,5) to be considered.
+            so we still need to check "k*(k-1) < 2*N"
+            */
             if((k*(k-1) < 2*N) && ((N - k*(k-1)/2) % k == 0)) ++count;
         }
         
