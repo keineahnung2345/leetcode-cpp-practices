@@ -60,3 +60,40 @@ public:
         return (vec[(n>>1)-1]+vec[n>>1])/2.0;
     }
 };
+
+//Approach 3: Two Heaps
+//Runtime: 424 ms, faster than 18.81% of C++ online submissions for Find Median from Data Stream.
+//Memory Usage: 47 MB, less than 41.77% of C++ online submissions for Find Median from Data Stream.
+//time: O(logN), space: O(N)
+class MedianFinder {
+public:
+    //maxPQ: smaller half, may contain one more element than minPQ
+    //minPQ: larger half
+    priority_queue<int, vector<int>> maxPQ;
+    priority_queue<int, vector<int>, greater<int>> minPQ;
+    
+    /** initialize your data structure here. */
+    MedianFinder() {
+        
+    }
+    
+    void addNum(int num) {
+        maxPQ.push(num);
+        int t = maxPQ.top(); maxPQ.pop();
+        minPQ.push(t);
+        
+        //minPQ's size must be <= maxPQ's size
+        if(minPQ.size() > maxPQ.size()){
+            t = minPQ.top(); minPQ.pop();
+            maxPQ.push(t);
+        }
+    }
+    
+    double findMedian() {
+        if(maxPQ.size() > minPQ.size()){
+            return maxPQ.top();
+        }
+        return (maxPQ.top()+minPQ.top())/2.0;
+    }
+};
+
