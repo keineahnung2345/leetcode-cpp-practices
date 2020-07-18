@@ -97,3 +97,93 @@ public:
     }
 };
 
+//Approach 4: Multiset and Two Pointers
+//Runtime: 220 ms, faster than 95.39% of C++ online submissions for Find Median from Data Stream.
+//Memory Usage: 49.3 MB, less than 9.29% of C++ online submissions for Find Median from Data Stream.
+//time: O(logN), space: O(N)
+class MedianFinder {
+public:
+    //AVL tree
+    multiset<int> mset;
+    multiset<int>::iterator lo, hi;
+    
+    /** initialize your data structure here. */
+    MedianFinder() {
+        
+    }
+    
+    void addNum(int num) {
+        int n = mset.size();
+        multiset<int>::iterator it = mset.insert(num);
+        
+        if(!n){
+            //originally empty
+            lo = hi = it;
+        }else if(n&1){
+            //odd number of elements, lo and hi points to same location
+            if(num < *lo){
+                /*
+                [1,2,3]
+                becomes
+                [1,1,2,3]
+                */
+                --lo;
+            }else if(num == *lo){
+                /*
+                In C++, if there are already elements equal to num,
+                then it insert num after such elements,
+                so larger half's size will increase
+                
+                [1,2,3]: lo and hi points to 2
+                becomes
+                [1,2,2,3]: lo points to 1st 2, hi points to 2nd 2
+                */
+                ++hi;
+            }else{
+                //num > *lo
+                ++hi;
+            }
+        }else{
+            //even number of elements
+            if(*lo <= num && num < *hi){
+                //note the <= and < here!!
+                /*
+                In C++, if there are already elements equal to num,
+                then it insert num after such elements
+                
+                so when num equal to *lo,
+                it will also be inserted btw the two pointers
+                */
+                lo = hi = it;
+            }else if(num < *lo){
+                /*
+                only when num < *lo(not ==),
+                num is inserted before lo
+                
+                [1,3,4,5]
+                becomes
+                [1,2,3,4,5]
+                */
+                hi = lo;
+                //lo and hi both points to old lo
+            }else{
+                /*
+                when num >= *hi,
+                num is always inserted after hi
+                
+                [1,3,4,5]
+                becomes
+                [1,3,4,5,6]
+                */
+                lo = hi;
+                //lo and hi both points to old hi
+            }
+        }
+    }
+    
+    double findMedian() {
+        return (*lo + *hi)/2.0;
+    }
+};
+
+
