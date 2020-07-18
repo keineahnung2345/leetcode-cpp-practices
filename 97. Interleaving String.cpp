@@ -59,3 +59,35 @@ public:
         return dfs(s1, s2, s3, 0, 0);
     }
 };
+
+//DP
+//Runtime: 8 ms, faster than 52.84% of C++ online submissions for Interleaving String.
+//Memory Usage: 6.7 MB, less than 49.81% of C++ online submissions for Interleaving String.
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        if(s1.size() + s2.size() != s3.size()) return false;
+        int m = s1.size(), n = s2.size();
+        vector<vector<bool>> dp(m+1, vector<bool>(n+1, false));
+        
+        for(int i = m; i >= 0; --i){
+            for(int j = n; j >= 0; --j){
+                if(i == m && j == n){
+                    dp[i][j] = true;
+                }else{
+                    if(s1[i] == s3[i+j] && dp[i+1][j]){
+                        dp[i][j] = true;
+                        continue;
+                    }
+                    if(s2[j] == s3[i+j] && dp[i][j+1]){
+                        dp[i][j] = true;
+                        continue;
+                    }
+                    dp[i][j] = false;
+                }
+            }
+        }
+        
+        return dp[0][0];
+    }
+};
