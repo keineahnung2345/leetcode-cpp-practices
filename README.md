@@ -146,6 +146,19 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 
 [1499. Max Value of Equation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1499.%20Max%20Value%20of%20Equation.cpp)
 
+## Multiset
+It serves as Self-balancing Binary Search Trees (like an AVL Tree).
+
+[218. The Skyline Problem.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/218.%20The%20Skyline%20Problem.cpp)
+
+[295. Find Median from Data Stream.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/295.%20Find%20Median%20from%20Data%20Stream.cpp)
+
+[332. Reconstruct Itinerary.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/332.%20Reconstruct%20Itinerary.cpp)
+
+[480. Sliding Window Median.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/480.%20Sliding%20Window%20Median.cpp)
+
+[645. Set Mismatch.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/645.%20Set%20Mismatch.cpp)
+
 ## Bit manipulation
 [Detailed explanation and generalization of the bitwise operation method for single numbers](https://leetcode.com/problems/single-number-ii/discuss/43295/Detailed-explanation-and-generalization-of-the-bitwise-operation-method-for-single-numbers)
 
