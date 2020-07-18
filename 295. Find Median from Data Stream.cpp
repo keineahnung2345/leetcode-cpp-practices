@@ -186,4 +186,54 @@ public:
     }
 };
 
-
+//Multiset and One Pointer
+//Runtime: 300 ms, faster than 44.92% of C++ online submissions for Find Median from Data Stream.
+//Memory Usage: 49.5 MB, less than 5.62% of C++ online submissions for Find Median from Data Stream.
+class MedianFinder {
+public:
+    multiset<int> mset;
+    //mid points to the lower median if mset have even elements
+    multiset<int>::iterator mid;
+    
+    /** initialize your data structure here. */
+    MedianFinder() {
+        
+    }
+    
+    void addNum(int num) {
+        int n = mset.size();
+        mset.insert(num);
+        
+        if(n == 0){
+            mid = mset.begin();
+        }else if(num < *mid){
+            /*
+            [1,3,4]
+            becomes
+            [1,2,3,4]
+            
+            [1,3,4,5]
+            beocmes
+            [1,2,3,4,5]
+            */
+            mid = (n&1) ? prev(mid) : mid;
+        }else{
+            //num >= *mid, num is inserted after mid
+            /*
+            [1,3,4]
+            becomes
+            [1,3,4,6]
+            
+            [1,3,4,5]
+            beocmes
+            [1,3,4,5,6]
+            */
+            mid = (n&1) ? mid : next(mid);
+        }
+    }
+    
+    double findMedian() {
+        int n = mset.size();
+        return (n&1) ? *mid: (*mid + *(next(mid)))/2.0;
+    }
+};
