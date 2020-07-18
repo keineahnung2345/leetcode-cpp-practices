@@ -131,6 +131,44 @@ public:
     }
 };
 
+//DP, bottom up
+//Runtime: 8 ms, faster than 52.84% of C++ online submissions for Interleaving String.
+//Memory Usage: 6.5 MB, less than 68.01% of C++ online submissions for Interleaving String.
+class Solution {
+public:
+    bool isInterleave(string s1, string s2, string s3) {
+        if(s1.size() + s2.size() != s3.size()) return false;
+        int m = s1.size(), n = s2.size();
+        /*
+        dp[i][j]: seen i char in s1, j char in s2,
+        so we are currently looking at s1[i-1] and s2[j-1]
+        */
+        vector<vector<bool>> dp(m+1, vector<bool>(n+1, false));
+        
+        for(int i = 0; i <= m; ++i){
+            for(int j = 0; j <= n; ++j){
+                if(i == 0 && j == 0){
+                    dp[i][j] = true;
+                }else if(i == 0){
+                    /*
+                    after dp[0][j], we have seen
+                    0 chars from s1 and j chars from s2,
+                    so it means we are looking at s2[j-1]
+                    */
+                    dp[i][j] = (s2[j-1] == s3[i+j-1]) && dp[i][j-1];
+                }else if(j == 0){
+                    dp[i][j] = (s1[i-1] == s3[i+j-1]) && dp[i-1][j];
+                }else{
+                    dp[i][j] = (s1[i-1] == s3[i+j-1] && dp[i-1][j])
+                     || (s2[j-1] == s3[i+j-1] && dp[i][j-1]);
+                }
+            }
+        }
+        
+        return dp[m][n];
+    }
+};
+
 //1-D DP
 //Runtime: 4 ms, faster than 84.58% of C++ online submissions for Interleaving String.
 //Memory Usage: 6.3 MB, less than 83.14% of C++ online submissions for Interleaving String.
