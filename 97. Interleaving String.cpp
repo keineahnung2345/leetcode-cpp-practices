@@ -60,6 +60,45 @@ public:
     }
 };
 
+//recursion + memorization, early stopping
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Interleaving String.
+//Memory Usage: 7 MB, less than 33.14% of C++ online submissions for Interleaving String.
+class Solution {
+public:
+    vector<vector<int>> memo;
+    
+    bool dfs(string& s1, string& s2, string& s3, int i, int j){
+        // cout << i << ", " << j << endl;
+        if(i+j == s1.size() + s2.size()){
+            return true;
+        }else if(i == s1.size()){
+            return s2.substr(j) == s3.substr(i+j);
+        }else if(j == s2.size()){
+            return s1.substr(i) == s3.substr(i+j);
+        }
+        
+        if(memo[i][j] != -1){
+            return memo[i][j];
+        }
+        
+        if(i < s1.size() && s1[i] == s3[i+j]){
+            if(dfs(s1, s2, s3, i+1, j)) return memo[i][j] = true;
+        }
+        if(j < s2.size() && s2[j] == s3[i+j]){
+            if(dfs(s1, s2, s3, i, j+1)) return memo[i][j] = true;
+        }
+        
+        return memo[i][j] = false;
+    };
+    
+    bool isInterleave(string s1, string s2, string s3) {
+        if(s1.size() + s2.size() != s3.size()) return false;
+        int m = s1.size(), n = s2.size();
+        memo = vector<vector<int>>(m, vector<int>(n, -1));
+        return dfs(s1, s2, s3, 0, 0);
+    }
+};
+
 //DP
 //Runtime: 8 ms, faster than 52.84% of C++ online submissions for Interleaving String.
 //Memory Usage: 6.7 MB, less than 49.81% of C++ online submissions for Interleaving String.
