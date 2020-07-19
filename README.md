@@ -268,6 +268,10 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 ***
 
+[51. N-Queens.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/51.%20N-Queens.cpp)
+
+[52. N-Queens II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/52.%20N-Queens%20II.cpp)
+
 [211. Add and Search Word - Data structure design.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/211.%20Add%20and%20Search%20Word%20-%20Data%20structure%20design.cpp)
 
 [401. Binary Watch.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/401.%20Binary%20Watch.cpp)
