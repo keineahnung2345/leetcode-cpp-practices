@@ -1,6 +1,6 @@
 //Backtracking
-//Runtime: 20 ms, faster than 37.63% of C++ online submissions for N-Queens.
-//Memory Usage: 8 MB, less than 33.39% of C++ online submissions for N-Queens.
+//Runtime: 12 ms, faster than 59.92% of C++ online submissions for N-Queens.
+//Memory Usage: 8 MB, less than 32.76% of C++ online submissions for N-Queens.
 class Solution {
 public:
     int n;
@@ -18,9 +18,8 @@ public:
             ans.push_back(curans);
         }else{
             for(int c = 0; c < n; ++c){
-                if(r > 0 && abs(curpos.back()-c) <= 1) continue;
-                curpos.push_back(c);
                 if(!used_col[c] && !used_pos_diag[r-c+n-1] && !used_neg_diag[r+c]){
+                    curpos.push_back(c);
                     used_col[c] = true;
                     used_pos_diag[r-c+n-1] = true;
                     used_neg_diag[r+c] = true;
@@ -30,8 +29,8 @@ public:
                     used_col[c] = false;
                     used_pos_diag[r-c+n-1] = false;
                     used_neg_diag[r+c] = false;
+                    curpos.pop_back();
                 }
-                curpos.pop_back();
             }
         }
     };
