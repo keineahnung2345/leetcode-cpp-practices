@@ -1,5 +1,9 @@
 //Greedy
 //https://leetcode.com/problems/maximum-number-of-non-overlapping-substrings/discuss/743223/C%2B%2BJava-Greedy-O(n)
+//Runtime: 156 ms, faster than 98.13% of C++ online submissions for Maximum Number of Non-Overlapping Substrings.
+//Memory Usage: 20 MB, less than 100.00% of C++ online submissions for Maximum Number of Non-Overlapping Substrings.
+//time: O(N), because the inner loop will be executed at most 26 times, this is ensured by "if(l[s[i]-'a'] == i)"
+//space: O(1)
 class Solution {
 public:
     int checkSubstr(string& s, int i, vector<int>& l, vector<int>& r){
