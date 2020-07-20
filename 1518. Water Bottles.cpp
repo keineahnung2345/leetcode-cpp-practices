@@ -38,3 +38,15 @@ public:
         return ans;
     }
 };
+
+//O(1)
+//not understand
+//https://leetcode.com/problems/water-bottles/discuss/744623/Python-One-liner-explanation
+//Runtime: 4 ms, faster than 33.56% of C++ online submissions for Water Bottles.
+//Memory Usage: 6.1 MB, less than 100.00% of C++ online submissions for Water Bottles.
+class Solution {
+public:
+    int numWaterBottles(int numBottles, int numExchange) {
+        return numBottles + (numBottles-1)/(numExchange-1);
+    }
+};
