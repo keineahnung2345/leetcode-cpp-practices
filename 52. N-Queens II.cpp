@@ -38,3 +38,37 @@ public:
         return ans;
     }
 };
+
+//+speed up, vector<bool> -> vector<int>, build ans on the fly
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for N-Queens II.
+//Memory Usage: 6.2 MB, less than 56.45% of C++ online submissions for N-Queens II.
+class Solution {
+public:
+    int n;
+    
+    void backtrack(vector<int>& used, int r, int& ans){
+        if(r == n){
+            ++ans;
+        }else{
+            for(int c = 0; c < n; ++c){
+                if(!used[c] && !used[n+r-c+n-1] && !used[n+2*n-1+r+c]){
+                    used[c] = used[n+r-c+n-1] = used[n+2*n-1+r+c] = true;
+                    
+                    backtrack(used, r+1, ans);
+                    
+                    used[c] = used[n+r-c+n-1] = used[n+2*n-1+r+c] = false;
+                }
+            }
+        }
+    };
+    
+    int totalNQueens(int n) {
+        this->n = n;
+        int ans = 0;
+        vector<int> used(n + 2*n-1 + 2*n-1, false);
+        
+        backtrack(used, 0, ans);
+        
+        return ans;
+    }
+};
