@@ -216,3 +216,138 @@ public:
         return ans;
     }
 };
+
+//Segment Tree
+//use pointer rather than array, because treeIdx could be larger than n*4
+//https://leetcode.com/problems/count-of-smaller-numbers-after-self/discuss/76674/3-Ways-(Segment-Tree-Binary-Indexed-Tree-Merge-Sort)-clean-Java-code
+//Runtime: 36 ms, faster than 62.45% of C++ online submissions for Count of Smaller Numbers After Self.
+//Memory Usage: 11.4 MB, less than 52.47% of C++ online submissions for Count of Smaller Numbers After Self.
+class SegTreeNode{
+public:
+    //the values it covered's range: [vmin, vmax]
+    int vmin, vmax;
+    //how many values are covered
+    int count;
+    SegTreeNode *left, *right;
+    
+    SegTreeNode(int vmin, int vmax){
+        this->vmin = vmin;
+        this->vmax = vmax;
+        count = 0;
+        left = right = nullptr;
+    }
+};
+
+class SegTree{
+public:
+    SegTreeNode* root;
+    
+	SegTree(int vmin, int vmax){
+        root = new SegTreeNode(vmin, vmax);
+    }
+    
+    void add(SegTreeNode* node, int val){
+        //tree[treeIdx]'s coverage: [node->vmin, node->vmax]
+        
+        if(val < node->vmin || val > node->vmax){
+            //val is not in current node's coverage
+            return;
+        }
+        
+        //add "val" to "node"'s coverage
+        ++node->count;
+        //it's leaf node
+        if(node->vmin == node->vmax) return;
+        
+        //recursively update its descendants
+        int vmid = node->vmin + ((node->vmax - node->vmin) >> 1);
+        if(val <= vmid){
+            //go to left subtree
+            if(node->left == nullptr){
+                node->left = new SegTreeNode(node->vmin, vmid);
+            }
+            add(node->left, val);
+        }else{
+            //go to right subtree
+            if(node->right == nullptr){
+                node->right = new SegTreeNode(vmid+1, node->vmax);
+            }
+            add(node->right, val);
+        }
+    }
+    
+    int find(SegTreeNode* node, int val){
+        //find the count of values <= val
+        
+        if(node == nullptr){
+            //stop condition: current node the child of leaf node
+            return 0;
+        }
+        
+        if(val >= node->vmax){
+            //the max element covered by node <= val
+            /*
+            we want to find values <= val,
+            and current node is in the range
+            */
+            return node->count;
+        }else{
+            //val < node->max
+            int vmid = node->vmin + ((node->vmax - node->vmin) >> 1);
+            
+            if(val <= vmid){
+                /*
+                val falls in left subtree,
+                so don't need to search right subtree
+                */
+                return find(node->left, val);
+            }else{
+                /*
+                we are finding [INT_MIN, val],
+                so we need to find in left subtree
+                */
+                return find(node->left, val) + find(node->right, val);
+            }
+        }
+    }
+};
+
+class Solution {
+public:
+    vector<int> countSmaller(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> ans(n);
+        
+        if(n == 0) return ans;
+        
+        // cout << "n: " << n << endl;
+        
+        int vmin = *min_element(nums.begin(), nums.end());
+        int vmax = *max_element(nums.begin(), nums.end());
+        
+        SegTree* st = new SegTree(vmin, vmax);
+        
+        /*
+        in each iteration, 
+        find nums[i]-1 before adding it to segment tree,
+        so when we find nums[i] in st,
+        all the elements in st are all after nums[i]
+        */
+        for(int i = n-1; i >= 0; --i){
+            //find count of values <= nums[i]-1
+            /*
+            now elements in st are nums[i+1:],
+            all behind current element,
+            so when searching in st,
+            we only care about elements' values,
+            don't need to care about their positions
+            */
+            ans[i] = st->find(st->root, nums[i]-1);
+            //add current element into st
+            //root's coverage: [vmin, vmax]
+            st->add(st->root, nums[i]);
+        }
+        
+        return ans;
+    }
+};
