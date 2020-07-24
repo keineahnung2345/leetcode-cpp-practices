@@ -111,3 +111,32 @@ our prepending operation path.add(0, node) will be O(N^2).
 
 Space Complexity: O(2^N*N), the size of the output dominating the final space complexity.
 **/
+
+//dfs
+//Runtime: 16 ms, faster than 94.16% of C++ online submissions for All Paths From Source to Target.
+//Memory Usage: 10.5 MB, less than 92.07% of C++ online submissions for All Paths From Source to Target.
+class Solution {
+public:
+    void dfs(vector<vector<int>>& graph, int cur, vector<int>& path, vector<vector<int>>& paths){
+        int n = graph.size();
+        
+        if(cur == n-1){
+            paths.push_back(path);
+        }else{
+            for(int nei : graph[cur]){
+                path.push_back(nei);
+                dfs(graph, nei, path, paths);
+                path.pop_back();
+            }
+        }
+    };
+    
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+        vector<int> path = {0};
+        vector<vector<int>> paths;
+        
+        dfs(graph, 0, path, paths);
+        
+        return paths;
+    }
+};
