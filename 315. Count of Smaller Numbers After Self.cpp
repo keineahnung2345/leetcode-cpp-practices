@@ -419,3 +419,96 @@ public:
         return ans;
     }
 };
+
+//mergesort
+//Runtime: 48 ms, faster than 51.32% of C++ online submissions for Count of Smaller Numbers After Self.
+//Memory Usage: 31.2 MB, less than 20.26% of C++ online submissions for Count of Smaller Numbers After Self.
+class Pair{
+public:
+    int idx;
+    int val;
+    Pair(int i, int v) : idx(i), val(v){};
+};
+
+class Solution {
+public:
+    void merge(vector<Pair*>& pairs, int start, int end, vector<int>& ans){
+        int mid = (start+end) >> 1;
+        vector<Pair*> newpairs(end-start+1);
+        
+        // cout << "[" << start << ", " << mid << ", " << end << "]" << endl;
+        // for(int i = 0; i < pairs.size(); ++i){
+        //     cout << pairs[i]->idx << " " << pairs[i]->val << " | ";
+        // }
+        // cout << endl;
+        
+        //the index to left subarray
+        int lix = start;
+        //the index to right subarray
+        int rix = mid+1;
+        //the index to the new array: newpairs
+        int nix = 0;
+        
+        while(nix < newpairs.size()){
+            // cout << lix << ", " << rix << ", " << nix << endl;
+            if(lix > mid || (rix <= end && pairs[rix]->val < pairs[lix]->val)){
+                /*
+                when lix == mid, it is still in the valid range of 
+                left subarray,
+                only when lix > mid: we can say that 
+                left subarray is totally visited
+                */
+                //choose from right subarray
+                // cout << "pick " << rix << endl;
+                newpairs[nix] = pairs[rix];
+                ++nix;
+                ++rix;
+            }else{
+                //choose from left subarray
+                /*
+                in right subarray,
+                [mid+1, rix-1] is already moved 
+                to somewhere before nix,
+                their count is rix-mid-1
+                */
+                // cout << "pick " << lix << endl;
+                // cout << pairs[lix]->idx << " add " << rix-mid-1 << endl;
+                ans[pairs[lix]->idx] += rix - mid - 1;
+                newpairs[nix] = pairs[lix];
+                ++nix;
+                ++lix;
+            }
+        }
+        // cout << lix << ", " << rix << ", " << nix << endl;
+        
+        copy_n(newpairs.begin(), end-start+1, pairs.begin()+start);
+    };
+    
+    void mergesort(vector<Pair*>& pairs, int start, int end, vector<int>& ans){
+        if(end-start+1 <= 1) return;
+        int mid = (start+end) >> 1;
+        
+        // cout << start << ", " << mid << ", " << end << endl;
+        
+        mergesort(pairs, start, mid, ans);
+        mergesort(pairs, mid+1, end, ans);
+        
+        merge(pairs, start, end, ans);
+    };
+    
+    vector<int> countSmaller(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> ans(n, 0);
+        if(n == 0) return ans;
+        
+        vector<Pair*> pairs(n);
+        
+        for(int i = 0; i < n; ++i){
+            pairs[i] = new Pair(i, nums[i]);
+        }
+        
+        mergesort(pairs, 0, n-1, ans);
+        
+        return ans;
+    }
+};
