@@ -555,6 +555,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 [307. Range Sum Query - Mutable Medium.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/307.%20Range%20Sum%20Query%20-%20Mutable%20Medium.cpp)
 
+[315. Count of Smaller Numbers After Self.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/315.%20Count%20of%20Smaller%20Numbers%20After%20Self.cpp)
+
 [850. Rectangle Area II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/850.%20Rectangle%20Area%20II.cpp)
 
 [673. Number of Longest Increasing Subsequence.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/673.%20Number%20of%20Longest%20Increasing%20Subsequence.cpp)
@@ -570,6 +572,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 [Topcode binary indexed trees tutorial](https://www.topcoder.com/community/competitive-programming/tutorials/binary-indexed-trees)
 
 [307. Range Sum Query - Mutable Medium.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/307.%20Range%20Sum%20Query%20-%20Mutable%20Medium.cpp)
+
+[315. Count of Smaller Numbers After Self.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/315.%20Count%20of%20Smaller%20Numbers%20After%20Self.cpp)
 
 [1395. Count Number of Teams.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1395.%20Count%20Number%20of%20Teams.cpp)
 
