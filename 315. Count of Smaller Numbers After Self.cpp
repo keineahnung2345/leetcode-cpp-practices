@@ -421,6 +421,8 @@ public:
 };
 
 //mergesort
+//https://leetcode.com/problems/count-of-smaller-numbers-after-self/discuss/76674/3-Ways-(Segment-Tree-Binary-Indexed-Tree-Merge-Sort)-clean-Java-code
+//not understand
 //Runtime: 48 ms, faster than 51.32% of C++ online submissions for Count of Smaller Numbers After Self.
 //Memory Usage: 31.2 MB, less than 20.26% of C++ online submissions for Count of Smaller Numbers After Self.
 class Pair{
@@ -508,6 +510,70 @@ public:
         }
         
         mergesort(pairs, 0, n-1, ans);
+        
+        return ans;
+    }
+};
+
+//Binary Search Tree
+//https://leetcode.com/problems/count-of-smaller-numbers-after-self/discuss/76580/9ms-short-Java-BST-solution-get-answer-when-building-BST
+//Runtime: 16 ms, faster than 96.71% of C++ online submissions for Count of Smaller Numbers After Self.
+//Memory Usage: 20.4 MB, less than 37.38% of C++ online submissions for Count of Smaller Numbers After Self.
+class Node{
+public:
+    Node *left, *right;
+    
+    int val, count, lbCount;
+    
+    Node(int v, int lbc){
+        val = v;
+        //current node is inserted into the BST for "count" times
+        count = 1;
+        //count of nodes to the left and below current node
+        lbCount = lbc;
+        /*
+        to deal with the error:
+        member access within misaligned address ... for type 'Node', 
+        which requires 8 byte alignment
+        */
+        left = right = nullptr;
+    }
+};
+
+class Solution {
+public:
+    Node* insert(Node* node, int cur, int num, int smallerCount, vector<int>& ans){
+        if(node == nullptr){
+            node = new Node(num, 0);
+            ans[cur] = smallerCount;
+        }else if(node->val == num){
+            ++node->count;
+            ans[cur] = smallerCount + node->lbCount;
+        }else if(num < node->val){
+            ++node->lbCount;
+            node->left = insert(node->left, cur, num, smallerCount, ans);
+        }else{
+            /*
+            because num > node->val,
+            (the num to be inserted is larger than current node),
+            so we accumulate node->count and node->lbCount to smallerCount
+            */
+            node->right = insert(node->right, cur, num, 
+                                 smallerCount+node->count+node->lbCount , ans);
+        }
+        
+        return node;
+    };
+    
+    vector<int> countSmaller(vector<int>& nums) {
+        int n = nums.size();
+        Node* root = nullptr;
+        
+        vector<int> ans(n);
+        
+        for(int i = n-1; i >= 0; --i){
+            root = insert(root, i, nums[i], 0, ans);
+        }
         
         return ans;
     }
