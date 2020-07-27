@@ -89,3 +89,91 @@ public:
         return ans;
     }
 };
+
+//Binary search
+//https://leetcode.com/problems/find-a-value-of-a-mysterious-function-closest-to-target/discuss/743267/C%2B%2B-O(N)-Algorithm-with-detailed-explanation-improved-from-O(N(log(N))
+//Runtime: 940 ms, faster than 55.42% of C++ online submissions for Find a Value of a Mysterious Function Closest to Target.
+//Memory Usage: 141.9 MB, less than 100.00% of C++ online submissions for Find a Value of a Mysterious Function Closest to Target.
+//time: O(NlogN)
+class Solution {
+public:
+    int closestToTarget(vector<int>& arr, int target) {
+        int n = arr.size();
+        int ans = INT_MAX;
+        
+        const int maxbits = ceil(log2(1e6));
+        vector<vector<int>> bit2indices(maxbits);
+        
+        for(int i = 0; i < n; ++i){
+            for(int b = 0; b < maxbits; ++b){
+                if(arr[i]>>b & 1){
+                    //arr[i]'s bth bit is set
+                    bit2indices[b].push_back(i);
+                }
+            }
+        }
+        
+        /*
+        when index is i,
+        sums[i]: arr[i]
+        sums[i+1]: arr[i]&arr[i+1]
+        sums[i+2]: arr[i]&arr[i+1]&arr[i+2]
+        ...
+        sums[n-1]: arr[i]&...&arr[n-1]
+        */
+        vector<int> sums(n);
+        
+        for(int i = n-1; i >= 0; --i){
+            //update sums[i+1], sums[i+2], ... sums[n-1]
+            for(int b = 0; b < maxbits; ++b){
+                if(!((arr[i]>>b)&1)){
+                    /*
+                    if arr[i]'s jth bit is unset
+                    that means we need to 
+                    unset all arr[i+1...n-1]'s bth bit
+                    */
+                    while(!bit2indices[b].empty() && bit2indices[b].back() > i){
+                        /*
+                        bit2indices[b] is increasing,
+                        so bit2indices[b].back() is the largest in bit2indices[b]
+                        */
+                        
+                        /*
+                        sums[x]'s meaning changes from arr[i+1]&...&arr[n-1]
+                        to arr[i]&arr[i+1]&...&arr[n-1],
+                        i.e. sums[x] = sums[x] & arr[i],
+                        we unset all sums[x]'s 1s bit by bit
+                        */
+                        sums[bit2indices[b].back()] -= 1<<b;
+                        //After set this element's j'th bit to zero, we need not consider this bit again?
+                        bit2indices[b].pop_back();
+                    }
+                }
+            }
+            sums[i] = arr[i];
+            
+            //sums[i...n-1] is decreasing
+            //binary search
+            int l = i, r = n;
+            int mid;
+            while(l < r){
+                mid = (l+r) >> 1;
+                if(sums[mid] == target){
+                    return 0;
+                }else if(sums[mid] > target){
+                    l = mid+1;
+                }else{
+                    //sums[mid] > target
+                    r = mid;
+                }
+            }
+            
+            //?
+            if(l == n)ans = min(ans, abs(sums[n-1]-target));
+            else if(l == i)ans = min(ans, abs(sums[i]-target));
+            else ans = min({ans, abs(sums[l]-target), abs(sums[l -1]-target)});
+        }
+        
+        return ans;
+    }
+};
