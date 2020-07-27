@@ -177,3 +177,57 @@ public:
         return ans;
     }
 };
+
+//O(N)
+//https://leetcode.com/problems/find-a-value-of-a-mysterious-function-closest-to-target/discuss/743267/C%2B%2B-O(N)-Algorithm-with-detailed-explanation-improved-from-O(N(log(N))
+//Runtime: 932 ms, faster than 55.60% of C++ online submissions for Find a Value of a Mysterious Function Closest to Target.
+//Memory Usage: 141.8 MB, less than 100.00% of C++ online submissions for Find a Value of a Mysterious Function Closest to Target.
+class Solution {
+public:
+    int closestToTarget(vector<int>& arr, int target) {
+        int n = arr.size();
+        int ans = INT_MAX;
+        
+        const int maxbits = ceil(log2(1e6));
+        vector<vector<int>> bit2indices(maxbits);
+        
+        for(int i = 0; i < n; ++i){
+            for(int b = 0; b < maxbits; ++b){
+                if(arr[i]>>b & 1){
+                    bit2indices[b].push_back(i);
+                }
+            }
+        }
+        
+        vector<int> sums(n);
+        
+        /*
+        we want to find a 'r' 
+        s.t. sums[r](arr[i]&...arr[r]) or 
+        sums[r+1](arr[i]&...arr[r+1]) 
+        is closest to target
+        such r is decreasing for different i,
+        so actually we don't need binary search
+        */
+        int r = n-1;
+        for(int i = n-1; i >= 0; --i){
+            for(int b = 0; b < maxbits; ++b){
+                if(!((arr[i]>>b)&1)){
+                    while(!bit2indices[b].empty() && bit2indices[b].back() > i){
+                        sums[bit2indices[b].back()] -= 1<<b;
+                        bit2indices[b].pop_back();
+                    }
+                }
+            }
+            sums[i] = arr[i];
+            
+            while(r > i && sums[r] < target) --r;
+            //now (1) sum[r] >= target and sum[r+1] < target or (2) r == i
+            
+            ans = min({ans, abs(sums[r]-target), 
+                       (r != n-1) ? abs(sums[r+1]-target) : INT_MAX});
+        }
+        
+        return ans;
+    }
+};
