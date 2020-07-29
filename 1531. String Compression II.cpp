@@ -51,6 +51,7 @@ public:
 //https://leetcode.com/problems/string-compression-ii/discuss/755762/C%2B%2B-top-down-dynamic-programming-with-explanation
 //TLE
 //87 / 132 test cases passed.
+//time: O(26*N^3), space: O(26*N^3)
 class Solution {
 public:
     vector<vector<vector<vector<int>>>> memo;
@@ -92,6 +93,7 @@ public:
 //https://leetcode.com/problems/string-compression-ii/discuss/755762/C%2B%2B-top-down-dynamic-programming-with-explanation
 //Runtime: 1168 ms, faster than 22.58% of C++ online submissions for String Compression II.
 //Memory Usage: 450.5 MB, less than 5.12% of C++ online submissions for String Compression II.
+//time: O(26*10*N^2), space: O(26*10*N^2)
 class Solution {
 public:
     vector<vector<vector<vector<int>>>> memo;
