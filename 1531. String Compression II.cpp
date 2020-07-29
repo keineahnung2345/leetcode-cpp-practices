@@ -147,3 +147,68 @@ public:
     }
 };
 
+//DP with memorization, prune, use array instead of vector
+//https://leetcode.com/problems/string-compression-ii/discuss/755762/C%2B%2B-top-down-dynamic-programming-with-explanation
+//Runtime: 376 ms, faster than 45.89% of C++ online submissions for String Compression II.
+//Memory Usage: 19.2 MB, less than 49.55% of C++ online submissions for String Compression II.
+class Solution {
+public:
+    int memo[100][27][11][101];
+    
+    int counter(string& s, int cur, char last_char, int last_count, int k){
+        if(cur == s.size()) return 0;
+        
+        if(memo[cur][last_char-'a'][last_count][k] != -1){
+            return memo[cur][last_char-'a'][last_count][k];
+        }
+        
+        if(s[cur] == last_char){
+            int incr = 0;
+            if(last_count == 1 || last_count == 9){
+                incr = 1;
+            }
+            memo[cur][last_char-'a'][last_count][k] = incr + counter(s, cur+1, s[cur], min(10, last_count+1), k);
+        }else{
+            int keep_count = 1 + counter(s, cur+1, s[cur], 1, k);
+            int discard_count = (k >= 1) ? counter(s, cur+1, last_char, last_count, k-1) : numeric_limits<int>::max();
+            
+            memo[cur][last_char-'a'][last_count][k] = min(keep_count, discard_count);
+        }
+        
+        return memo[cur][last_char-'a'][last_count][k];
+    };
+    
+    int getLengthOfOptimalCompression(string s, int k) {
+        int n = s.size();
+        
+        if(n == 100 && k == 0){
+            char c = s[0];
+            if(s == string(c, 100)){
+                /*
+                this is the only case that "last_count" could be 100,
+                and now we exclude it
+                */
+                return 4;
+            }
+        }
+        
+        /*
+        now the max value "last_count" could be is 99,
+        and we know that when "last_count" is in [10,99],
+        the encoded string will have same length,
+        so we don't care "last_count" once it reaches 10
+        */
+        
+        for(int a = 0; a < n; ++a){
+            for(int b = 0; b <= 26; ++b){
+                for(int c = 0; c <= 10; ++c){
+                    for(int d = 0; d <= n; ++d){
+                        memo[a][b][c][d] = -1;
+                    }
+                }
+            }
+        }
+        
+        return counter(s, 0, '{', 0, k);
+    }
+};
