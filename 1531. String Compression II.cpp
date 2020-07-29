@@ -46,3 +46,44 @@ public:
         return counter(s, 0, '#', 0, k);
     }
 };
+
+//DP with memorization
+//https://leetcode.com/problems/string-compression-ii/discuss/755762/C%2B%2B-top-down-dynamic-programming-with-explanation
+//TLE
+//87 / 132 test cases passed.
+class Solution {
+public:
+    vector<vector<vector<vector<int>>>> memo;
+    
+    int counter(string& s, int cur, char last_char, int last_count, int k){
+        if(cur == s.size()) return 0;
+        
+        if(memo[cur][last_char-'a'][last_count][k] != -1){
+            return memo[cur][last_char-'a'][last_count][k];
+        }
+        
+        if(s[cur] == last_char){
+            int incr = 0;
+            if(last_count == 1 || log10(last_count+1) == int(log10(last_count+1))){
+                incr = 1;
+            }
+            memo[cur][last_char-'a'][last_count][k] = incr + counter(s, cur+1, s[cur], last_count+1, k);
+        }else{
+            int keep_count = 1 + counter(s, cur+1, s[cur], 1, k);
+            int discard_count = (k >= 1) ? counter(s, cur+1, last_char, last_count, k-1) : numeric_limits<int>::max();
+            
+            memo[cur][last_char-'a'][last_count][k] = min(keep_count, discard_count);
+        }
+        
+        return memo[cur][last_char-'a'][last_count][k];
+    };
+    
+    int getLengthOfOptimalCompression(string s, int k) {
+        int n = s.size();
+        
+        memo = vector<vector<vector<vector<int>>>>(n, vector<vector<vector<int>>>(26+1, vector<vector<int>>(n, vector<int>(k+1, -1))));
+        
+        //'{' is the char just after 'z'
+        return counter(s, 0, '{', 0, k);
+    }
+};
