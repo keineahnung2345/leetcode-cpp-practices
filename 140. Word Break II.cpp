@@ -136,3 +136,39 @@ public:
         return segs[0];
     }
 };
+
+//DFS + memorization, each time move a "word" forward
+//https://leetcode.com/problems/word-break-ii/discuss/44167/My-concise-JAVA-solution-based-on-memorized-DFS
+//Runtime: 12 ms, faster than 93.80% of C++ online submissions for Word Break II.
+//Memory Usage: 10.1 MB, less than 84.03% of C++ online submissions for Word Break II.
+class Solution {
+public:
+    unordered_map<string, vector<string>> memo;
+    
+    void dfs(string s, vector<string>& wordDict, unordered_map<string, vector<string>>& memo){
+        if(memo.find(s) != memo.end()){
+            return;
+        }
+        
+        if(s.size() == 0){
+            memo[s] = {""};
+            return;
+        }
+        
+        for(string& word : wordDict){
+            if(s.rfind(word, 0)==0){ //startswith
+                //split s into word + s.substr(word.size())
+                dfs(s.substr(word.size()), wordDict, memo);
+                for(string& seg : memo[s.substr(word.size())]){
+                    memo[s].push_back(word + ((!seg.empty()) ? " " : "") + seg);
+                }
+            }
+        }
+    };
+    
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        dfs(s, wordDict, memo);
+        
+        return memo[s];
+    }
+};
