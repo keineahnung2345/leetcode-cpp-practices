@@ -1,4 +1,5 @@
 //Segment Tree
+//https://leetcode.com/problems/minimum-number-of-increments-on-subarrays-to-form-a-target-array/discuss/757373/C%2B%2B-Segment-Tree-Solution-w-explanation-Accepted
 //Runtime: 396 ms, faster than 38.41% of C++ online submissions for Minimum Number of Increments on Subarrays to Form a Target Array.
 //Memory Usage: 90.2 MB, less than 7.90% of C++ online submissions for Minimum Number of Increments on Subarrays to Form a Target Array.
 class SegTree {
