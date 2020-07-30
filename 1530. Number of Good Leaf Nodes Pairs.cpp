@@ -119,3 +119,72 @@ public:
         return ans>>1;
     }
 };
+
+//Post order traversal
+//https://leetcode.com/problems/number-of-good-leaf-nodes-pairs/discuss/755784/Java-Detailed-Explanation-Post-Order-Cache-in-Array
+//Runtime: 128 ms, faster than 57.60% of C++ online submissions for Number of Good Leaf Nodes Pairs.
+//Memory Usage: 35.4 MB, less than 68.22% of C++ online submissions for Number of Good Leaf Nodes Pairs.
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int ans;
+    
+    vector<int> helper(TreeNode* node, int distance){
+        vector<int> dist2counts(11, 0);
+        
+        if(!node) return dist2counts;
+        
+        if(!node->left && !node->right){
+            //first 1 : parent to current node's distance?
+            //second 1: the count is one
+            dist2counts[1] = 1;
+            return dist2counts;
+        }
+        
+        vector<int> left = helper(node->left, distance);
+        vector<int> right = helper(node->right, distance);
+        
+        for(int i = 0; i < 10; ++i){
+            //left[i]: counts of leaves to node->left with distance = i
+            //i+1: distance to node->left + distance from node->left to node
+            dist2counts[i+1] += left[i]+right[i];
+        }
+        
+        for(int i = 0; i <= 10; ++i){
+            for(int j = 0; i+j <= distance; ++j){
+                ans += (left[i]*right[j]);
+            }
+        }
+        
+        // cout << "node: " << node->val << endl;
+        // for(int i = 0; i < 11; ++i){
+        //     cout << left[i] << " ";
+        // }
+        // cout << endl;
+        // for(int i = 0; i < 11; ++i){
+        //     cout << right[i] << " ";
+        // }
+        // cout << endl;
+        // for(int i = 0; i < 11; ++i){
+        //     cout << dist2counts[i] << " ";
+        // }
+        // cout << endl;
+        return dist2counts;
+    };
+    
+    int countPairs(TreeNode* root, int distance) {
+        ans = 0;
+        helper(root, distance);
+        return ans;
+    }
+};
