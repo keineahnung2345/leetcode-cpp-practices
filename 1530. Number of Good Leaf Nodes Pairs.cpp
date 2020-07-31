@@ -140,12 +140,15 @@ public:
     int ans;
     
     vector<int> helper(TreeNode* node, int distance){
+        //i: the distance from node's PARENT to leaves
+        //dist2counts[i]: such leaves' count
+        //from problem description, 0 <= distance <= 10, so we only need a length 11 array
         vector<int> dist2counts(11, 0);
         
         if(!node) return dist2counts;
         
         if(!node->left && !node->right){
-            //first 1 : parent to current node's distance?
+            //first 1 : PARENT to current node's distance
             //second 1: the count is one
             dist2counts[1] = 1;
             return dist2counts;
@@ -155,13 +158,14 @@ public:
         vector<int> right = helper(node->right, distance);
         
         for(int i = 0; i < 10; ++i){
-            //left[i]: counts of leaves to node->left with distance = i
-            //i+1: distance to node->left + distance from node->left to node
+            //left[i]: starting from current node, there are left[i] leaves distance i
+            //i+1: distance from node to leaf + distance from node's parent to node
             dist2counts[i+1] += left[i]+right[i];
         }
         
         for(int i = 0; i <= 10; ++i){
             for(int j = 0; i+j <= distance; ++j){
+                //i and j are distance from current node to leaves
                 ans += (left[i]*right[j]);
             }
         }
