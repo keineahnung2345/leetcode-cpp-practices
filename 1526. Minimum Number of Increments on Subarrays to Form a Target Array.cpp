@@ -96,3 +96,73 @@ public:
         return st->count(target, 0, n-1, 0);
     }
 };
+
+//https://leetcode.com/problems/minimum-number-of-increments-on-subarrays-to-form-a-target-array/discuss/754623/Detailed-Explanation
+//Runtime: 368 ms, faster than 43.51% of C++ online submissions for Minimum Number of Increments on Subarrays to Form a Target Array.
+//Memory Usage: 73.2 MB, less than 66.61% of C++ online submissions for Minimum Number of Increments on Subarrays to Form a Target Array.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int minNumberOperations(vector<int>& target) {
+        int totalOps = target[0];
+        int usableOps = target[0];
+        
+        int n = target.size();
+        
+        for(int i = 1; i < n; ++i){
+            if(target[i] <= usableOps){
+                usableOps = target[i];
+            }else{
+                //target[i] > usableOps
+                totalOps += (target[i] - usableOps);
+                usableOps = target[i];
+            }
+        }
+        
+        return totalOps;
+    }
+};
+
+//refactored
+//Runtime: 296 ms, faster than 73.27% of C++ online submissions for Minimum Number of Increments on Subarrays to Form a Target Array.
+//Memory Usage: 73.4 MB, less than 44.42% of C++ online submissions for Minimum Number of Increments on Subarrays to Form a Target Array.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int minNumberOperations(vector<int>& target) {
+        int totalOps = target[0];
+        
+        int n = target.size();
+        
+        for(int i = 1; i < n; ++i){
+            //target[i-1] serves as operationsWeCanReuse
+            if(target[i] > target[i-1]){
+                //extra operations needed: target[i] - target[i-1]
+                totalOps += (target[i] - target[i-1]);
+            }
+            //every time usableOps will be updated to target[i]
+        }
+        
+        return totalOps;
+    }
+};
+
+//shortest
+//https://leetcode.com/problems/minimum-number-of-increments-on-subarrays-to-form-a-target-array/discuss/754674/JavaC%2B%2BPython-Comparison-of-Consecutive-Elements
+//Runtime: 376 ms, faster than 41.85% of C++ online submissions for Minimum Number of Increments on Subarrays to Form a Target Array.
+//Memory Usage: 73.2 MB, less than 78.18% of C++ online submissions for Minimum Number of Increments on Subarrays to Form a Target Array.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int minNumberOperations(vector<int>& target) {
+        int totalOps = target[0];
+        
+        int n = target.size();
+        
+        for(int i = 1; i < n; ++i){
+            totalOps += max(target[i]-target[i-1], 0);
+        }
+        
+        return totalOps;
+    }
+};
