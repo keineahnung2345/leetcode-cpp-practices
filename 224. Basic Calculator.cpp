@@ -127,3 +127,110 @@ public:
         return ans;
     }
 };
+
+//Approach 1: Stack and String Reversal
+//Runtime: 40 ms, faster than 46.67% of C++ online submissions for Basic Calculator.
+//Memory Usage: 9.8 MB, less than 20.48% of C++ online submissions for Basic Calculator.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    void print_stack(stack<char>& stk){
+        if(stk.empty()) return;
+        char* end   = &stk.top() + 1;
+        char* begin = end - stk.size();
+        vector<char> stack_contents(begin, end);
+
+        cout << "oprs: " << endl;
+        for(char e : stack_contents){
+            cout << e << " ";
+        }
+        cout << endl;
+    };
+    
+    void print_stack(stack<int>& stk){
+        if(stk.empty()) return;
+        int* end   = &stk.top() + 1;
+        int* begin = end - stk.size();
+        vector<int> stack_contents(begin, end);
+
+        cout << "opds: " << endl;
+        for(int e : stack_contents){
+            cout << e << " ";
+        }
+        cout << endl;
+    };
+    
+    int evaluateExpr(stack<int>& opds, stack<char>& oprs){
+        int res = 0;
+        
+        //think about the case "(10)"
+        if(!opds.empty()){
+            res = opds.top(); opds.pop();
+        }
+        
+        /*
+        recall that we push chars into stack in reverse order,
+        so here when we pop chars from stack,
+        they are in positive order
+        
+        so ')' is the end of sub-expression
+        */
+        while(!opds.empty() && !oprs.empty() && oprs.top() != ')'){
+            //pop one operator and one operand at a time
+            char opr = oprs.top(); oprs.pop();
+            
+            if(opr == '+'){
+                // cout << "+ " << opds.empty() << endl;
+                res += opds.top(); opds.pop();
+            }else{
+                // cout << "- " << opds.empty() << endl;
+                res -= opds.top(); opds.pop();
+            }
+        }
+        
+        return res;
+    };
+    
+    int calculate(string s) {
+        //cover the original expression with a set of parenthesis to avoid this extra call
+        s = '(' + s + ')';
+        reverse(s.begin(), s.end());
+        
+        int opd = 0, p = 0;
+        stack<int> opds;
+        stack<char> oprs;
+        
+        for(char c : s){
+            if(c == ' '){
+                continue;
+            }else if(c >= '0' && c <= '9'){
+                //c is a digit
+                opd = (c-'0')*pow(10, p) + opd;
+                ++p;
+            }else{
+                //meet +, -, or (), we first store the operand
+                if(p != 0){
+                    // cout << "push " << opd << endl;
+                    opds.push(opd);
+                    opd = 0;
+                    p = 0;
+                }
+                
+                if(c == '('){
+                    //the end of reversed sub-expression
+                    // print_stack(oprs);
+                    // print_stack(opds);
+                    int res = evaluateExpr(opds, oprs);
+                    // cout << "( " << oprs.empty() << endl;
+                    oprs.pop(); //pop ')', the end of sub-expression
+                    opds.push(res);
+                }else{
+                    // cout << "push " << c << endl;
+                    oprs.push(c);
+                }
+            }
+        }
+        
+        return opds.top();
+    }
+};
