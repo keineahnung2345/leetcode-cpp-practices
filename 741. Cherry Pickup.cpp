@@ -190,3 +190,48 @@ public:
         return max(0, dfs(grid, 0, 0, 0));
     }
 };
+
+//Approach #3: Dynamic Programming (Bottom Up)
+//use the concept of time
+//Runtime: 96 ms, faster than 38.22% of C++ online submissions for Cherry Pickup.
+//Memory Usage: 35.3 MB, less than 28.77% of C++ online submissions for Cherry Pickup.
+//time: O(N^3), space: O(N^2)
+class Solution {
+public:
+    int cherryPickup(vector<vector<int>>& grid) {
+        int n = grid.size();
+        vector<vector<int>> dp(n, vector<int>(n, INT_MIN));
+        
+        //base case
+        dp[0][0] = grid[0][0];
+        
+        //t: timestep, at time t, player 1 and 2 each move t steps
+        for(int t = 1; t <= 2*(n-1); ++t){
+            vector<vector<int>> dp_next(n, vector<int>(n, INT_MIN));
+            
+            for(int r1 = 0; r1 < n; ++r1){
+                for(int r2 = 0; r2 < n; ++r2){
+                    int c1 = t-r1, c2 = t-r2;
+                    if(c1 < 0 || c1 >= n || c2 < 0 || c2 >= n) continue;
+                    //cannot go to this cell, skip it
+                    if(grid[r1][c1] == -1 || grid[r2][c2] == -1) continue;
+                    int ans = grid[r1][c1];
+                    if(r1 != r2) ans += grid[r2][c2];
+                    
+                    ans += max({
+                        (r1-1>=0 && r2-1>=0) ? dp[r1-1][r2-1] : INT_MIN, //both from top
+                        dp[r1][r2], //both comes from left
+                        (r1-1>=0) ? dp[r1-1][r2] : INT_MIN, //p1 from top, p2 from left
+                        (r2-1 >= 0) ? dp[r1][r2-1] : INT_MIN //p1 from left, p2 from top
+                        }); 
+                    
+                    dp_next[r1][r2] = ans;
+                }
+            }
+            
+            swap(dp, dp_next);
+        }
+        
+        return max(dp[n-1][n-1], 0);
+    }
+};
