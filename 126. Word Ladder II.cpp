@@ -251,6 +251,110 @@ public:
     }
 };
 
+//revised from above, represent wordList as unordered_set
+//Runtime: 324 ms, faster than 73.15% of C++ online submissions for Word Ladder II.
+//Memory Usage: 32.5 MB, less than 69.39% of C++ online submissions for Word Ladder II.
+class Solution {
+public:
+    int n;
+    
+    void getNextLevel(string& beginWord, unordered_set<string>& wordList, vector<string>& neighbors){
+        vector<string>::iterator it;
+        
+        for(int i = 0; i < beginWord.size(); ++i){
+            for(char c = 'a'; c <= 'z'; ++c){
+                if(beginWord[i] == c) continue;
+                char oldC = beginWord[i];
+                beginWord[i] = c;
+                if(wordList.find(beginWord) != wordList.end()){
+                    neighbors.push_back(beginWord);
+                }
+                beginWord[i] = oldC;
+            }
+        }
+    };
+    
+    void buildGraph(string& beginWord, string& endWord, unordered_set<string>& wordList, unordered_map<string, unordered_set<string>>& graph){
+        unordered_set<string> visited, tovisit;
+        
+        queue<string> q;
+        q.push(beginWord);
+        tovisit.insert(beginWord);
+        
+        bool foundEnd = false;
+        
+        while(!q.empty()){
+            visited.insert(tovisit.begin(), tovisit.end());
+            tovisit.clear();
+            
+            int levelSize = q.size();
+            
+            for(int i = 0; i < levelSize; ++i){
+                string cur = q.front(); q.pop();
+                
+                vector<string> neighbors;
+                getNextLevel(cur, wordList, neighbors);
+                
+                for(string nei : neighbors){
+                    if(nei == endWord) foundEnd = true;
+                    if(visited.find(nei) == visited.end()){
+                        graph[cur].insert(nei);
+                    }
+                
+                    if(visited.find(nei) == visited.end() && tovisit.find(nei) == tovisit.end()){
+                        q.push(nei);
+                        tovisit.insert(nei);
+                    }
+                }
+            }
+            
+            if(foundEnd) break;
+        }
+    };
+    
+    void backtrack(string& cur, string& endWord, unordered_set<string>& wordList, 
+             unordered_map<string, unordered_set<string>>& graph, 
+             vector<string>& path, vector<vector<string>>& paths){
+        if(cur == endWord){
+            paths.push_back(path);
+        }else{
+            for(string nei : graph[cur]){
+                path.push_back(nei);
+                backtrack(nei, endWord, wordList, graph, path, paths);
+                path.pop_back();
+            }
+        }
+    }
+    
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+        auto it = find(wordList.begin(), wordList.end(), beginWord);
+        if(it == wordList.end()){
+            wordList.push_back(beginWord);
+        }
+        
+        it = find(wordList.begin(), wordList.end(), endWord);
+        if(it == wordList.end()){
+            return vector<vector<string>>();
+        }
+        
+        unordered_set<string> words(wordList.begin(), wordList.end());
+        
+        n = words.size();
+        vector<string> path;
+        vector<vector<string>> paths;
+        unordered_map<string, unordered_set<string>> graph;
+        
+        buildGraph(beginWord, endWord, words, graph);
+        
+        path = {beginWord};
+        backtrack(beginWord, endWord, words, graph, path, paths);
+        
+        return paths;
+    }
+};
+
+
+
 //BFS, view a path as a node
 //https://leetcode.com/problems/word-ladder-ii/discuss/40434/C%2B%2B-solution-using-standard-BFS-method-no-DFS-or-backtracking
 //Runtime: 968 ms, faster than 43.36% of C++ online submissions for Word Ladder II.
