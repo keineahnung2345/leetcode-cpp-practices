@@ -90,3 +90,163 @@ public:
         return paths;
     }
 };
+
+//BFS + DFS(backtracking)
+//https://leetcode.com/problems/word-ladder-ii/discuss/40475/My-concise-JAVA-solution-based-on-BFS-and-DFS/145572
+//TLE
+//29 / 39 test cases passed.
+class Solution {
+public:
+    int n;
+    
+    void getNextLevel(int begin, vector<string>& wordList, vector<int>& neighbors){
+        string beginWord = wordList[begin];
+        vector<string>::iterator it;
+        
+        for(int i = 0; i < beginWord.size(); ++i){
+            for(char c = 'a'; c <= 'z'; ++c){
+                if(beginWord[i] == c) continue;
+                char oldC = beginWord[i];
+                beginWord[i] = c;
+                if((it = find(wordList.begin(), wordList.end(), beginWord)) != 
+                  wordList.end()){
+                    // cout << wordList[it - wordList.begin()] << " ";
+                    neighbors.push_back(it - wordList.begin());
+                }
+                beginWord[i] = oldC;
+            }
+        }
+        
+        // cout << endl;
+    };
+    
+    void buildGraph(int begin, int end, vector<string>& wordList, unordered_map<int, unordered_set<int>>& graph){
+        unordered_set<int> visited, tovisit;
+        
+        queue<int> q;
+        //0th level
+        q.push(begin);
+        // tovisit.insert(begin); //don't need this
+        tovisit.insert(begin);
+        
+        bool foundEnd = false;
+        
+        while(!q.empty()){
+            visited.insert(tovisit.begin(), tovisit.end());
+            tovisit.clear();
+            
+            int levelSize = q.size();
+            
+            for(int i = 0; i < levelSize; ++i){
+                int cur = q.front(); q.pop();
+                
+                // cout << "cur: " << wordList[cur] << ", neighbors: ";
+                
+                vector<int> neighbors;
+                getNextLevel(cur, wordList, neighbors);
+                
+                // cout << "found " << neighbors.size() << " neighbors." << endl;
+                
+                for(int nei : neighbors){
+                    if(nei == end) foundEnd = true;
+                    // if(!visited[nei]){
+                    if(visited.find(nei) == visited.end()){
+                        //there could be a duplicate, so we use set
+                        graph[cur].insert(nei);
+                        // cout << "nei: " << wordList[nei] << endl;
+                    }
+                    
+                    /*
+                    in a graph, a node can be reached from multiple parents,
+                    so we use the "tovisit" to avoid 
+                    visiting the same node in the same level twice
+                    */
+                    // if(!visited[nei] && !tovisit[nei]){
+                    if(visited.find(nei) == visited.end() && tovisit.find(nei) == tovisit.end()){
+                        q.push(nei);
+                        // cout << "to visit " << wordList[nei] << endl;
+                        // tovisit[nei] = true;
+                        tovisit.insert(nei);
+                    }
+                }
+                // cout << endl;
+            }
+            
+            //stopping building graph once we find the goal
+            if(foundEnd) break;
+        }
+        // cout << endl;
+    };
+    
+    void dfs(int cur, int end, vector<string>& wordList, 
+             unordered_map<int, unordered_set<int>>& graph, 
+             vector<string>& path, vector<vector<string>>& paths){
+        path.push_back(wordList[cur]);
+        
+        if(cur == end){
+            paths.push_back(path);
+        }else{
+            for(int nei : graph[cur]){
+                dfs(nei, end, wordList, graph, path, paths);
+            }
+        }
+        
+        path.pop_back();
+    }
+    
+    void backtrack(int cur, int end, vector<string>& wordList, 
+             unordered_map<int, unordered_set<int>>& graph, 
+             vector<string>& path, vector<vector<string>>& paths){
+        if(cur == end){
+            paths.push_back(path);
+        }else{
+            for(int nei : graph[cur]){
+                // cout << wordList[cur] << " -> " << wordList[nei] << endl;
+                path.push_back(wordList[nei]);
+                backtrack(nei, end, wordList, graph, path, paths);
+                path.pop_back();
+            }
+        }
+    }
+    
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+        int begin, end;
+        
+        auto it = find(wordList.begin(), wordList.end(), beginWord);
+        if(it != wordList.end()){
+            begin = it - wordList.begin();
+        }else{
+            wordList.push_back(beginWord);
+            begin = wordList.size()-1;
+        }
+        
+        it = find(wordList.begin(), wordList.end(), endWord);
+        if(it != wordList.end()){
+            end = it - wordList.begin();
+        }else{
+            return vector<vector<string>>();
+        }
+        
+        n = wordList.size();
+        vector<string> path;
+        vector<vector<string>> paths;
+        unordered_map<int, unordered_set<int>> graph;
+        
+        // cout << "begin: " << begin << ", end: " << end << ", n: " << n << endl;
+        
+        buildGraph(begin, end, wordList, graph);
+        
+        // for(int i = 0; i < n; ++i){
+        //     cout << wordList[i] << " has " << graph[i].size() << " neighbors: ";
+        //     for(int j : graph[i]){
+        //         cout << wordList[j] << " ";
+        //     }
+        //     cout << endl;
+        // }
+        // dfs(begin, end, wordList, graph, path, paths);
+        path = {wordList[begin]};
+        backtrack(begin, end, wordList, graph, path, paths);
+        
+        return paths;
+    }
+};
