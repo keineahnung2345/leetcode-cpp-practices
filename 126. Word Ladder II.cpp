@@ -250,3 +250,68 @@ public:
         return paths;
     }
 };
+
+//BFS, view a path as a node
+//https://leetcode.com/problems/word-ladder-ii/discuss/40434/C%2B%2B-solution-using-standard-BFS-method-no-DFS-or-backtracking
+//Runtime: 968 ms, faster than 43.36% of C++ online submissions for Word Ladder II.
+//Memory Usage: 180.1 MB, less than 28.57% of C++ online submissions for Word Ladder II.
+class Solution {
+public:
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+        int level = 1;
+        int minLevel = INT_MAX;
+        queue<vector<string>> q;
+        vector<vector<string>> ans;
+        unordered_set<string> visited;
+        
+        //represent vector as unordered_set is the key to avoid TLE!!!
+        unordered_set<string> words(wordList.begin(), wordList.end());
+        
+        q.push({beginWord});
+        
+        while(!q.empty()){
+            vector<string> path = q.front(); q.pop();
+            
+            if(path.size() > minLevel){
+                break;
+            }
+            
+            if(path.size() > level){
+                // visited.clear(); //add this line will make it slower
+                //reach a new level, erase the unneeded words
+                for(const string& word : visited){
+                    words.erase(word);
+                }
+                
+                level = path.size();
+            }
+            
+            string cur = path.back();
+            
+            if(cur == endWord){
+                minLevel = level;
+                ans.push_back(path);
+            }
+            
+            for(int i = 0; i < cur.size(); ++i){
+                char oldC = cur[i];
+                
+                for(char c = 'a'; c <= 'z'; ++c){
+                    if(c == oldC) continue;
+                    cur[i] = c;
+                    
+                    if(words.find(cur) != words.end()){
+                        vector<string> nextpath = path;
+                        nextpath.push_back(cur);
+                        visited.insert(cur);
+                        q.push(nextpath);
+                    }
+                }
+                
+                cur[i] = oldC;
+            }
+        }
+        
+        return ans;
+    }
+};
