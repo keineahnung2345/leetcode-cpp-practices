@@ -137,3 +137,48 @@ public:
         }
     }
 };
+
+//improved from above, dfs + memorization
+//Runtime: 8 ms, faster than 73.58% of C++ online submissions for Least Operators to Express Number.
+//Memory Usage: 12.2 MB, less than 8.49% of C++ online submissions for Least Operators to Express Number.
+class Solution {
+public:
+    unordered_map<int, int> memo;
+    
+    int dfs(int x, int target) {
+        if(memo.find(target) != memo.end()){
+            return memo[target];
+        }else if(x == target){
+            return memo[target] = 0;
+        }else if(x > target){
+            return memo[target] = min(2*target-1, 2*(x-target));
+        }else{
+            //x < target
+            long long cur = x;
+            int count = 0;
+            
+            while(cur < target){
+                cur *= x;
+                ++count;
+            }
+            
+            if(cur == target){
+                return memo[target] = count;
+            }
+            
+            int sub_count = INT_MAX, add_count = INT_MAX;
+            
+            if(cur - target < target){ //?
+                sub_count = count + dfs(x, cur-target);
+            }
+            
+            add_count = count - 1 + dfs(x, target-cur/x);
+            
+            return memo[target] = min(sub_count, add_count) + 1;
+        }
+    }
+    
+    int leastOpsExpressTarget(int x, int target) {
+        return dfs(x, target);
+    }
+};
