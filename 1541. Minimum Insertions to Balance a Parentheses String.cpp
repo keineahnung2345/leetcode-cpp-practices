@@ -71,3 +71,42 @@ public:
         return ans;
     }
 };
+
+//One pass
+//https://leetcode.com/problems/minimum-insertions-to-balance-a-parentheses-string/discuss/780199/JavaC%2B%2BPython-Straight-Forward-One-Pass
+//Runtime: 84 ms, faster than 100.00% of C++ online submissions for Minimum Insertions to Balance a Parentheses String.
+//Memory Usage: 12.6 MB, less than 50.00% of C++ online submissions for Minimum Insertions to Balance a Parentheses String.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int minInsertions(string s) {
+        int added = 0, right_to_add = 0;
+        
+        for(char& c : s){
+            if(c == '('){
+                if(right_to_add&1){
+                    //actually add one ')'
+                    ++added;
+                    //so the ')' needed to be added is decreased by one
+                    --right_to_add;
+                }
+                //meet one '(', so we need two more ')'
+                right_to_add += 2;
+            }else{
+                //meet one ')', so need one less ')'
+                --right_to_add;
+                if(right_to_add < 0){
+                    //add one '('
+                    ++added;
+                    /*
+                    because we have added one '(',
+                    we need two more ')'
+                    */
+                    right_to_add += 2;
+                }
+            }
+        }
+        
+        return added + right_to_add;
+    }
+};
