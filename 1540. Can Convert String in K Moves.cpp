@@ -35,3 +35,35 @@ public:
         return true;
     }
 };
+
+//counter
+//https://leetcode.com/problems/can-convert-string-in-k-moves/discuss/779903/JavaPython-3-O(n)-Count-the-shift-displacement-w-brief-explanation-and-analysis.
+//Runtime: 172 ms, faster than 100.00% of C++ online submissions for Can Convert String in K Moves.
+//Memory Usage: 18 MB, less than 33.33% of C++ online submissions for Can Convert String in K Moves.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    bool canConvertString(string s, string t, int k) {
+        int n = s.size();
+        
+        if(t.size() != n) return false;
+        
+        vector<int> counter(26, 0);
+        
+        for(int i = 0; i < n; ++i){
+            int diff = t[i] - s[i];
+            if(diff < 0) diff += 26;
+            //no op
+            if(diff == 0) continue;
+            
+            //diff + counter[diff]*26: how many moves we need
+            if(k < diff + counter[diff]*26){
+                return false;
+            }
+            
+            ++counter[diff];
+        }
+        
+        return true;
+    }
+};
