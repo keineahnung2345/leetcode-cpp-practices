@@ -64,3 +64,39 @@ public:
         }
     }
 };
+
+//Iterative
+//https://leetcode.com/problems/find-kth-bit-in-nth-binary-string/discuss/781181/JavaC%2B%2BPython-Iterative-Solutions
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Find Kth Bit in Nth Binary String.
+//Memory Usage: 6.1 MB, less than 66.67% of C++ online submissions for Find Kth Bit in Nth Binary String.
+class Solution {
+public:
+    char findKthBit(int n, int k) {
+        int flipped = 0, len = (1<<n)-1;
+        
+        while(k > 1){
+            // cout << k << endl;
+            if(k == (len>>1)+1){
+                return (!flipped) ? '1' : '0';
+            }
+            
+            //prepare for next iteration
+            
+            if(k > (len>>1)+1){
+                //in the right part of current string
+                k = len-k+1;
+                flipped ^= 1;
+            }
+            
+            len >>= 1;
+        }
+        
+        //now k is equal to 1, meaning the first bit of the string
+        
+        /*
+        1st bit(1-based) is always '0', 
+        and we have flipped many times
+        */
+        return '0' + flipped;
+    }
+};
