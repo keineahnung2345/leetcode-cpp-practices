@@ -154,3 +154,61 @@ public:
         backtrack(board, tovisit, rows, cols, grids);
     }
 };
+
+//backtracking
+//https://leetcode.com/problems/sudoku-solver/discuss/15752/Straight-Forward-Java-Solution-Using-Backtracking
+//Runtime: 28 ms, faster than 58.89% of C++ online submissions for Sudoku Solver.
+//Memory Usage: 6.5 MB, less than 82.12% of C++ online submissions for Sudoku Solver.
+class Solution {
+public:
+    int coord2gridIdx(int i, int j){
+        /*
+        grid 0: i: [0-2], j:[0-2]
+        grid 1: i: [0-2], j:[3-5]
+        grid 2: i: [0-2], j:[6-8]
+        */
+        
+        return i/3 * 3 + j/3;
+    };
+    
+    bool isValidSudokuCell(vector<vector<char>>& board, int row, int col, char d) {
+        /*
+        want to find board[row][col] with d,
+        check if it will be valid
+        */
+        for(int i = 0; i < 9; ++i){
+            //check row
+            if(board[i][col] == d) return false;
+            //check col
+            if(board[row][i] == d) return false;
+            //check 3*3 block
+            if(board[3 *(row/3)+i/3][3*(col/3)+i%3] == d) return false;
+        }
+        
+        return true;
+    };
+    
+    bool helper(vector<vector<char>>& board) {
+        for(int i = 0; i < 9; ++i){
+            for(int j = 0; j < 9; ++j){
+                if(board[i][j] != '.') continue;
+                for(char d = '1'; d <= '9'; ++d){
+                    if(!isValidSudokuCell(board, i, j, d)) continue;
+                    board[i][j] = d;
+                    bool res = helper(board);
+                    if(res) return true;
+                    board[i][j] = '.';
+                }
+                
+                //this cell cannot be filled with '1'-'9'
+                return false;
+            }
+        }
+        
+        return true;
+    };
+    
+    void solveSudoku(vector<vector<char>>& board) {
+        helper(board);
+    }
+};
