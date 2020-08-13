@@ -62,6 +62,72 @@ public:
     }
 };
 
+//Union Find
+//https://leetcode.com/problems/longest-consecutive-sequence/discuss/41062/My-Java-Solution-using-UnionFound
+//Runtime: 28 ms, faster than 38.15% of C++ online submissions for Longest Consecutive Sequence.
+//Memory Usage: 12.6 MB, less than 5.01% of C++ online submissions for Longest Consecutive Sequence.
+class DSU{
+public:
+    vector<int> parent;
+    
+    DSU(int n){
+        parent = vector<int>(n);
+        iota(parent.begin(), parent.end(), 0);
+    }
+    
+    int find(int x){
+        if(x != parent[x]){
+            parent[x] = find(parent[x]);
+        }
+        return parent[x];
+    }
+    
+    void unite(int x, int y){
+        //merge y into x
+        parent[y] = find(parent[x]);
+    }
+    
+    int maxUnion(){
+        unordered_map<int, int> groupSizes;
+        int maxSize = 0;
+        
+        for(int i = 0; i < parent.size(); ++i){
+            ++groupSizes[find(i)];
+            maxSize = max(maxSize, groupSizes[find(i)]);
+        }
+        
+        return maxSize;
+    }
+};
+
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        int n = nums.size();
+        
+        DSU dsu(n);
+        
+        unordered_map<int, int> val2idx;
+        
+        for(int i = 0; i < n; ++i){
+            //ignore duplicate element
+            if(val2idx.find(nums[i]) != val2idx.end()) continue;
+            
+            val2idx[nums[i]] = i;
+            
+            if(val2idx.find(nums[i]-1) != val2idx.end()){
+                dsu.unite(val2idx[nums[i]-1], i);
+            }
+            
+            if(val2idx.find(nums[i]+1) != val2idx.end()){
+                dsu.unite(i, val2idx[nums[i]+1]);
+            }
+        }
+        
+        return dsu.maxUnion();
+    }
+};
+
 //Brute force
 //TLE
 //66 / 68 test cases passed.
