@@ -61,3 +61,28 @@ public:
         return ans;
     }
 };
+
+//Brute force
+//TLE
+//66 / 68 test cases passed.
+//time: O(N^3), space: O(1)
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        int maxStreak = 0;
+        
+        for(int num : nums){ //O(n)
+            int cur = num;
+            while(find(nums.begin(), nums.end(), cur+1) != nums.end()){ 
+                //while loop: O(n)
+                //find: O(n)
+                ++cur;
+            }
+            //cur in nums, cur+1 not in nums
+            maxStreak = max(maxStreak, cur-num+1);
+            // cout << num << ", " << cur << ", " << maxStreak << endl;
+        }
+        
+        return maxStreak;
+    }
+};
