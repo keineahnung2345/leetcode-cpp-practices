@@ -148,3 +148,36 @@ public:
         return maxStreak;
     }
 };
+
+//Approach 3: HashSet and Intelligent Sequence Building
+//Runtime: 16 ms, faster than 93.81% of C++ online submissions for Longest Consecutive Sequence.
+//Memory Usage: 11 MB, less than 49.83% of C++ online submissions for Longest Consecutive Sequence.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        unordered_set<int> snums(nums.begin(), nums.end());
+        
+        int maxStreak = 0;
+        
+        for(const int num : snums){
+            if(snums.find(num-1) == snums.end()){
+                //that means num is the head of its group
+                int cur = num;
+                
+                /*
+                this can only run for n iterations,
+                because the outside "if" only let the head of a group in
+                */
+                while(snums.find(cur+1) != snums.end()){
+                    ++cur;
+                }
+                
+                //[num...cur] is a group
+                maxStreak = max(maxStreak, cur-num+1);
+            }
+        }
+        
+        return maxStreak;
+    }
+};
