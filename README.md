@@ -559,6 +559,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 [130. Surrounded Regions.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/130.%20Surrounded%20Regions.cpp)
 
+[128. Longest Consecutive Sequence.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/128.%20Longest%20Consecutive%20Sequence.cpp)
+
 ## Segment Tree
 [307. Range Sum Query - Mutable(solution)](https://leetcode.com/articles/range-sum-query-mutable/)
 
