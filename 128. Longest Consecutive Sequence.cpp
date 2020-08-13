@@ -114,3 +114,37 @@ public:
         return maxStreak;
     }
 };
+
+//Sorting, with duplicate
+//Runtime: 16 ms, faster than 93.81% of C++ online submissions for Longest Consecutive Sequence.
+//Memory Usage: 9.8 MB, less than 98.38% of C++ online submissions for Longest Consecutive Sequence.
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        if(nums.empty()) return 0;
+        
+        int curStreak = 1;
+        int maxStreak = 1;
+        
+        sort(nums.begin(), nums.end());
+        
+        int n = nums.size();
+        
+        for(int i = 1; i < n; ++i){
+            if(nums[i] == nums[i-1]) continue;
+            if(nums[i] == nums[i-1]+1){
+                //extend old group
+                ++curStreak;
+            }else{
+                //start a new group
+                maxStreak = max(maxStreak, curStreak);
+                curStreak = 1;
+            }
+        }
+        
+        //update with last group
+        maxStreak = max(maxStreak, curStreak);
+        
+        return maxStreak;
+    }
+};
