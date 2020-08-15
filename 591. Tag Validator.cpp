@@ -121,3 +121,68 @@ public:
         return regex_match(code, pattern);
     }
 };
+
+//Approach 2: Regex
+//TLE
+//0 / 256 test cases passed.
+class Solution {
+public:
+    stack<string> stk;
+    bool containsTag;
+    
+    bool isValidTagName(string s, bool ending){
+        if(ending){
+            if(!stk.empty() && stk.top() == s){
+                stk.pop();
+            }else{
+                return false;
+            }
+        }else{
+            containsTag = true;
+            stk.push(s);
+        }
+        
+        return true;
+    };
+    
+    bool isValid(string code) {
+        regex pattern("<[A-Z]{1,9}>([^<]*(<((\/?[A-Z]{1,9}>)|(!\[CDATA\[(.*?)]]>)))?)*");
+        // cout << "matching regex" << endl;
+        if(!regex_match(code, pattern))
+            return false;
+        // cout << "matched regex" << endl;
+        
+        //initialize, it is set when we find a valid start tag
+        containsTag = false;
+        
+        for(int i = 0; i < code.size(); ++i){
+            bool ending = false;
+            
+            if(containsTag && stk.empty()){
+                return false;
+            }
+            
+            if(code[i] == '<'){
+                if(code[i+1] == '!'){
+                    //"<!]]>" is wrapped by a tag
+                    i = code.find("]]>", i+1);
+                    continue;
+                }
+                
+                if(code[i+1] == '/'){
+                    ++i;
+                    ending = true;
+                }
+                int closeIndex = code.find('>', i+1);
+                // cout << "potential tagname: " << code.substr(i+1, closeIndex-(i+1)) << endl;
+                if(closeIndex < 0 || 
+                  !isValidTagName(code.substr(i+1, closeIndex-(i+1)), ending)){
+                    return false;
+                }
+                //next time start from a char behind cdata or tag's end
+                i = closeIndex;
+            }
+        }
+        return stk.empty() && containsTag;
+    }
+};
