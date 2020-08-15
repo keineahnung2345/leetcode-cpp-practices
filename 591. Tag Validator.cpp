@@ -117,7 +117,7 @@ public:
         this regex will lead to catastrophic backtracking
         https://www.regular-expressions.info/catastrophic.html
         */
-        regex pattern("<([A-Z]{1,9})>([^<]*((<\/?[A-Z]{1,9}>)|(<!\[CDATA\[(.*?)]]>))?[^<]*)*<\/1>");
+        regex pattern("<([A-Z]{1,9})>([^<]*((<\\/?[A-Z]{1,9}>)|(<!\\[CDATA\\[(.*?)]]>))?[^<]*)*<\/1>");
         return regex_match(code, pattern);
     }
 };
@@ -146,7 +146,7 @@ public:
     };
     
     bool isValid(string code) {
-        regex pattern("<[A-Z]{1,9}>([^<]*(<((\/?[A-Z]{1,9}>)|(!\[CDATA\[(.*?)]]>)))?)*");
+        regex pattern("<[A-Z]{0,9}>([^<]*(<((\\/?[A-Z]{1,9}>)|(!\\[CDATA\\[(.*?)]]>)))?)*");
         // cout << "matching regex" << endl;
         if(!regex_match(code, pattern))
             return false;
