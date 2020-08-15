@@ -512,6 +512,13 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 ## Greedy
 [Greedy for Beginners [Problems | Sample solutions]](https://leetcode.com/discuss/general-discussion/669996/Greedy-for-Beginners-Problems-or-Sample-solutions)
 
+### Interval
+[56. Merge Intervals.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/56.%20Merge%20Intervals.cpp)
+
+[435. Non-overlapping Intervals.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/435.%20Non-overlapping%20Intervals.cpp)
+
+[452. Minimum Number of Arrows to Burst Balloons.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/452.%20Minimum%20Number%20of%20Arrows%20to%20Burst%20Balloons.cpp)
+
 ## Rolling hash, Rabin-Karp
 [686. Repeated String Match.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/686.%20Repeated%20String%20Match.cpp)
 
