@@ -149,3 +149,66 @@ public:
         }
     }
 };
+
+//Solution 4: Count the Occurrence of Characters
+//https://leetcode.com/problems/guess-the-word/discuss/133862/Random-Guess-and-Minimax-Guess-with-Comparison
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Guess the Word.
+//Memory Usage: 6.6 MB, less than 48.26% of C++ online submissions for Guess the Word.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    //(pos, char) -> count
+    vector<vector<int>> counter;
+    
+    int match(string& a, string& b){
+        int matches = 0;
+        
+        for(int i = 0; i < a.size(); ++i){
+            if(a[i] == b[i]) ++matches;
+        }
+        
+        return matches;
+    };
+    
+    int score(string& w){
+        int res = 0;
+        
+        for(int i = 0; i < 6; ++i){
+            res += counter[i][w[i]-'a'];
+        }
+        
+        return res;
+    };
+    
+    void findSecretWord(vector<string>& wordlist, Master& master) {
+        for(int i = 0; i < 10 && !wordlist.empty(); ++i){
+            counter = vector<vector<int>>(6, vector<int>(26, 0));
+            
+            for(string& word : wordlist){
+                for(int j = 0; j < 6; ++j){
+                    ++counter[j][word[j]-'a'];
+                }
+            }
+            
+            //guess the word who has most same char on same position
+            string guessword = *max_element(wordlist.begin(), wordlist.end(),
+                [this](string& a, string& b){
+                    return score(a) < score(b);
+                });
+            
+            int diff = master.guess(guessword);
+            
+            // cout << "guess: " << guessword << ", " << diff << endl;
+            
+            vector<string> tmp;
+            copy_if(wordlist.begin(), wordlist.end(), 
+                    back_inserter(tmp), 
+                    [&diff, &guessword, this](string& w){
+                        return match(guessword, w) == diff;} 
+                   );
+            swap(wordlist, tmp);
+            
+            // cout << "wordlist: " << wordlist.size() << endl;
+        }
+    }
+};
