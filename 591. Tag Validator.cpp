@@ -87,3 +87,37 @@ public:
         return stk.empty() && containsTag;
     }
 };
+
+//Approach 2: Regex, catastrophic backtracking
+//TLE
+//0 / 256 test cases passed.
+class Solution {
+public:
+    bool isValid(string code) {
+        /*
+        (1) <([A-Z]{1,9})>: outermost start-tag
+        all upper-case alphabets with length btw 1 to 9 inside <...>
+        
+        (2) [^<]*: TAG_CONTENT except CDATA
+        all chars except '<' occurring 0 or more times
+        
+        (3) (<\/?[A-Z]{1,9}>): start tag or end tag
+        
+        (4) (<!\[CDATA\[(.*?)]]>): CDATA
+        matches any char within <!\[CDATA\[...]]>
+        
+        (5) <\/1>: outermost end-tag
+        using "back-reference"
+        //https://www.regular-expressions.info/backref.html
+        
+        (6) (.*?): match all chars until "]]>"
+        (inside (4)) using "non-greedy mode"
+        */
+        /*
+        this regex will lead to catastrophic backtracking
+        https://www.regular-expressions.info/catastrophic.html
+        */
+        regex pattern("<([A-Z]{1,9})>([^<]*((<\/?[A-Z]{1,9}>)|(<!\[CDATA\[(.*?)]]>))?[^<]*)*<\/1>");
+        return regex_match(code, pattern);
+    }
+};
