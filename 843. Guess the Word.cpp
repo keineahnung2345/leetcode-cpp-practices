@@ -83,7 +83,7 @@ public:
     }
 };
 
-//Solution 3: Minimax
+//Solution 3: Minimax(minimize a certain maxima heuristic rather the the Minimax algorithm in AI)
 //https://leetcode.com/problems/guess-the-word/discuss/133862/Random-Guess-and-Minimax-Guess-with-Comparison
 //Runtime: 12 ms, faster than 27.33% of C++ online submissions for Guess the Word.
 //Memory Usage: 6.7 MB, less than 29.88% of C++ online submissions for Guess the Word.
@@ -122,7 +122,6 @@ public:
             // cout << "counter built: " << counter.size() << endl;
             
             //guess the word having minimum 0-matching words
-            //
             string guessword = *min_element(wordlist.begin(), wordlist.end(),
                 [&counter](const string& a, const string& b){
                     return counter[a] < counter[b];
