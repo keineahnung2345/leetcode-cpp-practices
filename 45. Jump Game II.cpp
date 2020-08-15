@@ -94,3 +94,33 @@ public:
         return jump;
     }
 };
+
+//Greedy
+//https://leetcode.com/problems/jump-game-ii/discuss/18014/Concise-O(n)-one-loop-JAVA-solution-based-on-Greedy
+//Runtime: 28 ms, faster than 36.18% of C++ online submissions for Jump Game II.
+//Memory Usage: 13.2 MB, less than 80.46% of C++ online submissions for Jump Game II.
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n = nums.size();
+        
+        int jumps = 0;
+        int cur_end = 0, cur_max_reach = 0;
+        
+        /*
+        i stops at n-2, 
+        that's because we don't need to jump 
+        if we have reached n-1
+        */
+        for(int i = 0; i < n-1; ++i){
+            cur_max_reach = max(cur_max_reach, i + nums[i]);
+            
+            if(i == cur_end){
+                cur_end = cur_max_reach;
+                ++jumps;
+            }
+        }
+        
+        return jumps;
+    }
+};
