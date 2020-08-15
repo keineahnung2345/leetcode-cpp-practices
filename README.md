@@ -519,6 +519,11 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 [1147. Longest Chunked Palindrome Decomposition.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1147.%20Longest%20Chunked%20Palindrome%20Decomposition.cpp)
 
+## Regex
+[591. Tag Validator.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/591.%20Tag%20Validator.cpp)
+
+[1071. Greatest Common Divisor of Strings.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1071.%20Greatest%20Common%20Divisor%20of%20Strings.cpp)
+
 ## Trie
 
 [Article on Trie. General Template and List of problems.](https://leetcode.com/discuss/general-discussion/680706/Article-on-Trie.-General-Template-and-List-of-problems.)
