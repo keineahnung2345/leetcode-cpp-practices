@@ -186,3 +186,36 @@ public:
         return stk.empty() && containsTag;
     }
 };
+
+//regex, replace
+//https://leetcode.com/problems/tag-validator/discuss/103370/short-python-accepted-but-not-sure-if-correct
+//Runtime: 168 ms, faster than 7.14% of C++ online submissions for Tag Validator.
+//Memory Usage: 29.2 MB, less than 7.14% of C++ online submissions for Tag Validator.
+class Solution {
+public:
+    bool isValid(string code) {
+        if(code == "t") return false;
+        
+        // cout << code << endl;
+        /*
+        in C++, \\ will be interpreted as \
+        in regex, \[ will be interpreted as the char '[', 
+        different from the [] when we need to matches any single character in brackets.
+        */
+        regex pattern("<!\\[CDATA\\[.*?\\]\\]>");
+        
+        code = regex_replace(code, pattern, "c");
+        // cout << code << endl;
+        
+        string prev = "";
+        pattern = regex("<([A-Z]{1,9})>[^<]*</\\1>");
+        
+        while(code != prev){
+            prev = code;
+            code = regex_replace(code, pattern, "t");
+            // cout << code << endl;
+        }
+        
+        return code == "t";
+    }
+};
