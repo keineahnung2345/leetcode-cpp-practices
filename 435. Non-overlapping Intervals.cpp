@@ -1,3 +1,10 @@
+//Greedy, maintain the shortest intervals
+/*
+the algorithm is not optimal!
+consider [[-3,3],[4,8]] and [2,5],
+this algorithm will choose [2,5],
+which is sub-optimal!
+*/
 //WA
 //15 / 18 test cases passed.
 class Solution {
@@ -48,6 +55,37 @@ public:
             }else{
                 ++discarded;
             }
+        }
+        
+        return discarded;
+    }
+};
+
+//Greedy, maintain the intervals with minimum right boundary
+//proof: https://en.wikipedia.org/wiki/Interval_scheduling#Interval_Scheduling_Maximization
+//http://lonati.di.unimi.it/algo/0910/lab/kowalski6.pdf
+//https://leetcode.com/problems/non-overlapping-intervals/discuss/91713/Java%3A-Least-is-Most
+//Runtime: 40 ms, faster than 59.83% of C++ online submissions for Non-overlapping Intervals.
+//Memory Usage: 10.7 MB, less than 32.78% of C++ online submissions for Non-overlapping Intervals.
+//time: O(NlogN)
+class Solution {
+public:
+    int eraseOverlapIntervals(vector<vector<int>>& intervals) {
+        int n = intervals.size();
+        
+        sort(intervals.begin(), intervals.end(),
+            [](vector<int>& a, vector<int>& b){
+                return a[1] < b[1];
+            });
+        
+        int discarded = 0;
+        int last_end = INT_MIN;
+        
+        for(vector<int> interval : intervals){
+            if(last_end > interval[0])
+                ++discarded;
+            else
+                last_end = interval[1];
         }
         
         return discarded;
