@@ -123,6 +123,93 @@ public:
     }
 };
 
+//segment tree
+//not understand
+//https://leetcode.com/problems/jump-game-v/discuss/497004/C%2B%2B-Segment-Tree
+//Runtime: 88 ms, faster than 44.60% of C++ online submissions for Jump Game V.
+//Memory Usage: 17.5 MB, less than 17.90% of C++ online submissions for Jump Game V.
+//time: O(NlogN)
+class Solution {
+private:
+    vector<int> tree;
+
+public:
+    int query(int x, int l, int r, int ql, int qr) {
+        if (ql > r || qr < l) {
+            return 0;
+        }
+        if (ql <= l && r <= qr) {
+            return tree[x];
+        }
+        int mid = (l + r) / 2;
+        return max(query(x * 2, l, mid, ql, qr), query(x * 2 + 1, mid + 1, r, ql, qr));
+    }
+
+    void update(int x, int l, int r, int u, int value) {
+        if (l > u || r < u) {
+            return;
+        }
+        if (l == r) {
+            tree[x] = value;
+            return;
+        }
+        int mid = (l + r) / 2;
+        update(x * 2, l, mid, u, value);
+        update(x * 2 + 1, mid + 1, r, u, value);
+        tree[x] = max(tree[x * 2], tree[x * 2 + 1]);
+    }
+
+    int maxJumps(vector<int>& arr, int d) {
+        int n = arr.size();
+        vector<int> bound_l(n), bound_r(n);
+
+        stack<int> stk;
+        for (int i = 0; i < n; ++i) {
+            while (!stk.empty() && arr[stk.top()] <= arr[i]) {
+                bound_r[stk.top()] = min(i - 1, stk.top() + d);
+                stk.pop();
+            }
+            stk.push(i);
+        }
+        while (!stk.empty()) {
+            bound_r[stk.top()] = min(n - 1, stk.top() + d);
+            stk.pop();
+        }
+
+        for (int i = n - 1; i >= 0; --i) {
+            while (!stk.empty() && arr[stk.top()] <= arr[i]) {
+                bound_l[stk.top()] = max(i + 1, stk.top() - d);
+                stk.pop();
+            }
+            stk.push(i);
+        }
+        while (!stk.empty()) {
+            bound_l[stk.top()] = max(0, stk.top() - d);
+            stk.pop();
+        }
+
+        vector<int> order(n);
+        iota(order.begin(), order.end(), 0);
+        sort(order.begin(), order.end(), [&](int i, int j) {return arr[i] < arr[j];});
+
+        vector<int> f(n);
+        tree.resize(n * 4 + 10);
+        for (int id: order) {
+            int prev = 0;
+            if (bound_l[id] < id) {
+                prev = max(prev, query(1, 0, n - 1, bound_l[id], id - 1));
+            }
+            if (id < bound_r[id]) {
+                prev = max(prev, query(1, 0, n - 1, id + 1, bound_r[id]));
+            }
+            f[id] = prev + 1;
+            update(1, 0, n - 1, id, f[id]);
+        }
+
+        return *max_element(f.begin(), f.end());
+    }
+};
+
 //dp, monotonic stack
 //not understand
 //https://mp.weixin.qq.com/s/kEQ00_WLqDTG6tbsjQ2Xjw
