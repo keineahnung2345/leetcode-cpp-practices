@@ -122,3 +122,69 @@ public:
         return ans;
     }
 };
+
+//dp, monotonic stack
+//not understand
+//https://mp.weixin.qq.com/s/kEQ00_WLqDTG6tbsjQ2Xjw
+//Runtime: 48 ms, faster than 96.87% of C++ online submissions for Jump Game V.
+//Memory Usage: 15.1 MB, less than 77.56% of C++ online submissions for Jump Game V.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    void print_stack(stack<int>& stk){
+        int* end   = &stk.top() + 1;
+        int* begin = end - stk.size();
+        vector<int> stack_contents(begin, end);
+        for(int& e : stack_contents){
+            cout << e << " ";
+        }
+        cout << endl;
+    };
+    
+    int maxJumps(vector<int>& arr, int d) {
+        int n = arr.size();
+        
+        vector<int> dp(n+1, 1);
+        //monotonic stack, bottom element is the highest
+        stack<int> stk, stk2;
+        
+        //use to clear "stk"
+        arr.push_back(INT_MAX);
+        
+        for(int i = 0; i <= n; ++i){
+            // cout << "i: " << i << endl;
+            //while we can jump from i to some previous index
+            while(!stk.empty() && arr[stk.top()] < arr[i]){
+                //stk.top() is current lowest element in "stk"
+                //"stk"'s bottom element is the highest
+                int pre_h = arr[stk.top()];
+                // cout << "stk: " << endl;
+                // print_stack(stk);
+                while(!stk.empty() && arr[stk.top()] == pre_h){
+                    int j = stk.top(); stk.pop();
+                    if(i - j <= d){
+                        //the index in "stk" are all visited
+                        //jump from i to j
+                        dp[i] = max(dp[i], dp[j]+1);
+                        // cout << "dp[" << i << "], jump to " << j << ": " << dp[j]+1 << endl;
+                    }
+                    stk2.push(j);
+                }
+                // cout << "stk2: " << endl;
+                // print_stack(stk2);
+                while(!stk2.empty()){
+                    int j = stk2.top(); stk2.pop();
+                    if(!stk.empty() && j - stk.top() <= d){
+                        //j's height is smaller than all element in "stk"
+                        //jump from stk.top() to j
+                        dp[stk.top()] = max(dp[stk.top()], dp[j]+1);
+                        // cout << "dp[" << stk.top() << "], jump to " << j << ": " << dp[j]+1 << endl;
+                    }
+                }
+            }
+            stk.push(i);
+        }
+        
+        return *max_element(dp.begin(), dp.begin()+n);
+    }
+};
