@@ -1,3 +1,31 @@
+//DFS + memo
+//TLE
+//76 / 176 test cases passed.
+//Runtime: 140 ms, faster than 28.57% of C++ online submissions for Minimum Number of Days to Eat N Oranges.
+//Memory Usage: 22.5 MB, less than 14.29% of C++ online submissions for Minimum Number of Days to Eat N Oranges.
+class Solution {
+public:
+    unordered_map<int, int> memo;
+    
+    int dfs(int n){
+        if(memo.find(n) != memo.end()){
+            return memo[n];
+        }
+        
+        int days = INT_MAX;
+        
+        days = min(days, dfs(n-1));
+        if(!(n&1)) days = min(days, dfs(n>>1));
+        if(n%3==0) days = min(days, dfs(n/3));
+        
+        return memo[n] = days+1;
+    }
+    int minDays(int n) {
+        memo[0] = 0;
+        return dfs(n);
+    }
+};
+
 //BFS
 //Runtime: 140 ms, faster than 28.57% of C++ online submissions for Minimum Number of Days to Eat N Oranges.
 //Memory Usage: 22.5 MB, less than 14.29% of C++ online submissions for Minimum Number of Days to Eat N Oranges.
