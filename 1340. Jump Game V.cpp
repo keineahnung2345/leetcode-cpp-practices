@@ -42,3 +42,43 @@ public:
         return max_jumps;
     }
 };
+
+//DP
+//Hint 1: Use dynamic programming. dp[i] is max jumps you can do starting from index i. Answer is max(dp[i]).
+//Hint 2: dp[i] = 1 + max (dp[j]) where j is all indices you can reach from i.
+//Runtime: 80 ms, faster than 53.12% of C++ online submissions for Jump Game V.
+//Memory Usage: 15.6 MB, less than 31.53% of C++ online submissions for Jump Game V.
+class Solution {
+public:
+    int maxJumps(vector<int>& arr, int d) {
+        int n = arr.size();
+        
+        vector<pair<int, int>> parr(n);
+        
+        for(int i = 0; i < n; ++i){
+            parr[i] = {i, arr[i]};
+        }
+        
+        sort(parr.begin(), parr.end(), 
+            [](const pair<int, int>& p, const pair<int, int>& q){
+                return (p.second == q.second) ? p.first < q.first : p.second < q.second;
+            });
+        
+        vector<int> dp(n, INT_MIN);
+        int ans = 0;
+        
+        for(pair<int, int>& p : parr){
+            dp[p.first] = 1;
+            for(int k = p.first-1; k >= max(p.first-d, 0) && arr[k] < arr[p.first]; --k){
+                dp[p.first] = max(dp[p.first], dp[k]+1);
+            }
+            for(int k = p.first+1; k <= min(p.first+d, n-1) && arr[k] < arr[p.first]; ++k){
+                dp[p.first] = max(dp[p.first], dp[k]+1);
+            }
+            ans = max(ans, dp[p.first]);
+            // cout << p.first << ", " << dp[p.first] << ", " << ans << endl;
+        }
+        
+        return ans;
+    }
+};
