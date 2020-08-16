@@ -43,11 +43,51 @@ public:
     }
 };
 
-//DP
+//top-down dp(dfs + memo)
+//https://mp.weixin.qq.com/s/kEQ00_WLqDTG6tbsjQ2Xjw
+//Runtime: 76 ms, faster than 57.67% of C++ online submissions for Jump Game V.
+//Memory Usage: 15.3 MB, less than 48.01% of C++ online submissions for Jump Game V.
+//time: O(Nd), space: O(N)
+class Solution {
+public:
+    int n;
+    vector<int> memo;
+    
+    int dfs(vector<int>& arr, int& d, int i){
+        if(memo[i]) return memo[i];
+        
+        memo[i] = 1;
+        for(int k = i-1; k >= max(i-d, 0) && arr[k] < arr[i]; --k){
+            memo[i] = max(memo[i], dfs(arr, d, k)+1);
+        }
+        for(int k = i+1; k <= min(i+d, n-1) && arr[k] < arr[i]; ++k){
+            memo[i] = max(memo[i], dfs(arr, d, k)+1);
+        }
+        
+        return memo[i];
+    };
+    
+    int maxJumps(vector<int>& arr, int d) {
+        n = arr.size();
+        
+        memo = vector<int>(n, 0);
+        int ans = 0;
+        
+        for(int i = 0; i < n; ++i){
+            ans = max(ans, dfs(arr, d, i));
+        }
+        
+        return ans;
+    }
+};
+
+
+//bottom-up DP
 //Hint 1: Use dynamic programming. dp[i] is max jumps you can do starting from index i. Answer is max(dp[i]).
 //Hint 2: dp[i] = 1 + max (dp[j]) where j is all indices you can reach from i.
 //Runtime: 80 ms, faster than 53.12% of C++ online submissions for Jump Game V.
 //Memory Usage: 15.6 MB, less than 31.53% of C++ online submissions for Jump Game V.
+//time: O(NlogN + Nd), space: O(N)
 class Solution {
 public:
     int maxJumps(vector<int>& arr, int d) {
