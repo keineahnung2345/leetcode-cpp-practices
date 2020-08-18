@@ -132,3 +132,29 @@ public:
         return srev.substr(0, n - lps[nnew-1]) + s;
     }
 };
+
+//Approach #3 KMP [Accepted](official)
+//Runtime: 8 ms, faster than 96.25% of C++ online submissions for Shortest Palindrome.
+//Memory Usage: 7.9 MB, less than 66.73% of C++ online submissions for Shortest Palindrome.
+class Solution {
+public:
+    string shortestPalindrome(string s) {
+        int n = s.size();
+        string srev(s.rbegin(), s.rend());
+        string snew = s + "#" + srev;
+        int nnew = snew.size();
+        vector<int> lps(nnew, 0);
+        
+        for(int i = 1; i < nnew; ++i){
+            int len = lps[i-1];
+            while(len > 0 && snew[i] != snew[len]){
+                len = lps[len-1];
+            }
+            if(snew[i] == snew[len]){
+                ++len;
+            }
+            lps[i] = len;
+        }
+        return srev.substr(0, n - lps[nnew-1]) + s;
+    }
+};
