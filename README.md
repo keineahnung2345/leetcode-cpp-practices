@@ -82,6 +82,8 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 
 [167. Two Sum II - Input array is sorted.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/167.%20Two%20Sum%20II%20-%20Input%20array%20is%20sorted.cpp)
 
+[214. Shortest Palindrome.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/214.%20Shortest%20Palindrome.cpp)
+
 [234. Palindrome Linked List.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/234.%20Palindrome%20Linked%20List.cpp)
 
 [283. Move Zeroes.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/283.%20Move%20Zeroes.cpp)
@@ -491,6 +493,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 [28. Implement strStr().cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/28.%20Implement%20strStr().cpp)
 
 [187. Repeated DNA Sequences.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/187.%20Repeated%20DNA%20Sequences.cpp)
+
+[214. Shortest Palindrome.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/214.%20Shortest%20Palindrome.cpp)
 
 [796. Rotate String.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/796.%20Rotate%20String.cpp)
 
