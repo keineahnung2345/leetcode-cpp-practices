@@ -166,6 +166,8 @@ public:
                 */
                 return i - j;
             }else if (i < m && text[i] != pattern[j]) {
+                //i < m: haven't look to the end of "text"
+                //text[i] != pattern[j]: need to change i or j
                 if(j > 0){
                     //fallback
                     /*
