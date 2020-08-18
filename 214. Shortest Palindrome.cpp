@@ -29,3 +29,27 @@ public:
         return "";
     }
 };
+
+//Approach #1 Brute force [Accepted]
+//TLE
+//119 / 120 test cases passed.
+//time: O(N^2), space: O(N)
+class Solution {
+public:
+    string shortestPalindrome(string s) {
+        int n = s.size();
+        string srev(s.rbegin(), s.rend());
+        
+        /*
+        s:    "aacecaaa"
+        srev: "aaacecaa"
+        */
+        for(int l = n; l >= 1; --l){
+            if(s.substr(0, l) == srev.substr(n-l)){
+                return srev.substr(0, n-l) + s;
+            }
+        }
+        
+        return "";
+    }
+};
