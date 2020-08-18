@@ -524,6 +524,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 [452. Minimum Number of Arrows to Burst Balloons.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/452.%20Minimum%20Number%20of%20Arrows%20to%20Burst%20Balloons.cpp)
 
 ## Rolling hash, Rabin-Karp
+[Why is the base used to compute hashes in Rabin–Karp always primes?](https://cs.stackexchange.com/questions/28019/why-is-the-base-used-to-compute-hashes-in-rabin-karp-always-primes/28024#28024)
+
 [686. Repeated String Match.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/686.%20Repeated%20String%20Match.cpp)
 
 [1044. Longest Duplicate Substring.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1044.%20Longest%20Duplicate%20Substring.cpp)
