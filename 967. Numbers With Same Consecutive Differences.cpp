@@ -81,3 +81,52 @@ public:
         return ans;
     }
 };
+
+//Approach 2: BFS (Breadth-First Search)
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Numbers With Same Consecutive Differences.
+//Memory Usage: 7.1 MB, less than 96.29% of C++ online submissions for Numbers With Same Consecutive Differences.
+//time: O(N*2^N), we have 9*(2^(N-1)) potention combinations, and to generate each combination, we need O(N)
+//space: O(2^N), in the queue, we could have at most two level of elements, for first level, it takes O(9*2^(N-1)), for 2nd level, it takes O(9*2^(N-1-1))
+class Solution {
+public:
+    vector<int> numsSameConsecDiff(int N, int K) {
+        if(N == 1){
+            return {0,1,2,3,4,5,6,7,8,9};
+        }
+        
+        queue<int> q;
+        
+        for(int i = 1; i <= 9; ++i){
+            q.push(i);
+        }
+        
+        int level = 1;
+        vector<int> ans;
+        
+        while(level <= N){
+            int level_size = q.size();
+            
+            while(level_size-- > 0){
+                int cur = q.front(); q.pop();
+                
+                if(level == N){
+                    ans.push_back(cur);
+                }else{
+                    int d = cur%10;
+            
+                    if(d-K >= 0){
+                        q.push(cur*10 + (d-K));
+                    }
+
+                    if(K != 0 && d+K <= 9){
+                        q.push(cur*10 + (d+K));
+                    }
+                }
+            }
+            
+            ++level;
+        }
+        
+        return ans;
+    }
+};
