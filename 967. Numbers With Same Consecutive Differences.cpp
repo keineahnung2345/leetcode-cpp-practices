@@ -42,3 +42,42 @@ public:
         return ans;
     }
 };
+
+//Approach 1: DFS (Depth-First Search)
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Numbers With Same Consecutive Differences.
+//Memory Usage: 8 MB, less than 46.79% of C++ online submissions for Numbers With Same Consecutive Differences.
+//time: O(N*2^N), we have 9*(2^(N-1)) potention combinations, and to generate each combination, we need O(N) for recursion
+//space: O(2^N), recursion space: O(N), answer space: O(9*(2^(N-1))) = O(2^N)
+class Solution {
+public:
+    int K;
+    vector<int> ans;
+    
+    void dfs(int N, int num){
+        if(N == 0){
+            ans.push_back(num);
+        }else{
+            int d = num%10;
+            
+            if(d-K >= 0){
+                dfs(N-1, num*10 + (d-K));
+            }
+            
+            if(K != 0 && d+K <= 9){
+                dfs(N-1, num*10 + (d+K));
+            }
+        }
+    }
+    
+    vector<int> numsSameConsecDiff(int N, int K) {
+        this->K = K;
+        
+        if(N == 1) ans.push_back(0);
+        
+        for(int num = 1; num <= 9; ++num){
+            dfs(N-1, num);
+        }
+        
+        return ans;
+    }
+};
