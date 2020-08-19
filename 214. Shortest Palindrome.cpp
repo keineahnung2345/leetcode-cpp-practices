@@ -190,3 +190,70 @@ public:
         return prepend + s; 
     }
 };
+
+//Manacher's algorithm
+//https://leetcode.com/problems/shortest-palindrome/discuss/60234/Easy-C%2B%2B-Manacher
+//Runtime: 12 ms, faster than 61.90% of C++ online submissions for Shortest Palindrome.
+//Memory Usage: 7.8 MB, less than 70.16% of C++ online submissions for Shortest Palindrome.
+class Solution {
+public:
+    string shortestPalindrome(string s) {
+        int n = s.size();
+        int tn = 2*n+3;
+        
+        /*
+        s: abcd
+        t: ^#a#b#c#d#$
+        */
+        string t(tn, '#');
+        
+        t[0] = '^';
+        t[t.size()-1] = '$';
+        
+        for(int i = 2, j = 0; j < n; i += 2, ++j){
+            t[i] = s[j];
+        }
+        
+        // cout << t << endl;
+        
+        int mirror = 0, right = 0, center = 0;
+        vector<int> p(tn, 0);
+        
+        for(int i = 0; i < tn; ++i){
+            //i - center == center - mirror
+            mirror = center*2 - i;
+            
+            if(i < right){
+                p[i] = min(p[mirror], right - i);
+            }
+            
+            while(i+p[i]+1 < tn && i-(p[i]+1) >= 0 && t[i-(p[i]+1)] == t[i+p[i]+1]){
+                ++p[i];
+            }
+            
+            if(i+p[i] > right){
+                center = i;
+                right = center + p[center];
+            }
+        }
+        
+        /*
+        find in t[1:tn-2]: #a#b#c#d#
+        */
+        int not_match_start;
+        for (int i = tn - 2; i > 0; i--) {
+            // cout << i << " - " << p[i] << endl;
+            //i: the center of palindrome
+            //p[i]: the length of half palindrome in t
+            //i - p[i]: the start index of palindrome in t
+            //here we choose the palindrome starting at 1?
+            if (i - p[i] == 1) {
+                not_match_start = p[i];
+                break;
+            }
+        }
+        string not_match = s.substr(not_match_start); 
+        reverse(not_match.begin(), not_match.end());
+        return not_match + s;
+    }
+};
