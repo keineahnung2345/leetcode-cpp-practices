@@ -509,6 +509,10 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 [Manacher’s Algorithm – Linear Time Longest Palindromic Substring – Part 4](https://www.geeksforgeeks.org/manachers-algorithm-linear-time-longest-palindromic-substring-part-4/)
 
+[[译]最长回文子串(Longest Palindromic Substring) Part I](https://www.cnblogs.com/bitzhuwei/p/Longest-Palindromic-Substring-Par-I.html)
+
+[[译+改]最长回文子串(Longest Palindromic Substring) Part II](https://www.cnblogs.com/bitzhuwei/p/Longest-Palindromic-Substring-Part-II.html)
+
 [5. Longest Palindromic Substring.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/5.%20Longest%20Palindromic%20Substring.cpp)
 
 [214. Shortest Palindrome.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/214.%20Shortest%20Palindrome.cpp)
