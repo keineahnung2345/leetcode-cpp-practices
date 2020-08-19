@@ -511,6 +511,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 [5. Longest Palindromic Substring.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/5.%20Longest%20Palindromic%20Substring.cpp)
 
+[214. Shortest Palindrome.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/214.%20Shortest%20Palindrome.cpp)
+
 [647. Palindromic Substrings.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/647.%20Palindromic%20Substrings.cpp)
 
 ## Greedy
