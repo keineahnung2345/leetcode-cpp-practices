@@ -225,6 +225,10 @@ public:
             /*
             try to expand it:
             try assume the new p[i] is 1+p[i], and see if it works
+            
+            i+(1+p[i]) < t.size() && i-(1+p[i]) >= 0: 
+            the expected new palindrome's range is [i-p[i],i+p[i]],
+            we need to check if it falls in [0, t.size())
             */
             while(i+(1+p[i]) < t.size() && i-(1+p[i]) >= 0 && t[i+(1+p[i])] == t[i-(1+p[i])]){
                 p[i]++;
