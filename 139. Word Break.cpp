@@ -30,6 +30,32 @@ public:
     }
 };
 
+//DP
+//https://leetcode.com/problems/concatenated-words/discuss/348972/Java-Common-template-Word-Break-I-Word-Break-II-Concatenated-Words
+//Runtime: 12 ms, faster than 79.03% of C++ online submissions for Word Break.
+//Memory Usage: 9.6 MB, less than 68.61% of C++ online submissions for Word Break.
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int n = s.size();
+        
+        vector<bool> dp(n+1, false);
+        dp[n] = true;
+        
+        for(int i = n-1; i >= 0; --i){
+            for(int j = i+1; j <= n; ++j){
+                // cout << i << ", " << j << ", " << s.substr(i, j-i) << endl;
+                if(dp[j] && find(wordDict.begin(), wordDict.end(), s.substr(i, j-i)) != wordDict.end()){
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        
+        return dp[0];
+    }
+};
+
 //trie
 //Runtime: 24 ms, faster than 56.77% of C++ online submissions for Word Break.
 //Memory Usage: 13.7 MB, less than 26.97% of C++ online submissions for Word Break.
