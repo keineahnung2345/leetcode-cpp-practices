@@ -187,3 +187,55 @@ public:
         return ans;
     }
 };
+
+//DP, Word Break I
+//https://leetcode.com/problems/concatenated-words/discuss/95652/Java-DP-Solution
+//TLE
+//6 / 44 test cases passed.
+class Solution {
+public:
+    bool wordBreak(string s, unordered_set<string>& wordDict) {
+        if(wordDict.empty())
+            return false;
+        
+        int n = s.size();
+        
+        //key: end index, 1-based
+        vector<bool> dp(n+1, false);
+        //empty string
+        dp[0] = true;
+        
+        for(int end = 1; end <= n; ++end){
+            for(int start = 0; start < end; ++start){
+                //dp[start]: s[0...start-1]
+                if(dp[start] && find(wordDict.begin(), wordDict.end(), s.substr(start, end-start)) != wordDict.end()){
+                    //s[0...end-1] can be split into s[0...start-1] and s[start...end-1]
+                    dp[end] = true;
+                    break;
+                }
+            }
+        }
+        
+        return dp[n];
+    }
+    
+    vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
+        int n = words.size();
+        
+        vector<string> ans;
+        
+        sort(words.begin(), words.end(), [](const string& w1, const string& w2){
+            return w1.size() < w2.size();
+        });
+        
+        unordered_set<string> preWords;
+        for(string& word : words){
+            if(wordBreak(word, preWords)){
+                ans.push_back(word);
+            }
+            preWords.insert(word);
+        }
+        
+        return ans;
+    }
+};
