@@ -46,23 +46,44 @@ public:
             // cout << "cur->(preMid->next): " << cur->val << "->" << preMid->next->val << endl;
             // cout << "preMid->cur: " << preMid->val << "->" << cur->val << endl;
             
+            /*
+            at first iteration, cur is the 2nd node of later part
+            in each iteration, 
+            we move cur so it becomes the new head of later part
+            in the loop, cur is 2nd node, then 3rd node, then 4th, ...
+            */
             preCur->next = cur->next;
             cur->next = preMid->next;
+            /*
+            preMid serves as the previous node of later part,
+            it will not be changed it this step
+            preMid->next points to the head of later part
+            */
             preMid->next = cur;
         }
         // cout << endl;
         
         //start reorder
         /*
-        for 1->2->3->4->5, now
-        1->5->2->4->3
-        for 1->2->3->4->5->6, now
-        1->6->2->5->3->4
+        for 1->2->3->4->5,
+        it becomes 1->2->3->5->4
+        and then 1->5->2->4->3
+        for 1->2->3->4->5->6,
+        it becomes 1->2->3->6->5->4
+        and then 1->6->2->3->5->4
+        and then 1->6->2->5->3->4
         */
         p1 = head;
         p2 = preMid->next;
         
         while(p1 != preMid){
+            /*
+            p2 is the head of later part
+            in each iteration, 
+            move p2 to the behind of p1
+            (p1 is initially the head of former part,
+            but it will move)
+            */
             // cout << "premid->(p2->next): " << preMid->val << "->" << (p2->next ? p2->next->val : -1) << endl;
             // cout << "p2->(p1->next): " << p2->val << "->" << p1->next->val << endl;
             // cout << "p1->p2: " << p1->val << "->" << p2->val << endl;
