@@ -30,8 +30,7 @@ public:
     }
 };
 
-//DP
-//https://leetcode.com/problems/concatenated-words/discuss/348972/Java-Common-template-Word-Break-I-Word-Break-II-Concatenated-Words
+//DP optimized from above
 //Runtime: 12 ms, faster than 79.03% of C++ online submissions for Word Break.
 //Memory Usage: 9.6 MB, less than 68.61% of C++ online submissions for Word Break.
 class Solution {
@@ -53,6 +52,35 @@ public:
         }
         
         return dp[0];
+    }
+};
+
+//DP
+//https://leetcode.com/problems/concatenated-words/discuss/348972/Java-Common-template-Word-Break-I-Word-Break-II-Concatenated-Words
+//Runtime: 28 ms, faster than 49.06% of C++ online submissions for Word Break.
+//Memory Usage: 12.9 MB, less than 52.89% of C++ online submissions for Word Break.
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        int n = s.size();
+        
+        //key: end index, 1-based
+        vector<bool> dp(n+1, false);
+        //empty string
+        dp[0] = true;
+        
+        for(int end = 1; end <= n; ++end){
+            for(int start = 0; start < end; ++start){
+                //dp[start]: s[0...start-1]
+                if(dp[start] && find(wordDict.begin(), wordDict.end(), s.substr(start, end-start)) != wordDict.end()){
+                    //s[0...end-1] can be split into s[0...start-1] and s[start...end-1]
+                    dp[end] = true;
+                    break;
+                }
+            }
+        }
+        
+        return dp[n];
     }
 };
 
