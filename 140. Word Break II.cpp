@@ -145,7 +145,7 @@ class Solution {
 public:
     unordered_map<string, vector<string>> memo;
     
-    void dfs(string s, vector<string>& wordDict, unordered_map<string, vector<string>>& memo){
+    void dfs(string s, vector<string>& wordDict){
         if(memo.find(s) != memo.end()){
             return;
         }
@@ -158,7 +158,7 @@ public:
         for(string& word : wordDict){
             if(s.rfind(word, 0)==0){ //startswith
                 //split s into word + s.substr(word.size())
-                dfs(s.substr(word.size()), wordDict, memo);
+                dfs(s.substr(word.size()), wordDict);
                 for(string& seg : memo[s.substr(word.size())]){
                     memo[s].push_back(word + ((!seg.empty()) ? " " : "") + seg);
                 }
@@ -167,8 +167,9 @@ public:
     };
     
     vector<string> wordBreak(string s, vector<string>& wordDict) {
-        dfs(s, wordDict, memo);
+        dfs(s, wordDict);
         
         return memo[s];
     }
 };
+
