@@ -1,7 +1,7 @@
-//DFS
-//WA
-//69 / 70 test cases passed.
-//fails [3,3,8,8] (expected true)
+//DFS, need to consider epsilon!
+//Runtime: 96 ms, faster than 20.53% of C++ online submissions for 24 Game.
+//Memory Usage: 18 MB, less than 12.62% of C++ online submissions for 24 Game.
+
 class Solution {
 public:
     vector<char> ops;
@@ -15,7 +15,14 @@ public:
         // cout << endl;
         
         if(n == 1){
-            return nums[0] == 24;
+            /*
+            http://www.cplusplus.com/reference/cfloat/
+            DBL_EPSILON: 1e-9 or smaller
+            */
+            //69 / 70 test cases passed.
+            //fails [3,3,8,8] (expected true)
+            return abs(nums[0] - 24.0) < 1e-5;
+            // return abs(nums[0] - 24.0) < std::numeric_limits<double>::epsilon();
         }else{
             /*
             choose any two elements and do operation,
