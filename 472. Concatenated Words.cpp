@@ -188,6 +188,98 @@ public:
     }
 };
 
+//Trie + DFS, optimized
+//https://leetcode.com/problems/concatenated-words/discuss/95644/102ms-java-Trie-%2B-DFS-solution.-With-explanation-easy-to-understand.
+//Runtime: 488 ms, faster than 78.18% of C++ online submissions for Concatenated Words.
+//Memory Usage: 290.5 MB, less than 36.74% of C++ online submissions for Concatenated Words.
+class TrieNode{
+public:
+    vector<TrieNode*> children;
+    string word;
+    
+    TrieNode(){
+        children = vector<TrieNode*>(26, nullptr);
+    }
+};
+
+class Trie{
+public:
+    TrieNode* root;
+    
+    Trie(){
+        root = new TrieNode();
+    }
+    
+    void add(string& word){
+        TrieNode* cur = root;
+        
+        for(char& c : word){
+            if(cur->children[c-'a'] == nullptr){
+                cur->children[c-'a'] = new TrieNode();
+            }
+            
+            cur = cur->children[c-'a'];
+        }
+        
+        cur->word = word;
+    }
+    
+    /*
+    find all prefixes of "word",
+    note that the word itself is also considered as a prefix
+    */
+    bool test(string& word, int start, int& count){
+        TrieNode* cur = root;
+        
+        for(int i = start; i < word.size(); ++i){
+            char c = word[i];
+            cur = cur->children[c-'a'];
+            
+            if(cur == nullptr){
+                break;
+            }
+            
+            if(!cur->word.empty()){ //a.k.a isEnd
+                ++count;
+                if(i == word.size()-1){
+                    //constructed by more than 1 words
+                    return count > 1;
+                }
+                if(test(word, i+1, count)){
+                    return true;
+                }
+                --count;
+            }
+        }
+        
+        return false;
+    }
+};
+
+class Solution {
+public:
+    vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
+        Trie* trie = new Trie();
+        
+        for(int i = 0; i < words.size(); ++i){
+            trie->add(words[i]);
+        }
+        
+        vector<string> ans;
+        
+        for(string& word : words){
+            // cout << "word: " << word << endl;
+            if(word.empty()) continue;
+            int count = 0;
+            if(trie->test(word, 0, count)){
+                ans.push_back(word);
+            }
+        }
+        
+        return ans;
+    }
+};
+
 //DP, Word Break I
 //https://leetcode.com/problems/concatenated-words/discuss/95652/Java-DP-Solution
 //TLE
