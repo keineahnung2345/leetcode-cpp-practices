@@ -178,3 +178,48 @@ public:
         return ans;
     }
 };
+
+//https://leetcode.com/problems/find-the-closest-palindrome/discuss/102391/Python-Simple-with-Explanation
+//Runtime: 8 ms, faster than 16.56% of C++ online submissions for Find the Closest Palindrome.
+//Memory Usage: 6.2 MB, less than 71.34% of C++ online submissions for Find the Closest Palindrome.
+class Solution {
+public:
+    string nearestPalindromic(string n) {
+        int l = n.size();
+        
+        unordered_set<string> cands;
+        cands.insert("1" + string(l-1, '0') + "1"); //999->1001, one more digit
+        if(l-1 > 0) cands.insert(string(l-1, '9')); //1001->999, one less digit
+        
+        /*
+        If the final answer has the same number of digits as the input string S, then the answer must be the middle digits + (-1, 0, or 1) flipped into a palindrome.(?)
+        */
+        string former = n.substr(0, l&1 ? (l>>1)+1 : l>>1);
+        // cout << former << endl;
+        vector<string> formers = {to_string(stoll(former)-1), 
+                                  former, 
+                                  to_string(stoll(former)+1)};
+        
+        for(string& f : formers){
+            string later = f.substr(0, l&1 ? f.size()-1 : f.size());
+            reverse(later.begin(), later.end());
+            // cout << "insert " << f+later << endl;
+            cands.insert(f + later);
+        }
+        
+        cands.erase(n);
+        
+        // cout << "cands: ";
+        // for(const string& cand : cands){
+        //     cout << cand << "#";
+        // }
+        // cout << endl;
+        
+        return *min_element(cands.begin(), cands.end(),
+            [&n](const string& c1, const string& c2){
+                return (abs(stoll(n) - stoll(c1)) == abs(stoll(n) - stoll(c2))) ? 
+                    stoll(c1) < stoll(c2) :
+                    (abs(stoll(n) - stoll(c1)) < abs(stoll(n) - stoll(c2)));
+            });
+    }
+};
