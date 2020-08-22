@@ -164,6 +164,8 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 
 [94. Binary Tree Inorder Traversal.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/3bad51a31f89eb66c28269f5dd54bb5536a44ef9/94.%20Binary%20Tree%20Inorder%20Traversal.cpp)
 
+[99. Recover Binary Search Tree.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/99.%20Recover%20Binary%20Search%20Tree.cpp)
+
 [538. Convert BST to Greater Tree.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/1171b5e67a0e24e173dace2b69e236447a7aef03/538.%20Convert%20BST%20to%20Greater%20Tree.cpp)
 
 ## Multiset
