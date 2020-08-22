@@ -1,5 +1,6 @@
 //Runtime: 56 ms, faster than 20.38% of C++ online submissions for Recover Binary Search Tree.
 //Memory Usage: 55.2 MB, less than 5.06% of C++ online submissions for Recover Binary Search Tree.
+//time: O(N), space: O(N)
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -61,6 +62,7 @@ public:
 //https://leetcode.com/problems/recover-binary-search-tree/discuss/32559/Detail-Explain-about-How-Morris-Traversal-Finds-two-Incorrect-Pointer
 //Runtime: 48 ms, faster than 33.92% of C++ online submissions for Recover Binary Search Tree.
 //Memory Usage: 53.7 MB, less than 33.72% of C++ online submissions for Recover Binary Search Tree.
+//time: O(N), space: O(1)
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
