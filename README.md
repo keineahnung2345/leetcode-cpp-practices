@@ -157,6 +157,15 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 
 [1499. Max Value of Equation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1499.%20Max%20Value%20of%20Equation.cpp)
 
+## Binary tree
+
+### Threaded binary tree, Morris Traversal
+[Morris Traversal方法遍历二叉树（非递归，不用栈，O(1)空间）](https://www.cnblogs.com/AnnieKim/archive/2013/06/15/morristraversal.html)
+
+[94. Binary Tree Inorder Traversal.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/3bad51a31f89eb66c28269f5dd54bb5536a44ef9/94.%20Binary%20Tree%20Inorder%20Traversal.cpp)
+
+[538. Convert BST to Greater Tree.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/1171b5e67a0e24e173dace2b69e236447a7aef03/538.%20Convert%20BST%20to%20Greater%20Tree.cpp)
+
 ## Multiset
 It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
