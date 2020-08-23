@@ -192,7 +192,10 @@ public:
         if(l-1 > 0) cands.insert(string(l-1, '9')); //1001->999, one less digit
         
         /*
-        If the final answer has the same number of digits as the input string S, then the answer must be the middle digits + (-1, 0, or 1) flipped into a palindrome.(?)
+        If the final answer has the same number of digits as the input string S, then the answer must be the middle digits + (-1, 0, or 1) flipped into a palindrome.
+        0:  12345 -> 12321
+        -1: 99100 -> 99099
+        +1: 10299 -> 10300
         */
         string former = n.substr(0, l&1 ? (l>>1)+1 : l>>1);
         // cout << former << endl;
