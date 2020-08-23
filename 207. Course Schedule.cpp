@@ -10,7 +10,15 @@ public:
         /*
         3
         [[0,1],[0,2],[1,2]]
+        (according to the problem description, the edge is represented as [dst, src])
         In the example: 
+        there are two paths :
+        2->0
+        2->1->0
+        If we go through the first path first, 0 will be marked as visited,
+        later when we go through the second path, we will see 0 as visited,
+        if we only use "visited" to detect cycle, it will fail in this case,
+        so we need "recStack" to check if 0 is on our path
         */
         
         for(int nei : edges[cur]){
