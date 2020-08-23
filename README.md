@@ -61,7 +61,7 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 
 #### Cycle detection in undirected graph
 
-[Detect cycle in an undirected graph](https://www.geeksforgeeks.org/detect-cycle-undirected-graph/)
+[Detect cycle in an undirected graph](https://www.geeksforgeeks.org/detect-cycle-undirected-graph/): the text description is wrong, watch the video
 
 [1559. Detect Cycles in 2D Grid.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1559.%20Detect%20Cycles%20in%202D%20Grid.cpp)
 
