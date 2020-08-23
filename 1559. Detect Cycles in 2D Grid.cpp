@@ -166,3 +166,76 @@ public:
         return false;
     }
 };
+
+//Union find
+//https://www.geeksforgeeks.org/union-find/
+//Runtime: 596 ms, faster than 60.00% of C++ online submissions for Detect Cycles in 2D Grid.
+//Memory Usage: 45.6 MB, less than 20.00% of C++ online submissions for Detect Cycles in 2D Grid.
+class DSU{
+public:
+    vector<int> parent;
+    
+    DSU(int n){
+        parent = vector<int>(n);
+        iota(parent.begin(), parent.end(), 0);
+    }
+    
+    int find(int x){
+        if(parent[x] != x){
+            parent[x] = find(parent[x]);
+        }
+        return parent[x];
+    }
+    
+    int unite(int x, int y){
+        //merge the larger into the smaller
+        if(x > y){
+            swap(x, y);
+        }
+        
+        //they are already in the same union
+        if(parent[find(y)] == find(x)){
+            return -1;
+        }
+        
+        //merge y into x
+        parent[find(y)] = find(x);
+        /*
+        this line is not:
+        parent[y] = find(x);
+        If so, it will give WA, 73 / 74 test cases passed.
+        */
+        return 0;
+    }
+};
+
+class Solution {
+public:
+    int m, n;
+    
+    int getgid(int r, int c){
+        return r*n + c;
+    };
+    
+    bool containsCycle(vector<vector<char>>& grid) {
+        m = grid.size();
+        n = grid[0].size();
+        
+        DSU dsu(m*n);
+        
+        for(int i = 0; i < m; ++i){
+            for(int j = 0; j < n; ++j){
+                if(i-1 >= 0 && grid[i][j] == grid[i-1][j]){
+                    if(dsu.unite(getgid(i-1, j), getgid(i,j)))
+                        return true;
+                }
+                if(j-1 >= 0 && grid[i][j] == grid[i][j-1]){
+                    if(dsu.unite(getgid(i, j-1), getgid(i,j)))
+                        return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+};
