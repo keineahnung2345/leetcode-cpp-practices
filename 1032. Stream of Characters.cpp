@@ -140,3 +140,75 @@ public:
  * StreamChecker* obj = new StreamChecker(words);
  * bool param_1 = obj->query(letter);
  */
+
+//store words in reverse order, and find the query string in reverse order
+//also pruning when query string is too long
+//https://leetcode.com/problems/stream-of-characters/discuss/278769/Java-Trie-Solution
+//Runtime: 624 ms, faster than 59.45% of C++ online submissions for Stream of Characters.
+//Memory Usage: 265.8 MB, less than 13.61% of C++ online submissions for Stream of Characters.
+class TrieNode{
+public:
+    vector<TrieNode*> children;
+    bool isEnd;
+    
+    TrieNode(){
+        children = vector<TrieNode*>(26, nullptr);
+        isEnd = false;
+    }
+};
+
+class StreamChecker {
+public:
+    TrieNode* root;
+    int max_word_len;
+    string past;
+    
+    void reverse_add(string& word){
+        TrieNode* cur = root;
+        
+        for(int i = word.size()-1; i >= 0; --i){
+            char c = word[i];
+            if(cur->children[c-'a'] == nullptr){
+                cur->children[c-'a'] = new TrieNode();
+            }
+            cur = cur->children[c-'a'];
+        }
+        
+        cur->isEnd = true;
+    }
+    
+    StreamChecker(vector<string>& words) {
+        root = new TrieNode();
+        max_word_len = 0;
+        
+        for(string& word : words){
+            reverse_add(word);
+            max_word_len = max(max_word_len, (int)word.size());
+        }
+    }
+    
+    bool query(char letter) {
+        past = letter + past;
+        //this avoids TLE!!
+        if(past.size() > max_word_len){
+            past = past.substr(0, max_word_len);
+        }
+        TrieNode* cur = root;
+        
+        for(char& c : past){
+            cur = cur->children[c-'a'];
+            if(!cur) break;
+            if(cur->isEnd){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+};
+
+/**
+ * Your StreamChecker object will be instantiated and called as such:
+ * StreamChecker* obj = new StreamChecker(words);
+ * bool param_1 = obj->query(letter);
+ */
