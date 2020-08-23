@@ -1,4 +1,4 @@
-//detect cycle in undirected graph
+//dfs, detect cycle in undirected graph
 //https://www.geeksforgeeks.org/detect-cycle-undirected-graph/
 //Runtime: 1872 ms, faster than 20.00% of C++ online submissions for Detect Cycles in 2D Grid.
 //Memory Usage: 245.8 MB, less than 20.00% of C++ online submissions for Detect Cycles in 2D Grid.
@@ -99,6 +99,66 @@ public:
                 if(visited.find(node) != visited.end()) continue;
                 if(isCyclicUtil(node, graph, visited, -1)){
                     return true; 
+                }
+            }
+        }
+        
+        return false;
+    }
+};
+
+//dfs, detect cycle in undirected graph, cleaner
+//https://leetcode.com/problems/detect-cycles-in-2d-grid/discuss/805677/DFS-or-Simple-Explanation
+//Runtime: 832 ms, faster than 20.00% of C++ online submissions for Detect Cycles in 2D Grid.
+//Memory Usage: 98.4 MB, less than 20.00% of C++ online submissions for Detect Cycles in 2D Grid.
+class Solution {
+public:
+    int m, n;
+    vector<vector<bool>> visited;
+    vector<vector<int>> dirs;
+    
+    bool dfs(int r, int c, int pr, int pc, vector<vector<char>>& grid){
+        visited[r][c] = true;
+        
+        for(vector<int>& dir : dirs){
+            int nr = r + dir[0];
+            int nc = c + dir[1];
+            //neighbor must be valid
+            if(nr < 0 || nr >= m || nc < 0 || nc >= n)
+                continue;
+            //neighbor's color must be the same as cur's
+            if(grid[r][c] != grid[nr][nc])
+                continue;
+            if(!visited[nr][nc]){
+                if(dfs(nr, nc, r, c, grid)){
+                    return true;
+                }
+            }else if(!(nr == pr && nc == pc)){
+                //neighbor is not parent
+                return true;
+            }
+        }
+        
+        return false;
+    };
+    
+    bool containsCycle(vector<vector<char>>& grid) {
+        m = grid.size();
+        n = grid[0].size();
+        visited = vector<vector<bool>>(m, vector<bool>(n, false));
+        dirs = {
+            {0,1},
+            {0,-1},
+            {1,0},
+            {-1,0}
+        };
+        
+        for(int i = 0; i < m; ++i){
+            for(int j = 0; j < n; ++j){
+                if(!visited[i][j]){
+                    if(dfs(i, j, -1, -1, grid)){
+                        return true;
+                    }
                 }
             }
         }
