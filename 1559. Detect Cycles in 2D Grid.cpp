@@ -1,4 +1,5 @@
 //detect cycle in undirected graph
+//https://www.geeksforgeeks.org/detect-cycle-undirected-graph/
 //Runtime: 1872 ms, faster than 20.00% of C++ online submissions for Detect Cycles in 2D Grid.
 //Memory Usage: 245.8 MB, less than 20.00% of C++ online submissions for Detect Cycles in 2D Grid.
 class Solution {
@@ -25,6 +26,21 @@ public:
                     return true;
                 }
             }else if(nei != parent){
+                /*
+                consider the graph:
+                0<->1, 0<->2 and 2<->1
+                we go to 0, mark it as visited, 
+                then go to 1, and mark it as visited,
+                then go to 2 from 1, then 2's parent is 1.
+                note that 2 has another nei, which is 0,
+                and 0 is not 2's parent,
+                so there is a cycle.
+                (2 and its neighbor 0 has common ancestor,
+                so 2 and 0 are already connected indirectly,
+                and 2 and 0 are also the neighbor to each other,
+                so there are 2 paths from 2 to 0,
+                so we can say there is a cycle)
+                */
                 // cout << nei/n << ", " << nei%n << " in rec stack" << endl;
                 return true;
             }
@@ -44,6 +60,7 @@ public:
             {-1, 0}
         };
         
+        //build graph
         for(int i = 0; i < m; ++i){
             for(int j = 0; j < n; ++j){
                 int gid = getgid(i, j);
@@ -65,6 +82,7 @@ public:
             }
         }
         
+        //check graphs corresponding to different chars
         for(auto it = graphs.begin(); it != graphs.end(); ++it){
             char c = it->first;
             unordered_map<int, unordered_set<int>>& graph = it->second;
