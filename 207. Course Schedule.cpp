@@ -23,6 +23,12 @@ public:
         
         for(int nei : edges[cur]){
             // cout << cur << " -- " << nei << endl;
+            /*
+            the first part can be written as:
+            if(!visited[nei] && isCyclicUtil(nei, edges, visited, recStack))
+            because in the second part, if recStack[nei] is true, 
+            then visited[nei] must be true, so it will skip first part anyway
+            */
             if(!visited[nei]){
                 //find whether its neighbor is cyclic
                 if(isCyclicUtil(nei, edges, visited, recStack)){
