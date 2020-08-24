@@ -116,3 +116,47 @@ public:
         return ans;
     }
 };
+
+//count the length of groups
+//Runtime: 320 ms, faster than 40.00% of C++ online submissions for Find Latest Group of Size M.
+//Memory Usage: 82.7 MB, less than 20.00% of C++ online submissions for Find Latest Group of Size M.
+//https://leetcode.com/problems/find-latest-group-of-size-m/discuss/806786/JavaC%2B%2BPython-Count-the-Length-of-Groups-O(N)
+class Solution {
+public:
+    int findLatestStep(vector<int>& arr, int m) {
+        int n = arr.size();
+        
+        //padding 0 left and padding n+1 right
+        vector<int> length(n+2, 0);
+        //range: [0,n]
+        vector<int> counter(n+1, 0);
+        int ans = -1;
+        
+        for(int i = 0; i < n; ++i){
+            int num = arr[i];
+            
+            //the length of "1" groups to its left and right
+            int left_len = length[num-1];
+            int right_len = length[num+1];
+            
+            /*
+            we only update "length" value for those who are boundary of "1" groups,
+            so the element in the middle of "1" group's "length" value could be outdated, 
+            but that's fine,
+            because we won't access middle element's "length" value
+            */
+            length[num-left_len] = length[num+right_len] = left_len + right_len + 1;
+            
+            --counter[left_len];
+            --counter[right_len];
+            ++counter[length[num-left_len]];
+            
+            if(counter[m] > 0){
+                ans = i+1;
+            }
+        }
+        
+        return ans;
+    }
+};
+
