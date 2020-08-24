@@ -613,6 +613,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 [1559. Detect Cycles in 2D Grid.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1559.%20Detect%20Cycles%20in%202D%20Grid.cpp)
 
+[1562. Find Latest Group of Size M.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1562.%20Find%20Latest%20Group%20of%20Size%20M.cpp)
+
 ## Segment Tree
 [307. Range Sum Query - Mutable(solution)](https://leetcode.com/articles/range-sum-query-mutable/)
 
