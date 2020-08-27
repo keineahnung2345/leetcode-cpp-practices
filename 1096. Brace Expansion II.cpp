@@ -1,3 +1,4 @@
+//not understand
 //https://leetcode.com/problems/brace-expansion-ii/discuss/317623/Python3-Clear-and-Short-Recursive-Solution
 //Runtime: 28 ms, faster than 75.42% of C++ online submissions for Brace Expansion II.
 //Memory Usage: 13.6 MB, less than 13.96% of C++ online submissions for Brace Expansion II.
