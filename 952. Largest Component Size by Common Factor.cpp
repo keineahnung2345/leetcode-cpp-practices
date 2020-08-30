@@ -196,3 +196,87 @@ public:
         return ans;
     }
 };
+
+//Union find + a map to memorize what index to be united
+//https://leetcode.com/problems/largest-component-size-by-common-factor/discuss/200959/Simplest-Solution-(Union-Find-only)-No-Prime-Calculation
+//Runtime: 992 ms, faster than 12.23% of C++ online submissions for Largest Component Size by Common Factor.
+//Memory Usage: 42.4 MB, less than 51.44% of C++ online submissions for Largest Component Size by Common Factor.
+class DSU{
+public:
+    int maxsz;
+    vector<int> parent;
+    vector<int> sz;
+    
+    DSU(int n){
+        maxsz = 0;
+        parent = vector<int>(n, 0);
+        iota(parent.begin(), parent.end(), 0);
+        sz = vector<int>(n, 1);
+    }
+    
+    int find(int x){
+        if(parent[x] != x){
+            parent[x] = find(parent[x]);
+        }
+        
+        return parent[x];
+    }
+    
+    void unite(int x, int y){
+        //merge the larger to the smaller
+        int rx = find(x);
+        int ry = find(y);
+        
+        //this line is important!
+        if(rx == ry) return;
+        
+        if(sz[rx] > sz[ry]){
+            //merge y into x
+            parent[ry] = rx;
+            //only care the large union's size
+            sz[rx] += sz[ry];
+            maxsz = max(maxsz, sz[rx]);
+        }else{
+            parent[rx] = ry;
+            //only care the large union's size
+            sz[ry] += sz[rx];
+            maxsz = max(maxsz, sz[ry]);
+        }
+    }
+};
+
+class Solution {
+public:
+    int largestComponentSize(vector<int>& A) {
+        int n = A.size();
+        
+        DSU dsu(n);
+        unordered_map<int, int> fact2idx;
+        
+        for(int i = 0; i < n; ++i){
+            for(int factor = 2; factor*factor <= A[i]; ++factor){
+                if(A[i]%factor == 0){
+                    if(fact2idx.find(factor) != fact2idx.end()){
+                        dsu.unite(i, fact2idx[factor]);
+                    }else{
+                        fact2idx[factor] = i;
+                    }
+                    int factor2 = A[i]/factor;
+                    if(fact2idx.find(factor2) != fact2idx.end()){
+                        dsu.unite(i, fact2idx[factor2]);
+                    }else{
+                        fact2idx[factor2] = i;
+                    }
+                }
+            }
+            //A[i] is itself's factor
+            if(fact2idx.find(A[i]) != fact2idx.end()){
+                dsu.unite(i, fact2idx[A[i]]);
+            }else{
+                fact2idx[A[i]] = i;
+            }
+        }
+        
+        return dsu.maxsz;
+    }
+};
