@@ -15,27 +15,27 @@ Explanation: The sum of 2 and 7 is 9. Therefore index1 = 1, index2 = 2.
 **/
 
 /**
-Runtime: 16 ms, faster than 18.81% of C++ online submissions for Two Sum II - Input array is sorted.
-Memory Usage: 9.5 MB, less than 57.66% of C++ online submissions for Two Sum II - Input array is sorted.
+Runtime: 12 ms, faster than 69.38% of C++ online submissions for Two Sum II - Input array is sorted.
+Memory Usage: 9.7 MB, less than 72.70% of C++ online submissions for Two Sum II - Input array is sorted.
 **/
 
 class Solution {
 public:
     vector<int> twoSum(vector<int>& numbers, int target) {
-        int l = 0, r = numbers.size()-1;
+        int n = numbers.size();
         
-        sort(numbers.begin(), numbers.end());
+        int i = 0, j = n-1;
         
-        while(true){
-            if(numbers[l] + numbers[r] == target){
-                return vector<int> {l+1, r+1};
-            }else if(numbers[l] + numbers[r] < target){
-                l++;
+        while(i < j){
+            if(numbers[i] + numbers[j] == target){
+                return {i+1, j+1};
+            }else if(numbers[i] + numbers[j] > target){
+                --j;
             }else{
-                r--;
+                ++i;
             }
         }
         
-        return vector<int>();
+        return {0,0};
     }
 };
