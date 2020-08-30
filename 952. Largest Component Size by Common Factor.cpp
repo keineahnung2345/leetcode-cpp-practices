@@ -280,3 +280,103 @@ public:
         return dsu.maxsz;
     }
 };
+
+//Union find + a map to memorize what index to be united + precompute primes
+//https://leetcode.com/problems/largest-component-size-by-common-factor/discuss/200546/Prime-Factorization-and-Union-Find
+//TLE
+//81 / 100 test cases passed.
+class DSU{
+public:
+    int maxsz;
+    vector<int> parent;
+    vector<int> sz;
+    
+    DSU(int n){
+        maxsz = 0;
+        parent = vector<int>(n, 0);
+        iota(parent.begin(), parent.end(), 0);
+        sz = vector<int>(n, 1);
+    }
+    
+    int find(int x){
+        if(parent[x] != x){
+            parent[x] = find(parent[x]);
+        }
+        
+        return parent[x];
+    }
+    
+    void unite(int x, int y){
+        //merge the larger to the smaller
+        int rx = find(x);
+        int ry = find(y);
+        
+        //this line is important!
+        if(rx == ry) return;
+        
+        if(sz[rx] > sz[ry]){
+            //merge y into x
+            parent[ry] = rx;
+            //only care the large union's size
+            sz[rx] += sz[ry];
+            maxsz = max(maxsz, sz[rx]);
+        }else{
+            parent[rx] = ry;
+            //only care the large union's size
+            sz[ry] += sz[rx];
+            maxsz = max(maxsz, sz[ry]);
+        }
+    }
+};
+
+class Solution {
+public:
+    vector<bool> isprime;
+    set<int> primes;
+    
+    void SieveOfEratosthenes(int n){
+        for(int p=2; p<=n; p++){ 
+            if(isprime[p]){
+                primes.insert(p);
+                for(int i=2; p*i<=n; i++)
+                    isprime[p*i] = false;
+            }
+        }
+    };
+
+    int largestComponentSize(vector<int>& A) {
+        int n = A.size();
+        
+        int max_ele = *max_element(A.begin(), A.end());
+        isprime = vector<bool>(max_ele+1, true);
+        SieveOfEratosthenes(max_ele);
+        
+        // cout << "max: " << max_ele << endl;
+        
+        DSU dsu(n);
+        unordered_map<int, int> prime2idx;
+        
+        for(int i = 0; i < n; ++i){
+            for(int p : primes){
+                if(A[i]%p == 0){
+                    if(primes.find(A[i]) != primes.end()){
+                        p = A[i];
+                    }
+                    if(prime2idx.find(p) != prime2idx.end()){
+                        dsu.unite(i, prime2idx[p]);
+                    }else{
+                        prime2idx[p] = i;
+                    }
+                    
+                    while(A[i]%p == 0){
+                        A[i] /= p;
+                    }
+                }
+                
+                if(A[i] == 1) break;
+            }
+        }
+        
+        return dsu.maxsz;
+    }
+};
