@@ -1,3 +1,4 @@
+//https://stackoverflow.com/questions/17119116/how-many-ways-can-you-insert-a-series-of-values-into-a-bst-to-form-a-specific-tr
 //Runtime: 128 ms, faster than 80.00% of C++ online submissions for Number of Ways to Reorder Array to Get Same BST.
 //Memory Usage: 28.5 MB, less than 100.00% of C++ online submissions for Number of Ways to Reorder Array to Get Same BST.
 class Node{
@@ -45,6 +46,7 @@ public:
     int MOD = 1e9+7;
     unordered_map<Node*, int> counter;
     
+    //fill "counter"
     int dfs(Node* node){
         if(node == nullptr) return 0;
         counter[node] = dfs(node->left) + dfs(node->right) + 1;
@@ -113,8 +115,11 @@ public:
        int m = counter[node->left];
        int n = counter[node->right];
        
+        //number of ways to permute sequence of L and sequence of R
         long long a = nCr(m + n, n);
+        //how many possible permutations of sequence L
         long long b = countInsertionOrderings(node->left);
+        //how many possible permutations of sequence R
         long long c = countInsertionOrderings(node->right);
         
         return (((a*b) % MOD) * c) % MOD;
@@ -130,10 +135,9 @@ public:
             bst->insert(nums[i]);
         }
         
-        Node* node = bst->root;
-        
         dfs(bst->root);
         
+        //-1: deduce one, the original way to construct binary tree
         return countInsertionOrderings(bst->root) - 1;
     }
 };
