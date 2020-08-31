@@ -61,3 +61,49 @@ public:
         return ans;
     }
 };
+
+//Greedy
+//https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/discuss/819278/Java-O(n)-time-O(1)-space
+//Runtime: 260 ms, faster than 20.00% of C++ online submissions for Maximum Length of Subarray With Positive Product.
+//Memory Usage: 57.9 MB, less than 20.00% of C++ online submissions for Maximum Length of Subarray With Positive Product.
+class Solution {
+public:
+    int getMaxLen(vector<int>& nums) {
+        int firstNeg = -1, lastZero = -1;
+        int negCount = 0;
+        int ans = 0;
+        
+        int n = nums.size();
+        
+        for(int i = 0; i < n; ++i){
+            int e = nums[i];
+            
+            if(e < 0){
+                ++negCount;
+                if(firstNeg == -1)
+                    firstNeg = i;
+            }
+            
+            if(e == 0){
+                lastZero = i;
+                negCount = 0;
+                //this also need to be reset!
+                firstNeg = -1;
+            }else{
+                //e > 0 or e < 0!!
+                if(!(negCount&1)){
+                    //negCount is even
+                    //[lastZero+1...i]
+                    // cout << i << " : " << i-lastZero << endl;
+                    ans = max(ans, i-lastZero);
+                }else{
+                    //[firstNeg+1...i]
+                    // cout << i << " : " << i-firstNeg << endl;
+                    ans = max(ans, i-firstNeg);
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
