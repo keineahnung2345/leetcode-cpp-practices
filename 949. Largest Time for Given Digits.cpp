@@ -79,3 +79,35 @@ public:
         return ans;
     }
 };
+
+//use built-in permutation function
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Largest Time for Given Digits.
+//Memory Usage: 9.4 MB, less than 97.80% of C++ online submissions for Largest Time for Given Digits.
+//time: O(1), space: O(1)
+class Solution {
+public:
+    string largestTimeFromDigits(vector<int>& A) {
+        int max_time = -1;
+        
+        sort(A.begin(), A.end());
+        
+        do{
+            int hour = A[0]*10 + A[1];
+            int minute = A[2]*10 + A[3];
+            if(hour < 24 && minute < 60){
+                int time = hour*60+minute;
+                max_time = max(max_time, time);
+            }
+        }while(next_permutation(A.begin(), A.end()));
+        
+        if(max_time == -1){
+            return "";
+        }
+        
+        ostringstream strstream;
+        strstream << setw(2) << setfill('0') << max_time/60 <<
+            ":" << setw(2) << setfill('0') << max_time%60;
+        
+        return strstream.str();
+    }
+};
