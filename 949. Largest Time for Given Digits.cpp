@@ -83,7 +83,7 @@ public:
 //use built-in permutation function
 //Runtime: 0 ms, faster than 100.00% of C++ online submissions for Largest Time for Given Digits.
 //Memory Usage: 9.4 MB, less than 97.80% of C++ online submissions for Largest Time for Given Digits.
-//time: O(1), space: O(1)
+//time: O(1), space: O(1), because for a length 4 array, its permutation count is a constant
 class Solution {
 public:
     string largestTimeFromDigits(vector<int>& A) {
@@ -108,6 +108,55 @@ public:
         strstream << setw(2) << setfill('0') << max_time/60 <<
             ":" << setw(2) << setfill('0') << max_time%60;
         
+        return strstream.str();
+    }
+};
+
+//backtracking, permutation
+//Runtime: 4 ms, faster than 79.21% of C++ online submissions for Largest Time for Given Digits.
+//Memory Usage: 9.5 MB, less than 78.33% of C++ online submissions for Largest Time for Given Digits.
+//time: O(1), space: O(1)
+class Solution {
+public:
+    int max_time;
+    
+    void permute(vector<int>& A, int cur){
+        int n = A.size();
+        
+        if(cur == n){
+            int hour = A[0]*10 + A[1];
+            int minute = A[2]*10 + A[3];
+            // cout << hour << ", " << minute << endl;
+            if(hour < 24 && minute < 60){
+                max_time = max(max_time, hour*60+minute);
+            }
+        }else{
+            /*
+            we want n-start+1 branches,
+            each branches first char are different
+            next starts from "cur",
+            because we want the first branch's first char to be "cur"
+            */
+            for(int next = cur; next < n; ++next){
+                // cout << "swap: " << cur << " and " << next << endl;
+                swap(A[cur], A[next]);
+                //in next recursion, start from the next position
+                permute(A, cur+1);
+                swap(A[cur], A[next]);
+            }
+        }
+    }
+    
+    string largestTimeFromDigits(vector<int>& A) {
+        max_time = -1;
+        
+        permute(A, 0);
+        
+        if(max_time == -1) return "";
+        
+        ostringstream strstream;
+        strstream << setw(2) << setfill('0') << max_time/60 <<
+            ":" << setw(2) << setfill('0') << max_time%60;
         return strstream.str();
     }
 };
