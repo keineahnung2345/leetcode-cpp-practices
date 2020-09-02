@@ -121,6 +121,7 @@ public:
 };
 
 //Union find + precompute prime numbers
+//https://www.geeksforgeeks.org/sieve-of-eratosthenes/
 //TLE
 //78 / 100 test cases passed.
 class DSU{
