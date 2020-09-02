@@ -141,3 +141,62 @@ public:
         return countInsertionOrderings(bst->root) - 1;
     }
 };
+
+//use pascal triangle to calculate combination count
+//https://leetcode.com/problems/number-of-ways-to-reorder-array-to-get-same-bst/discuss/819369/C%2B%2B-Just-using-recursion-very-Clean-and-Easy-to-understand-O(n2)
+//https://www.geeksforgeeks.org/calculate-ncr-using-pascals-triangle/
+//Runtime: 376 ms, faster than 37.46% of C++ online submissions for Number of Ways to Reorder Array to Get Same BST.
+//Memory Usage: 105.7 MB, less than 38.77% of C++ online submissions for Number of Ways to Reorder Array to Get Same BST.
+class Solution {
+public:
+    long long MOD = 1e9+7;
+    vector<vector<int>> pascal;
+    
+    void build_pascal(int max_num){
+        pascal = vector<vector<int>>(max_num+1);
+        
+        for(int n = 0; n <= max_num; ++n){
+            //we need nC0 to nCn
+            pascal[n] = vector<int>(n+1);
+        	//cout << "pascal[" << n << "]" << endl;
+            
+            /*
+            to calculate pascal[n][n], 
+            it will use pascal[n-1][n], which doesn't exist,
+            so here we treat pascal[n][n] as a special case
+            and do not calculate it in the loop
+            */
+            pascal[n][0] = pascal[n][n] = 1;
+            for(int r = 1; r < n; ++r){
+                pascal[n][r] = (pascal[n-1][r-1] + pascal[n-1][r]) % MOD;
+            }
+        }
+    }
+    
+    int dfs(vector<int>& nums){
+        int n = nums.size();
+        if(n == 0) return 1;
+        
+        vector<int> left, right;
+        
+        //i starts from 1: exclude nums[0], which is root
+        for(int i = 1; i < n; ++i){
+            if(nums[i] < nums[0]) left.push_back(nums[i]);
+            else right.push_back(nums[i]);
+        }
+        
+        long long left_res = dfs(left);
+        long long right_res = dfs(right);
+        
+        //(n-1)C(left.size()): choose from n-1 elements, excluding the root
+        return ((pascal[n-1][left.size()] * left_res) % MOD * right_res) % MOD;
+    }
+    
+    int numOfWays(vector<int>& nums) {
+        int n = nums.size();
+        build_pascal(n);
+        //cout << "table built" << endl;
+        
+        return dfs(nums)-1;
+    }
+};
