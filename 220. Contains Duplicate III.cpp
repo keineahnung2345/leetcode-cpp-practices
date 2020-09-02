@@ -22,6 +22,7 @@ public:
 //https://leetcode.com/problems/contains-duplicate-iii/discuss/61645/AC-O(N)-solution-in-Java-using-buckets-with-explanation
 //Runtime: 28 ms, faster than 79.23% of C++ online submissions for Contains Duplicate III.
 //Memory Usage: 11.4 MB, less than 36.26% of C++ online submissions for Contains Duplicate III.
+//time: O(N), space: O(N)
 class Solution {
 public:
     bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {
@@ -60,6 +61,37 @@ public:
             
             //currently buckets[bucket] is empty
             buckets[bucket] = remappedNum;
+        }
+        
+        return false;
+    }
+};
+
+//Tree set
+//https://leetcode.com/problems/contains-duplicate-iii/discuss/61655/Java-O(N-lg-K)-solution
+//time: O(NlogK), N: #insertion/deletion, K: size of the tree set
+//space: O(K)
+class Solution {
+public:
+    bool containsNearbyAlmostDuplicate(vector<int>& nums, int k, int t) {
+        set<long long> vals;
+        int n = nums.size();
+        
+        for(int i = 0; i < n; ++i){
+            //smallest element >= nums[i]-t
+            set<long long>::iterator floor = vals.lower_bound((long long)nums[i]-t);
+            if(floor != vals.end() && *floor <= nums[i]) return true; 
+            
+            //smallest element > nums[i]+t
+            set<long long>::iterator ceil = vals.upper_bound((long long)nums[i]+t);
+            if(ceil != vals.begin()){
+                //largest element <= nums[i]+t
+                ceil = prev(ceil);
+                if(*ceil >= nums[i]) return true;
+            }
+            
+            vals.insert(nums[i]);
+            if(i >= k) vals.erase(nums[i-k]);
         }
         
         return false;
