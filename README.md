@@ -49,7 +49,14 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 [Floyd Warshall](https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/)
 
 ### Tarjan's algorithm
+[Articulation Points (or Cut Vertices) in a Graph](https://www.geeksforgeeks.org/articulation-points-or-cut-vertices-in-a-graph/)
+
+[1568. Minimum Number of Days to Disconnect Island.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1568.%20Minimum%20Number%20of%20Days%20to%20Disconnect%20Island.cpp)
+
+[Bridges in a graph](https://www.geeksforgeeks.org/bridge-in-a-graph/)
+
 [1192. Critical Connections in a Network.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1192.%20Critical%20Connections%20in%20a%20Network.cpp)
+
 
 ### Cycle detection
 
