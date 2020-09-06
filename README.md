@@ -142,6 +142,8 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 
 [1248. Count Number of Nice Subarrays.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1248.%20Count%20Number%20of%20Nice%20Subarrays.cpp)
 
+[1574. Shortest Subarray to be Removed to Make Array Sorted.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1574.%20Shortest%20Subarray%20to%20be%20Removed%20to%20Make%20Array%20Sorted.cpp)
+
 ## Sliding Window
 [Sliding Window for Beginners [Problems | Template | Sample Solutions]](https://leetcode.com/discuss/general-discussion/657507/sliding-window-for-beginners-problems-template-sample-solutions)
 
