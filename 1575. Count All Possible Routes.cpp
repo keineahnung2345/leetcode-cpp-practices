@@ -2,6 +2,7 @@
 //https://leetcode.com/problems/count-all-possible-routes/discuss/830400/Dynamic-Programming-or-Simple-Explanation
 //Runtime: 148 ms, faster than 28.57% of C++ online submissions for Count All Possible Routes.
 //Memory Usage: 8.8 MB, less than 100.00% of C++ online submissions for Count All Possible Routes.
+//time: O(fuel*N*N), space: O(fuel*N)
 class Solution {
 public:
     int MOD = 1e9+7;
