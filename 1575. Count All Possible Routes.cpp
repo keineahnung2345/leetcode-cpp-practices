@@ -16,6 +16,7 @@ public:
             return memo[cur][cur_fuel];
         }else{
             //cur_fuel >= 0
+            //if cur == finish, we have found a possible way
             int ways = (cur == finish);
             
             if(cur_fuel > 0){
