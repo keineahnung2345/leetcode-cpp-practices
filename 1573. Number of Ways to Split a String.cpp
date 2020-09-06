@@ -39,3 +39,44 @@ public:
         return ans;
     }
 };
+
+//not using extra array
+//https://leetcode.com/problems/number-of-ways-to-split-a-string/discuss/830455/JavaPython-3-Multiplication-of-the-ways-of-1st-and-2nd-cuts-w-explanation-and-analysis.
+//Runtime: 136 ms, faster than 12.50% of C++ online submissions for Number of Ways to Split a String.
+//Memory Usage: 13.7 MB, less than 37.50% of C++ online submissions for Number of Ways to Split a String.
+class Solution {
+public:
+    int MOD = 1e9 + 7;
+    
+    int numWays(string s) {
+        int n = s.size();
+        int ones = count(s.begin(), s.end(), '1');
+        
+        if(ones == 0){
+            //(n-1)C2
+            return ((n-1L)*(n-2L)>>1)%MOD;
+        }
+        
+        if(ones % 3 != 0){
+            return 0;
+        }
+        
+        ones /= 3;
+        int cnt = 0;
+        long long lo = 0, hi = 0;
+        
+        for(char& c : s){
+            if(c == '1'){
+                ++cnt;
+            }
+            
+            if(cnt == ones){
+                ++lo;
+            }else if(cnt == ones*2){
+                ++hi;
+            }
+        }
+        
+        return lo*hi % MOD;
+    }
+};
