@@ -1,6 +1,8 @@
 //backtracking
 //Runtime: 0 ms, faster than 100.00% of C++ online submissions for Combination Sum III.
 //Memory Usage: 6.3 MB, less than 89.73% of C++ online submissions for Combination Sum III.
+//time: O((9!/(9-K)!)*K), there are P(9,K) combinations and the last recursion takes O(n) time
+//space: O(K)
 class Solution {
 public:
     void backtrack(int k, int n, vector<int>& cur, vector<vector<int>>& ans){
