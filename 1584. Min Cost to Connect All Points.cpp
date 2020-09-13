@@ -89,6 +89,7 @@ public:
 //vector
 //Runtime: 188 ms, faster than 50.00% of C++ online submissions for Min Cost to Connect All Points.
 //Memory Usage: 26.7 MB, less than 25.00% of C++ online submissions for Min Cost to Connect All Points.
+//time: O(V^2)
 #define ARRAY
 
 class Solution {
