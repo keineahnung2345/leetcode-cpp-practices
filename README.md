@@ -72,6 +72,12 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 
 [1559. Detect Cycles in 2D Grid.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1559.%20Detect%20Cycles%20in%202D%20Grid.cpp)
 
+### Minimum spanning tree, Prim's algorithm(Greedy)
+[Prim’s Minimum Spanning Tree (MST) | Greedy Algo-5](https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/)
+
+[Minimum cost to connect all cities](https://www.geeksforgeeks.org/minimum-cost-connect-cities/)
+
+[1584. Min Cost to Connect All Points.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1584.%20Min%20Cost%20to%20Connect%20All%20Points.cpp)
 
 ## Two pointers
 [11. Container With Most Water.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/11.%20Container%20With%20Most%20Water.cpp)
