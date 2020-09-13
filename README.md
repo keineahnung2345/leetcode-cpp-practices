@@ -614,8 +614,6 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 [1391. Check if There is a Valid Path in a Grid.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1391.%20Check%20if%20There%20is%20a%20Valid%20Path%20in%20a%20Grid.cpp)
 
-[684. Redundant Connection.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/684.%20Redundant%20Connection.cpp)
-
 [399. Evaluate Division.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/399.%20Evaluate%20Division.cpp)
 
 [130. Surrounded Regions.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/130.%20Surrounded%20Regions.cpp)
@@ -625,6 +623,9 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 [1559. Detect Cycles in 2D Grid.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1559.%20Detect%20Cycles%20in%202D%20Grid.cpp)
 
 [1562. Find Latest Group of Size M.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1562.%20Find%20Latest%20Group%20of%20Size%20M.cpp)
+
+### Union by rank
+[684. Redundant Connection.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/684.%20Redundant%20Connection.cpp)
 
 ## Segment Tree
 [307. Range Sum Query - Mutable(solution)](https://leetcode.com/articles/range-sum-query-mutable/)
