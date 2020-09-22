@@ -1,3 +1,34 @@
+//Naive
+//TLE
+//78 / 82 test cases passed.
+class Solution {
+public:
+    int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& requests) {
+        int n = nums.size();
+        
+        vector<int> counter(n, 0);
+        
+        for(vector<int>& req : requests){
+            for(int pos = req[0]; pos <= req[1]; ++pos){
+                ++counter[pos];
+            }
+        }
+        
+        sort(counter.begin(), counter.end());
+        sort(nums.begin(), nums.end());
+        
+        long long ans = 0;
+        int MOD = 1e9 + 7;
+        
+        for(int i = 0; i < n; ++i){
+            long long prod = (1LL * nums[i] * counter[i]) % MOD;
+            ans = (ans + prod) % MOD;
+        }
+        
+        return ans;
+    }
+};
+
 //Binary indexed tree, Range Updates and Point Queries
 //Runtime: 864 ms, faster than 74.80% of C++ online submissions for Maximum Sum Obtained of Any Permutation.
 //Memory Usage: 98.3 MB, less than 55.20% of C++ online submissions for Maximum Sum Obtained of Any Permutation.
