@@ -666,6 +666,10 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 [1505. Minimum Possible Integer After at Most K Adjacent Swaps On Digits.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1505.%20Minimum%20Possible%20Integer%20After%20at%20Most%20K%20Adjacent%20Swaps%20On%20Digits.cpp)
 
+[Binary Indexed Tree : Range Updates and Point Queries](https://www.geeksforgeeks.org/binary-indexed-tree-range-updates-point-queries/)
+
+[1589. Maximum Sum Obtained of Any Permutation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1589.%20Maximum%20Sum%20Obtained%20of%20Any%20Permutation.cpp)
+
 ## Line Sweep
 [850. Rectangle Area II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/850.%20Rectangle%20Area%20II.cpp)
 
