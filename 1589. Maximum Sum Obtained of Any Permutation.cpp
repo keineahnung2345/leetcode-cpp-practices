@@ -1,6 +1,9 @@
-//Binary indexed tree
+//Binary indexed tree, Range Updates and Point Queries
 //Runtime: 864 ms, faster than 74.80% of C++ online submissions for Maximum Sum Obtained of Any Permutation.
 //Memory Usage: 98.3 MB, less than 55.20% of C++ online submissions for Maximum Sum Obtained of Any Permutation.
+//https://www.geeksforgeeks.org/binary-indexed-tree-range-updates-point-queries/
+//getElement -> getSum: now we the prefix sum of index i BITree[0...i] means arr[i]
+//updateBIT -> update: update BITree[l] and BITree[r-1] so range sum of arr[l...r] is updated
 class BIT{
 public:
     int n;
