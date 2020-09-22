@@ -574,6 +574,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 [1589. Maximum Sum Obtained of Any Permutation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1589.%20Maximum%20Sum%20Obtained%20of%20Any%20Permutation.cpp)
 
+[1109. Corporate Flight Bookings.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1109.%20Corporate%20Flight%20Bookings.cpp)
+
 ## Rolling hash, Rabin-Karp
 [Why is the base used to compute hashes in Rabin–Karp always primes?](https://cs.stackexchange.com/questions/28019/why-is-the-base-used-to-compute-hashes-in-rabin-karp-always-primes/28024#28024)
 
@@ -676,6 +678,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 [850. Rectangle Area II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/850.%20Rectangle%20Area%20II.cpp)
 
 [218. The Skyline Problem.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/218.%20The%20Skyline%20Problem.cpp)
+
+[1109. Corporate Flight Bookings.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1109.%20Corporate%20Flight%20Bookings.cpp)
 
 [1589. Maximum Sum Obtained of Any Permutation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1589.%20Maximum%20Sum%20Obtained%20of%20Any%20Permutation.cpp)
 
