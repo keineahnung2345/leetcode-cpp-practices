@@ -572,6 +572,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 [452. Minimum Number of Arrows to Burst Balloons.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/452.%20Minimum%20Number%20of%20Arrows%20to%20Burst%20Balloons.cpp)
 
+[1589. Maximum Sum Obtained of Any Permutation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1589.%20Maximum%20Sum%20Obtained%20of%20Any%20Permutation.cpp)
+
 ## Rolling hash, Rabin-Karp
 [Why is the base used to compute hashes in Rabin–Karp always primes?](https://cs.stackexchange.com/questions/28019/why-is-the-base-used-to-compute-hashes-in-rabin-karp-always-primes/28024#28024)
 
@@ -674,6 +676,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 [850. Rectangle Area II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/850.%20Rectangle%20Area%20II.cpp)
 
 [218. The Skyline Problem.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/218.%20The%20Skyline%20Problem.cpp)
+
+[1589. Maximum Sum Obtained of Any Permutation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1589.%20Maximum%20Sum%20Obtained%20of%20Any%20Permutation.cpp)
 
 ## Angular Sweep
 [1453. Maximum Number of Darts Inside of a Circular Dartboard.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1453.%20Maximum%20Number%20of%20Darts%20Inside%20of%20a%20Circular%20Dartboard.cpp)
