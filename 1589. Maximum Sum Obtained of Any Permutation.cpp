@@ -139,3 +139,39 @@ public:
         return ans;
     }
 };
+
+//line sweep
+//https://leetcode.com/problems/maximum-sum-obtained-of-any-permutation/discuss/854206/JavaC%2B%2BPython-Sweep-Line
+//Runtime: 1072 ms, faster than 49.11% of C++ online submissions for Maximum Sum Obtained of Any Permutation.
+//Memory Usage: 97 MB, less than 84.07% of C++ online submissions for Maximum Sum Obtained of Any Permutation.
+//time: O(NlogN), space: O(N)
+class Solution {
+public:
+    int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& requests) {
+        int n = nums.size();
+        
+        vector<int> counter(n);
+        
+        for(vector<int>& req : requests){
+            //freq of [req[0]...req[1]] is added by one,
+            ++counter[req[0]];
+            if(req[1]+1 < n) --counter[req[1]+1];
+        }
+        
+        //convert the elements to their real freq
+        for(int i = 1; i < n; ++i){
+            counter[i] += counter[i-1];
+        }
+        
+        sort(counter.begin(), counter.end());
+        sort(nums.begin(), nums.end());
+        
+        long long ans = 0LL;
+        int MOD = 1e9+7;
+        for(int i = 0; i < n; ++i){
+            ans = (ans + 1LL*counter[i]*nums[i]) % MOD;
+        }
+        
+        return ans;
+    }
+};
