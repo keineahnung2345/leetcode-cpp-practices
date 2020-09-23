@@ -58,8 +58,59 @@ public:
 };
 
 //hashmap
-//TLE
-//128 / 142 test cases passed.
+//Runtime: 372 ms, faster than 76.44% of C++ online submissions for Make Sum Divisible by P.
+//Memory Usage: 67 MB, less than 66.04% of C++ online submissions for Make Sum Divisible by P.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    int minSubarray(vector<int>& nums, int p) {
+        int n = nums.size();
+        
+        int k = accumulate(nums.begin(), nums.end(), 0LL) % p;
+        
+        // cout << "need: " << k << endl;
+        
+        if(k == 0) return 0;
+        
+        //need to use unordered_map, if using vector, it will give TLE!!
+        unordered_map<int, int> lastidx;
+        /*
+        cannot set ans as "INT_MAX",
+        because we should not allow the case s.t.
+        we need to remove the whole array to make the sum%p=k,
+        in this case, ans will be n(remove whole array)
+        */
+        int ans = n;
+        int runsum = 0;
+        
+        // lastidx[0] = -1;
+        for(int i = 0; i < n; ++i){
+            runsum = (runsum+nums[i])%p;
+            if(lastidx.count((runsum-k+p)%p)){
+                /*
+                nums[lastidx[?]+1...i] % p = k
+                (runsum-?) % p = k
+                ? = (runsum-k+p) % p
+                */
+                ans = min(ans, i - lastidx[(runsum-k+p)%p]);
+            }
+            /*
+            runsum don't need to subtract anything to become k%p
+            */
+            if(runsum == k){
+                ans = min(ans, i+1);
+            }
+            lastidx[runsum] = i;
+            // cout << "lastidx[" << runsum << "] = " << i << endl;
+        }
+        
+        return (ans == n) ? -1 : ans;
+    }
+};
+
+//revise from above, merge the case of sum from beginning into lastidx[0] = -1;
+//Runtime: 368 ms, faster than 82.78% of C++ online submissions for Make Sum Divisible by P.
+//Memory Usage: 66.8 MB, less than 91.49% of C++ online submissions for Make Sum Divisible by P.
 class Solution {
 public:
     int minSubarray(vector<int>& nums, int p) {
@@ -69,28 +120,19 @@ public:
         
         if(k == 0) return 0;
         
-        vector<int> lastidx(p, -1);
-        int ans = INT_MAX;
+        unordered_map<int, int> lastidx;
+        int ans = n;
         int runsum = 0;
         
+        lastidx[0] = -1;
         for(int i = 0; i < n; ++i){
-            /*
-            nums[0...i]: psum[i]
-            nums[0...lastidx]: psum[i]-k
-            (psum[i] - psum[lastidx]) % p == k
-            -> (psum[i]-k)%p = psum[lastidx]
-            */
             runsum = (runsum+nums[i])%p;
-            if(lastidx[(runsum-k+p)%p] >= 0){
+            if(lastidx.count((runsum-k+p)%p)){
                 ans = min(ans, i - lastidx[(runsum-k+p)%p]);
             }
-            if(lastidx[k] >= 0){
-                ans = min(ans, lastidx[k]+1);
-            }
-            lastidx[runsum%p] = i;
-            // cout << "lastidx[" << psum[i]%p << "] = " << i << endl;
+            lastidx[runsum] = i;
         }
         
-        return (ans == INT_MAX) ? -1 : ans;
+        return (ans == n) ? -1 : ans;
     }
 };
