@@ -87,3 +87,47 @@ public:
         return res[1] % MOD;
     }
 };
+
+//bottom-up DP
+//https://leetcode.com/problems/maximum-non-negative-product-in-a-matrix/discuss/855082/C%2B%2B-Dynamic-Programming-With-Comments
+//Runtime: 8 ms, faster than 92.88% of C++ online submissions for Maximum Non Negative Product in a Matrix.
+//Memory Usage: 10.7 MB, less than 15.98% of C++ online submissions for Maximum Non Negative Product in a Matrix.
+class Solution {
+public:
+    int maxProductPath(vector<vector<int>>& grid) {
+        int m = grid.size();
+        int n = grid[0].size();
+        int MOD = 1e9 + 7;
+        
+        vector<vector<long long>> mx(m, vector<long long>(n, 0LL));
+        vector<vector<long long>> mn(m, vector<long long>(n, 0LL));
+        
+        //base case
+        mx[0][0] = mn[0][0] = grid[0][0];
+        
+        //in the leftmost column, we only have one choice
+        for(int i = 1; i < m; ++i){
+            mx[i][0] = mn[i][0] = mx[i-1][0] * grid[i][0];
+        }
+        
+        //in the top row, we only have one choice
+        for(int j = 1; j < n; ++j){
+            mx[0][j] = mn[0][j] = mn[0][j-1] * grid[0][j];
+        }
+        
+        for(int i = 1; i < m; ++i){
+            for(int j = 1; j < n; ++j){
+                if(grid[i][j] > 0){
+                    //the product could be negative, so don't MOD here
+                    mx[i][j] = max(mx[i-1][j], mx[i][j-1]) * grid[i][j];
+                    mn[i][j] = min(mn[i-1][j], mn[i][j-1]) * grid[i][j];
+                }else{
+                    mx[i][j] = min(mn[i-1][j], mn[i][j-1]) * grid[i][j];
+                    mn[i][j] = max(mx[i-1][j], mx[i][j-1]) * grid[i][j];
+                }
+            }
+        }
+        
+        return mx[m-1][n-1] < 0LL ? -1 : mx[m-1][n-1] % MOD;
+    }
+};
