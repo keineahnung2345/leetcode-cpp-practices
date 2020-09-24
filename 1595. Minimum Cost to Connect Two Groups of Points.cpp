@@ -1,4 +1,4 @@
-//dfs + memorization
+//dfs + memorization, greedy
 //https://leetcode.com/problems/minimum-cost-to-connect-two-groups-of-points/discuss/855041/C%2B%2BPython-DP-using-mask
 //vector version
 //Runtime: 64 ms, faster than 51.35% of C++ online submissions for Minimum Cost to Connect Two Groups of Points.
@@ -7,6 +7,9 @@
 //Runtime: 36 ms, faster than 75.04% of C++ online submissions for Minimum Cost to Connect Two Groups of Points.
 //Memory Usage: 8.6 MB, less than 71.21% of C++ online submissions for Minimum Cost to Connect Two Groups of Points.
 //ARR version: visited element in memo will always be >= 1, so we don't need to initialize memo as -1
+//m: size of group1, n: size of group2
+//time: O(m*2^n * n), it takes O(n) to compute each state
+//space: O(m*2^n)
 class Solution {
 public:
     int m, n;
