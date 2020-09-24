@@ -75,3 +75,73 @@ public:
         return true;
     }
 };
+
+//cycle detection
+//https://leetcode.com/problems/strange-printer-ii/discuss/854151/C%2B%2B-O(n3)-solution-checking-cycle-in-dependency-graph
+//https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
+//Runtime: 452 ms, faster than 24.32% of C++ online submissions for Strange Printer II.
+//Memory Usage: 22.8 MB, less than 40.22% of C++ online submissions for Strange Printer II.
+class Solution {
+public:
+    bool hasCycle(int cur, vector<unordered_set<int>>& graph, 
+        vector<bool>& visited, vector<bool>& recStack){
+        if(!visited[cur]){
+            visited[cur] = true;
+            recStack[cur] = true;
+
+            for(const int& nei : graph[cur]){
+                if(recStack[nei]) return true;
+                if(!visited[nei] && hasCycle(nei, graph, visited, recStack))
+                    return true;
+            }
+        }
+        
+        recStack[cur] = false;
+        
+        return false;
+    }
+    
+    bool isPrintable(vector<vector<int>>& targetGrid) {
+        //valid range: [1,60]
+        vector<unordered_set<int>> color2dep(61);
+        int m = targetGrid.size();
+        int n = targetGrid[0].size();
+        
+        for(int c = 1; c <= 60; ++c){
+            int left = INT_MAX, up = INT_MAX;
+            int right = INT_MIN, down = INT_MIN;
+            
+            for(int i = 0; i < m; ++i){
+                for(int j = 0; j < n; ++j){
+                    if(targetGrid[i][j] == c){
+                        left = min(left, j);
+                        right = max(right, j);
+                        up = min(up, i);
+                        down = max(down, i);
+                    }
+                }
+            }
+            
+            for(int i = up; i <= down; ++i){
+                for(int j = left; j <= right; ++j){
+                    if(targetGrid[i][j] != c){
+                        color2dep[c].insert(targetGrid[i][j]);
+                        // cout << c << " depends on " << targetGrid[i][j] << endl;
+                    }
+                }
+            }
+        }
+        
+        vector<bool> visited(61, false);
+        vector<bool> recStack(61, false);
+        for(int c = 1; c <= 60; ++c){
+            // cout << "color " << c << endl;
+            if(!color2dep[c].empty() && 
+               !visited[c] && hasCycle(c, color2dep, visited, recStack)){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+};
