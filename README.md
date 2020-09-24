@@ -532,6 +532,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 [1494. Parallel Courses II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1494.%20Parallel%20Courses%20II.cpp)
 
+[1595. Minimum Cost to Connect Two Groups of Points.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1595.%20Minimum%20Cost%20to%20Connect%20Two%20Groups%20of%20Points.cpp)
+
 ## KMP
 [KMP Algorithm for Pattern Searching](https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/)
 
