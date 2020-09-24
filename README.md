@@ -66,6 +66,8 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 
 [207. Course Schedule.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/207.%20Course%20Schedule.cpp)
 
+[1591. Strange Printer II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1591.%20Strange%20Printer%20II.cpp)
+
 #### Cycle detection in undirected graph
 
 [Detect cycle in an undirected graph](https://www.geeksforgeeks.org/detect-cycle-undirected-graph/): the text description is wrong, watch the video
