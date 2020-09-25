@@ -37,3 +37,23 @@ public:
         return prehead->next;
     }
 };
+
+//Follow up
+//What if the the digits in the linked list are stored in non-reversed order? For example:
+//(3 -> 4 -> 2) + (4 -> 6 -> 5) = 8 -> 0 -> 7
+//reverse l1 and l2 first, do the algo, and then reverse the answer
+//reverse function:
+ListNode* reverse(ListNode* h){
+    if(!h || !h->next) return h;
+
+    ListNode* prev = nullptr;
+    ListNode* cur = h;
+    while(cur){
+        ListNode* next = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = next;
+    }
+
+    return prev;
+}
