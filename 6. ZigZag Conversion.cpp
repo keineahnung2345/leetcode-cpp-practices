@@ -41,3 +41,33 @@ public:
         return ans;
     }
 };
+
+//Approach 1: Sort by Row
+//Runtime: 12 ms, faster than 99.63% of C++ online submissions for ZigZag Conversion.
+//Memory Usage: 11 MB, less than 24.06% of C++ online submissions for ZigZag Conversion.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if(numRows == 1) return s;
+        
+        int n = s.size();
+        
+        vector<string> rows(min(numRows,n));
+        int r = 0;
+        bool down = true;
+        
+        for(char c : s){
+            rows[r] += c;
+            r += down ? 1 : -1;
+            if(r == 0 || r == numRows-1)
+                down = !down;
+        }
+        
+        string ans;
+        for(string& row : rows){
+            ans += row;
+        }
+        return ans;
+    }
+};
