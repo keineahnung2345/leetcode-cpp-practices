@@ -49,6 +49,7 @@ public:
 //Runtime: 20 ms, faster than 50.98% of C++ online submissions for Largest Number.
 //Memory Usage: 11.2 MB, less than 65.28% of C++ online submissions for Largest Number.
 //time: O(NlogN), space: O(N)
+//proof of the transitivity of our comparator: https://leetcode.com/problems/largest-number/discuss/291988/A-Proof-of-the-Concatenation-Comparator's-Transtivity
 class Solution {
 public:
     string largestNumber(vector<int>& nums) {
