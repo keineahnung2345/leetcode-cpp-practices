@@ -1,3 +1,6 @@
+//Runtime: 32 ms, faster than 79.81% of C++ online submissions for Add Two Numbers.
+//Memory Usage: 71.1 MB, less than 26.28% of C++ online submissions for Add Two Numbers.
+//time: O(max(m,n)), space: O(max(m,n))
 /**
  * Definition for singly-linked list.
  * struct ListNode {
