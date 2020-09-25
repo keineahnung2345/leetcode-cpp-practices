@@ -44,3 +44,25 @@ public:
         return ans;
     }
 };
+
+//sort by concatenated numbers
+//Runtime: 20 ms, faster than 50.98% of C++ online submissions for Largest Number.
+//Memory Usage: 11.2 MB, less than 65.28% of C++ online submissions for Largest Number.
+//time: O(NlogN), space: O(N)
+class Solution {
+public:
+    string largestNumber(vector<int>& nums) {
+        int max_ele = *max_element(nums.begin(), nums.end());
+        if(max_ele == 0) return "0";
+        
+        sort(nums.rbegin(), nums.rend(), 
+             [](int& a, int& b){
+                 return to_string(a)+to_string(b) < to_string(b)+to_string(a);});
+        
+        string ans;
+        for(int& num : nums){
+            ans += to_string(num);
+		}
+        return ans;
+    }
+};
