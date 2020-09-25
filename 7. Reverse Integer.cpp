@@ -29,3 +29,33 @@ public:
         return ans;
     }
 };
+
+//Approach 1: Pop and Push Digits & Check before Overflow
+//Runtime: 4 ms, faster than 55.26% of C++ online submissions for Reverse Integer.
+//Memory Usage: 6.1 MB, less than 22.79% of C++ online submissions for Reverse Integer.
+//time: O(log10(x)), space: O(1)
+class Solution {
+public:
+    int reverse(int x) {
+        int ans = 0;
+        
+        while(x){
+            int pop = x%10;
+            x /= 10;
+            
+            //>7 because the last digit of INT_MAX is 7
+            //if ans*10 > INT_MAX or ans*10+pop > INT_MAX
+            if(ans > INT_MAX/10 || (ans == INT_MAX/10 && pop > 7))
+                return 0;
+            
+            //<-8 because the last digit of INT_MIN is 8
+            //if ans*10 < INT_MIN or ans*10+pop < INT_MIN
+            if(ans < INT_MIN/10 || (ans == INT_MIN/10 && pop < -8))
+                return 0;
+            
+            ans = ans*10 + pop;
+        }
+        
+        return ans;
+    }
+};
