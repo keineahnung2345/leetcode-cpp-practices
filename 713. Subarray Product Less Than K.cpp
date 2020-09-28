@@ -2,6 +2,7 @@
 //Runtime: 312 ms, faster than 30.64% of C++ online submissions for Subarray Product Less Than K.
 //Memory Usage: 100.5 MB, less than 6.14% of C++ online submissions for Subarray Product Less Than K.
 //about epsilon: https://stackoverflow.com/a/253874/10651567
+//time: O(NlogN), space: O(N)
 class Solution {
 public:
     int numSubarrayProductLessThanK(vector<int>& nums, int k) {
