@@ -155,6 +155,8 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 ## Sliding Window
 [Sliding Window for Beginners [Problems | Template | Sample Solutions]](https://leetcode.com/discuss/general-discussion/657507/sliding-window-for-beginners-problems-template-sample-solutions)
 
+[713. Subarray Product Less Than K.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/713.%20Subarray%20Product%20Less%20Than%20K.cpp)
+
 ## Monotonic stack
 [Python solution using monotonic stack, similar pattern questions listed](https://leetcode.com/problems/daily-temperatures/discuss/314477/python-solution-using-monotonic-stack-similar-pattern-questions-listed)
 
