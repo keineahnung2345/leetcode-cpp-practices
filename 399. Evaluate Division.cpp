@@ -1,5 +1,9 @@
-//Runtime: 8 ms, faster than 5.22% of C++ online submissions for Evaluate Division.
-//Memory Usage: 7.5 MB, less than 100.00% of C++ online submissions for Evaluate Division.
+//union find
+//WA
+//[["a","c"],["b","e"],["c","d"],["e","d"]]
+//[2.0,3.0,0.5,5.0]
+//[["a","b"]]
+//in the "connect (a,b) and (b,c) to (a,c)" part, it fails when the path is too long
 class DSU{
 public:
     map<string, string> parent;
@@ -51,6 +55,14 @@ public:
             groups[dsu.find(vertex)].insert(vertex);
         }
         
+        // for(auto it = groups.begin(); it != groups.end(); ++it){
+        //     cout << it->first << " : ";
+        //     for(auto it2 = it->second.begin(); it2 != it->second.end(); ++it2){
+        //         cout << *it2 << " ";
+        //     }
+        //     cout << endl;
+        // }
+        
         //for each connect component, full connect their nodes
         //we have (a,b) and (b,c), now connect them to (a,c)
         for(auto it = groups.begin(); it != groups.end(); it++){
@@ -80,6 +92,10 @@ public:
                 }
             }
         }
+        
+        // for(auto it = edges.begin(); it != edges.end(); ++it){
+        //     cout << it->first[0] << ", " << it->first[1] << endl;
+        // }
         
         vector<double> ans;
         
