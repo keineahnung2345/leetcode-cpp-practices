@@ -1,3 +1,29 @@
+//Naive
+//TLE
+//75 / 84 test cases passed.
+//time: O(N^2), space: O(1)
+class Solution {
+public:
+    int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+        int n = nums.size();
+        int ans = 0;
+        
+        for(int i = 0; i < n; ++i){
+            long long product = 1LL;
+            int j;
+            for(j = i; j < n; ++j){
+                product *= nums[j];
+                if(product >= k) break;
+            }
+            //[i...j-1]
+            // cout << i << "..." << j-1 << endl;
+            ans += (j-i);
+        }
+        
+        return ans;
+    }
+};
+
 //Approach #1: Binary Search on Logarithms
 //Runtime: 312 ms, faster than 30.64% of C++ online submissions for Subarray Product Less Than K.
 //Memory Usage: 100.5 MB, less than 6.14% of C++ online submissions for Subarray Product Less Than K.
