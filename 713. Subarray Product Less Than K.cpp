@@ -1,6 +1,7 @@
 //Approach #1: Binary Search on Logarithms
 //Runtime: 312 ms, faster than 30.64% of C++ online submissions for Subarray Product Less Than K.
 //Memory Usage: 100.5 MB, less than 6.14% of C++ online submissions for Subarray Product Less Than K.
+//about epsilon: https://stackoverflow.com/a/253874/10651567
 class Solution {
 public:
     int numSubarrayProductLessThanK(vector<int>& nums, int k) {
@@ -20,6 +21,9 @@ public:
         }
         // cout << endl;
         
+        // cout << std::numeric_limits<double>::epsilon() << endl;
+        // cout << max(*max_element(psum.begin(), psum.end()), logk) * numeric_limits<double>::epsilon() << endl;
+        
         int ans = 0;
         
         for(int i = 0; i < n; ++i){
@@ -36,7 +40,7 @@ public:
             while(left <= right){
                 mid = (left+right)>>1;
                 // cout << left << ", " << mid << ", " << right << endl;
-                if(psum[mid+1] - psum[i] >= logk - 1e-9){
+                if(psum[mid+1] >= psum[i] + logk - max(psum[mid+1], psum[i] + logk)*std::numeric_limits<double>::epsilon()){
                     right = mid-1;
                     //right is always valid
                 }else{
