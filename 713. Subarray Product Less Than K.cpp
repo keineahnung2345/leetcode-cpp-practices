@@ -83,3 +83,33 @@ public:
         return ans;
     }
 };
+
+//Approach #2: Sliding Window [Accepted]
+//Runtime: 236 ms, faster than 98.00% of C++ online submissions for Subarray Product Less Than K.
+//Memory Usage: 92.2 MB, less than 9.99% of C++ online submissions for Subarray Product Less Than K.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int numSubarrayProductLessThanK(vector<int>& nums, int k) {
+        int n = nums.size();
+        
+        int left = 0, right = 0;
+        long long prod = 1LL;
+        int ans = 0;
+        
+        for(int right = 0; right < n; ++right){
+            prod *= nums[right];
+            
+            while(left < n && prod >= k){
+                prod /= nums[left];
+                ++left;
+            }
+            
+            // cout << "[" << left << ", " << right << "]: " << prod << endl;
+            
+            if(left <= right) ans += (right-left+1);
+        }
+        
+        return ans;
+    }
+};
