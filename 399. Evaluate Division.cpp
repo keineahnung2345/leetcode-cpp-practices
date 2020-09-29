@@ -115,8 +115,8 @@ public:
 
 //Floyd Warshall
 //https://leetcode.com/problems/evaluate-division/discuss/88175/9-lines-%22Floydu2013Warshall%22-in-Python
-//Runtime: 8 ms, faster than 5.22% of C++ online submissions for Evaluate Division.
-//Memory Usage: 6.9 MB, less than 100.00% of C++ online submissions for Evaluate Division.
+//Runtime: 8 ms, faster than 9.29% of C++ online submissions for Evaluate Division.
+//Memory Usage: 8.3 MB, less than 12.40% of C++ online submissions for Evaluate Division.
 class Solution {
 public:
     vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
@@ -135,20 +135,22 @@ public:
         }
         
         for(auto it = quot.begin(); it != quot.end(); it++){
-            string k = it->first;
+            const string& k = it->first;
             for(auto it2 = quot[k].begin(); it2 != quot[k].end(); it2++){
-                string i = it2->first;
+                const string& i = it2->first;
                 for(auto it3 = quot[k].begin(); it3 != quot[k].end(); it3++){
-                    string j = it3->first;
+                    const string& j = it3->first;
                     quot[i][j] = quot[i][k] * quot[k][j];
-                    quot[j][i] = quot[j][k] * quot[k][i];
+                    // adding this line gives WA!!!
+                    //we don't need this line because i is not necessary <= j!
+                    // quot[j][i] = quot[j][k] * quot[k][i];
                 }
             }
         }
         
         vector<double> ans;
         
-        for(vector<string> query : queries){
+        for(vector<string>& query : queries){
             string num = query[0], den = query[1];
             
             if(quot[num].find(den) == quot[num].end()){
