@@ -220,3 +220,105 @@ public:
         return ans;
     }
 };
+
+//BFS
+//https://leetcode.com/problems/evaluate-division/discuss/88275/Python-fast-BFS-solution-with-detailed-explantion
+//Runtime: 4 ms, faster than 58.89% of C++ online submissions for Evaluate Division.
+//Memory Usage: 8.5 MB, less than 8.40% of C++ online submissions for Evaluate Division.
+class Solution {
+public:
+    double dfs(string start, string end, unordered_map<string, unordered_map<string, double>>& graph, unordered_set<string>& visited){
+        if(graph.find(start) == graph.end()){
+            return -1;
+        }
+        
+        if(graph[start].find(end) != graph[start].end()){
+            return graph[start][end];
+        }
+        
+        for(const auto& nei : graph[start]){
+            if(find(visited.begin(), visited.end(), nei.first) != visited.end())
+                continue;
+            visited.insert(nei.first);
+            double res;
+            if((res = dfs(nei.first, end, graph, visited)) != -1){
+                //optimization: runtime 4ms -> 0ms
+                return graph[start][end] = graph[start][nei.first] * res;
+            }
+        }
+        
+        return -1;
+    }
+    
+    vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
+        unordered_map<string, unordered_map<string, double>> quot;
+        
+        int N = equations.size();
+        
+        for(int i = 0; i < N; i++){
+            const vector<string>& equation = equations[i];
+            const string& num = equation[0], den = equation[1];
+            const double& value = values[i];
+            quot[num][num] = 1.0;
+            quot[den][den] = 1.0;
+            quot[num][den] = value;
+            quot[den][num] = 1.0/value;
+        }
+        
+        vector<double> ans;
+        unordered_set<string> visited;
+        
+        for(const vector<string>& query : queries){
+            const string& num = query[0], den = query[1];
+            
+            double prod;
+            
+            //cout << num << " - " << den << endl;
+            
+            if(quot.find(num) == quot.end() || quot.find(den) == quot.end()){
+                //cout << "cannot find " << num << " or " << den << endl;
+                prod = -1.0;
+            }else if(quot[num].find(den) != quot[num].end()){
+                //cout << num << " - " << den << " already exist" << endl;
+                prod = quot[num][den];
+            }else{
+                //cout << "do BFS" << endl;
+                prod = -1.0;
+                
+                //do BFS
+                //(node, current product)
+                queue<pair<string, double>> q;
+                q.push({num, 1.0});
+                visited = {num};
+            
+                while(!q.empty()){
+                    //cannot use pair<string, double>& here!!
+                    pair<string, double> cur = q.front(); q.pop();
+
+                    if(cur.first == den){
+                        prod = cur.second;
+                        break;
+                    }
+                    
+                    for(const pair<string, double>& nei : quot[cur.first]){
+                        if(visited.find(nei.first) != visited.end()) 
+                            continue;
+                        visited.insert(nei.first);
+                        /*
+                        quot represents for the weight of edges,
+                        not accumulative product,
+                        so following line is wrong!
+                        quot[cur.first][nei.first] = cur.second * nei.second;
+                        */
+                        q.push({nei.first, cur.second * nei.second});
+                    }
+                }
+            }
+            
+            //cout << prod << endl;
+            ans.push_back(prod);
+        }
+        
+        return ans;
+    }
+};
