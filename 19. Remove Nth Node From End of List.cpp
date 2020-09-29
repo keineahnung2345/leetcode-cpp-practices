@@ -93,3 +93,45 @@ public:
         return dummy->next;
     }
 };
+
+//Approach 2: One pass algorithm
+//Runtime: 4 ms, faster than 85.69% of C++ online submissions for Remove Nth Node From End of List.
+//Memory Usage: 11.1 MB, less than 5.24% of C++ online submissions for Remove Nth Node From End of List.
+//time: O(L), space: O(1)
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* dummy = new ListNode();
+        dummy->next = head;
+        
+        ListNode *slow = dummy, *fast = dummy;
+        
+        for(int i = 0; i < n+1; ++i){
+            fast = fast->next;
+        }
+        //slow and fast are n+1 apart
+        
+        while(fast){
+            slow = slow->next;
+            fast = fast->next;
+        }
+        //slow is n+1 from tail->next, so n from tail
+        //so it's (n+1)-last node
+        
+        ListNode* tmp = slow->next;
+        slow->next = slow->next->next;
+        delete tmp;
+        
+        return dummy->next;
+    }
+};
