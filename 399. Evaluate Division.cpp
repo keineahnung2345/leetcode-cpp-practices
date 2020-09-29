@@ -166,8 +166,8 @@ public:
 
 //DFS
 //https://leetcode.com/problems/evaluate-division/discuss/171649/1ms-DFS-with-Explanations
-//Runtime: 4 ms, faster than 58.89% of C++ online submissions for Evaluate Division.
-//Memory Usage: 8.5 MB, less than 8.58% of C++ online submissions for Evaluate Division.
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Evaluate Division.
+//Memory Usage: 8.5 MB, less than 7.50% of C++ online submissions for Evaluate Division.
 class Solution {
 public:
     double dfs(string start, string end, unordered_map<string, unordered_map<string, double>>& graph, unordered_set<string>& visited){
@@ -185,7 +185,8 @@ public:
             visited.insert(nei.first);
             double res;
             if((res = dfs(nei.first, end, graph, visited)) != -1){
-                return graph[start][nei.first] * res;
+                //optimization: runtime 4ms -> 0ms
+                return graph[start][end] = graph[start][nei.first] * res;
             }
         }
         
