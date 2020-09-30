@@ -122,3 +122,42 @@ public:
         return ans;
     }
 };
+
+//backtracking
+//https://leetcode.com/problems/maximum-number-of-achievable-transfer-requests/discuss/866387/Java-Backtracking-Straightforward-No-Bit-Masking
+//Runtime: 212 ms, faster than 71.74% of C++ online submissions for Maximum Number of Achievable Transfer Requests.
+//Memory Usage: 9.1 MB, less than 81.09% of C++ online submissions for Maximum Number of Achievable Transfer Requests.
+class Solution {
+public:
+    void backtrack(vector<vector<int>>& requests, int start, 
+                   vector<int>& in, vector<int>& out, int& ans){
+        if(start == requests.size()){
+            if(in == out){
+                ans = max(ans, accumulate(in.begin(), in.end(), 0));
+            }
+        }else{
+            // don't need the for loop here!
+            // for each request, we only have two choices: choose or not choose
+            // for(int i = start; i < requests.size(); ++i){
+            // }
+            //not choose requests[i]
+            backtrack(requests, start+1, in, out, ans);
+
+            //choose requests[i]
+            ++out[requests[start][0]];
+            ++in[requests[start][1]];
+            backtrack(requests, start+1, in, out, ans);
+            --out[requests[start][0]];
+            --in[requests[start][1]];
+        }
+    }
+    
+    int maximumRequests(int n, vector<vector<int>>& requests) {
+        vector<int> in(n), out(n);
+        int ans = 0;
+        
+        backtrack(requests, 0, in, out, ans);
+        
+        return ans;
+    }
+};
