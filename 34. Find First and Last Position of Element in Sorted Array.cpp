@@ -1,6 +1,7 @@
 //binary search
 //Runtime: 16 ms, faster than 90.01% of C++ online submissions for Find First and Last Position of Element in Sorted Array.
 //Memory Usage: 14.1 MB, less than 10.23% of C++ online submissions for Find First and Last Position of Element in Sorted Array.
+//time: O(logN), space: O(1)
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
