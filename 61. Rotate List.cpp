@@ -40,3 +40,37 @@ public:
         return newhead;
     }
 };
+
+//cleaner
+//https://leetcode.com/problems/rotate-list/discuss/22735/My-clean-C%2B%2B-code-quite-standard-(find-tail-and-reconnect-the-list)
+//Runtime: 8 ms, faster than 81.03% of C++ online submissions for Rotate List.
+//Memory Usage: 12 MB, less than 14.57% of C++ online submissions for Rotate List.
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(!head || !head->next || k == 0) return head;
+        ListNode* cur = head;
+        int len = 1;
+        
+        //find tail
+        while(cur->next){
+            ++len;
+            cur = cur->next;
+        }
+        //now cur is the last node of original list
+        
+        //connect tail and head
+        cur->next = head;
+        
+        //find the tail of new list
+        for(int i = 0; i < len - (k%len); ++i){
+            cur = cur->next;
+        }
+        
+        //head of new list is the next node of tail of new list
+        head = cur->next;
+        cur->next = nullptr;
+        
+        return head;
+    }
+};
