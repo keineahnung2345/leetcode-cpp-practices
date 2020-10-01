@@ -1,5 +1,6 @@
 //Runtime: 8 ms, faster than 81.03% of C++ online submissions for Rotate List.
 //Memory Usage: 11.9 MB, less than 20.29% of C++ online submissions for Rotate List.
+//time: O(N), space: O(1)
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -30,7 +31,7 @@ public:
             fast = fast->next;
         }
         
-        //now slow->next is the previous node of the new head
+        //now slow is the previous node of the new head
         ListNode* newhead = slow->next;
         slow->next = nullptr;
         //fast is the last node of original list
