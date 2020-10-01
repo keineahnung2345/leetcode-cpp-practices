@@ -1,5 +1,6 @@
 //Runtime: 0 ms, faster than 100.00% of C++ online submissions for Spiral Matrix II.
 //Memory Usage: 6.8 MB, less than 8.22% of C++ online submissions for Spiral Matrix II.
+//time: O(N^2), space: O(1)
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
@@ -20,6 +21,35 @@ public:
             r2--;
             c1++;
             c2--;
+        }
+        
+        return ans;
+    }
+};
+
+//Approach 2: Optimized spiral traversal
+//Runtime: 4 ms, faster than 16.12% of C++ online submissions for Spiral Matrix II.
+//Memory Usage: 6.8 MB, less than 9.17% of C++ online submissions for Spiral Matrix II.
+//time: O(N^2), space: O(1)
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> ans(n, vector<int>(n, 0));
+        
+        vector<int> dirs = {0, 1, 0, -1, 0};
+        int dir = 0;
+        int r = 0, c = 0;
+        int k = 1;
+        
+        while(k <= n*n){
+            ans[r][c] = k++;
+            
+            if(ans[(r + n + dirs[dir])%n][(c + n + dirs[dir+1])%n] != 0){
+                dir = (dir+1) % 4;
+            }
+            
+            r += dirs[dir];
+            c += dirs[dir+1];
         }
         
         return ans;
