@@ -1,5 +1,6 @@
 //Runtime: 12 ms, faster than 13.34% of C++ online submissions for Partition List.
 //Memory Usage: 10.6 MB, less than 14.01% of C++ online submissions for Partition List.
+//time: O(N), 
 /**
  * Definition for singly-linked list.
  * struct ListNode {
