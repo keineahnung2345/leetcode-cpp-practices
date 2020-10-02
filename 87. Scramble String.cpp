@@ -54,3 +54,45 @@ public:
         return backtrack(split);
     }
 };
+
+//recursion
+//https://leetcode.com/problems/scramble-string/discuss/29392/Share-my-4ms-c%2B%2B-recursive-solution
+//Runtime: 4 ms, faster than 97.37% of C++ online submissions for Scramble String.
+//Memory Usage: 12 MB, less than 59.34% of C++ online submissions for Scramble String.
+class Solution {
+public:
+    bool isScramble(string s1, string s2) {
+        if(s1 == s2) return true;
+        
+        int len = s1.size();
+        
+        vector<int> counter(26, 0);
+        for(int i = 0; i < len; ++i){
+            ++counter[s1[i]-'a'];
+            --counter[s2[i]-'a'];
+        }
+        
+        if(any_of(counter.begin(), counter.end(), 
+            [](const int& e){return e != 0;})){
+            return false;
+        }
+        
+        //split at 1, 2, ..., len-1
+        for(int slen = 1; slen <= len-1; ++slen){
+            //not swap
+            if(isScramble(s1.substr(0, slen), s2.substr(0, slen))
+              && isScramble(s1.substr(slen), s2.substr(slen))){
+                return true;
+            }
+            
+            //swap: s1[slen...]-s2[0...len-slen-1] and 
+            //s1[0...slen-1]-s2[len-slen...]
+            if(isScramble(s1.substr(slen), s2.substr(0, len-slen))
+              && isScramble(s1.substr(0, slen), s2.substr(len-slen))){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+};
