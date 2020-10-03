@@ -31,3 +31,30 @@ public:
         return backtrack(s, 0);
     }
 };
+
+//bottom-up DP
+//Runtime: 0 ms, faster than 100.00% of C++ online submissions for Decode Ways.
+//Memory Usage: 6.4 MB, less than 44.21% of C++ online submissions for Decode Ways.
+class Solution {
+public:
+    int numDecodings(string s) {
+        int n = s.size();
+        
+        vector<int> dp(n+1, 0);
+        
+        dp[n] = 1;
+        
+        for(int i = n-1; i >= 0; --i){
+            if(s[i] != '0'){
+                dp[i] += dp[i+1];
+                
+                if(i+1 < n &&
+                  (s[i] == '1' || (s[i] == '2' && s[i+1] <= '6'))){
+                    dp[i] += dp[i+2];
+                }
+            }
+        }
+        
+        return dp[0];
+    }
+};
