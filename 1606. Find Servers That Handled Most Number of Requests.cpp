@@ -1,5 +1,6 @@
 //TLE
 //105 / 108 test cases passed.
+//time: O(nk), space: O(k)
 class Solution {
 public:
     vector<int> busiestServers(int k, vector<int>& arrival, vector<int>& load) {
