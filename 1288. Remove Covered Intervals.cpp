@@ -23,7 +23,7 @@ public:
 
 //sort, one pass
 //https://leetcode.com/problems/remove-covered-intervals/discuss/451277/JavaC%2B%2BPython-Sort-Solution-Test-Cases-are-Trash
-//time: O(NlogN), space: O(N)
+//time: O(NlogN), space: O(1)
 //Runtime: 24 ms, faster than 76.60% of C++ online submissions for Remove Covered Intervals.
 //Memory Usage: 11.1 MB, less than 100.00% of C++ online submissions for Remove Covered Intervals.
 class Solution {
@@ -53,6 +53,7 @@ public:
 //easier to understand
 //Runtime: 52 ms, faster than 66.90% of C++ online submissions for Remove Covered Intervals.
 //Memory Usage: 11.5 MB, less than 57.75% of C++ online submissions for Remove Covered Intervals.
+//time: O(NlogN), space: O(1)
 class Solution {
 public:
     int removeCoveredIntervals(vector<vector<int>>& intervals) {
@@ -83,6 +84,40 @@ public:
                 }
             }
         }
+        return res;
+    }
+};
+
+//sort left ascending, right descending
+//Runtime: 44 ms, faster than 89.91% of C++ online submissions for Remove Covered Intervals.
+//Memory Usage: 11.6 MB, less than 50.00% of C++ online submissions for Remove Covered Intervals.
+//time: O(NlogN), space: O(1)
+class Solution {
+public:
+    int removeCoveredIntervals(vector<vector<int>>& intervals) {
+        //sort left ascending, right descending
+        sort(intervals.begin(), intervals.end(),
+            [](const vector<int>& a, const vector<int>& b){
+                return (a[0] == b[0]) ? a[1] > b[1] : a[0] < b[0];
+                });
+        
+        int res = 0, right = -1;
+        
+        for(const vector<int>& v : intervals){
+            if(v[1] > right){
+                //in this case v[1] > right and v[0] > left
+                ++res;
+                right = v[1];
+            }
+            /*
+            ignore these cases:
+            1. v[0]==left && v[1]<=right:
+            these intervals are covered by last interval
+            2. v[0]>left && v[1]<=right:
+            these intervals are covered by last interval
+            */
+        }
+        
         return res;
     }
 };
