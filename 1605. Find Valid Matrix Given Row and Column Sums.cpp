@@ -39,3 +39,57 @@ public:
         return mat;
     }
 };
+
+//Greedy
+//https://leetcode.com/problems/find-valid-matrix-given-row-and-column-sums/discuss/876845/JavaC%2B%2BPython-Easy-and-Concise-with-Prove
+//Runtime: 108 ms, faster than 50.00% of C++ online submissions for Find Valid Matrix Given Row and Column Sums.
+//Memory Usage: 33.8 MB, less than 25.00% of C++ online submissions for Find Valid Matrix Given Row and Column Sums.
+//time: O(mn), space: O(mn)
+class Solution {
+public:
+    vector<vector<int>> restoreMatrix(vector<int>& rowSum, vector<int>& colSum) {
+        int m = rowSum.size();
+        int n = colSum.size();
+        
+        vector<vector<int>> mat(m, vector<int>(n, 0));
+        
+        for(int i = 0; i < m; ++i){
+            for(int j = 0; j < n; ++j){
+                mat[i][j] = min(rowSum[i], colSum[j]);
+                rowSum[i] -= mat[i][j];
+                colSum[j] -= mat[i][j];
+            }
+        }
+        
+        return mat;
+    }
+};
+
+//Greedy
+//https://leetcode.com/problems/find-valid-matrix-given-row-and-column-sums/discuss/876845/JavaC%2B%2BPython-Easy-and-Concise-with-Prove
+//Runtime: 76 ms, faster than 75.00% of C++ online submissions for Find Valid Matrix Given Row and Column Sums.
+//Memory Usage: 33.6 MB, less than 25.00% of C++ online submissions for Find Valid Matrix Given Row and Column Sums.
+//time: O(mn) for initialization, O(m+n) for process, space: O(mn)
+class Solution {
+public:
+    vector<vector<int>> restoreMatrix(vector<int>& rowSum, vector<int>& colSum) {
+        int m = rowSum.size();
+        int n = colSum.size();
+        
+        vector<vector<int>> mat(m, vector<int>(n, 0));
+        
+        int i = 0, j = 0;
+        
+        while(i < m && j < n){
+            mat[i][j] = min(rowSum[i], colSum[j]);
+            rowSum[i] -= mat[i][j];
+            colSum[j] -= mat[i][j];
+            //done for ith row
+            if(rowSum[i] == 0) ++i;
+            //done for jth col
+            if(colSum[j] == 0) ++j;
+        }
+        
+        return mat;
+    }
+};
