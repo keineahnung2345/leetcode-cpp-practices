@@ -48,3 +48,41 @@ public:
         return res;
     }
 };
+
+//revise from https://leetcode.com/problems/remove-covered-intervals/discuss/451277/JavaC%2B%2BPython-Sort-Solution-Test-Cases-are-Trash
+//easier to understand
+//Runtime: 52 ms, faster than 66.90% of C++ online submissions for Remove Covered Intervals.
+//Memory Usage: 11.5 MB, less than 57.75% of C++ online submissions for Remove Covered Intervals.
+class Solution {
+public:
+    int removeCoveredIntervals(vector<vector<int>>& intervals) {
+        int res = 0, left = -1, right = -1;
+        sort(intervals.begin(), intervals.end());
+        for(vector<int>& v : intervals){
+            //v[0] can only >= left
+            if(v[0] == left){
+                //v[1] can only >= right
+                if(v[1] == right){
+                    //the two intervals are exactly the same
+                    //discard current interval
+                }else{
+                    //v[1] > right
+                    //last interval is covered by current interval
+                    right = v[1];
+                }
+            }else{
+                //v[0] > left
+                if(v[1] <= right){
+                    //current interval is covered by last interval
+                }else{
+                    //v[1] > right
+                    //the two intervals cannot cover each other
+                    left = v[0];
+                    right = v[1];
+                    ++res;
+                }
+            }
+        }
+        return res;
+    }
+};
