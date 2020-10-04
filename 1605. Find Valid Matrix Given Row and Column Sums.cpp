@@ -1,3 +1,4 @@
+//Greedy: each time fill the cell pointed by min rowSum and min colSum
 //Runtime: 140 ms, faster than 12.50% of C++ online submissions for Find Valid Matrix Given Row and Column Sums.
 //Memory Usage: 33.6 MB, less than 25.00% of C++ online submissions for Find Valid Matrix Given Row and Column Sums.
 class Solution {
