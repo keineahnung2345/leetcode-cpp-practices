@@ -48,3 +48,48 @@ public:
         return dummy->next;
     }
 };
+
+//recursion
+//https://leetcode.com/problems/reverse-linked-list-ii/solution/242639
+//time: O(N)
+//space: O(N), space used by recursion
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* successor;
+
+    ListNode* reverseN(ListNode* head, int n){
+        if(n == 1){
+            //successor: the node after the first n nodes
+            successor = head->next;
+            return head;
+        }
+
+        ListNode* rhead = reverseN(head->next, n-1);
+
+        //head is now the new tail of reversed list
+        head->next->next = head;
+        head->next = successor;
+
+        return rhead;
+    }
+    
+    ListNode* reverseBetween(ListNode* head, int m, int n){
+        if(m == 1){
+            return reverseN(head, n);
+        }
+
+        head->next = reverseBetween(head->next, m-1, n-1);
+
+        return head;
+    }
+};
