@@ -38,3 +38,34 @@ public:
         return pairs.size();
     }
 };
+
+//counter
+//https://leetcode.com/problems/k-diff-pairs-in-an-array/discuss/100098/Java-O(n)-solution-one-Hashmap-easy-to-understand
+//Runtime: 40 ms, faster than 75.08% of C++ online submissions for K-diff Pairs in an Array.
+//Memory Usage: 14.1 MB, less than 48.00% of C++ online submissions for K-diff Pairs in an Array.
+class Solution {
+public:
+    int findPairs(vector<int>& nums, int k) {
+        map<int, int> counter;
+        
+        for(const int& num : nums){
+            ++counter[num];
+        }
+        
+        int ans = 0;
+        
+        //the key is sorted
+        for(const pair<int, int>& p : counter){
+            if(k == 0){
+                if(p.second >= 2) ++ans;
+            }else{
+                //since key is sorted, we only need to find in one direction
+                if(counter.find(p.first+k) != counter.end()){
+                    ++ans;
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
