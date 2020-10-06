@@ -53,6 +53,7 @@ public:
 //https://leetcode.com/problems/reverse-linked-list-ii/solution/242639
 //time: O(N)
 //space: O(N), space used by recursion
+//for reverse the whole list, check https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/206.%20Reverse%20Linked%20List.cpp
 /**
  * Definition for singly-linked list.
  * struct ListNode {
