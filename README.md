@@ -14,6 +14,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [Comprehensive Data Structure and Algorithm Study Guide](https://leetcode.com/discuss/general-discussion/494279/Comprehensive-Data-Structure-and-Algorithm-Study-Guide)
 
+[My System Design Template](https://leetcode.com/discuss/career/229177/my-system-design-template)
+
 ## BFS
 
 ### Bidirectional BFS
