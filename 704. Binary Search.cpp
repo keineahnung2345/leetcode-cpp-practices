@@ -22,8 +22,8 @@ n will be in the range [1, 10000].
 The value of each element in nums will be in the range [-9999, 9999].
 **/
 
-//Runtime: 68 ms, faster than 9.92% of C++ online submissions for Binary Search.
-//Memory Usage: 10.9 MB, less than 98.02% of C++ online submissions for Binary Search.
+//Runtime: 72 ms, faster than 91.56% of C++ online submissions for Binary Search.
+//Memory Usage: 27.9 MB, less than 15.64% of C++ online submissions for Binary Search.
 class Solution {
 public:
     int bSearch(vector<int>& nums, int target, int start, int end){
