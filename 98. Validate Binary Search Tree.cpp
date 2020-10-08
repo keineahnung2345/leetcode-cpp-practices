@@ -96,3 +96,35 @@ public:
         return recurse(root, LLONG_MIN, LLONG_MAX);
     }
 };
+
+//Approach 2: Iteration
+//Runtime: 20 ms, faster than 56.08% of C++ online submissions for Validate Binary Search Tree.
+//Memory Usage: 22.2 MB, less than 5.05% of C++ online submissions for Validate Binary Search Tree.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    typedef tuple<TreeNode*, long long, long long> tpnlu;
+    bool isValidBST(TreeNode* root) {
+        stack<tpnlu> stk;
+        
+        stk.push({root, LLONG_MIN, LLONG_MAX});
+        
+        while(!stk.empty()){
+            tpnlu tp = stk.top(); stk.pop();
+            TreeNode* node = get<0>(tp);
+            long long lower = get<1>(tp);
+            long long upper = get<2>(tp);
+            
+            if(node == nullptr) continue;
+            
+            // cout << lower << ", " << node->val << ", " << upper << endl;
+            if(node->val <= lower) return false;
+            if(node->val >= upper) return false;
+            
+            stk.push({node->left, lower, node->val});
+            stk.push({node->right, node->val, upper});
+        }
+        
+        return true;
+    }
+};
