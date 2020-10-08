@@ -128,3 +128,38 @@ public:
         return true;
     }
 };
+
+//Approach 3: Inorder traversal(recursive)
+//Runtime: 20 ms, faster than 56.08% of C++ online submissions for Validate Binary Search Tree.
+//Memory Usage: 22 MB, less than 12.60% of C++ online submissions for Validate Binary Search Tree.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    bool inOrder(TreeNode* node, long long& last){
+        if(!node) return true;
+        if(!inOrder(node->left, last)) return false;
+        // cout << node->val << " " << last << endl;
+        
+        //check for current node
+        if(node->val <= last) return false;
+        //update last for its right child and also its parent to its right
+        /*
+        if current node is left child, 
+        when it returns to its parent(to its right),
+        "last" will be updated to the max value in that parent's left subtree,
+        then parent's val will be compared with "last"
+        
+        if current node is right child,
+        it will return to one of its ancestor to the right
+        */
+        last = node->val;
+        
+        if(!inOrder(node->right, last)) return false;
+        return true;
+    }
+    
+    bool isValidBST(TreeNode* root) {
+        long long last = LLONG_MIN;
+        return inOrder(root, last);
+    }
+};
