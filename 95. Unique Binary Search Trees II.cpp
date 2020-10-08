@@ -66,3 +66,58 @@ public:
         return trees;
     }
 };
+
+//recursion + memorization
+//note that a tree's range must be continuous, so we can use start and end to identify a tree
+//Runtime: 12 ms, faster than 95.32% of C++ online submissions for Unique Binary Search Trees II.
+//Memory Usage: 12.3 MB, less than 88.56% of C++ online submissions for Unique Binary Search Trees II.
+class Solution {
+public:
+    vector<vector<vector<TreeNode*>>> memo;
+    
+    void generateTrees(int start, int end){
+        // cout << start << " - " << end << endl;
+        
+        if(!memo[start][end].empty()){
+            return;
+        }
+        
+        if(start > end){
+            memo[start][end] = {nullptr};
+            return;
+        }
+        
+        vector<TreeNode*> trees;
+        for(int v = start; v <= end; ++v){
+            generateTrees(start, v-1);
+            vector<TreeNode*>& ltree = memo[start][v-1];
+            
+            generateTrees(v+1, end);
+            vector<TreeNode*>&rtree = memo[v+1][end];
+        
+            // cout << "left: " << ltrees.size() << endl;
+            // cout << "right: " << rtrees.size() << endl;
+            
+            for(int li = 0; li < ltree.size(); ++li){
+                for(int ri = 0; ri < rtree.size(); ++ri){
+                    TreeNode* root = new TreeNode(v);
+                    root->left = ltree[li];
+                    root->right = rtree[ri];
+                    trees.push_back(root);
+                }
+            }
+        }
+        if(trees.empty()) trees.push_back(nullptr);
+        memo[start][end] = trees;
+    }
+    
+    vector<TreeNode*> generateTrees(int n) {
+        if(n == 0) return {};
+        //[1,n] x [1,n] is valid range
+        //but 0 and n+1 are also used for convenience
+        memo = vector<vector<vector<TreeNode*>>>(n+2, 
+            vector<vector<TreeNode*>>(n+2));
+        generateTrees(1, n);
+        return memo[1][n];
+    }
+};
