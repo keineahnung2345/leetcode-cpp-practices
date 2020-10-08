@@ -163,3 +163,33 @@ public:
         return inOrder(root, last);
     }
 };
+
+//Inorder traversal(iterative)
+//Runtime: 16 ms, faster than 82.11% of C++ online submissions for Validate Binary Search Tree.
+//Memory Usage: 22.1 MB, less than 7.55% of C++ online submissions for Validate Binary Search Tree.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        stack<TreeNode*> stk;
+        
+        long long last = LLONG_MIN;
+        TreeNode* cur = root;
+        
+        while(!stk.empty() || cur){
+            while(cur){
+                stk.push(cur);
+                cur = cur->left;
+            }
+            
+            cur = stk.top(); stk.pop();
+            
+            if(cur->val <= last) return false;
+            last = cur->val;
+            
+            cur = cur->right;
+        }
+        
+        return true;
+    }
+};
