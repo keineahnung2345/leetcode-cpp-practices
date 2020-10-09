@@ -61,7 +61,11 @@ public:
 //recursion, without dummy
 //Runtime: 40 ms, faster than 46.56% of C++ online submissions for Convert Sorted List to Binary Search Tree.
 //Memory Usage: 32.9 MB, less than 5.43% of C++ online submissions for Convert Sorted List to Binary Search Tree.
-//time: O(NlogN), space: O(logN)
+//time: O(NlogN)
+//in ith recursion(i starts from 1), we use (N/pow(2,i)) times to find middle point, do it pow(2,i-1) times
+//and we will do that for logN recursions, so it sums up to NlogN/2, which is O(NlogN)
+//space: O(logN)
+//recursion space used by "balanced" tree
 class Solution {
 public:
     TreeNode* sortedListToBST(ListNode* head) {
