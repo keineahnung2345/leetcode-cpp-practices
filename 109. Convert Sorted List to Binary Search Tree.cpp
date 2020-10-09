@@ -105,3 +105,35 @@ public:
         return root;
     }
 };
+
+//Approach 2: Recursion + Conversion to Array
+//use more space to reduce time complexity
+//Runtime: 40 ms, faster than 46.56% of C++ online submissions for Convert Sorted List to Binary Search Tree.
+//Memory Usage: 33.4 MB, less than 5.43% of C++ online submissions for Convert Sorted List to Binary Search Tree.
+class Solution {
+public:
+    TreeNode* sortedVectorToBST(vector<int>& arr, int start, int end){
+        if(start > end) return nullptr;
+        
+        int mid = (start+end)>>1;
+        TreeNode* root = new TreeNode(arr[mid]);
+        
+        root->left = sortedVectorToBST(arr, start, mid-1);
+        root->right = sortedVectorToBST(arr, mid+1, end);
+        
+        return root;
+    }
+    
+    TreeNode* sortedListToBST(ListNode* head) {
+        vector<int> arr;
+        
+        while(head){
+            arr.push_back(head->val);
+            head = head->next;
+        }
+        
+        int n = arr.size();
+        
+        return sortedVectorToBST(arr, 0, n-1);
+    }
+};
