@@ -91,3 +91,46 @@ public:
         return backtrack(0, cur);
     }
 };
+
+//top-down DP
+//actually we don't need to keep the string "cur", because it must be a prefix of "t", so we can simply use the index "ti"
+//Runtime: 16 ms, faster than 47.28% of C++ online submissions for Distinct Subsequences.
+//Memory Usage: 11.9 MB, less than 5.01% of C++ online submissions for Distinct Subsequences.
+class Solution {
+public:
+    string s, t;
+    vector<vector<int>> dp;
+    
+    int backtrack(int si, int ti){
+        if(dp[si][ti] != -1){
+            return dp[si][ti];
+        }else if(ti == t.size()){
+            return dp[si][ti] = 1;
+        }else if(ti < t.size() && 
+                 ti + s.size() - si >= t.size()){
+            int ret = 0;
+            
+            //use s[si]
+            if(s[si] == t[ti]){
+                //ti+1: because t[ti] is matched
+                ret += backtrack(si+1, ti+1);
+            }
+            
+            //not use s[si]
+            ret += backtrack(si+1, ti);
+            
+            return dp[si][ti] = ret;
+        }
+        
+        return dp[si][ti] = 0;
+    }
+    
+    int numDistinct(string s, string t) {
+        this->s = s;
+        this->t = t;
+        
+        dp = vector<vector<int>>(s.size()+1, vector<int>(t.size()+1, -1));
+        
+        return backtrack(0, 0);
+    }
+};
