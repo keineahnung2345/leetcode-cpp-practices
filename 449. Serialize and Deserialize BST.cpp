@@ -72,3 +72,63 @@ public:
 // string tree = ser->serialize(root);
 // TreeNode* ans = deser->deserialize(tree);
 // return ans;
+
+//use # to mark "nullptr"
+//https://leetcode.com/problems/serialize-and-deserialize-bst/discuss/177617/the-General-Solution-for-Serialize-and-Deserialize-BST-and-Serialize-and-Deserialize-BT
+//Runtime: 36 ms, faster than 93.72% of C++ online submissions for Serialize and Deserialize BST.
+//Memory Usage: 29.7 MB, less than 5.45% of C++ online submissions for Serialize and Deserialize BST.
+class Codec {
+public:
+    void serialize(TreeNode* node, string& s){
+        if(!node){
+            s += "# ";
+            return;
+        }
+        
+        //preorder
+        s += to_string(node->val) + " ";
+        serialize(node->left, s);
+        serialize(node->right, s);
+    }
+    
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        string s;
+        serialize(root, s);
+        // cout << s << endl;
+        return s;
+    }
+    
+    TreeNode* deserialize(queue<string>& q, int lower, int upper){
+        if(q.front() == "#"){ 
+            // cout << "null" << endl; 
+            q.pop(); 
+            return nullptr; 
+        }
+        
+        int val = stoi(q.front()); q.pop();
+        // cout << val << endl;
+        
+        TreeNode* node = new TreeNode(val);
+        // cout << val << "'s left" << endl;
+        node->left = deserialize(q, lower, val);
+        // cout << val << "'s right" << endl;
+        node->right = deserialize(q, val, upper);
+        return node;
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        if(data.empty()) return nullptr;
+        
+        istringstream ss(data);
+        queue<string> q;
+        string s;
+        
+        while(ss >> s){
+            q.push(s);
+        }
+        
+        return deserialize(q, INT_MIN, INT_MAX);
+    }
+};
