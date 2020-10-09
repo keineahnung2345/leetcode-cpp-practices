@@ -110,6 +110,7 @@ public:
 //use more space to reduce time complexity
 //Runtime: 40 ms, faster than 46.56% of C++ online submissions for Convert Sorted List to Binary Search Tree.
 //Memory Usage: 33.4 MB, less than 5.43% of C++ online submissions for Convert Sorted List to Binary Search Tree.
+//time: O(N), space: O(N)
 class Solution {
 public:
     TreeNode* sortedVectorToBST(vector<int>& arr, int start, int end){
@@ -135,5 +136,53 @@ public:
         int n = arr.size();
         
         return sortedVectorToBST(arr, 0, n-1);
+    }
+};
+
+//Approach 3: Inorder Simulation
+//Runtime: 40 ms, faster than 46.56% of C++ online submissions for Convert Sorted List to Binary Search Tree.
+//Memory Usage: 33.1 MB, less than 5.43% of C++ online submissions for Convert Sorted List to Binary Search Tree.
+//time: O(N), space: O(logN)
+class Solution {
+public:
+    ListNode* head;
+    
+    TreeNode* convertListToBST(int start, int end){
+        if(start > end){
+            // cout << "return nullptr" << endl;
+            return nullptr;
+        }
+        
+        int mid = (start+end) >> 1;
+        
+        TreeNode* left = convertListToBST(start, mid-1);
+        
+        // cout << start << ", " << end << ", " << this->head->val << endl;
+        TreeNode* root = new TreeNode(this->head->val);
+        root->left = left;
+        
+        this->head = this->head->next;
+        
+        root->right = convertListToBST(mid+1, end);
+        
+        // cout << "return " << root->val << endl;
+        return root;
+    }
+    
+    TreeNode* sortedListToBST(ListNode* head) {
+        if(!head) return nullptr;
+        
+        int n = 0;
+        
+        ListNode* cur = head;
+        
+        while(cur){
+            ++n;
+            cur = cur->next;
+        }
+        
+        this->head = head;
+        
+        return convertListToBST(0, n-1);
     }
 };
