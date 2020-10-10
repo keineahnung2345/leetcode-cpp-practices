@@ -227,3 +227,66 @@ public:
         return candies;
     }
 };
+
+//slope-based
+//https://leetcode.com/problems/candy/discuss/135698/Simple-solution-with-one-pass-using-O(1)-space
+//Runtime: 40 ms, faster than 85.56% of C++ online submissions for Candy.
+//Memory Usage: 17.5 MB, less than 5.93% of C++ online submissions for Candy.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int candy(vector<int>& ratings) {
+        int n = ratings.size();
+        
+        if(n <= 1) return n;
+        
+        //up: how many transitions are going up
+        int up = 0;
+        //down: how many transitions are going down
+        int down = 0;
+        //record the mountain peak
+        int peak = 0;
+        
+        //candy for 0th child?
+        int ans = 1;
+        
+        for(int i = 1; i < n; ++i){
+            if(ratings[i] > ratings[i-1]){
+                ++up;
+                peak = up;
+                down = 0;
+                //the mountain's foot must be >= 1
+                ans += (1+up);
+            }else if(ratings[i] == ratings[i-1]){
+                up = down = peak = 0;
+                ans += 1;
+            }else{
+                //ratings[i] < ratings[i-1]
+                ++down;
+                up = 0;
+                /*
+                consider [0,1,20,9,8,7],
+                when we are at 9, down = 1,
+                when we are at 8, down = 2,
+                when we are at 7, down = 3
+                
+                actually 9 should have 3 candy,
+                8 should have 2 candy,
+                7 should have 1 candy,
+                
+                we program as this because the sum are equivalent
+                */
+                ans += down;
+                if(peak < down){
+                    /*
+                    peak must >= down,
+                    if it's smaller, we need to make it higher
+                    */
+                    ++ans;
+                }
+            }
+        }
+        
+        return ans;
+    }
+};
