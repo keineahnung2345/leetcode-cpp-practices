@@ -106,3 +106,37 @@ public:
         return accumulate(candies.begin(), candies.end(), 0);
     }
 };
+
+//Approach 2: Using two arrays
+//Runtime: 40 ms, faster than 85.56% of C++ online submissions for Candy.
+//Memory Usage: 18.6 MB, less than 5.93% of C++ online submissions for Candy.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    int candy(vector<int>& ratings) {
+        int n = ratings.size();
+        
+        vector<int> left2right(n, 1);
+        vector<int> right2left(n, 1);
+        
+        for(int i = 1; i < n; ++i){
+            if(ratings[i] > ratings[i-1]){
+                left2right[i] = left2right[i-1]+1;
+            }
+        }
+        
+        for(int i = n-2; i >= 0; --i){
+            if(ratings[i] > ratings[i+1]){
+                right2left[i] = right2left[i+1]+1;
+            }
+        }
+        
+        int ans = 0;
+        
+        for(int i = 0; i < n; ++i){
+            ans += max(left2right[i], right2left[i]);
+        }
+        
+        return ans;
+    }
+};
