@@ -112,3 +112,29 @@ public:
         return old2new[node];
     }
 };
+
+//DFS
+//https://leetcode.com/problems/clone-graph/discuss/42313/C%2B%2B-BFSDFS
+//Runtime: 8 ms, faster than 96.13% of C++ online submissions for Clone Graph.
+//Memory Usage: 9 MB, less than 98.02% of C++ online submissions for Clone Graph.
+class Solution {
+public:
+    unordered_map<Node*, Node*> old2new;
+    
+    Node* cloneGraph(Node* node) {
+        if(!node) return node;
+        
+        //this node is already visited
+        if(old2new.find(node) != old2new.end())
+            return old2new[node];
+        
+        old2new[node] = new Node(node->val);
+        
+        for(Node* nei : node->neighbors){
+            //build new node for "nei" and then connect them together
+            old2new[node]->neighbors.push_back(cloneGraph(nei));
+        }
+        
+        return old2new[node];
+    }
+};
