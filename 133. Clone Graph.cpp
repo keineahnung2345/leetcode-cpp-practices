@@ -1,3 +1,4 @@
+//BFS
 //Runtime: 12 ms, faster than 64.56% of C++ online submissions for Clone Graph.
 //Memory Usage: 8.9 MB, less than 98.02% of C++ online submissions for Clone Graph.
 /*
@@ -70,5 +71,44 @@ public:
         }
         
         return newnodes[1];
+    }
+};
+
+//BFS, one pass
+//https://leetcode.com/problems/clone-graph/discuss/42313/C%2B%2B-BFSDFS
+//Runtime: 8 ms, faster than 96.13% of C++ online submissions for Clone Graph.
+//Memory Usage: 8.5 MB, less than 98.02% of C++ online submissions for Clone Graph.
+class Solution {
+public:
+    Node* cloneGraph(Node* node) {
+        if(!node) return node;
+        
+        unordered_map<Node*, Node*> old2new;
+        
+        old2new[node] = new Node(node->val);
+        
+        queue<Node*> q;
+        
+        //visit the old graph
+        q.push(node);
+        
+        while(!q.empty()){
+            Node* cur = q.front(); q.pop();
+            
+            for(Node* nei : cur->neighbors){
+                if(old2new.find(nei) != old2new.end()){
+                    //create the edge
+                    old2new[cur]->neighbors.push_back(old2new[nei]);
+                    continue;
+                }
+                old2new[nei] = new Node(nei->val);
+                //visit the old graph
+                q.push(nei);
+                //create the edge
+                old2new[cur]->neighbors.push_back(old2new[nei]);
+            }
+        }
+        
+        return old2new[node];
     }
 };
