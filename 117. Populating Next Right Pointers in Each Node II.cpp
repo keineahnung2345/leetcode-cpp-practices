@@ -31,3 +31,49 @@ public:
         return root;
     }
 };
+
+//O(1) space iterative solution
+//https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/discuss/37811/Simple-solution-using-constant-space
+//Runtime: 12 ms, faster than 96.85% of C++ online submissions for Populating Next Right Pointers in Each Node II.
+//Memory Usage: 17.7 MB, less than 66.31% of C++ online submissions for Populating Next Right Pointers in Each Node II.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    Node* connect(Node* root) {
+        //first node of next level
+        Node *nhead = nullptr;
+        
+        Node *prev = nullptr, *cur = root;
+        
+        while(cur){
+            //process cur's next level
+            while(cur){
+                if(cur->left){
+                    if(prev){
+                        prev->next = cur->left;
+                    }else{
+                        nhead = cur->left;
+                    }
+                    prev = cur->left;
+                }
+                //else 
+                if(cur->right){
+                    if(prev){
+                        prev->next = cur->right;
+                    }else{
+                        nhead = cur->right;
+                    }
+                    prev = cur->right;
+                }
+                //go to next node in current level
+                cur = cur->next;
+            }
+            
+            //go to next level
+            cur = nhead;
+            prev = nhead = nullptr;
+        }
+        
+        return root;
+    }
+};
