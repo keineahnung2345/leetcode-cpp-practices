@@ -134,3 +134,55 @@ public:
         return backtrack(0, 0);
     }
 };
+
+//bottom-up DP
+//https://leetcode.com/problems/distinct-subsequences/discuss/37327/Easy-to-understand-DP-in-Java
+//https://leetcode.com/problems/distinct-subsequences/discuss/37327/Easy-to-understand-DP-in-Java/35364
+//Runtime: 12 ms, faster than 66.64% of C++ online submissions for Distinct Subsequences.
+//Memory Usage: 12.5 MB, less than 5.01% of C++ online submissions for Distinct Subsequences.
+class Solution {
+public:
+    int numDistinct(string s, string t) {
+        int ssz = s.size(), tsz = t.size();
+        
+        //need to use long long?!
+        vector<vector<long long>> dp(tsz+1, vector<long long>(ssz+1, 0));
+        
+        //first row: empty t
+        //dp[0][...] = 1
+        for(int j = 0; j <= ssz; ++j){
+            dp[0][j] = 1;
+        }
+        
+        //first col: non-empty t, empty s
+        //dp[1:][0] = 0
+        
+        for(int i = 1; i <= tsz; ++i){
+            //compare t[...i-1] with s's substrings
+            //think t[...i-1] as fixed and keep lengthen s
+            for(int j = 1; j <= ssz; ++j){
+                //i, j: length of compared substrings
+                if(s[j-1] == t[i-1]){ //note: it's NOT s[j] == t[i] here!!
+                    /*
+                    when we don't match s[j-1] and t[i-1],
+                    we have the same way as matching s[0...j-2] and t[i-1],
+                    which is dp[i][j-1]
+                    
+                    when we match s[j-1] and t[i-1],
+                    we have the same way as matching s[0...j-2] and t[0...i-2],
+                    which is dp[i-1][j-1]
+                    */
+                    dp[i][j] = dp[i][j-1] + dp[i-1][j-1];
+                }else{
+                    /*
+                    if s[j-1] != t[i-1], that means s[j-1] has no effect,
+                    so the result is same as that when s[j-1] doesn't exist
+                    */
+                    dp[i][j] = dp[i][j-1];
+                }
+            }
+        }
+        
+        return dp[tsz][ssz];
+    }
+};
