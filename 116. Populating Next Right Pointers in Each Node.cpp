@@ -1,6 +1,7 @@
 //BFS with queue
 //Runtime: 20 ms, faster than 94.93% of C++ online submissions for Populating Next Right Pointers in Each Node.
 //Memory Usage: 17.5 MB, less than 16.36% of C++ online submissions for Populating Next Right Pointers in Each Node.
+//time: O(N), space: O(N)
 /*
 // Definition for a Node.
 class Node {
@@ -43,6 +44,36 @@ public:
                 
                 prev = cur;
             }
+        }
+        
+        return root;
+    }
+};
+
+//O(1) iterative solution
+//https://leetcode.com/problems/populating-next-right-pointers-in-each-node/discuss/37472/A-simple-accepted-solution
+//Right Pointers in Each Node.
+//Memory Usage: 17 MB, less than 16.36% of C++ online submissions for Populating Next Right Pointers in Each Node.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    Node* connect(Node* root) {
+        if(!root) return root;
+        
+        Node *prev = root, *cur = nullptr;
+        
+        //while prev is not a leaf
+        while(prev->left){
+            //in each iteration, connect all nodes in prev's next level
+            cur = prev;
+            while(cur){
+                cur->left->next = cur->right;
+                if(cur->next) cur->right->next = cur->next->left;
+                //move rightward, in the same level
+                cur = cur->next;
+            }
+            //go to next level
+            prev = prev->left;
         }
         
         return root;
