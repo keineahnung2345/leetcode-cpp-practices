@@ -146,3 +146,31 @@ public:
         return ans;
     }
 };
+
+//Approach 3: Using one array
+//Runtime: 40 ms, faster than 85.56% of C++ online submissions for Candy.
+//Memory Usage: 18.1 MB, less than 5.93% of C++ online submissions for Candy.
+//time: O(N), space: O(N)
+class Solution {
+public:
+    int candy(vector<int>& ratings) {
+        int n = ratings.size();
+        
+        vector<int> candies(n, 1);
+        
+        for(int i = 1; i < n; ++i){
+            if(ratings[i] > ratings[i-1]){
+                candies[i] = candies[i-1]+1;
+            }
+        }
+        
+        for(int i = n-2; i >= 0; --i){
+            if(ratings[i] > ratings[i+1]){
+                //here candies[i] could > candies[i+1], so we need the max(..., ...) here
+                candies[i] = max(candies[i], candies[i+1]+1);
+            }
+        }
+        
+        return accumulate(candies.begin(), candies.end(), 0);
+    }
+};
