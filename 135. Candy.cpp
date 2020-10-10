@@ -121,6 +121,12 @@ public:
         
         for(int i = 1; i < n; ++i){
             if(ratings[i] > ratings[i-1]){
+                /*
+                left2right[i-1] is update before left2right[i],
+                so left2right[i-1] >= left2right[i],
+                so we don't need to write:
+                left2right[i] = max(left2right[i], left2right[i-1]+1);
+                */
                 left2right[i] = left2right[i-1]+1;
             }
         }
