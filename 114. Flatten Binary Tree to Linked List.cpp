@@ -54,3 +54,35 @@ public:
         prev = root;
     }
 };
+
+//iterative
+//https://leetcode.com/problems/flatten-binary-tree-to-linked-list/discuss/37010/Share-my-simple-NON-recursive-solution-O(1)-space-complexity!
+//Runtime: 4 ms, faster than 97.16% of C++ online submissions for Flatten Binary Tree to Linked List.
+//Memory Usage: 13 MB, less than 59.25% of C++ online submissions for Flatten Binary Tree to Linked List.
+class Solution {
+public:
+    void flatten(TreeNode* root) {
+        TreeNode* cur = root;
+        
+        while(cur){
+            if(cur->left){
+                TreeNode* prev = cur->left;
+                
+                while(prev->right) prev = prev->right;
+                //now prev is cur's predecessor in in-order traversal
+                //it's also rightmost node of cur's left subtree
+                
+                //let cur's right subtree be cur's left subtree's descendants
+                //prev->right must be nullptr, so this op is safe
+                prev->right = cur->right;
+                //move cur's left subtree to the right
+                cur->right = cur->left;
+                //the reconstructed tree don't have left children
+                cur->left = nullptr;
+            }
+            
+            //move forward in the reconstructed tree
+            cur = cur->right;
+        }
+    }
+};
