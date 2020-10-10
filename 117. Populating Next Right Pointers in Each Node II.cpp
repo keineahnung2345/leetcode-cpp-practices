@@ -77,3 +77,51 @@ public:
         return root;
     }
 };
+
+//O(1) space(not consider recursion stack) recursive solution
+//https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/discuss/172861/Mostly-recursive-solution-O(n)-time-(beats-99.32)-and-O(1)-space-(without-considering-stack)
+//Runtime: 4 ms, faster than 100.00% of C++ online submissions for Populating Next Right Pointers in Each Node II.
+//Memory Usage: 17.6 MB, less than 66.31% of C++ online submissions for Populating Next Right Pointers in Each Node II.
+class Solution {
+public:
+    Node* findnext(Node* node){
+        //recursively find the next leftmost child
+        if(!node) return node;
+        if(node->left) return node->left;
+        if(node->right) return node->right;
+        //current node is leaf, go to its right neighbor
+        return findnext(node->next);
+    }
+    
+    Node* connect(Node* root) {
+        if(!root) return root;
+        
+        if(root->left){
+            Node* target;
+            if(root->right){
+                target = root->right;
+            }else{
+                target = findnext(root->next);
+            }
+            root->left->next = target;
+        }
+        
+        if(root->right){
+            root->right->next = findnext(root->next);
+        }
+        
+        //https://leetcode.com/problems/populating-next-right-pointers-in-each-node-ii/discuss/172861/Mostly-recursive-solution-O(n)-time-(beats-99.32)-and-O(1)-space-(without-considering-stack)/260137
+        /*
+        in the function "findnext",
+        we will recursively go right,
+        and it requires that the right subtree is connected first,
+        otherwise, therewill be a gap btw left and right subtree
+        
+        consider: [2,1,3,0,7,9,1,2,null,1,0,null,null,8,8,null,null,null,null,7]
+        */
+        connect(root->right);
+        connect(root->left);
+        
+        return root;
+    }
+};
