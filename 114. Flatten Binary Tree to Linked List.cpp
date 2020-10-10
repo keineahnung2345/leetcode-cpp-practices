@@ -33,3 +33,24 @@ public:
         }
     }
 };
+
+//post order traversal
+//https://leetcode.com/problems/flatten-binary-tree-to-linked-list/discuss/36977/My-short-post-order-traversal-Java-solution-for-share
+//Runtime: 12 ms, faster than 31.00% of C++ online submissions for Flatten Binary Tree to Linked List.
+//Memory Usage: 12.9 MB, less than 59.25% of C++ online submissions for Flatten Binary Tree to Linked List.
+class Solution {
+public:
+    TreeNode* prev;
+    
+    void flatten(TreeNode* root) {
+        if(!root) return;
+        //post-order traversal
+        //visit right child -> left child -> itself
+        flatten(root->right);
+        flatten(root->left);
+        //prev will be its successor in in-order traversal!
+        root->right = prev;
+        root->left = nullptr;
+        prev = root;
+    }
+};
