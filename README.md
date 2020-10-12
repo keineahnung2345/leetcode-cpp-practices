@@ -23,6 +23,24 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [126. Word Ladder II.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/126.%20Word%20Ladder%20II.cpp)
 
+## Tree
+
+### Threaded binary tree, Morris Traversal
+[Morris Traversal方法遍历二叉树（非递归，不用栈，O(1)空间）](https://www.cnblogs.com/AnnieKim/archive/2013/06/15/morristraversal.html)
+
+[94. Binary Tree Inorder Traversal.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/3bad51a31f89eb66c28269f5dd54bb5536a44ef9/94.%20Binary%20Tree%20Inorder%20Traversal.cpp)
+
+[99. Recover Binary Search Tree.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/99.%20Recover%20Binary%20Search%20Tree.cpp)
+
+[538. Convert BST to Greater Tree.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/1171b5e67a0e24e173dace2b69e236447a7aef03/538.%20Convert%20BST%20to%20Greater%20Tree.cpp)
+
+### Tree diameter
+[Diameter of a tree using DFS](https://www.geeksforgeeks.org/diameter-tree-using-dfs/)
+
+[1617. Count Subtrees With Max Distance Between Cities.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1617.%20Count%20Subtrees%20With%20Max%20Distance%20Between%20Cities.cpp)
+
+[1405D - Tree Tag.md](https://github.com/keineahnung2345/codeforces-cpp-practice/blob/master/1405D%20-%20Tree%20Tag.md)
+
 ## Graph
 [Graph Problems For Beginners Practice [Problems and Sample Solutions]](https://leetcode.com/discuss/general-discussion/655708/graph-problems-for-beginners-practice-problems-and-sample-solutions)
 
@@ -196,17 +214,6 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 [1438. Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1438.%20Longest%20Continuous%20Subarray%20With%20Absolute%20Diff%20Less%20Than%20or%20Equal%20to%20Limit.cpp)
 
 [1499. Max Value of Equation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1499.%20Max%20Value%20of%20Equation.cpp)
-
-## Binary tree
-
-### Threaded binary tree, Morris Traversal
-[Morris Traversal方法遍历二叉树（非递归，不用栈，O(1)空间）](https://www.cnblogs.com/AnnieKim/archive/2013/06/15/morristraversal.html)
-
-[94. Binary Tree Inorder Traversal.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/3bad51a31f89eb66c28269f5dd54bb5536a44ef9/94.%20Binary%20Tree%20Inorder%20Traversal.cpp)
-
-[99. Recover Binary Search Tree.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/99.%20Recover%20Binary%20Search%20Tree.cpp)
-
-[538. Convert BST to Greater Tree.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/1171b5e67a0e24e173dace2b69e236447a7aef03/538.%20Convert%20BST%20to%20Greater%20Tree.cpp)
 
 ## Multiset
 It serves as Self-balancing Binary Search Trees (like an AVL Tree).
