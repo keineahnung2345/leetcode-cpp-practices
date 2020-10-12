@@ -134,3 +134,39 @@ public:
         return false;
     }
 };
+
+//O(N) greedy
+//https://leetcode.com/problems/split-two-strings-to-make-palindrome/discuss/888885/C%2B%2BJava-Greedy-O(n)-or-O(1)
+//Runtime: 76 ms, faster than 50.00% of C++ online submissions for Split Two Strings to Make Palindrome.
+//Memory Usage: 24.5 MB, less than 25.00% of C++ online submissions for Split Two Strings to Make Palindrome.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    bool isPalindrome(string& s, int i, int j){
+        while(i < j && s[i] == s[j]){
+            ++i;
+            --j;
+        }
+        
+        return i >= j;
+    }
+    
+    bool check(string& a, string& b){
+        int n = a.size();
+        int i = 0;
+        
+        /*
+        Greedy: match their two sides as more as possible,
+        so the middle part is more likely to be a palindrome
+        */
+        while(i < n-1-i && a[i] == b[n-1-i]){
+            ++i;
+        }
+        
+        return i >= n-1-i || isPalindrome(a, i, n-1-i) || isPalindrome(b, i, n-1-i);
+    }
+    
+    bool checkPalindromeFormation(string a, string b) {
+        return check(a, b) || check(b, a);
+    }
+};
