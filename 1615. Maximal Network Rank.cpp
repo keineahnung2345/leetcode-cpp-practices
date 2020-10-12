@@ -31,3 +31,48 @@ public:
         return ans;
     }
 };
+
+//average O(NlogN), worst O(N^2)
+//https://leetcode.com/problems/maximal-network-rank/discuss/889001/C%2B%2B-quadratic...-linearithmic...-linear!
+//Runtime: 148 ms, faster than 50.00% of C++ online submissions for Maximal Network Rank.
+//Memory Usage: 33.3 MB, less than 50.00% of C++ online submissions for Maximal Network Rank.
+class Solution {
+public:
+    int encode(int i, int j){
+        if(i > j) swap(i, j);
+        //n's range [2,100]
+        //i*128+j
+        return (i<<7)+j;
+    }
+    
+    int maximalNetworkRank(int n, vector<vector<int>>& roads) {
+        vector<int> degrees(n, 0);
+        unordered_set<int> edges;
+        
+        for(vector<int>& road : roads){
+            edges.insert(encode(road[0], road[1]));
+            ++degrees[road[0]];
+            ++degrees[road[1]];
+        }
+        
+        vector<int> indices(n);
+        iota(indices.begin(), indices.end(), 0);
+        //the index whose degree is larger is put former
+        sort(indices.begin(), indices.end(), [&degrees](int i, int j){return degrees[i] > degrees[j];});
+        
+        size_t ans = 0;
+        bool stop = false;
+        for(int i = 0; i < n; ++i){
+            for(int j = i+1; j < n; ++j){
+                if(degrees[indices[i]] + degrees[indices[j]] < ans){
+                    stop = true;
+                    break;
+                }
+                ans = max(ans, degrees[indices[i]] + degrees[indices[j]] - edges.count(encode(indices[i], indices[j])));
+            }
+            if(stop) break;
+        }
+        
+        return ans;
+    }
+};
