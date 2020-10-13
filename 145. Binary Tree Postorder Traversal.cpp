@@ -28,3 +28,31 @@ public:
         return ans;
     }
 };
+
+//iterative
+//Runtime: 4 ms, faster than 50.22% of C++ online submissions for Binary Tree Postorder Traversal.
+//Memory Usage: 8.8 MB, less than 8.39% of C++ online submissions for Binary Tree Postorder Traversal.
+class Solution {
+public:
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> ans;
+        if(!root) return ans;
+        
+        stack<TreeNode*> stk;
+        stack<int> stk_val;
+        
+        stk.push(root);
+        TreeNode* cur;
+        
+        while(!stk.empty()){
+            cur = stk.top(); stk.pop();
+            
+            if(cur->left) stk.push(cur->left);
+            if(cur->right) stk.push(cur->right);
+            
+            ans.insert(ans.begin(), cur->val);
+        }
+        
+        return ans;
+    }
+};
