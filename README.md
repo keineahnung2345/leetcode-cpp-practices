@@ -25,6 +25,15 @@ Including problem statement, solution, runtime and complexity analysis.
 
 ## Tree
 
+### Binary tree traversal
+[Preorder, Inorder, and Postorder Iteratively Summarization](https://leetcode.com/problems/binary-tree-postorder-traversal/discuss/45551/Preorder-Inorder-and-Postorder-Iteratively-Summarization/188240)
+
+[94. Binary Tree Inorder Traversal.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/94.%20Binary%20Tree%20Inorder%20Traversal.cpp#L126)
+
+[144. Binary Tree Preorder Traversal.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/144.%20Binary%20Tree%20Preorder%20Traversal.cpp)
+
+[145. Binary Tree Postorder Traversal.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/145.%20Binary%20Tree%20Postorder%20Traversal.cpp)
+
 ### Threaded binary tree, Morris Traversal
 [Morris Traversal方法遍历二叉树（非递归，不用栈，O(1)空间）](https://www.cnblogs.com/AnnieKim/archive/2013/06/15/morristraversal.html)
 
