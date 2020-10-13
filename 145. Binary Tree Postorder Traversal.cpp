@@ -46,11 +46,10 @@ public:
         
         while(!stk.empty()){
             cur = stk.top(); stk.pop();
+            ans.insert(ans.begin(), cur->val);
             
             if(cur->left) stk.push(cur->left);
             if(cur->right) stk.push(cur->right);
-            
-            ans.insert(ans.begin(), cur->val);
         }
         
         return ans;
