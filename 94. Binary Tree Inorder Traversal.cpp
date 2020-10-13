@@ -124,6 +124,7 @@ public:
 };
 
 //Approach 2: Iterating method using Stack(official sol)
+//https://leetcode.com/problems/binary-tree-postorder-traversal/discuss/45551/Preorder-Inorder-and-Postorder-Iteratively-Summarization/188240
 //time: O(N), space: O(N)
 //Runtime: 0 ms, faster than 100.00% of C++ online submissions for Binary Tree Inorder Traversal.
 //Memory Usage: 8.5 MB, less than 100.00% of C++ online submissions for Binary Tree Inorder Traversal.
