@@ -106,3 +106,29 @@ public:
         return l; //works
     }
 };
+
+//Approach 2: Recursive Binary Search
+//Runtime: 4 ms, faster than 98.84% of C++ online submissions for Find Peak Element.
+//Memory Usage: 9 MB, less than 100.00% of C++ online submissions for Find Peak Element.
+//time: O(logN)
+//space: O(1)
+class Solution {
+public:
+    int search(vector<int>& nums, int l, int r){
+        if(l == r) return l;
+        
+        int mid = l + ((r-l)>>1);
+        
+        if(nums[mid] > nums[mid+1]){
+            return search(nums, l, mid);
+        }
+        
+        return search(nums, mid+1, r);
+    }
+    
+    int findPeakElement(vector<int>& nums) {
+        int n = nums.size();
+        
+        return search(nums, 0, n-1);
+    }
+};
