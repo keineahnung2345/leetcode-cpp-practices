@@ -18,3 +18,25 @@ public:
         return -1;
     }
 };
+
+//cleaner O(N)
+//Approach 1: Linear Scan
+//Runtime: 8 ms, faster than 76.83% of C++ online submissions for Find Peak Element.
+//Memory Usage: 9.1 MB, less than 100.00% of C++ online submissions for Find Peak Element.
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int n = nums.size();
+        
+        for(int i = 0; i+1 < n; ++i){
+            /*
+            when we are at i, nums[i] must > nums[i-1],
+            otherwise it will return at previous step
+            */
+            if(nums[i] > nums[i+1]) return i;
+        }
+        
+        //note this edge case!!
+        return n-1;
+    }
+};
