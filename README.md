@@ -270,6 +270,24 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 
 [Binary Search for Beginners [Problems | Patterns | Sample solutions]](https://leetcode.com/discuss/general-discussion/691825/binary-search-for-beginners-problems-patterns-sample-solutions)
 
+### "378. Kth Smallest Element in a Sorted Matrix" and its variant
+[Summary of solutions for problems "reducible" to LeetCode 378](https://leetcode.com/problems/k-th-smallest-prime-fraction/discuss/115819/Summary-of-solutions-for-problems-%22reducible%22-to-LeetCode-378)
+
+[378. Kth Smallest Element in a Sorted Matrix.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/378.%20Kth%20Smallest%20Element%20in%20a%20Sorted%20Matrix.cpp)
+
+[373. Find K Pairs with Smallest Sums.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/373.%20Find%20K%20Pairs%20with%20Smallest%20Sums.cpp)
+
+[668. Kth Smallest Number in Multiplication Table.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/668.%20Kth%20Smallest%20Number%20in%20Multiplication%20Table.cpp)
+
+[719. Find K-th Smallest Pair Distance.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/719.%20Find%20K-th%20Smallest%20Pair%20Distance.cpp)
+
+[786. K-th Smallest Prime Fraction.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/786.%20K-th%20Smallest%20Prime%20Fraction.cpp)
+
+### find local maximum/minimum
+[162. Find Peak Element.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/162.%20Find%20Peak%20Element.cpp)
+
+***
+
 [35. Search Insert Position.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/35.%20Search%20Insert%20Position.cpp)
 
 [69. Sqrt(x).cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/69.%20Sqrt(x).cpp)
@@ -313,19 +331,6 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 [1235. Maximum Profit in Job Scheduling.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1235.%20Maximum%20Profit%20in%20Job%20Scheduling.cpp)
 
 [1237. Find Positive Integer Solution for a Given Equation.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1237.%20Find%20Positive%20Integer%20Solution%20for%20a%20Given%20Equation.cpp)
-
-### "378. Kth Smallest Element in a Sorted Matrix" and its variant
-[Summary of solutions for problems "reducible" to LeetCode 378](https://leetcode.com/problems/k-th-smallest-prime-fraction/discuss/115819/Summary-of-solutions-for-problems-%22reducible%22-to-LeetCode-378)
-
-[378. Kth Smallest Element in a Sorted Matrix.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/378.%20Kth%20Smallest%20Element%20in%20a%20Sorted%20Matrix.cpp)
-
-[373. Find K Pairs with Smallest Sums.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/373.%20Find%20K%20Pairs%20with%20Smallest%20Sums.cpp)
-
-[668. Kth Smallest Number in Multiplication Table.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/668.%20Kth%20Smallest%20Number%20in%20Multiplication%20Table.cpp)
-
-[719. Find K-th Smallest Pair Distance.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/719.%20Find%20K-th%20Smallest%20Pair%20Distance.cpp)
-
-[786. K-th Smallest Prime Fraction.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/786.%20K-th%20Smallest%20Prime%20Fraction.cpp)
 
 ## Backtracking
 [A general approach to backtracking questions in Java (Subsets, Permutations, Combination Sum, Palindrome Partioning)](https://leetcode.com/problems/permutations/discuss/18239/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partioning))
