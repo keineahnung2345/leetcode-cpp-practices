@@ -23,6 +23,7 @@ public:
 //Approach 1: Linear Scan
 //Runtime: 8 ms, faster than 76.83% of C++ online submissions for Find Peak Element.
 //Memory Usage: 9.1 MB, less than 100.00% of C++ online submissions for Find Peak Element.
+//time: O(N), space: O(1)
 class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
@@ -38,5 +39,70 @@ public:
         
         //note this edge case!!
         return n-1;
+    }
+};
+
+//Approach 3: Iterative Binary Search
+//Runtime: 8 ms, faster than 76.83% of C++ online submissions for Find Peak Element.
+//Memory Usage: 9 MB, less than 100.00% of C++ online submissions for Find Peak Element.
+//time: O(logN), space: O(1)
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int n = nums.size();
+        
+        //use binary search to find local maximum
+        
+        int l = 0, r = n-1;
+        
+        while(l <= r){
+            //stop when the search space contains only one element
+            if(l == r) return l;
+            
+            int mid = l + ((r-l)>>1);
+            
+            // cout << l << ", " << mid << ", " << r << endl;
+            
+            if(nums[mid] > nums[mid+1]){
+                //it's on falling slope
+                //find on the left
+                r = mid;
+            }else{
+                //it's on rising slope
+                //find on the right
+                l = mid+1;
+            }
+        }
+        
+        return -1;
+    }
+};
+
+//official
+//Approach 3: Iterative Binary Search
+//Runtime: 4 ms, faster than 98.84% of C++ online submissions for Find Peak Element.
+//Memory Usage: 9.1 MB, less than 100.00% of C++ online submissions for Find Peak Element.
+class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int n = nums.size();
+        
+        int l = 0, r = n-1;
+        
+        while(l < r){
+            int mid = l + ((r-l)>>1);
+            
+            // cout << l << ", " << mid << ", " << r << endl;
+            
+            if(nums[mid] > nums[mid+1]){
+                r = mid;
+            }else{
+                l = mid+1;
+            }
+        }
+        
+        //now l is equal to r
+        //return r; //works
+        return l; //works
     }
 };
