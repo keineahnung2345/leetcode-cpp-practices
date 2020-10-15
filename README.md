@@ -30,6 +30,8 @@ Including problem statement, solution, runtime and complexity analysis.
 
 [94. Binary Tree Inorder Traversal.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/94.%20Binary%20Tree%20Inorder%20Traversal.cpp#L126)
 
+[173. Binary Search Tree Iterator.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/173.%20Binary%20Search%20Tree%20Iterator.cpp)
+
 [144. Binary Tree Preorder Traversal.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/144.%20Binary%20Tree%20Preorder%20Traversal.cpp)
 
 [145. Binary Tree Postorder Traversal.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/145.%20Binary%20Tree%20Postorder%20Traversal.cpp)
