@@ -135,3 +135,71 @@ public:
         return ans;
     }
 };
+
+//Approach 3: Buckets and The Pigeonhole Principle
+//Runtime: 12 ms, faster than 84.36% of C++ online submissions for Maximum Gap.
+//Memory Usage: 9.2 MB, less than 10.95% of C++ online submissions for Maximum Gap.
+//time: O(n + b) = O(n)
+//space: O(b*2) = O(b)
+struct Bucket{
+    bool used;
+    int maxv, minv;
+    
+    Bucket(): used(false), minv(INT_MAX), maxv(INT_MIN) {};
+};
+
+class Solution {
+public:
+    int maximumGap(vector<int>& nums) {
+        int n = nums.size();
+        
+        if(n <= 1) return 0;
+        
+        int maxn = *max_element(nums.begin(), nums.end());
+        int minn = *min_element(nums.begin(), nums.end());
+        
+        /*
+        we can get min possible gap by assuming
+        the n elements are uniformly distributed in [minn, maxn]
+        
+        e.g. [1,4,7,10]: max gap = 3,
+        if the array is not uniformly distrubted,
+        e.g. [1,3,7,10]: the max gap will become 4
+        */
+        double min_possible_gap = (double)(maxn - minn)/(n-1);
+        
+        /*
+        the gap in a bucket will be bucket_size-1,
+        by setting bucket size be <= min_possible_gap,
+        we know that the gap in any bucket will < min_possible_gap,
+        so we only need to find max gap at two buckets's boundary,
+        not need to find within buckets
+        */
+        //bucket_size should be at least 1
+        int bucket_size = max(1, (int)floor(min_possible_gap));
+        
+        int bucket_count = ceil((double)(1LL + maxn - minn)/bucket_size);
+        
+        vector<Bucket> buckets(bucket_count);
+        
+        for(int& num : nums){
+            int bucket_id = (num-minn)/bucket_size;
+            buckets[bucket_id].used = true;
+            buckets[bucket_id].minv = min(buckets[bucket_id].minv, num);
+            buckets[bucket_id].maxv = max(buckets[bucket_id].maxv, num);
+        }
+        
+        int max_gap = 0;
+        int last_maxv = buckets[0].minv;
+        for(Bucket& bucket : buckets){
+            //ignore empty bucket
+            if(!bucket.used) continue;
+            max_gap = max(max_gap, bucket.minv - last_maxv);
+            last_maxv = bucket.maxv;
+        }
+        
+        // cout << max_gap << endl;
+        
+        return max_gap;
+    }
+};
