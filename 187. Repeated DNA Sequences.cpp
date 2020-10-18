@@ -116,14 +116,14 @@ public:
 
 //Bit manipulation + Hashmap
 //https://leetcode.com/problems/repeated-dna-sequences/discuss/53867/Clean-Java-solution-(hashmap-%2B-bits-manipulation)
-//Runtime: 184 ms, faster than 5.84% of C++ online submissions for Repeated DNA Sequences.
-//Memory Usage: 16.3 MB, less than 100.00% of C++ online submissions for Repeated DNA Sequences.
+//Runtime: 140 ms, faster than 32.45% of C++ online submissions for Repeated DNA Sequences.
+//Memory Usage: 15.6 MB, less than 13.54% of C++ online submissions for Repeated DNA Sequences.
 class Solution {
 public:
     vector<string> findRepeatedDnaSequences(string s) {
-        set<int> words; //substrings that appear once
-        set<int> doubleWords; //appear twice
-        map<char, int> bitRepresentation;
+        unordered_set<int> words; //substrings that appear once
+        unordered_set<int> doubleWords; //appear twice
+        unordered_map<char, int> bitRepresentation;
         
         //we use 2 bit to represent a char
         bitRepresentation['A'] = 0;
