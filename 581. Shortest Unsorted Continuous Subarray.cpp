@@ -94,3 +94,42 @@ public:
         return max(0, r-l+1);
     }
 };
+
+//Approach 5: Without Using Extra Space
+//Runtime: 52 ms, faster than 94.59% of C++ online submissions for Shortest Unsorted Continuous Subarray.
+//Memory Usage: 26.8 MB, less than 7.65% of C++ online submissions for Shortest Unsorted Continuous Subarray.
+//time: O(N), space: O(1)
+class Solution {
+public:
+    int findUnsortedSubarray(vector<int>& nums) {
+        int n = nums.size();
+        bool flag = false;
+        int minv = INT_MAX, maxv = INT_MIN;
+        
+        for(int i = 1; i < n; ++i){
+            //see the first unsorted element
+            if(nums[i] < nums[i-1]) flag = true;
+            //start to record the min element in the unsorted array
+            if(flag) minv = min(minv, nums[i]);
+        }
+        
+        flag = false;
+        for(int i = n-2; i >= 0; --i){
+            if(nums[i] > nums[i+1]) flag = true;
+            if(flag) maxv = max(maxv, nums[i]);
+        }
+        
+        int l, r;
+        for(l = 0; l < n; ++l){
+            if(nums[l] > minv) break;
+        }
+        //minv should be at l
+        
+        for(r = n-1; r >= 0; --r){
+            if(nums[r] < maxv) break;
+        }
+        //maxv should be at r
+        
+        return max(r-l+1, 0);
+    }
+};
