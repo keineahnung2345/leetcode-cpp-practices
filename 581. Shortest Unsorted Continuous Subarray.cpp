@@ -1,5 +1,7 @@
+//Sorting
 //Runtime: 80 ms, faster than 58.67% of C++ online submissions for Shortest Unsorted Continuous Subarray.
 //Memory Usage: 27.6 MB, less than 7.63% of C++ online submissions for Shortest Unsorted Continuous Subarray.
+//time: O(NlogN), space: O(N)
 class Solution {
 public:
     int findUnsortedSubarray(vector<int>& nums) {
