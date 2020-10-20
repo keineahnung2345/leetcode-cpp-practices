@@ -46,6 +46,7 @@ public:
 //sort + backtrack
 //TLE
 //50 / 147 test cases passed.
+//how to do memorization? There are at most 1000 players, hard to use bitmask as state!
 class Solution {
 public:
     int max_score;
