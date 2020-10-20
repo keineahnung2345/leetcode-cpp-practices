@@ -147,3 +147,50 @@ public:
         return max_score;
     }
 };
+
+//a trial of using memorization, slower than previous?
+//TLE
+//44 / 147 test cases passed.
+class Solution {
+public:
+    vector<vector<unordered_map<int, int>>> memo;
+    
+    int backtrack(vector<int>& scores, vector<int>& ages, vector<int>& players, int pi, int last_chosen, int cur_score){
+        if(memo[pi+1][last_chosen+1].find(cur_score) != memo[pi+1][last_chosen+1].end()){
+            return memo[pi+1][last_chosen+1][cur_score];
+        }else if(pi == players.size()){
+            return memo[pi+1][last_chosen+1][cur_score] = cur_score;
+        }else{
+            int res = 0;
+            
+            //not choose cur
+            res = backtrack(scores, ages, players, pi+1, last_chosen, cur_score);
+            
+            int p = players[pi];
+            
+            //don't need to check age!
+            if(last_chosen == -1 || 
+               !(/*ages[p] > ages[chosen.back()] && */scores[p] < scores[last_chosen])){
+                //choose cur
+                res = max(res, backtrack(scores, ages, players, pi+1, p, cur_score+scores[p]));
+            }
+            
+            return memo[pi+1][last_chosen+1][cur_score] = res;
+        }
+    }
+    
+    int bestTeamScore(vector<int>& scores, vector<int>& ages) {
+        int n = scores.size();
+        vector<int> players(n);
+        iota(players.begin(), players.end(), 0);
+        
+        sort(players.begin(), players.end(), [&](int& pi1, int& pi2){
+            return (ages[pi1] == ages[pi2]) ? scores[pi1] < scores[pi2] : ages[pi1] < ages[pi2];
+        });
+        
+        memo = vector<vector<unordered_map<int, int>>>(n+2, 
+            vector<unordered_map<int, int>>(n+2));
+        
+        return backtrack(scores, ages, players, 0, -1, 0);
+    }
+};
