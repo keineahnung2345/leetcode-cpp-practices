@@ -64,3 +64,50 @@ public:
         return dfs(s, a, b);
     }
 };
+
+//dfs
+//https://leetcode.com/problems/lexicographically-smallest-string-after-applying-operations/discuss/899489/Basic-DFS-Brute-force-or-This-kind-of-questions-DFS
+//no early stop make it correct?
+//Runtime: 308 ms, faster than 71.01% of C++ online submissions for Lexicographically Smallest String After Applying Operations.
+//Memory Usage: 91.9 MB, less than 5.13% of C++ online submissions for Lexicographically Smallest String After Applying Operations.
+class Solution {
+public:
+    int n, a, b;
+    unordered_set<string> visited;
+    string ans;
+    
+    string add(string& s){
+        string ret = s;
+        for(int i = 1; i < n; i+=2){
+            ret[i] = '0'+(ret[i]-'0'+a)%10;
+        }
+        return ret;
+    }
+    
+    string rotate(string& s){
+        string ret = s;
+        
+        ret = s.substr(b) + s.substr(0, b);
+        
+        return ret;
+    }
+    
+    void dfs(string s){
+        if(visited.find(s) != visited.end()) return;
+        
+        visited.insert(s);
+        ans = min(ans, s);
+        
+        dfs(add(s));
+        dfs(rotate(s));
+    }
+    
+    string findLexSmallestString(string s, int a, int b) {
+        n = s.size();
+        this->a = a;
+        this->b = b;
+        ans = "aaaa";
+        dfs(s);
+        return ans;
+    }
+};
