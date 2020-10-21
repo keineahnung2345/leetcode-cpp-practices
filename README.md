@@ -653,6 +653,9 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 [1408. String Matching in an Array.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1408.%20String%20Matching%20in%20an%20Array.cpp)
 
 ## Union Find
+
+Union find problems look alike graph problems, if we only care whether two nodes are connected, not their distance, we should use union find.(?, inspired by 1627)
+
 [959. Regions Cut By Slashes.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/959.%20Regions%20Cut%20By%20Slashes.cpp)
 
 [547. Friend Circles.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/547.%20Friend%20Circles.cpp)
@@ -668,6 +671,8 @@ It serves as Self-balancing Binary Search Trees (like an AVL Tree).
 [1559. Detect Cycles in 2D Grid.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1559.%20Detect%20Cycles%20in%202D%20Grid.cpp)
 
 [1562. Find Latest Group of Size M.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1562.%20Find%20Latest%20Group%20of%20Size%20M.cpp)
+
+[1627. Graph Connectivity With Threshold](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1627.%20Graph%20Connectivity%20With%20Threshold.cpp)
 
 ### Union by rank
 [684. Redundant Connection.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/684.%20Redundant%20Connection.cpp)
