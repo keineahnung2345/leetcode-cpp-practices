@@ -88,3 +88,39 @@ public:
     }
 };
 
+//two pointer
+//https://leetcode.com/problems/asteroid-collision/solution/131673
+//Runtime: 24 ms, faster than 81.17% of C++ online submissions for Asteroid Collision.
+//Memory Usage: 17.9 MB, less than 95.21% of C++ online submissions for Asteroid Collision.
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& A) {
+        int n = A.size();
+        
+        //slow: last filled asteroid's position
+        int slow = -1, fast = 0;
+        
+        for(fast = 0; fast < n; ++fast){
+            bool exploded = false;
+            
+            while(slow >= 0 && A[slow] > 0 && A[fast] < 0){
+                if(abs(A[slow]) > abs(A[fast])){
+                    exploded = true;
+                    break;
+                }else if(abs(A[slow]) == abs(A[fast])){
+                    --slow;
+                    exploded = true;
+                    break;
+                }else{
+                    --slow;
+                }
+            }
+            
+            if(!exploded){
+                A[++slow] = A[fast];
+            }
+        }
+        
+        return vector<int>(A.begin(), A.begin()+slow+1);
+    }
+};
