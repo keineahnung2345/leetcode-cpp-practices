@@ -1,4 +1,8 @@
-//Naive
+# 713. Subarray Product Less Than K
+
+[leetcode - 713. Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/)
+
+## Naive
 //TLE
 //75 / 84 test cases passed.
 //time: O(N^2), space: O(1)
@@ -24,11 +28,17 @@ public:
     }
 };
 
-//Approach #1: Binary Search on Logarithms
-//Runtime: 312 ms, faster than 30.64% of C++ online submissions for Subarray Product Less Than K.
-//Memory Usage: 100.5 MB, less than 6.14% of C++ online submissions for Subarray Product Less Than K.
-//about epsilon: https://stackoverflow.com/a/253874/10651567
-//time: O(NlogN), space: O(N)
+## Approach #1: Binary Search on Logarithms
+
+Runtime: 312 ms, faster than 30.64% of C++ online submissions for Subarray Product Less Than K.
+    
+Memory Usage: 100.5 MB, less than 6.14% of C++ online submissions for Subarray Product Less Than K.
+
+about epsilon: https://stackoverflow.com/a/253874/10651567
+
+time: O(NlogN), space: O(N)
+
+```cpp
 class Solution {
 public:
     int numSubarrayProductLessThanK(vector<int>& nums, int k) {
@@ -83,11 +93,18 @@ public:
         return ans;
     }
 };
+```
 
-//Approach #2: Sliding Window [Accepted]
-//Runtime: 236 ms, faster than 98.00% of C++ online submissions for Subarray Product Less Than K.
-//Memory Usage: 92.2 MB, less than 9.99% of C++ online submissions for Subarray Product Less Than K.
-//time: O(N), space: O(1)
+
+## Approach #2: Sliding Window [Accepted]
+
+Runtime: 236 ms, faster than 98.00% of C++ online submissions for Subarray Product Less Than K.
+
+Memory Usage: 92.2 MB, less than 9.99% of C++ online submissions for Subarray Product Less Than K.
+
+time: O(N), space: O(1)
+
+```cpp
 class Solution {
 public:
     int numSubarrayProductLessThanK(vector<int>& nums, int k) {
@@ -113,3 +130,4 @@ public:
         return ans;
     }
 };
+```
