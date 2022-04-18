@@ -115,13 +115,13 @@ adjacency list + Fabonacci heap  | O(VlogV + E)     |
 [1584. Min Cost to Connect All Points.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/1584.%20Min%20Cost%20to%20Connect%20All%20Points.cpp)
 
 ## Two pointers
-[11. Container With Most Water.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/11.%20Container%20With%20Most%20Water.cpp)
+[11. Container With Most Water](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/11.%20Container%20With%20Most%20Water.md)
 
-[15. 3Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/15.%203Sum.cpp)
+[15. 3Sum](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/15.%203Sum.md)
 
-[16. 3Sum Closest.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/16.%203Sum%20Closest.cpp)
+[16. 3Sum Closest](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/16.%203Sum%20Closest.md)
 
-[18. 4Sum.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/18.%204Sum.cpp)
+[18. 4Sum](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/18.%204Sum.md)
 
 [26. Remove Duplicates from Sorted Array.cpp](https://github.com/keineahnung2345/leetcode-cpp-practices/blob/master/26.%20Remove%20Duplicates%20from%20Sorted%20Array.cpp)
 
